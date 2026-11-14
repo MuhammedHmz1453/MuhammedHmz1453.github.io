@@ -37,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Figtree:ital,wght@0,400..700;1,400&family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v={{ site.time | date: '%s' }}">
 
   <!-- Tema: sayfa çizilmeden önce seçili temayı uygula (beyaz yanıp sönmeyi önler) -->
   <script>
@@ -49,8 +49,8 @@
       if (t === 'acik' || t === 'koyu') document.documentElement.dataset.theme = t === 'koyu' ? 'dark' : 'light';
     } catch (e) {}
   </script>
-  <script src="js/main.js" defer></script>
-  <script src="js/lazer-bahcesi.js" defer></script>
+  <script src="js/main.js?v={{ site.time | date: '%s' }}" defer></script>
+  <script src="js/lazer-bahcesi.js?v={{ site.time | date: '%s' }}" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#icerik">İçeriğe atla</a>

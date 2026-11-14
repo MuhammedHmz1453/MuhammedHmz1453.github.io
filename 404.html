@@ -17,7 +17,7 @@ permalink: /404.html
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Figtree:ital,wght@0,400..700;1,400&family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap">
-  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <script>
     document.documentElement.classList.add('js');
     setTimeout(function () { document.documentElement.classList.add('is-ready'); }, 2000);
@@ -26,8 +26,8 @@ permalink: /404.html
       if (t === 'acik' || t === 'koyu') document.documentElement.dataset.theme = t === 'koyu' ? 'dark' : 'light';
     } catch (e) {}
   </script>
-  <script src="{{ '/js/main.js' | relative_url }}" defer></script>
-  <script src="{{ '/js/lazer-bahcesi.js' | relative_url }}" defer></script>
+  <script src="{{ '/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  <script src="{{ '/js/lazer-bahcesi.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 </head>
 <body>
   <header class="site-header">
