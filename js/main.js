@@ -51,11 +51,9 @@ function setupTheme() {
   const btn = document.querySelector('[data-theme-toggle]');
   if (!btn) return;
   const root = document.documentElement;
-  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
 
-  const isDark = () => root.dataset.theme
-    ? root.dataset.theme === 'dark'
-    : systemDark.matches;
+  // Site varsayılan olarak koyu; açık tema sadece düğmeyle seçilir
+  const isDark = () => root.dataset.theme !== 'light';
 
   const updateLabel = () => {
     btn.setAttribute('aria-label', isDark() ? 'Açık temaya geç' : 'Koyu temaya geç');
@@ -68,7 +66,6 @@ function setupTheme() {
     updateLabel();
   });
 
-  systemDark.addEventListener?.('change', updateLabel);
   updateLabel();
 }
 
