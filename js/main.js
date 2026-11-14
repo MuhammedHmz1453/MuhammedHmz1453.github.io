@@ -8,6 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setupTheme();
   setupCopyEmail();
   setupContactForm();
+  setupIntro();
+  setupReveal();
+  setupScrollSpy();
+  setupHeaderShadow();
+  setupHeroGlow();
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
@@ -161,4 +166,93 @@ function setupContactForm() {
     const body = `${form.mesaj.value.trim()}\n\n— ${name}\n${form.eposta.value.trim()}`;
     window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
+}
+
+// ---------- Giriş bölümü açılışı ----------
+// Yazı tipleri yüklenince satırlar sırayla açılır (en geç 1,2 sn sonra).
+function setupIntro() {
+  const root = document.documentElement;
+  const ready = () => root.classList.add('is-ready');
+  const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+  Promise.race([fonts, new Promise((r) => setTimeout(r, 1200))]).then(ready);
+}
+
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- Kaydırınca beliren bölümler ----------
+function setupReveal() {
+  const items = document.querySelectorAll('[data-reveal], [data-reveal-project], .stage');
+  if (!items.length || prefersReducedMotion() || !('IntersectionObserver' in window)) return;
+
+  document.documentElement.classList.add('reveal-on');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+  items.forEach((el) => observer.observe(el));
+}
+
+// ---------- Menüde o an bakılan bölümü işaretle ----------
+function setupScrollSpy() {
+  const links = [...document.querySelectorAll('.nav__links a[href^="#"]')];
+  const sections = links
+    .map((a) => document.getElementById(a.getAttribute('href').slice(1)))
+    .filter(Boolean);
+  if (!sections.length || !('IntersectionObserver' in window)) return;
+
+  const setCurrent = (id) => {
+    links.forEach((a) => {
+      if (a.getAttribute('href') === `#${id}`) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  };
+
+  // Ekranın ortasından geçen bölüm "o an bakılan" sayılır
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) setCurrent(entry.target.id);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  sections.forEach((s) => observer.observe(s));
+
+  // En üste dönünce işareti kaldır
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 200) setCurrent('');
+  }, { passive: true });
+}
+
+// ---------- Kaydırınca üst menüye gölge ----------
+function setupHeaderShadow() {
+  const header = document.querySelector('.site-header');
+  if (!header) return;
+  const update = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
+// ---------- Giriş bölümünde imleci izleyen ışık ----------
+function setupHeroGlow() {
+  const hero = document.querySelector('.hero__window');
+  if (!hero || prefersReducedMotion() || !window.matchMedia('(hover: hover)').matches) return;
+
+  let frame = 0;
+  let x = 0;
+  let y = 0;
+  hero.addEventListener('pointermove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    x = e.clientX - rect.left;
+    y = e.clientY - rect.top;
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      hero.style.setProperty('--mx', `${x}px`);
+      hero.style.setProperty('--my', `${y}px`);
+      frame = 0;
+    });
+  });
+  hero.addEventListener('pointerenter', () => hero.classList.add('is-pointer'));
+  hero.addEventListener('pointerleave', () => hero.classList.remove('is-pointer'));
 }
