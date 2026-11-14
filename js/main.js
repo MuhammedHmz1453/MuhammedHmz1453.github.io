@@ -258,7 +258,7 @@ function setupHeroGlow() {
 // ---------- Proje kartlarında imleci izleyen ışık ----------
 function setupCardSpotlight() {
   if (!window.matchMedia('(hover: hover)').matches) return;
-  document.querySelectorAll('.project').forEach((card) => {
+  document.querySelectorAll('.project, .stage').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--x', `${e.clientX - rect.left}px`);
