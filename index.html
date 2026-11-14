@@ -36,7 +36,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Figtree:ital,wght@0,400..700;1,400&family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Figtree:ital,wght@0,400..700;1,400&family=Martian+Mono:wdth,wght@75..112.5,300..600&family=Instrument+Serif:ital@1&display=swap">
   <link rel="stylesheet" href="css/style.css?v={{ site.time | date: '%s' }}">
 
   <!-- Tema: sayfa çizilmeden önce seçili temayı uygula (beyaz yanıp sönmeyi önler) -->
@@ -50,7 +50,6 @@
     } catch (e) {}
   </script>
   <script src="js/main.js?v={{ site.time | date: '%s' }}" defer></script>
-  <script src="js/lazer-bahcesi.js?v={{ site.time | date: '%s' }}" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#icerik">İçeriğe atla</a>
@@ -84,40 +83,69 @@
 
   <main id="icerik">
 
-    <!-- ============ GİRİŞ (HERO) ============ -->
+    <!-- ============ GİRİŞ (HERO) ============
+         Yazılar panelden (Giriş ve genel bilgiler) gelir.
+         Kayan şeritteki teknolojiler Yetenekler listesinden gelir;
+         logoları _data/teknoloji_ikonlari.yml dosyasında. -->
+    {%- assign durum_parca = g.durum | split: " · " -%}
+    {%- assign durum_ust = durum_parca[0] -%}
+    {%- assign durum_alt = g.durum | remove_first: durum_ust | remove_first: " · " -%}
+    {%- assign teknolojiler = y.kok_saldi | concat: y.buyuyor | concat: y.filizleniyor -%}
     <section class="hero container" aria-labelledby="hero-baslik">
-      <div class="hero__window">
-        <canvas class="hero__garden" data-garden aria-hidden="true"></canvas>
-
-        <div class="hero__content">
-          {%- if g.durum_goster and g.durum != "" %}
-          <p class="status"><span class="status__dot" aria-hidden="true"></span>{{ g.durum | escape }}</p>
-          {%- endif %}
-
-          <h1 class="hero__name" id="hero-baslik">
-            {%- for k in ad_kelimeleri %}
-            <span style="--i: {{ forloop.index0 }}">{{ k | escape }}</span>
-            {%- endfor %}
-            <span class="hero__surname" style="--i: {{ ad_kelimeleri.size }}">{{ g.soyad | escape }}</span>
+      <div class="spot">
+        <div class="spot__inner">
+          <h1 class="spot__title" id="hero-baslik">
+            <span class="spot__line" style="--i: 0">{{ g.ad | escape }}</span>
+            <span class="spot__line spot__line--serif" style="--i: 1">{{ g.soyad | escape }}</span>
           </h1>
 
-          <p class="hero__lede">{{ g.giris | escape }}</p>
+          <p class="spot__lede">{{ g.giris | escape }}</p>
 
-          <div class="hero__actions">
-            <a class="btn btn--light" href="#projeler">Projelerimi gör</a>
-            <a class="btn btn--ghost" href="#iletisim">Bana yaz</a>
+          <div class="spot__cta">
+            <a class="pill" href="#projeler">
+              Projelerimi gör
+              <span class="pill__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg></span>
+            </a>
+
+            {%- if g.durum_goster and g.durum != "" %}
+            <div class="trust">
+              <span class="trust__avatar" aria-hidden="true">
+                {%- assign kucuk_foto = g.profil_kucuk | default: h.foto -%}
+                {%- if kucuk_foto and kucuk_foto != "" %}
+                <img src="{{ kucuk_foto | remove_first: '/' }}" alt="" width="46" height="46" decoding="async">
+                {%- else %}
+                <span class="trust__initials">{{ bas_harfler | upcase }}</span>
+                {%- endif %}
+                <i class="trust__dot"></i>
+              </span>
+              <span class="trust__text">
+                <b>{{ durum_ust | escape }}</b>
+                {%- if durum_alt != "" %}<small>{{ durum_alt | escape }}</small>{% endif %}
+              </span>
+            </div>
+            {%- endif %}
           </div>
         </div>
 
-        <!-- Toprak şeridi: bitkiler bu şeridin üst kenarından büyür -->
-        <div class="hero__soil" data-soil>
-          <button class="plant-btn" type="button" data-plant>
-            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15V7M8 10 4.5 6.5M8 8.5l3-3"/></svg>
-            Bir ışık dalı ek
-          </button>
-          <span class="hero__hint-note hint--pointer">ya da yukarıda boş bir yere tıkla</span>
-          <span class="hero__hint-note hint--touch">ya da yukarıda boş bir yere dokun</span>
+        {%- if teknolojiler.size > 0 %}
+        <div class="spot__band">
+          <p class="spot__caption"><span>Kullandığım teknolojiler</span></p>
+          <div class="marquee">
+            <ul class="marquee__track">
+              {%- for kopya in (1..4) %}
+              {%- for t in teknolojiler %}
+              {%- assign anahtar = t.ad | downcase | strip -%}
+              {%- assign ikon = site.data.teknoloji_ikonlari[anahtar] %}
+              <li{% if kopya > 1 %} aria-hidden="true"{% endif %}>
+                {%- if ikon %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{ ikon }}"/></svg>{% else %}<i class="marquee__dot" aria-hidden="true"></i>{% endif -%}
+                <span>{{ t.ad | escape }}</span>
+              </li>
+              {%- endfor %}
+              {%- endfor %}
+            </ul>
+          </div>
         </div>
+        {%- endif %}
       </div>
     </section>
 

@@ -2,7 +2,7 @@
 
 Hakkımda, Projelerim, Yetenekler ve İletişim bölümlerinden oluşan, **HTML + CSS + JavaScript** ile yazılmış portfolyo sitesi. GitHub Pages'te ücretsiz yayınlanır ve içeriği bir **yönetim panelinden** düzenlenir.
 
-Giriş bölümündeki "lazer bahçesi" bir `<canvas>` animasyonu: ışık bitkileri yerden dallanarak büyür, boş bir yere tıklayınca yenisi eklenir.
+Giriş bölümünün altındaki kayan "Kullandığım teknolojiler" şeridi, panelde Yetenekler bölümüne yazdığın teknolojilerden oluşur; bilinen teknolojilerin logoları `_data/teknoloji_ikonlari.yml` dosyasında. 404 sayfasındaki "lazer bahçesi" bir `<canvas>` animasyonudur.
 
 ## Yönetim paneli
 

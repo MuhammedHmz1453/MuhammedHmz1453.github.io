@@ -236,7 +236,7 @@ function setupHeaderShadow() {
 
 // ---------- Giriş bölümünde imleci izleyen ışık ----------
 function setupHeroGlow() {
-  const hero = document.querySelector('.hero__window');
+  const hero = document.querySelector('.spot, .hero__window');
   if (!hero || prefersReducedMotion() || !window.matchMedia('(hover: hover)').matches) return;
 
   let frame = 0;
