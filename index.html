@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- DEĞİŞTİR: başlık ve açıklama Google'da ve link paylaşımlarında görünür -->
+  <title>Adın Soyadın · Web Geliştirici</title>
+  <meta name="description" content="Adın Soyadın — HTML, CSS ve JavaScript ile çalışan web geliştirici. Projelerim, yeteneklerim ve iletişim bilgilerim.">
+  <meta property="og:title" content="Adın Soyadın · Web Geliştirici">
+  <meta property="og:description" content="Tarayıcıda çalışan, elle tutulur şeyler yapıyorum. Projelerime göz at.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0b101b">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Figtree:ital,wght@0,400..700;1,400&family=Martian+Mono:wdth,wght@75..112.5,300..600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Tema: sayfa çizilmeden önce seçili temayı uygula (beyaz yanıp sönmeyi önler) -->
+  <script>
+    try {
+      var t = localStorage.getItem('tema');
+      if (t === 'acik' || t === 'koyu') document.documentElement.dataset.theme = t === 'koyu' ? 'dark' : 'light';
+    } catch (e) {}
+  </script>
+  <script src="js/main.js" defer></script>
+  <script src="js/lazer-bahcesi.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">İçeriğe atla</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Ana menü">
+      <!-- DEĞİŞTİR: baş harflerin -->
+      <a class="nav__brand" href="#" aria-label="Sayfanın başına dön">
+        <svg class="nav__mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 28V13M16 19l-6-6M16 15l5-5" />
+          <circle cx="10" cy="13" r="1.6" /><circle cx="21" cy="10" r="1.6" /><circle cx="16" cy="12" r="1.6" />
+        </svg>
+        <span>adın.soyadın</span>
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menü</button>
+
+      <ul class="nav__links" id="nav-menu">
+        <li><a href="#hakkimda">Hakkımda</a></li>
+        <li><a href="#projeler">Projeler</a></li>
+        <li><a href="#yetenekler">Yetenekler</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+        <li>
+          <button class="theme-toggle" type="button" aria-label="Koyu temaya geç" data-theme-toggle>
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-moon"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="icerik">
+
+    <!-- ============ GİRİŞ (HERO) ============ -->
+    <section class="hero container" aria-labelledby="hero-baslik">
+      <div class="hero__window">
+        <canvas class="hero__garden" data-garden aria-hidden="true"></canvas>
+
+        <div class="hero__content">
+          <!-- DEĞİŞTİR: iş aramıyorsan bu satırı sil ya da metni değiştir -->
+          <p class="status"><span class="status__dot" aria-hidden="true"></span>Junior web geliştirici · İş ve projelere açığım</p>
+
+          <!-- DEĞİŞTİR: adın. Her kelimeyi ayrı <span> içine koy -->
+          <h1 class="hero__name" id="hero-baslik">
+            <span>Adın</span>
+            <span>Soyadın</span>
+          </h1>
+
+          <p class="hero__lede">Tarayıcıda çalışan, elle tutulur şeyler yapıyorum: yapılacaklar listelerinden ışıktan bahçelere.</p>
+
+          <div class="hero__actions">
+            <a class="btn btn--light" href="#projeler">Projelerimi gör</a>
+            <a class="btn btn--ghost" href="#iletisim">Bana yaz</a>
+          </div>
+        </div>
+
+        <!-- Toprak şeridi: bitkiler bu şeridin üst kenarından büyür -->
+        <div class="hero__soil" data-soil>
+          <button class="plant-btn" type="button" data-plant>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15V7M8 10 4.5 6.5M8 8.5l3-3"/></svg>
+            Bir ışık dalı ek
+          </button>
+          <span class="hero__hint-note hint--pointer">ya da yukarıda boş bir yere tıkla</span>
+          <span class="hero__hint-note hint--touch">ya da yukarıda boş bir yere dokun</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HAKKIMDA ============ -->
+    <section class="section container about" id="hakkimda" aria-labelledby="hakkimda-baslik">
+      <header class="section__head">
+        <a class="anchor" href="#hakkimda">#hakkimda</a>
+        <h2 id="hakkimda-baslik">Hakkımda</h2>
+      </header>
+
+      <div class="about__grid">
+        <!-- DEĞİŞTİR: fotoğraf eklemek için bu <div>'i şununla değiştir:
+             <img class="about__photo" src="assets/foto.jpg" alt="Adın Soyadın'ın portresi" width="320" height="320"> -->
+        <div class="about__photo about__photo--initials" aria-hidden="true">AS</div>
+
+        <div class="about__text">
+          <!-- DEĞİŞTİR: kendi hikâyen. Kısa tut; 2–3 paragraf yeter. -->
+          <p class="about__intro">Merhaba, ben Adın. Web geliştirmeyi kendi kendime öğreniyorum ve öğrendiğim her şeyi küçük, çalışan projelere dönüştürüyorum.</p>
+          <p>Beni en çok heyecanlandıran şey, birkaç satır kodun ekranda dokunulabilir bir şeye dönüşmesi. Düzgün çalışan bir yapılacaklar listesi de, tıklayınca büyüyen bir ışık bahçesi de bana aynı keyfi veriyor. Kodumu okunur yazmaya, sayfalarımı telefonda da rahat kullanılır yapmaya özen gösteriyorum.</p>
+          <p>Şu an ilk junior pozisyonumu ya da serbest çalışabileceğim projeleri arıyorum. Bir ekibin içinde öğrenmeye ve gerçek kullanıcılar için bir şeyler yapmaya hazırım.</p>
+
+          <dl class="facts">
+            <div><dt>Konum</dt><dd>Türkiye · uzaktan çalışmaya açık</dd></div>
+            <div><dt>Şu an öğreniyorum</dt><dd>React</dd></div>
+            <div><dt>Aradığım</dt><dd>Junior pozisyon ya da serbest proje</dd></div>
+            <div><dt>Diller</dt><dd>Türkçe, İngilizce (orta)</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJELER ============ -->
+    <section class="section container" id="projeler" aria-labelledby="projeler-baslik">
+      <header class="section__head">
+        <a class="anchor" href="#projeler">#projeler</a>
+        <h2 id="projeler-baslik">Projelerim</h2>
+        <p class="section__sub">Her biri canlı çalışıyor ve kodu açık. Tıkla, dene, içine bak.</p>
+      </header>
+
+      <div class="projects">
+
+        <!-- ---------- Proje: To-Do ---------- -->
+        <article class="project">
+          <!-- DEĞİŞTİR: ekran görüntün hazır olunca bu önizlemeyi şununla değiştir:
+               <img class="project__shot" src="assets/todo.png" alt="To-Do uygulamasının ekran görüntüsü" loading="lazy"> -->
+          <div class="project__preview preview-todo" aria-hidden="true">
+            <div class="pt-card">
+              <div class="pt-input"><span>Yeni görev ekle…</span><b>+</b></div>
+              <ul>
+                <li class="is-done"><i></i>Portfolyo sitesini bitir</li>
+                <li><i></i>GitHub Pages'te yayınla</li>
+                <li><i></i>Lazer Bahçesi'ne ses ekle</li>
+              </ul>
+              <div class="pt-foot"><span>2 görev kaldı</span><span>Tümü · Aktif · Biten</span></div>
+            </div>
+          </div>
+          <div class="project__body">
+            <h3>To-Do Uygulaması</h3>
+            <!-- DEĞİŞTİR: kendi uygulamanın gerçekten yaptıklarını yaz -->
+            <p>Görev ekle, tamamla, sil, filtrele. Görevler tarayıcıda saklanıyor; sayfayı yenilesen de kaybolmuyor.</p>
+            <ul class="tags" aria-label="Kullanılan teknolojiler">
+              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>localStorage</li>
+            </ul>
+            <div class="project__links">
+              <!-- DEĞİŞTİR: kendi linklerin -->
+              <a href="https://muhammedhmz1453.github.io/todo/" target="_blank" rel="noopener">Canlı demo <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/MuhammedHmz1453/todo" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ---------- Proje: Lazer Bahçesi ---------- -->
+        <article class="project">
+          <div class="project__preview preview-garden" aria-hidden="true">
+            <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice">
+              <g class="pg-glow">
+                <path stroke="#ff4f9a" d="M70 200 72 150 66 110 70 72M70 120 48 96 40 78M68 96l20-22 6-20"/>
+                <path stroke="#3bf0d8" d="M160 200 158 140 164 92 160 44M161 112l26-24 10-24M160 78l-22-20-6-18"/>
+                <path stroke="#ffc24a" d="M248 200 250 160 246 126 252 98M248 136l18-18M249 112l-20-14-6-14"/>
+              </g>
+              <g class="pg-core">
+                <path d="M70 200 72 150 66 110 70 72M70 120 48 96 40 78M68 96l20-22 6-20"/>
+                <path d="M160 200 158 140 164 92 160 44M161 112l26-24 10-24M160 78l-22-20-6-18"/>
+                <path d="M248 200 250 160 246 126 252 98M248 136l18-18M249 112l-20-14-6-14"/>
+              </g>
+              <g class="pg-buds">
+                <circle cx="70" cy="72" r="3" fill="#ffd1e4"/><circle cx="40" cy="78" r="2.5" fill="#ffd1e4"/><circle cx="94" cy="54" r="2.5" fill="#ffd1e4"/>
+                <circle cx="160" cy="44" r="3" fill="#c9fff7"/><circle cx="197" cy="64" r="2.5" fill="#c9fff7"/><circle cx="132" cy="40" r="2.5" fill="#c9fff7"/>
+                <circle cx="252" cy="98" r="3" fill="#ffe9b8"/><circle cx="266" cy="118" r="2.5" fill="#ffe9b8"/><circle cx="223" cy="84" r="2.5" fill="#ffe9b8"/>
+              </g>
+            </svg>
+          </div>
+          <div class="project__body">
+            <h3>Lazer Bahçesi</h3>
+            <!-- DEĞİŞTİR: projenin gerçek açıklaması -->
+            <p>Canvas üzerinde çizilen etkileşimli bir ışık bahçesi. Tıkladığın yerden dallanarak büyüyen lazer bitkileri, her karede yeniden hesaplanıyor.</p>
+            <ul class="tags" aria-label="Kullanılan teknolojiler">
+              <li>JavaScript</li><li>Canvas API</li><li>Animasyon</li>
+            </ul>
+            <div class="project__links">
+              <a href="https://muhammedhmz1453.github.io/lazer-bahcesi/" target="_blank" rel="noopener">Canlı demo <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/MuhammedHmz1453/lazer-bahcesi" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ---------- Proje: Bu site ---------- -->
+        <article class="project">
+          <div class="project__preview preview-site" aria-hidden="true">
+            <div class="ps-page">
+              <div class="ps-nav"><i></i><span></span><span></span><span></span></div>
+              <div class="ps-hero"><b></b><b></b><em></em></div>
+              <div class="ps-row"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          <div class="project__body">
+            <h3>Bu portfolyo sitesi</h3>
+            <p>Şu an baktığın sayfa. Hazır şablon kullanmadan, elle yazılmış HTML, CSS ve JavaScript. Telefona uyumlu, koyu tema destekli, GitHub Pages'te ücretsiz yayında.</p>
+            <ul class="tags" aria-label="Kullanılan teknolojiler">
+              <li>HTML</li><li>CSS Grid</li><li>JavaScript</li><li>GitHub Pages</li>
+            </ul>
+            <div class="project__links">
+              <a href="https://github.com/MuhammedHmz1453/muhammedhamzakaraca.github.io" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Yeni proje eklemek için yukarıdaki <article class="project"> bloklarından birini kopyala. -->
+      </div>
+    </section>
+
+    <!-- ============ YETENEKLER ============ -->
+    <section class="section container" id="yetenekler" aria-labelledby="yetenekler-baslik">
+      <header class="section__head">
+        <a class="anchor" href="#yetenekler">#yetenekler</a>
+        <h2 id="yetenekler-baslik">Yetenekler</h2>
+        <p class="section__sub">Yüzdelik çubuklar yerine dürüst bir sınıflandırma: neyi sağlam bildiğim, neyi kullanarak büyüttüğüm, neye yeni başladığım.</p>
+      </header>
+
+      <!-- DEĞİŞTİR: her listeyi kendine göre düzenle. Sağdaki küçük not, o yeteneği nerede kullandığını gösterir. -->
+      <div class="skills">
+        <section class="stage stage--rooted" aria-labelledby="st-1">
+          <svg class="stage__icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path class="stage__ground" d="M6 54h52"/>
+            <path d="M32 54V14M32 40 20 28l-3-8M32 32l12-12 2-8M32 24l-8-8M32 46l10-8 6-2"/>
+            <path class="stage__root" d="M32 54v4M32 56l-6 4M32 56l6 4"/>
+            <circle cx="32" cy="14" r="2.4"/><circle cx="17" cy="20" r="2"/><circle cx="46" cy="12" r="2"/><circle cx="24" cy="16" r="2"/><circle cx="48" cy="36" r="2"/>
+          </svg>
+          <h3 id="st-1">Kök saldı</h3>
+          <p class="stage__desc">Rahatça, yardım almadan kullandıklarım.</p>
+          <ul class="skill-list">
+            <li><span>HTML</span><small>semantik etiketler, formlar</small></li>
+            <li><span>CSS</span><small>Flexbox, Grid, responsive</small></li>
+            <li><span>JavaScript</span><small>DOM, olaylar, localStorage</small></li>
+            <li><span>Git &amp; GitHub</span><small>tüm projelerim</small></li>
+          </ul>
+        </section>
+
+        <section class="stage stage--growing" aria-labelledby="st-2">
+          <svg class="stage__icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path class="stage__ground" d="M6 54h52"/>
+            <path d="M32 54V26M32 42l-10-10-2-6M32 34l9-9"/>
+            <circle cx="32" cy="26" r="2.4"/><circle cx="20" cy="26" r="2"/><circle cx="41" cy="25" r="2"/>
+          </svg>
+          <h3 id="st-2">Büyüyor</h3>
+          <p class="stage__desc">Projelerde kullandığım, her seferinde daha iyi öğrendiklerim.</p>
+          <ul class="skill-list">
+            <li><span>Canvas API</span><small>Lazer Bahçesi</small></li>
+            <li><span>Erişilebilirlik</span><small>klavye, kontrast</small></li>
+            <li><span>Fetch &amp; API'ler</span><small>JSON veri çekme</small></li>
+            <li><span>Figma</span><small>tasarımı koda dökme</small></li>
+          </ul>
+        </section>
+
+        <section class="stage stage--sprout" aria-labelledby="st-3">
+          <svg class="stage__icon" viewBox="0 0 64 64" aria-hidden="true">
+            <path class="stage__ground" d="M6 54h52"/>
+            <path d="M32 54V42M32 46l-6-5"/>
+            <circle cx="32" cy="42" r="2.4"/><circle cx="26" cy="41" r="2"/>
+          </svg>
+          <h3 id="st-3">Filizleniyor</h3>
+          <p class="stage__desc">Şu an öğrendiklerim. Yakında “Büyüyor”a geçecekler.</p>
+          <ul class="skill-list">
+            <li><span>React</span><small>bileşenler, state</small></li>
+            <li><span>TypeScript</span><small>temeller</small></li>
+            <li><span>Node.js</span><small>ilk adımlar</small></li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ İLETİŞİM ============ -->
+    <section class="section container contact" id="iletisim" aria-labelledby="iletisim-baslik">
+      <header class="section__head">
+        <a class="anchor" href="#iletisim">#iletisim</a>
+        <h2 id="iletisim-baslik">Birlikte bir şey yapalım</h2>
+      </header>
+
+      <div class="contact__grid">
+        <div class="contact__direct">
+          <p>Bir iş ilanı, serbest proje ya da sadece kodum hakkında bir soru: hepsine birkaç gün içinde dönüyorum.</p>
+
+          <!-- DEĞİŞTİR: e-posta adresin (iki yerde: link ve data-email) -->
+          <div class="email-row">
+            <a class="email" href="mailto:ornek@eposta.com" data-email="ornek@eposta.com">ornek@eposta.com</a>
+            <button class="copy-btn" type="button" data-copy-email>Kopyala</button>
+          </div>
+          <p class="copy-status" role="status" aria-live="polite"></p>
+
+          <!-- DEĞİŞTİR: profil linklerin -->
+          <ul class="socials">
+            <li><a href="https://github.com/MuhammedHmz1453" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.linkedin.com/in/KULLANICI-ADIN" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Bu form sunucu gerektirmez: Gönder'e basınca ziyaretçinin e-posta uygulaması,
+             mesaj hazır yazılmış hâlde açılır. Formspree'ye geçmek için README.md'ye bak. -->
+        <form class="form" data-contact-form novalidate>
+          <div class="field">
+            <label for="f-ad">Adın</label>
+            <input id="f-ad" name="ad" type="text" autocomplete="name" required>
+            <p class="field__error" id="f-ad-hata"></p>
+          </div>
+          <div class="field">
+            <label for="f-eposta">E-posta adresin</label>
+            <input id="f-eposta" name="eposta" type="email" autocomplete="email" required>
+            <p class="field__error" id="f-eposta-hata"></p>
+          </div>
+          <div class="field">
+            <label for="f-mesaj">Mesajın</label>
+            <textarea id="f-mesaj" name="mesaj" rows="5" required></textarea>
+            <p class="field__error" id="f-mesaj-hata"></p>
+          </div>
+          <button class="btn btn--accent" type="submit">Mesajı gönder</button>
+          <p class="form__note">Gönder'e basınca e-posta uygulaman, mesajın hazır yazılmış olarak açılır.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>© <span data-year>2026</span> Adın Soyadın</p>
+    <p>HTML, CSS ve JavaScript ile elle yazıldı. <a href="https://github.com/MuhammedHmz1453/muhammedhamzakaraca.github.io" target="_blank" rel="noopener">Kaynak kodu gör</a></p>
+  </footer>
+</body>
+</html>
