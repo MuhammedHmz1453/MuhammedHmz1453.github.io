@@ -268,6 +268,35 @@ a { color: inherit; }
   .theme-toggle { margin: 8px 0 0; }
 }
 
+/* Menü: giriş bölümüyle aynı koyu zemin (her iki temada) */
+.site-header {
+  --hd-ink: var(--spot-ink);
+  --hd-muted: rgba(244, 244, 245, .66);
+  --hd-line: rgba(255, 255, 255, .1);
+  --hd-accent: #ff6fae;
+  background: var(--spot-bg);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+  color: var(--hd-ink);
+}
+.site-header :focus-visible { outline-color: var(--hd-accent); }
+.site-header .nav__brand { color: var(--hd-ink); }
+.site-header .nav__mark { box-shadow: 0 0 0 1px var(--hd-line); }
+.site-header .nav__links a { color: var(--hd-muted); }
+.site-header .nav__links a:hover { color: var(--hd-ink); background: rgba(255, 255, 255, .07); }
+.site-header .nav__links a[aria-current="true"] { color: var(--hd-ink); }
+.site-header .nav__links a::after { background: var(--hd-accent); }
+.site-header .theme-toggle,
+.site-header .nav__toggle { color: var(--hd-ink); border-color: rgba(255, 255, 255, .18); }
+.site-header .theme-toggle:hover,
+.site-header .nav__toggle:hover { border-color: rgba(255, 255, 255, .4); }
+.site-header.is-scrolled { border-bottom-color: var(--hd-line); box-shadow: 0 12px 30px -20px rgba(0, 0, 0, .6); }
+@media (max-width: 720px) {
+  .site-header .nav__links:not(.nav__links--plain) { background: var(--spot-bg); border-bottom-color: var(--hd-line); }
+  .site-header .nav__links a { color: var(--hd-ink); }
+}
+
 /* ---------- Düğmeler ---------- */
 .btn {
   display: inline-flex;
