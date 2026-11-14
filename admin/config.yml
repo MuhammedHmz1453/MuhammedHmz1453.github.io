@@ -2,7 +2,7 @@
 # Depo adını değiştirirsen aşağıdaki "repo" satırını da güncelle.
 backend:
   name: github
-  repo: MuhammedHmz1453/muhammedhamzakaraca.github.io
+  repo: MuhammedHmz1453/MuhammedHmz1453.github.io
   branch: main
   commit_messages:
     create: "İçerik eklendi: {{slug}}"

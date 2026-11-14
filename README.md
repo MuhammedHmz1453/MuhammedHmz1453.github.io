@@ -8,7 +8,7 @@ Giriş bölümündeki "lazer bahçesi" bir `<canvas>` animasyonu: ışık bitkil
 
 Sitenin adresinin sonuna `/admin/` ekleyince panel açılır:
 
-**https://muhammedhmz1453.github.io/muhammedhamzakaraca.github.io/admin/**
+**https://muhammedhmz1453.github.io/admin/**
 
 Panelden adını, giriş yazısını, Hakkımda yazısını ve fotoğrafını, projeleri (ekran görüntüsüyle birlikte), yetenekleri, e-posta adresini ve profil linklerini değiştirebilirsin. **Kaydet**'e bastığında değişiklik GitHub'a kaydedilir. Site 1–2 dakika içinde yeniden oluşturulur, sonra sayfayı yenileyince değişikliği görürsün.
 
@@ -19,7 +19,7 @@ GitHub Pages'te sunucu olmadığı için panel şifre yerine GitHub'ın verdiği
 1. https://github.com/settings/personal-access-tokens/new adresine git.
 2. **Token name:** `Portfolyo paneli`
 3. **Expiration:** istediğin bir süre seç (örneğin 1 yıl). Süre dolunca aynı adımlarla yenisini oluşturursun.
-4. **Repository access:** **Only select repositories** seç, listeden `muhammedhamzakaraca.github.io` deposunu seç.
+4. **Repository access:** **Only select repositories** seç, listeden `MuhammedHmz1453.github.io` deposunu seç.
 5. **Permissions → Repository permissions → Contents:** **Read and write** seç.
 6. Sayfanın altındaki **Generate token**'a bas ve çıkan `github_pat_...` ile başlayan token'ı kopyala.
 7. Paneli aç, **Erişim Token'ı Kullanarak Giriş Yap** (*Sign In Using Access Token*) düğmesine bas ve token'ı yapıştır.
