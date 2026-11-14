@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupScrollSpy();
   setupHeaderShadow();
   setupHeroGlow();
+  setupCardSpotlight();
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
@@ -252,4 +253,16 @@ function setupHeroGlow() {
   });
   hero.addEventListener('pointerenter', () => hero.classList.add('is-pointer'));
   hero.addEventListener('pointerleave', () => hero.classList.remove('is-pointer'));
+}
+
+// ---------- Proje kartlarında imleci izleyen ışık ----------
+function setupCardSpotlight() {
+  if (!window.matchMedia('(hover: hover)').matches) return;
+  document.querySelectorAll('.project').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+    });
+  });
 }

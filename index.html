@@ -190,7 +190,7 @@
 
       <div class="projects">
         {%- for p in pr.liste %}
-        <article class="project" data-reveal-project>
+        <article class="project" data-reveal-project style="--i: {{ forloop.index0 | modulo: 2 }}">
           <div class="project__media">
           {%- if p.gorsel and p.gorsel != "" %}
           <img class="project__shot" src="{{ p.gorsel | remove_first: '/' }}" alt="{{ p.ad | escape }} görseli" loading="lazy" decoding="async">
@@ -239,19 +239,29 @@
           {%- endif %}
           </div>
           <div class="project__body">
-            <h3>{{ p.ad | escape }}</h3>
-            <p>{{ p.aciklama | escape }}</p>
             {%- if p.etiketler.size > 0 %}
             <ul class="tags" aria-label="Kullanılan teknolojiler">
               {%- for e in p.etiketler %}<li>{{ e | escape }}</li>{%- endfor %}
             </ul>
             {%- endif %}
+            <h3>{{ p.ad | escape }}</h3>
+            <p>{{ p.aciklama | escape }}</p>
             <div class="project__links">
               {%- if p.demo and p.demo != "" %}
-              <a href="{{ p.demo | escape }}" target="_blank" rel="noopener">Canlı demo <span aria-hidden="true">↗</span></a>
+              <a class="mini-pill mini-pill--solid" href="{{ p.demo | escape }}" target="_blank" rel="noopener">
+                Canlı demo
+                <span class="mini-pill__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg></span>
+              </a>
               {%- endif %}
               {%- if p.kod and p.kod != "" %}
-              <a href="{{ p.kod | escape }}" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
+              <a class="mini-pill mini-pill--ghost" href="{{ p.kod | escape }}" target="_blank" rel="noopener">
+                {%- if p.kod contains "github.com" %}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{ site.data.teknoloji_ikonlari['github'] }}"/></svg>
+                {%- else %}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mini-pill__code" d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+                {%- endif %}
+                Kaynak kod
+              </a>
               {%- endif %}
             </div>
           </div>
