@@ -24,6 +24,7 @@ collections:
         label: Giriş ve genel bilgiler
         file: _data/genel.yml
         fields:
+          - { name: site_adi, label: Site adı, widget: string, required: false, hint: "Menüdeki logonun yanında ve link paylaşımlarında görünür. Örnek: Hamza Karaca" }
           - { name: ad, label: Ad, widget: string, hint: "Örnek: Muhammed Hamza. Her kelime ayrı satırda büyük harflerle yazılır." }
           - { name: soyad, label: Soyad, widget: string, hint: "İçi boş harflerle, en altta yazılır." }
           - { name: unvan, label: Unvan, widget: string, hint: "Tarayıcı sekmesinde adının yanında görünür." }
