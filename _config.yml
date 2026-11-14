@@ -1,6 +1,10 @@
 # GitHub Pages bu siteyi Jekyll ile derler: _data/ klasöründeki içerik index.html'e yerleştirilir.
+# Sitenin asıl adresi (paylaşım önizlemesi ve arama motorları için)
+url: https://muhammedhamzakaraca.vercel.app
+
 exclude:
   - README.md
+  - vercel.json
   - Gemfile
   - Gemfile.lock
   - vendor
