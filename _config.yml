@@ -1,0 +1,6 @@
+# GitHub Pages bu siteyi Jekyll ile derler: _data/ klasöründeki içerik index.html'e yerleştirilir.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

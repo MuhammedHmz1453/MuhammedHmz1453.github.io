@@ -1,14 +1,26 @@
+---
+# Bu sayfanın içeriği _data/ klasöründen gelir. Metinleri değiştirmek için
+# yönetim panelini (/admin) kullan; bu dosyayı sadece tasarımı değiştirmek için düzenle.
+---
+{%- assign g = site.data.genel -%}
+{%- assign h = site.data.hakkimda -%}
+{%- assign pr = site.data.projeler -%}
+{%- assign y = site.data.yetenekler -%}
+{%- assign i = site.data.iletisim -%}
+{%- assign tam_ad = g.ad | append: " " | append: g.soyad | strip -%}
+{%- assign ad_kelimeleri = g.ad | split: " " -%}
+{%- assign tum_kelimeler = tam_ad | split: " " -%}
+{%- capture bas_harfler -%}{%- for k in tum_kelimeler -%}{{ k | slice: 0 }}{%- endfor -%}{%- endcapture -%}
 <!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- DEĞİŞTİR: başlık ve açıklama Google'da ve link paylaşımlarında görünür -->
-  <title>Muhammed Hamza Karaca · Web Geliştirici</title>
-  <meta name="description" content="Muhammed Hamza Karaca — HTML, CSS ve JavaScript ile çalışan web geliştirici. Projelerim, yeteneklerim ve iletişim bilgilerim.">
-  <meta property="og:title" content="Muhammed Hamza Karaca · Web Geliştirici">
-  <meta property="og:description" content="Tarayıcıda çalışan, elle tutulur şeyler yapıyorum. Projelerime göz at.">
+  <title>{{ tam_ad | escape }} · {{ g.unvan | escape }}</title>
+  <meta name="description" content="{{ g.seo_aciklama | escape }}">
+  <meta property="og:title" content="{{ tam_ad | escape }} · {{ g.unvan | escape }}">
+  <meta property="og:description" content="{{ g.giris | escape }}">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#0b101b">
 
@@ -34,13 +46,12 @@
 
   <header class="site-header">
     <nav class="nav container" aria-label="Ana menü">
-      <!-- Menüdeki logo ve adın -->
       <a class="nav__brand" href="#" aria-label="Sayfanın başına dön">
         <svg class="nav__mark" viewBox="0 0 32 32" aria-hidden="true">
           <path d="M16 28V13M16 19l-6-6M16 15l5-5" />
           <circle cx="10" cy="13" r="1.6" /><circle cx="21" cy="10" r="1.6" /><circle cx="16" cy="12" r="1.6" />
         </svg>
-        <span>muhammed.hamza.karaca</span>
+        <span>{{ tam_ad | downcase | replace: " ", "." | escape }}</span>
       </a>
 
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">Menü</button>
@@ -68,17 +79,18 @@
         <canvas class="hero__garden" data-garden aria-hidden="true"></canvas>
 
         <div class="hero__content">
-          <!-- DEĞİŞTİR: iş aramıyorsan bu satırı sil ya da metni değiştir -->
-          <p class="status"><span class="status__dot" aria-hidden="true"></span>Junior web geliştirici · İş ve projelere açığım</p>
+          {%- if g.durum_goster and g.durum != "" %}
+          <p class="status"><span class="status__dot" aria-hidden="true"></span>{{ g.durum | escape }}</p>
+          {%- endif %}
 
-          <!-- DEĞİŞTİR: adın. Her kelimeyi ayrı <span> içine koy; soyadı class="hero__surname" ile içi boş yazılır -->
           <h1 class="hero__name" id="hero-baslik">
-            <span>Muhammed</span>
-            <span>Hamza</span>
-            <span class="hero__surname">Karaca</span>
+            {%- for k in ad_kelimeleri %}
+            <span>{{ k | escape }}</span>
+            {%- endfor %}
+            <span class="hero__surname">{{ g.soyad | escape }}</span>
           </h1>
 
-          <p class="hero__lede">Tarayıcıda çalışan, elle tutulur şeyler yapıyorum: yapılacaklar listelerinden ışıktan bahçelere.</p>
+          <p class="hero__lede">{{ g.giris | escape }}</p>
 
           <div class="hero__actions">
             <a class="btn btn--light" href="#projeler">Projelerimi gör</a>
@@ -106,22 +118,23 @@
       </header>
 
       <div class="about__grid">
-        <!-- DEĞİŞTİR: fotoğraf eklemek için bu <div>'i şununla değiştir:
-             <img class="about__photo" src="assets/foto.jpg" alt="Muhammed Hamza Karaca'nın portresi" width="320" height="320"> -->
-        <div class="about__photo about__photo--initials" aria-hidden="true">MHK</div>
+        {%- if h.foto and h.foto != "" %}
+        <img class="about__photo" src="{{ h.foto | remove_first: '/' }}" alt="{{ tam_ad | escape }} portresi" width="320" height="320">
+        {%- else %}
+        <div class="about__photo about__photo--initials" aria-hidden="true">{{ bas_harfler | upcase }}</div>
+        {%- endif %}
 
         <div class="about__text">
-          <!-- DEĞİŞTİR: kendi hikâyen. Kısa tut; 2–3 paragraf yeter. -->
-          <p class="about__intro">Merhaba, ben Muhammed Hamza. Web geliştirmeyi kendi kendime öğreniyorum ve öğrendiğim her şeyi küçük, çalışan projelere dönüştürüyorum.</p>
-          <p>Beni en çok heyecanlandıran şey, birkaç satır kodun ekranda dokunulabilir bir şeye dönüşmesi. Düzgün çalışan bir yapılacaklar listesi de, tıklayınca büyüyen bir ışık bahçesi de bana aynı keyfi veriyor. Kodumu okunur yazmaya, sayfalarımı telefonda da rahat kullanılır yapmaya özen gösteriyorum.</p>
-          <p>Şu an ilk junior pozisyonumu ya da serbest çalışabileceğim projeleri arıyorum. Bir ekibin içinde öğrenmeye ve gerçek kullanıcılar için bir şeyler yapmaya hazırım.</p>
+          <p class="about__intro">{{ h.giris | escape }}</p>
+          {{ h.yazi | markdownify }}
 
+          {%- if h.bilgiler.size > 0 %}
           <dl class="facts">
-            <div><dt>Konum</dt><dd>Türkiye · uzaktan çalışmaya açık</dd></div>
-            <div><dt>Şu an öğreniyorum</dt><dd>React</dd></div>
-            <div><dt>Aradığım</dt><dd>Junior pozisyon ya da serbest proje</dd></div>
-            <div><dt>Diller</dt><dd>Türkçe, İngilizce (orta)</dd></div>
+            {%- for b in h.bilgiler %}
+            <div><dt>{{ b.baslik | escape }}</dt><dd>{{ b.deger | escape }}</dd></div>
+            {%- endfor %}
           </dl>
+          {%- endif %}
         </div>
       </div>
     </section>
@@ -131,15 +144,17 @@
       <header class="section__head">
         <a class="anchor" href="#projeler">#projeler</a>
         <h2 id="projeler-baslik">Projelerim</h2>
-        <p class="section__sub">Her biri canlı çalışıyor ve kodu açık. Tıkla, dene, içine bak.</p>
+        {%- if pr.aciklama != "" %}
+        <p class="section__sub">{{ pr.aciklama | escape }}</p>
+        {%- endif %}
       </header>
 
       <div class="projects">
-
-        <!-- ---------- Proje: To-Do ---------- -->
+        {%- for p in pr.liste %}
         <article class="project">
-          <!-- DEĞİŞTİR: ekran görüntün hazır olunca bu önizlemeyi şununla değiştir:
-               <img class="project__shot" src="assets/todo.png" alt="To-Do uygulamasının ekran görüntüsü" loading="lazy"> -->
+          {%- if p.gorsel and p.gorsel != "" %}
+          <img class="project__shot" src="{{ p.gorsel | remove_first: '/' }}" alt="{{ p.ad | escape }} ekran görüntüsü" loading="lazy">
+          {%- elsif p.cizim == "todo" %}
           <div class="project__preview preview-todo" aria-hidden="true">
             <div class="pt-card">
               <div class="pt-input"><span>Yeni görev ekle…</span><b>+</b></div>
@@ -151,23 +166,7 @@
               <div class="pt-foot"><span>2 görev kaldı</span><span>Tümü · Aktif · Biten</span></div>
             </div>
           </div>
-          <div class="project__body">
-            <h3>To-Do Uygulaması</h3>
-            <!-- DEĞİŞTİR: kendi uygulamanın gerçekten yaptıklarını yaz -->
-            <p>Görev ekle, tamamla, sil, filtrele. Görevler tarayıcıda saklanıyor; sayfayı yenilesen de kaybolmuyor.</p>
-            <ul class="tags" aria-label="Kullanılan teknolojiler">
-              <li>HTML</li><li>CSS</li><li>JavaScript</li><li>localStorage</li>
-            </ul>
-            <div class="project__links">
-              <!-- DEĞİŞTİR: kendi linklerin -->
-              <a href="https://muhammedhmz1453.github.io/todo/" target="_blank" rel="noopener">Canlı demo <span aria-hidden="true">↗</span></a>
-              <a href="https://github.com/MuhammedHmz1453/todo" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ---------- Proje: Lazer Bahçesi ---------- -->
-        <article class="project">
+          {%- elsif p.cizim == "bahce" %}
           <div class="project__preview preview-garden" aria-hidden="true">
             <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice">
               <g class="pg-glow">
@@ -187,22 +186,7 @@
               </g>
             </svg>
           </div>
-          <div class="project__body">
-            <h3>Lazer Bahçesi</h3>
-            <!-- DEĞİŞTİR: projenin gerçek açıklaması -->
-            <p>Canvas üzerinde çizilen etkileşimli bir ışık bahçesi. Tıkladığın yerden dallanarak büyüyen lazer bitkileri, her karede yeniden hesaplanıyor.</p>
-            <ul class="tags" aria-label="Kullanılan teknolojiler">
-              <li>JavaScript</li><li>Canvas API</li><li>Animasyon</li>
-            </ul>
-            <div class="project__links">
-              <a href="https://muhammedhmz1453.github.io/lazer-bahcesi/" target="_blank" rel="noopener">Canlı demo <span aria-hidden="true">↗</span></a>
-              <a href="https://github.com/MuhammedHmz1453/lazer-bahcesi" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
-            </div>
-          </div>
-        </article>
-
-        <!-- ---------- Proje: Bu site ---------- -->
-        <article class="project">
+          {%- elsif p.cizim == "site" %}
           <div class="project__preview preview-site" aria-hidden="true">
             <div class="ps-page">
               <div class="ps-nav"><i></i><span></span><span></span><span></span></div>
@@ -210,19 +194,28 @@
               <div class="ps-row"><span></span><span></span><span></span></div>
             </div>
           </div>
+          {%- else %}
+          <div class="project__preview preview-plain" aria-hidden="true"><span>{{ p.ad | escape }}</span></div>
+          {%- endif %}
           <div class="project__body">
-            <h3>Bu portfolyo sitesi</h3>
-            <p>Şu an baktığın sayfa. Hazır şablon kullanmadan, elle yazılmış HTML, CSS ve JavaScript. Telefona uyumlu, koyu tema destekli, GitHub Pages'te ücretsiz yayında.</p>
+            <h3>{{ p.ad | escape }}</h3>
+            <p>{{ p.aciklama | escape }}</p>
+            {%- if p.etiketler.size > 0 %}
             <ul class="tags" aria-label="Kullanılan teknolojiler">
-              <li>HTML</li><li>CSS Grid</li><li>JavaScript</li><li>GitHub Pages</li>
+              {%- for e in p.etiketler %}<li>{{ e | escape }}</li>{%- endfor %}
             </ul>
+            {%- endif %}
             <div class="project__links">
-              <a href="https://github.com/MuhammedHmz1453/muhammedhamzakaraca.github.io" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
+              {%- if p.demo and p.demo != "" %}
+              <a href="{{ p.demo | escape }}" target="_blank" rel="noopener">Canlı demo <span aria-hidden="true">↗</span></a>
+              {%- endif %}
+              {%- if p.kod and p.kod != "" %}
+              <a href="{{ p.kod | escape }}" target="_blank" rel="noopener">Kaynak kod <span aria-hidden="true">↗</span></a>
+              {%- endif %}
             </div>
           </div>
         </article>
-
-        <!-- Yeni proje eklemek için yukarıdaki <article class="project"> bloklarından birini kopyala. -->
+        {%- endfor %}
       </div>
     </section>
 
@@ -231,10 +224,11 @@
       <header class="section__head">
         <a class="anchor" href="#yetenekler">#yetenekler</a>
         <h2 id="yetenekler-baslik">Yetenekler</h2>
-        <p class="section__sub">Yüzdelik çubuklar yerine dürüst bir sınıflandırma: neyi sağlam bildiğim, neyi kullanarak büyüttüğüm, neye yeni başladığım.</p>
+        {%- if y.aciklama != "" %}
+        <p class="section__sub">{{ y.aciklama | escape }}</p>
+        {%- endif %}
       </header>
 
-      <!-- DEĞİŞTİR: her listeyi kendine göre düzenle. Sağdaki küçük not, o yeteneği nerede kullandığını gösterir. -->
       <div class="skills">
         <section class="stage stage--rooted" aria-labelledby="st-1">
           <svg class="stage__icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -246,10 +240,9 @@
           <h3 id="st-1">Kök saldı</h3>
           <p class="stage__desc">Rahatça, yardım almadan kullandıklarım.</p>
           <ul class="skill-list">
-            <li><span>HTML</span><small>semantik etiketler, formlar</small></li>
-            <li><span>CSS</span><small>Flexbox, Grid, responsive</small></li>
-            <li><span>JavaScript</span><small>DOM, olaylar, localStorage</small></li>
-            <li><span>Git &amp; GitHub</span><small>tüm projelerim</small></li>
+            {%- for s in y.kok_saldi %}
+            <li><span>{{ s.ad | escape }}</span><small>{{ s.nerede | escape }}</small></li>
+            {%- endfor %}
           </ul>
         </section>
 
@@ -262,10 +255,9 @@
           <h3 id="st-2">Büyüyor</h3>
           <p class="stage__desc">Projelerde kullandığım, her seferinde daha iyi öğrendiklerim.</p>
           <ul class="skill-list">
-            <li><span>Canvas API</span><small>Lazer Bahçesi</small></li>
-            <li><span>Erişilebilirlik</span><small>klavye, kontrast</small></li>
-            <li><span>Fetch &amp; API'ler</span><small>JSON veri çekme</small></li>
-            <li><span>Figma</span><small>tasarımı koda dökme</small></li>
+            {%- for s in y.buyuyor %}
+            <li><span>{{ s.ad | escape }}</span><small>{{ s.nerede | escape }}</small></li>
+            {%- endfor %}
           </ul>
         </section>
 
@@ -278,9 +270,9 @@
           <h3 id="st-3">Filizleniyor</h3>
           <p class="stage__desc">Şu an öğrendiklerim. Yakında “Büyüyor”a geçecekler.</p>
           <ul class="skill-list">
-            <li><span>React</span><small>bileşenler, state</small></li>
-            <li><span>TypeScript</span><small>temeller</small></li>
-            <li><span>Node.js</span><small>ilk adımlar</small></li>
+            {%- for s in y.filizleniyor %}
+            <li><span>{{ s.ad | escape }}</span><small>{{ s.nerede | escape }}</small></li>
+            {%- endfor %}
           </ul>
         </section>
       </div>
@@ -290,25 +282,26 @@
     <section class="section container contact" id="iletisim" aria-labelledby="iletisim-baslik">
       <header class="section__head">
         <a class="anchor" href="#iletisim">#iletisim</a>
-        <h2 id="iletisim-baslik">Birlikte bir şey yapalım</h2>
+        <h2 id="iletisim-baslik">{{ i.baslik | escape }}</h2>
       </header>
 
       <div class="contact__grid">
         <div class="contact__direct">
-          <p>Bir iş ilanı, serbest proje ya da sadece kodum hakkında bir soru: hepsine birkaç gün içinde dönüyorum.</p>
+          <p>{{ i.yazi | escape }}</p>
 
-          <!-- DEĞİŞTİR: e-posta adresin (iki yerde: link ve data-email) -->
           <div class="email-row">
-            <a class="email" href="mailto:ornek@eposta.com" data-email="ornek@eposta.com">ornek@eposta.com</a>
+            <a class="email" href="mailto:{{ i.eposta | escape }}" data-email="{{ i.eposta | escape }}">{{ i.eposta | escape }}</a>
             <button class="copy-btn" type="button" data-copy-email>Kopyala</button>
           </div>
           <p class="copy-status" role="status" aria-live="polite"></p>
 
-          <!-- DEĞİŞTİR: profil linklerin -->
+          {%- if i.linkler.size > 0 %}
           <ul class="socials">
-            <li><a href="https://github.com/MuhammedHmz1453" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></li>
-            <li><a href="https://www.linkedin.com/in/KULLANICI-ADIN" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a></li>
+            {%- for l in i.linkler %}
+            <li><a href="{{ l.adres | escape }}" target="_blank" rel="noopener">{{ l.ad | escape }} <span aria-hidden="true">↗</span></a></li>
+            {%- endfor %}
           </ul>
+          {%- endif %}
         </div>
 
         <!-- Bu form sunucu gerektirmez: Gönder'e basınca ziyaretçinin e-posta uygulaması,
@@ -337,8 +330,8 @@
   </main>
 
   <footer class="footer container">
-    <p>© <span data-year>2026</span> Muhammed Hamza Karaca</p>
-    <p>HTML, CSS ve JavaScript ile elle yazıldı. <a href="https://github.com/MuhammedHmz1453/muhammedhamzakaraca.github.io" target="_blank" rel="noopener">Kaynak kodu gör</a></p>
+    <p>© <span data-year>{{ site.time | date: "%Y" }}</span> {{ tam_ad | escape }}</p>
+    <p>HTML, CSS ve JavaScript ile elle yazıldı.{% if g.kaynak_kod and g.kaynak_kod != "" %} <a href="{{ g.kaynak_kod | escape }}" target="_blank" rel="noopener">Kaynak kodu gör</a>{% endif %}</p>
   </footer>
 </body>
 </html>

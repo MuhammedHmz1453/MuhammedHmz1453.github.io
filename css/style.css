@@ -694,6 +694,26 @@ a { color: inherit; }
 .ps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 6px; }
 .ps-row span { height: 22px; border-radius: 4px; background: #f6f8f4; border: 1px solid #c6d1c5; }
 
+/* Önizleme: görsel ya da çizim seçilmemiş proje */
+.preview-plain {
+  display: grid;
+  place-items: end start;
+  padding: 18px 20px;
+  background:
+    radial-gradient(90% 120% at 100% 100%, color-mix(in srgb, var(--laser-pink) 35%, transparent), transparent 60%),
+    var(--night);
+}
+.preview-plain span {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 125;
+  font-stretch: 125%;
+  font-size: 1.5rem;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--night-ink);
+}
+
 /* ---------- Yetenekler ---------- */
 .skills {
   display: grid;

@@ -1,63 +1,59 @@
 # Kişisel portfolyo sitesi
 
-Hakkımda, Projelerim, Yetenekler ve İletişim bölümlerinden oluşan, saf **HTML + CSS + JavaScript** ile yazılmış portfolyo sitesi. Hiçbir kurulum ya da derleme adımı yok: dosyaları GitHub'a yükle, GitHub Pages ücretsiz yayınlasın.
+Hakkımda, Projelerim, Yetenekler ve İletişim bölümlerinden oluşan, **HTML + CSS + JavaScript** ile yazılmış portfolyo sitesi. GitHub Pages'te ücretsiz yayınlanır ve içeriği bir **yönetim panelinden** düzenlenir.
 
 Giriş bölümündeki "lazer bahçesi" bir `<canvas>` animasyonu: ışık bitkileri yerden dallanarak büyür, boş bir yere tıklayınca yenisi eklenir.
+
+## Yönetim paneli
+
+Sitenin adresinin sonuna `/admin/` ekleyince panel açılır:
+
+**https://muhammedhmz1453.github.io/muhammedhamzakaraca.github.io/admin/**
+
+Panelden adını, giriş yazısını, Hakkımda yazısını ve fotoğrafını, projeleri (ekran görüntüsüyle birlikte), yetenekleri, e-posta adresini ve profil linklerini değiştirebilirsin. **Kaydet**'e bastığında değişiklik GitHub'a kaydedilir. Site 1–2 dakika içinde yeniden oluşturulur, sonra sayfayı yenileyince değişikliği görürsün.
+
+### İlk giriş: erişim token'ı oluştur (bir kere yapılır)
+
+GitHub Pages'te sunucu olmadığı için panel şifre yerine GitHub'ın verdiği bir **erişim token'ı** ile giriş yapar. Token sadece bu depoya yazabilir.
+
+1. https://github.com/settings/personal-access-tokens/new adresine git.
+2. **Token name:** `Portfolyo paneli`
+3. **Expiration:** istediğin bir süre seç (örneğin 1 yıl). Süre dolunca aynı adımlarla yenisini oluşturursun.
+4. **Repository access:** **Only select repositories** seç, listeden `muhammedhamzakaraca.github.io` deposunu seç.
+5. **Permissions → Repository permissions → Contents:** **Read and write** seç.
+6. Sayfanın altındaki **Generate token**'a bas ve çıkan `github_pat_...` ile başlayan token'ı kopyala.
+7. Paneli aç, **Erişim Token'ı Kullanarak Giriş Yap** (*Sign In Using Access Token*) düğmesine bas ve token'ı yapıştır.
+
+"GitHub ile Giriş Yap" düğmesi bu kurulumda çalışmaz; token ile giriş yap.
+
+Token o tarayıcıda saklanır, her seferinde tekrar girmen gerekmez. **Token'ı kimseyle paylaşma.** Bir cihazını kaybedersen https://github.com/settings/personal-access-tokens sayfasından token'ı silebilirsin.
+
+> Depo adını değiştirirsen `admin/config.yml` dosyasındaki `repo:` satırını da yeni adla güncelle.
 
 ## Dosyalar
 
 ```
-portfolio/
-├── index.html            ← tüm içerik (metinler, projeler, linkler)
+├── index.html            ← sayfa şablonu (tasarım); metinler _data/ klasöründen gelir
+├── _data/                ← sitenin tüm içeriği (panel bu dosyaları düzenler)
+│   ├── genel.yml         ← ad, giriş yazısı, durum satırı
+│   ├── hakkimda.yml
+│   ├── projeler.yml
+│   ├── yetenekler.yml
+│   └── iletisim.yml
+├── admin/                ← yönetim paneli (Sveltia CMS)
+├── assets/uploads/       ← panelden yüklenen fotoğraflar
 ├── css/style.css         ← tasarım (renkler en üstte)
 ├── js/main.js            ← menü, tema, e-posta kopyalama, iletişim formu
-├── js/lazer-bahcesi.js   ← giriş bölümündeki animasyon
-└── assets/favicon.svg    ← sekme ikonu
+└── js/lazer-bahcesi.js   ← giriş bölümündeki animasyon
 ```
 
-## 1. Kendi bilgilerinle doldur
+GitHub Pages siteyi **Jekyll** ile oluşturur: `_data/` klasöründeki içerik, `index.html` içindeki `{{ … }}` ve `{% … %}` yerlerine yerleştirilir. Bu yüzden `index.html`'e çift tıklayıp açınca bu işaretleri görürsün; sitenin son hâlini yayındaki adreste gör.
 
-`index.html` içinde **`DEĞİŞTİR`** yazan her yorumun altındaki metni kendi bilgilerinle değiştir. Editöründe `DEĞİŞTİR` diye aratman yeterli. Değiştirmen gerekenler:
+İçerik dışında tasarımı değiştirmek istersen `css/style.css` (renkler en üstteki `:root` değişkenlerinde) ve `index.html` dosyalarını düzenle.
 
-- Adın soyadın (başlık, giriş bölümü, menüdeki logo, alt bilgi)
-- Hakkımda paragrafları ve kısa bilgiler (konum, öğrendiğin şey…)
-- Proje açıklamaları ve linkleri: `KULLANICI-ADIN` yazan her yere GitHub kullanıcı adını yaz
-- Yetenek listeleri
-- E-posta adresin (iki yerde: `href="mailto:..."` ve `data-email="..."`)
-- GitHub ve LinkedIn linklerin
+## GitHub Pages ayarı
 
-**Fotoğraf eklemek için:** fotoğrafını `assets/foto.jpg` olarak kaydet, Hakkımda bölümündeki yorumda yazan `<img>` satırını baş harflerin olduğu `<div>`'in yerine koy.
-
-**Proje ekran görüntüsü eklemek için:** görüntüyü `assets/` klasörüne koy, kartın üstündeki `project__preview` bloğunu yorumda yazan `<img class="project__shot" ...>` satırıyla değiştir.
-
-**Yeni proje eklemek için:** `<article class="project">…</article>` bloklarından birini kopyala, altına yapıştır, içini değiştir.
-
-**Renkleri değiştirmek için:** `css/style.css` dosyasının en üstündeki `:root` değişkenlerini düzenle.
-
-## 2. Bilgisayarında aç
-
-`index.html` dosyasına çift tıkla, tarayıcıda açılır. (VS Code kullanıyorsan "Live Server" eklentisiyle kaydettikçe sayfa kendiliğinden yenilenir.)
-
-## 3. GitHub Pages'te ücretsiz yayınla
-
-1. GitHub'da yeni bir depo (repository) oluştur. Adını tam olarak **`kullaniciadin.github.io`** koy (kendi kullanıcı adınla). Böylece siten `https://kullaniciadin.github.io` adresinde açılır.
-2. Bu klasördeki **tüm dosyaları** depoya yükle:
-   - **Kolay yol:** depo sayfasında *Add file → Upload files*, dosyaları sürükle bırak, *Commit changes*.
-   - **Git ile:**
-     ```bash
-     git init
-     git add .
-     git commit -m "Portfolyo sitesi"
-     git branch -M main
-     git remote add origin https://github.com/kullaniciadin/kullaniciadin.github.io.git
-     git push -u origin main
-     ```
-3. Depoda **Settings → Pages** bölümüne git. *Source* olarak **Deploy from a branch**, branch olarak **main** ve klasör olarak **/ (root)** seç, kaydet.
-4. 1–2 dakika bekle. Siten `https://kullaniciadin.github.io` adresinde yayında.
-
-Sonradan bir şey değiştirdiğinde dosyaları tekrar yüklemen (ya da `git push` yapman) yeterli; site birkaç dakika içinde güncellenir.
-
-> `index.html` dosyası deponun en üst klasöründe olmalı, bir alt klasörde değil.
+Depoda **Settings → Pages** bölümünde *Source* olarak **Deploy from a branch**, branch olarak **main** ve klasör olarak **/ (root)** seçili olmalı.
 
 ## İletişim formu nasıl çalışıyor?
 
@@ -68,10 +64,3 @@ Mesajların doğrudan sana gelmesini istersen ücretsiz [Formspree](https://form
 1. Formspree'de hesap aç, yeni form oluştur, sana verilen adresi kopyala (`https://formspree.io/f/xxxxxxx` gibi).
 2. `index.html` içindeki `<form ...>` satırına `action="https://formspree.io/f/xxxxxxx" method="POST"` ekle.
 3. `js/main.js` dosyasında `setupContactForm` fonksiyonunun sonundaki `window.location.href = ...` satırını `form.submit();` ile değiştir.
-
-## Kontrol listesi (yayınlamadan önce)
-
-- [ ] `DEĞİŞTİR` yazan her yer düzenlendi
-- [ ] Tüm proje linkleri açılıyor
-- [ ] Telefonda açıp baktın (tarayıcıda F12 → cihaz simgesi ile de deneyebilirsin)
-- [ ] E-posta adresin doğru

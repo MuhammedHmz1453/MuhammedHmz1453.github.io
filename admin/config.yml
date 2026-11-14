@@ -1,0 +1,125 @@
+# Yönetim paneli ayarları (Sveltia CMS)
+# Depo adını değiştirirsen aşağıdaki "repo" satırını da güncelle.
+backend:
+  name: github
+  repo: MuhammedHmz1453/muhammedhamzakaraca.github.io
+  branch: main
+  commit_messages:
+    create: "İçerik eklendi: {{slug}}"
+    update: "İçerik güncellendi: {{slug}}"
+    delete: "İçerik silindi: {{slug}}"
+    uploadMedia: "Görsel yüklendi: {{path}}"
+    deleteMedia: "Görsel silindi: {{path}}"
+
+media_folder: assets/uploads
+public_folder: /assets/uploads
+
+collections:
+  - name: site
+    label: Site içeriği
+    description: Sitedeki her bölümün yazıları. Kaydettikten 1–2 dakika sonra sitede görünür.
+    files:
+      # ---------- Genel ----------
+      - name: genel
+        label: Giriş ve genel bilgiler
+        file: _data/genel.yml
+        fields:
+          - { name: ad, label: Ad, widget: string, hint: "Örnek: Muhammed Hamza. Her kelime ayrı satırda büyük harflerle yazılır." }
+          - { name: soyad, label: Soyad, widget: string, hint: "İçi boş harflerle, en altta yazılır." }
+          - { name: unvan, label: Unvan, widget: string, hint: "Tarayıcı sekmesinde adının yanında görünür." }
+          - { name: durum_goster, label: Durum satırını göster, widget: boolean, default: true }
+          - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Adının üstündeki küçük satır. Örnek: İş ve projelere açığım" }
+          - { name: giris, label: Giriş cümlesi, widget: text, hint: "Adının altındaki 1–2 cümle." }
+          - { name: seo_aciklama, label: Arama motoru açıklaması, widget: text, hint: "Google sonuçlarında sitenin altında görünen kısa açıklama." }
+          - { name: kaynak_kod, label: Sitenin kaynak kodu linki, widget: string, required: false }
+
+      # ---------- Hakkımda ----------
+      - name: hakkimda
+        label: Hakkımda
+        file: _data/hakkimda.yml
+        fields:
+          - { name: foto, label: Fotoğraf, widget: image, required: false, hint: "Kare bir fotoğraf en iyi sonucu verir. Boş bırakırsan baş harflerin görünür." }
+          - { name: giris, label: Giriş cümlesi, widget: text, hint: "Büyük yazılan ilk paragraf." }
+          - { name: yazi, label: Yazı, widget: markdown, buttons: [bold, italic, link], hint: "Paragrafları boş bir satırla ayır." }
+          - name: bilgiler
+            label: Kısa bilgiler
+            label_singular: bilgi
+            widget: list
+            summary: "{{baslik}}: {{deger}}"
+            fields:
+              - { name: baslik, label: Başlık, widget: string, hint: "Örnek: Konum" }
+              - { name: deger, label: Değer, widget: string, hint: "Örnek: Türkiye · uzaktan çalışmaya açık" }
+
+      # ---------- Projeler ----------
+      - name: projeler
+        label: Projeler
+        file: _data/projeler.yml
+        fields:
+          - { name: aciklama, label: Bölüm açıklaması, widget: string, required: false }
+          - name: liste
+            label: Projeler
+            label_singular: proje
+            widget: list
+            summary: "{{ad}}"
+            collapsed: true
+            fields:
+              - { name: ad, label: Proje adı, widget: string }
+              - { name: aciklama, label: Açıklama, widget: text, hint: "Proje ne yapıyor? 1–2 cümle yeter." }
+              - { name: etiketler, label: Kullanılan teknolojiler, widget: list, required: false, hint: "Virgülle ayır. Örnek: HTML, CSS, JavaScript" }
+              - { name: demo, label: Canlı demo linki, widget: string, required: false }
+              - { name: kod, label: Kaynak kod linki, widget: string, required: false }
+              - { name: gorsel, label: Ekran görüntüsü, widget: image, required: false, hint: "Yüklersen kartın üstünde bu görsel görünür. Yatay (16:10) görseller en iyi sonucu verir." }
+              - name: cizim
+                label: Görsel yoksa kartın üstünde
+                widget: select
+                required: false
+                default: duz
+                options:
+                  - { label: "Proje adı (koyu zemin)", value: duz }
+                  - { label: "To-Do çizimi", value: todo }
+                  - { label: "Lazer Bahçesi çizimi", value: bahce }
+                  - { label: "Site çizimi", value: site }
+
+      # ---------- Yetenekler ----------
+      - name: yetenekler
+        label: Yetenekler
+        file: _data/yetenekler.yml
+        fields:
+          - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false }
+          - name: kok_saldi
+            label: "Kök saldı (rahatça kullandıkların)"
+            label_singular: yetenek
+            widget: list
+            summary: "{{ad}}"
+            fields: &yetenek
+              - { name: ad, label: Yetenek, widget: string }
+              - { name: nerede, label: Kısa not, widget: string, required: false, hint: "Nerede ya da nasıl kullandığın. Örnek: Flexbox, Grid" }
+          - name: buyuyor
+            label: "Büyüyor (projelerde kullandıkların)"
+            label_singular: yetenek
+            widget: list
+            summary: "{{ad}}"
+            fields: *yetenek
+          - name: filizleniyor
+            label: "Filizleniyor (yeni öğrendiklerin)"
+            label_singular: yetenek
+            widget: list
+            summary: "{{ad}}"
+            fields: *yetenek
+
+      # ---------- İletişim ----------
+      - name: iletisim
+        label: İletişim
+        file: _data/iletisim.yml
+        fields:
+          - { name: baslik, label: Başlık, widget: string }
+          - { name: yazi, label: Yazı, widget: text }
+          - { name: eposta, label: E-posta adresin, widget: string, hint: "Sitede görünür ve iletişim formu bu adrese yazar." }
+          - name: linkler
+            label: Profil linkleri
+            label_singular: link
+            widget: list
+            summary: "{{ad}}"
+            fields:
+              - { name: ad, label: Ad, widget: string, hint: "Örnek: LinkedIn" }
+              - { name: adres, label: Link, widget: string, hint: "Örnek: https://www.linkedin.com/in/kullaniciadin" }

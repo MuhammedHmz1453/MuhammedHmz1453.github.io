@@ -1,0 +1,26 @@
+aciklama: "Yüzdelik çubuklar yerine dürüst bir sınıflandırma: neyi sağlam bildiğim, neyi kullanarak büyüttüğüm, neye yeni başladığım."
+kok_saldi:
+  - ad: HTML
+    nerede: semantik etiketler, formlar
+  - ad: CSS
+    nerede: Flexbox, Grid, responsive
+  - ad: JavaScript
+    nerede: DOM, olaylar, localStorage
+  - ad: Git & GitHub
+    nerede: tüm projelerim
+buyuyor:
+  - ad: Canvas API
+    nerede: Lazer Bahçesi
+  - ad: Erişilebilirlik
+    nerede: klavye, kontrast
+  - ad: Fetch & API'ler
+    nerede: JSON veri çekme
+  - ad: Figma
+    nerede: tasarımı koda dökme
+filizleniyor:
+  - ad: React
+    nerede: bileşenler, state
+  - ad: TypeScript
+    nerede: temeller
+  - ad: Node.js
+    nerede: ilk adımlar

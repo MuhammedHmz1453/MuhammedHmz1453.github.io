@@ -1,0 +1,23 @@
+aciklama: "Her biri canlı çalışıyor ve kodu açık. Tıkla, dene, içine bak."
+liste:
+  - ad: To-Do Uygulaması
+    aciklama: "Görev ekle, tamamla, sil, filtrele. Görevler tarayıcıda saklanıyor; sayfayı yenilesen de kaybolmuyor."
+    etiketler: [HTML, CSS, JavaScript, localStorage]
+    demo: https://muhammedhmz1453.github.io/todo/
+    kod: https://github.com/MuhammedHmz1453/todo
+    gorsel: ""
+    cizim: todo
+  - ad: Lazer Bahçesi
+    aciklama: "Canvas üzerinde çizilen etkileşimli bir ışık bahçesi. Tıkladığın yerden dallanarak büyüyen lazer bitkileri, her karede yeniden hesaplanıyor."
+    etiketler: [JavaScript, Canvas API, Animasyon]
+    demo: https://muhammedhmz1453.github.io/lazer-bahcesi/
+    kod: https://github.com/MuhammedHmz1453/lazer-bahcesi
+    gorsel: ""
+    cizim: bahce
+  - ad: Bu portfolyo sitesi
+    aciklama: "Şu an baktığın sayfa. Hazır şablon kullanmadan, elle yazılmış HTML, CSS ve JavaScript. Telefona uyumlu, koyu tema destekli, GitHub Pages'te ücretsiz yayında."
+    etiketler: [HTML, CSS Grid, JavaScript, GitHub Pages]
+    demo: ""
+    kod: https://github.com/MuhammedHmz1453/muhammedhamzakaraca.github.io
+    gorsel: ""
+    cizim: site
