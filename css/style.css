@@ -465,6 +465,17 @@ a { color: inherit; }
   .spot { min-height: min(calc(100svh - var(--header-h) - 32px), 860px); }
 }
 
+/* Giriş bölümü ekranın iki kenarına kadar uzanır */
+.hero--full { padding-top: 0; }
+.hero--full .spot {
+  border-radius: 0;
+  min-height: min(calc(100vh - var(--header-h)), 980px);
+  padding-inline: var(--gutter);
+}
+@supports (min-height: 100svh) {
+  .hero--full .spot { min-height: min(calc(100svh - var(--header-h)), 980px); }
+}
+
 .spot__inner {
   display: flex;
   flex-direction: column;

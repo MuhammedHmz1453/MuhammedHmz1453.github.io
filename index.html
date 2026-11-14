@@ -91,7 +91,7 @@
     {%- assign durum_ust = durum_parca[0] -%}
     {%- assign durum_alt = g.durum | remove_first: durum_ust | remove_first: " · " -%}
     {%- assign teknolojiler = y.kok_saldi | concat: y.buyuyor | concat: y.filizleniyor -%}
-    <section class="hero container" aria-labelledby="hero-baslik">
+    <section class="hero hero--full" aria-labelledby="hero-baslik">
       <div class="spot">
         <div class="spot__inner">
           <h1 class="spot__title" id="hero-baslik">
