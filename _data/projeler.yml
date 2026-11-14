@@ -17,7 +17,7 @@ liste:
   - ad: Bu portfolyo sitesi
     aciklama: "Şu an baktığın sayfa. Hazır şablon kullanmadan, elle yazılmış HTML, CSS ve JavaScript. Telefona uyumlu, koyu tema destekli, GitHub Pages'te ücretsiz yayında."
     etiketler: [HTML, CSS Grid, JavaScript, GitHub Pages]
-    demo: ""
+    demo: https://muhammedhmz1453.github.io/
     kod: https://github.com/MuhammedHmz1453/MuhammedHmz1453.github.io
     gorsel: ""
     cizim: site
