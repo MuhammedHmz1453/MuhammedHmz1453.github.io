@@ -8,7 +8,7 @@ Giriş bölümünün altındaki kayan "Kullandığım teknolojiler" şeridi, pan
 
 Sitenin adresinin sonuna `/admin/` ekleyince panel açılır:
 
-**https://muhammedhmz1453.github.io/admin/**
+**https://muhammedhamzakaraca.vercel.app/admin/**
 
 Panelden adını, giriş yazısını, Hakkımda yazısını ve fotoğrafını, projeleri (ekran görüntüsüyle birlikte), yetenekleri, e-posta adresini ve profil linklerini değiştirebilirsin. **Kaydet**'e bastığında değişiklik GitHub'a kaydedilir. Site 1–2 dakika içinde yeniden oluşturulur, sonra sayfayı yenileyince değişikliği görürsün.
 
@@ -51,9 +51,13 @@ GitHub Pages siteyi **Jekyll** ile oluşturur: `_data/` klasöründeki içerik, 
 
 İçerik dışında tasarımı değiştirmek istersen `css/style.css` (renkler en üstteki `:root` değişkenlerinde) ve `index.html` dosyalarını düzenle.
 
-## GitHub Pages ayarı
+## Yayın
 
-Depoda **Settings → Pages** bölümünde *Source* olarak **Deploy from a branch**, branch olarak **main** ve klasör olarak **/ (root)** seçili olmalı.
+Site **Vercel**'de yayında: **https://muhammedhamzakaraca.vercel.app**
+
+Vercel projesi (`muhammedhamzakaraca`) bu GitHub deposuna bağlı. Depoya her kayıt (panelden yapılan değişiklikler dahil) 1–2 dakika içinde siteye yansır. Vercel siteyi `Gemfile` ve `vercel.json` dosyalarındaki ayarlarla Jekyll kullanarak derler.
+
+Sitenin adresi değişirse `_config.yml` dosyasındaki `url:` satırını da güncelle; paylaşım önizlemesi bu adresi kullanır.
 
 ## İletişim formu nasıl çalışıyor?
 
