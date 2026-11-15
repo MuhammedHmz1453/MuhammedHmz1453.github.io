@@ -86,7 +86,10 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
   -webkit-text-size-adjust: 100%;
+  /* Sağdaki kaydırma çubuğu gizli; sayfa tekerlek, dokunma ve klavyeyle kaymaya devam eder */
+  scrollbar-width: none;
 }
+html::-webkit-scrollbar { display: none; }
 
 body {
   margin: 0;
