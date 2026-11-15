@@ -187,11 +187,12 @@
         <h2 id="hakkimda-baslik">Hakkımda</h2>
       </header>
 
-      <div class="about__grid">
-        {%- if h.foto and h.foto != "" %}
+      {%- comment %} Panelde fotoğraf boş bırakılırsa bu bölümde fotoğraf olmaz, yazı tek sütun durur {% endcomment %}
+      {%- assign foto_var = false -%}
+      {%- if h.foto and h.foto != "" %}{% assign foto_var = true %}{% endif %}
+      <div class="about__grid{% unless foto_var %} about__grid--yazi{% endunless %}">
+        {%- if foto_var %}
         <img class="about__photo" src="{{ h.foto | remove_first: '/' }}" alt="{{ tam_ad | escape }} portresi" width="320" height="320" decoding="async" data-reveal>
-        {%- else %}
-        <div class="about__photo about__photo--initials" aria-hidden="true" data-reveal>{{ bas_harfler | upcase }}</div>
         {%- endif %}
 
         <div class="about__text" data-reveal style="--i: 1">

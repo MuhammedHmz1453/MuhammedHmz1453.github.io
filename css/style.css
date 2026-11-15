@@ -743,6 +743,7 @@ body::before {
 }
 @media (min-width: 860px) {
   .about__grid { grid-template-columns: 280px minmax(0, 1fr); gap: 64px; }
+  .about__grid.about__grid--yazi { grid-template-columns: minmax(0, 1fr); }
 }
 
 .about__photo {
@@ -752,21 +753,8 @@ body::before {
   border-radius: var(--radius);
   object-fit: cover;
 }
-.about__photo--initials {
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at 50% 120%, rgba(255, 79, 154, .45), transparent 55%),
-    var(--night);
-  color: var(--night-ink);
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 4.5rem;
-  letter-spacing: -0.02em;
-}
 @media (max-width: 859px) {
   .about__photo { max-width: 160px; }
-  .about__photo--initials { font-size: 2.75rem; }
 }
 
 .about__text { max-width: 64ch; }

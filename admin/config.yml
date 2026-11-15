@@ -43,7 +43,7 @@ collections:
         label: Hakkımda
         file: _data/hakkimda.yml
         fields:
-          - { name: foto, label: Fotoğraf, widget: image, required: false, hint: "Kare bir fotoğraf en iyi sonucu verir. Boş bırakırsan baş harflerin görünür." }
+          - { name: foto, label: Fotoğraf, widget: image, required: false, hint: "Kare bir fotoğraf en iyi sonucu verir. Boş bırakırsan bu bölümde fotoğraf görünmez." }
           - { name: giris, label: Giriş cümlesi, widget: text, hint: "Büyük yazılan ilk paragraf." }
           - { name: yazi, label: Yazı, widget: markdown, buttons: [bold, italic, link], hint: "Paragrafları boş bir satırla ayır." }
           - name: bilgiler
