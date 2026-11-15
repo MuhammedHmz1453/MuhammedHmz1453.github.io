@@ -104,6 +104,117 @@
       box-shadow: 0 10px 26px -10px hsl(258 90% 55% / .95);
     }
 
+    /* ---------- Site içeriği: bölüm kartları ----------
+       Paneldeki dosya listesi (tablo) renkli, simgeli ve açıklamalı kartlara dönüşür.
+       Açıklamalar ve renkler sırayla verilir; sıra config.yml'deki "files" sırasıyla aynı:
+       1 Giriş ve genel bilgiler, 2 Hakkımda, 3 Projeler, 4 Yetenekler, 5 İletişim. */
+    html body .list-container .list-view {
+      padding: 8px clamp(16px, 2.4vw, 28px) 32px;
+    }
+    html body .list-container .list-view .sui.grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      width: 100%;
+    }
+    html body .list-container .list-view .sui.grid-row {
+      --c: 258;
+      --ic: 76%;
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      height: auto;
+      min-height: 150px;
+      padding: 22px 22px 22px;
+      border: 1px solid hsl(var(--sui-border-color-3-hsl));
+      border-radius: 18px;
+      background:
+        radial-gradient(120% 90% at 0% 0%, hsl(var(--c) 85% 62% / 13%), transparent 60%),
+        hsl(var(--sui-background-color-2-hsl));
+      cursor: pointer;
+      transition: transform .3s cubic-bezier(.2, .7, .2, 1), border-color .3s, box-shadow .3s;
+    }
+    html:root[data-theme="light"] .list-container .list-view .sui.grid-row { --ic: 42%; }
+    html body .list-container .list-view .sui.grid-row:hover {
+      transform: translateY(-3px);
+      border-color: hsl(var(--c) 80% 65% / 55%);
+      box-shadow: 0 18px 36px -20px hsl(var(--c) 90% 55% / .7);
+    }
+    html body .list-container .list-view .sui.grid-row:focus-visible {
+      outline: 2px solid hsl(var(--c) 85% 65%);
+      outline-offset: 2px;
+    }
+    html body .list-container .list-view .sui.grid-row .sui.grid-cell {
+      display: block;
+      height: auto;
+      padding: 0;
+      border: 0;
+      background: none;
+    }
+    html body .list-container .list-view .sui.grid-row .grid-cell.title { flex: 1; min-width: 0; white-space: normal; overflow: visible; }
+    html body .list-container .list-view .sui.grid-row .grid-cell.status { position: absolute; right: 52px; top: 22px; }
+    html body .list-container .list-view .sui.grid-row .grid-cell.title .label {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      height: auto;
+    }
+    html body .list-container .list-view .sui.grid-row .grid-cell.title .sui.icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: hsl(var(--c) 85% 62% / 16%);
+      box-shadow: inset 0 0 0 1px hsl(var(--c) 85% 70% / 22%);
+      color: hsl(var(--c) 85% var(--ic));
+      font-size: 24px;
+    }
+    html body .list-container .list-view .sui.grid-row .grid-cell.title .label > .sui.truncated-text {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: hsl(var(--sui-foreground-color-1-hsl));
+    }
+    /* Kartın altındaki kısa açıklama */
+    html body .list-container .list-view .sui.grid-row .grid-cell.title::after {
+      content: var(--aciklama, "");
+      display: block;
+      margin-top: 6px;
+      max-width: 40ch;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: clip;
+      font-size: .875rem;
+      line-height: 1.5;
+      color: hsl(var(--sui-foreground-color-3-hsl));
+    }
+    /* Sağ üstte "aç" oku */
+    html body .list-container .list-view .sui.grid-row::after {
+      content: "arrow_forward";
+      position: absolute;
+      top: 22px;
+      right: 20px;
+      font-family: "Material Symbols Outlined";
+      font-size: 20px;
+      line-height: 1;
+      color: hsl(var(--sui-foreground-color-4-hsl));
+      transition: transform .3s cubic-bezier(.2, .7, .2, 1), color .3s;
+    }
+    html body .list-container .list-view .sui.grid-row:hover::after {
+      transform: translateX(3px);
+      color: hsl(var(--c) 85% var(--ic));
+    }
+    html body .list-container .list-view .sui.grid-row:nth-child(1) { --c: 258; --aciklama: "Adın, giriş yazısı, sekme başlığı ve en alttaki tanıtım cümlesi."; }
+    html body .list-container .list-view .sui.grid-row:nth-child(2) { --c: 205; --aciklama: "Hakkımda yazısı ve konum, diller gibi kısa bilgiler."; }
+    html body .list-container .list-view .sui.grid-row:nth-child(3) { --c: 330; --aciklama: "Proje kartları: ad, açıklama, ekran görüntüsü ve canlı link."; }
+    html body .list-container .list-view .sui.grid-row:nth-child(4) { --c: 168; --aciklama: "Kök saldı, büyüyor ve filizleniyor listeleri."; }
+    html body .list-container .list-view .sui.grid-row:nth-child(5) { --c: 38;  --aciklama: "E-posta adresin ve sosyal medya linklerin."; }
+    @media (prefers-reduced-motion: reduce) {
+      html body .list-container .list-view .sui.grid-row,
+      html body .list-container .list-view .sui.grid-row::after { transition: none; }
+      html body .list-container .list-view .sui.grid-row:hover,
+      html body .list-container .list-view .sui.grid-row:hover::after { transform: none; }
+    }
+
     /* ---------- Giriş ekranı ---------- */
     /* Sitenin arka planı: koyu zemin, sol üstte mor ve sağ altta mavi ışık */
     body:has(.app-shell img.logo + h1) {

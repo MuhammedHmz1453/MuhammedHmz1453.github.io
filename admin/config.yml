@@ -60,11 +60,13 @@ collections:
         fields:
           - { name: foto, label: Fotoğraf, widget: image, required: false, hint: "Kare bir fotoğraf en iyi sonucu verir. Boş bırakırsan bu bölümde fotoğraf görünmez." }
           - { name: giris, label: Giriş cümlesi, widget: text, hint: "Büyük yazılan ilk paragraf." }
-          - { name: yazi, label: Yazı, widget: markdown, buttons: [bold, italic, link], hint: "Paragrafları boş bir satırla ayır." }
+          - { name: yazi, label: Yazı, widget: markdown, buttons: [bold, italic, link], editor_components: [], hint: "Paragrafları boş bir satırla ayır." }
           - name: bilgiler
             label: Kısa bilgiler
-            label_singular: bilgi
+            label_singular: Bilgi
             widget: list
+            required: false
+            collapsed: true
             summary: "{{baslik}}: {{deger}}"
             fields:
               - { name: baslik, label: Başlık, widget: string, hint: "Örnek: Konum" }
@@ -80,14 +82,15 @@ collections:
           - { name: aciklama, label: Bölüm açıklaması, widget: string, required: false }
           - name: liste
             label: Projeler
-            label_singular: proje
+            label_singular: Proje
             widget: list
             summary: "{{ad}}"
-            collapsed: false
+            collapsed: true
+            hint: "Bir projeye tıklayınca açılır. Sırasını değiştirmek için tutup sürükle."
             fields:
               - { name: ad, label: Proje adı, widget: string }
               - { name: aciklama, label: Açıklama, widget: text, hint: "Proje ne yapıyor? 1–2 cümle yeter." }
-              - { name: etiketler, label: Kullanılan teknolojiler, widget: list, required: false, hint: "Virgülle ayır. Örnek: HTML, CSS, JavaScript" }
+              - { name: etiketler, label: Kullanılan teknolojiler, label_singular: Teknoloji, widget: list, required: false, hint: "Her teknolojiyi ayrı ekle. Örnek: HTML, CSS, JavaScript" }
               - name: demo
                 label: Canlı link
                 widget: string
@@ -98,6 +101,7 @@ collections:
               - { name: gorsel, label: Ekran görüntüsü, widget: image, required: false, hint: "Yüklersen kartın üstünde bu görsel görünür. Yatay (16:10) görseller en iyi sonucu verir." }
               - name: cizim
                 label: Görsel yoksa kartın üstünde
+                hint: "Ekran görüntüsü yüklediysen bu seçim kullanılmaz."
                 widget: select
                 required: false
                 default: duz
@@ -117,22 +121,28 @@ collections:
           - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false, hint: "Buradaki tüm yetenekler giriş bölümündeki kayan “Kullandığım teknolojiler” şeridinde de görünür. HTML, CSS, JavaScript, React gibi bilinen teknolojiler logosuyla çıkar." }
           - name: kok_saldi
             label: "Kök saldı (rahatça kullandıkların)"
-            label_singular: yetenek
+            label_singular: Yetenek
             widget: list
+            required: false
+            collapsed: true
             summary: "{{ad}}"
             fields: &yetenek
               - { name: ad, label: Yetenek, widget: string }
               - { name: nerede, label: Kısa not, widget: string, required: false, hint: "Nerede ya da nasıl kullandığın. Örnek: Flexbox, Grid" }
           - name: buyuyor
             label: "Büyüyor (projelerde kullandıkların)"
-            label_singular: yetenek
+            label_singular: Yetenek
             widget: list
+            required: false
+            collapsed: true
             summary: "{{ad}}"
             fields: *yetenek
           - name: filizleniyor
             label: "Filizleniyor (yeni öğrendiklerin)"
-            label_singular: yetenek
+            label_singular: Yetenek
             widget: list
+            required: false
+            collapsed: true
             summary: "{{ad}}"
             fields: *yetenek
 
@@ -148,8 +158,9 @@ collections:
           - { name: eposta, label: E-posta adresin, widget: string, hint: "Sitede görünür; iletişim formundan gelen mesajlar bu adrese gelir. Değiştirirsen yeni adres için FormSubmit’in gönderdiği onay e-postasını bir kere onaylaman gerekir." }
           - name: linkler
             label: Profil linkleri
-            label_singular: link
+            label_singular: Link
             widget: list
+            collapsed: true
             summary: "{{ad}}"
             fields:
               - { name: ad, label: Ad, widget: string, hint: "Instagram, Facebook, X, LinkedIn, GitHub, YouTube, TikTok, WhatsApp, Telegram, Discord, Behance ya da Dribbble yazarsan sayfanın en altında kendi renkli logosuyla görünür." }
