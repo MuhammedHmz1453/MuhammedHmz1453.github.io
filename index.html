@@ -17,7 +17,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{{ tam_ad | escape }} · {{ g.unvan | escape }}</title>
+  <title>{{ g.site_adi | default: tam_ad | escape }}</title>
   <meta name="description" content="{{ g.seo_aciklama | escape }}">
   <meta property="og:title" content="{{ tam_ad | escape }} · {{ g.unvan | escape }}">
   <meta property="og:description" content="{{ g.giris | escape }}">

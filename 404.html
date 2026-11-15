@@ -10,7 +10,7 @@ permalink: /404.html
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Sayfa bulunamadı · {{ tam_ad | escape }}</title>
+  <title>Sayfa bulunamadı · {{ g.site_adi | default: tam_ad | escape }}</title>
   <meta name="theme-color" content="#0c0a1a">
 
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
