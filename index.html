@@ -157,9 +157,10 @@
         {%- if teknolojiler.size > 0 %}
         <div class="spot__band">
           <p class="spot__caption"><span>Kullandığım teknolojiler</span></p>
-          <div class="marquee">
+          {%- if teknolojiler.size < 4 %}{% assign kopyalar = 1 %}{% else %}{% assign kopyalar = 4 %}{% endif %}
+          <div class="marquee{% if kopyalar == 1 %} marquee--static{% endif %}">
             <ul class="marquee__track">
-              {%- for kopya in (1..4) %}
+              {%- for kopya in (1..kopyalar) %}
               {%- for t in teknolojiler %}
               {%- assign anahtar = t.ad | downcase | strip -%}
               {%- assign ikon = site.data.teknoloji_ikonlari[anahtar] %}
@@ -298,6 +299,7 @@
       </header>
 
       <div class="skills">
+        {%- if y.kok_saldi.size > 0 %}
         <section class="stage stage--rooted" aria-labelledby="st-1" style="--i: 0">
           <div class="stage__head">
             <span class="stage__badge"><svg class="stage__icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -321,7 +323,9 @@
             {%- endfor %}
           </ul>
         </section>
+        {%- endif %}
 
+        {%- if y.buyuyor.size > 0 %}
         <section class="stage stage--growing" aria-labelledby="st-2" style="--i: 1">
           <div class="stage__head">
             <span class="stage__badge"><svg class="stage__icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -344,7 +348,9 @@
             {%- endfor %}
           </ul>
         </section>
+        {%- endif %}
 
+        {%- if y.filizleniyor.size > 0 %}
         <section class="stage stage--sprout" aria-labelledby="st-3" style="--i: 2">
           <div class="stage__head">
             <span class="stage__badge"><svg class="stage__icon" viewBox="0 0 64 64" aria-hidden="true">
@@ -367,6 +373,7 @@
             {%- endfor %}
           </ul>
         </section>
+        {%- endif %}
       </div>
     </section>
 
