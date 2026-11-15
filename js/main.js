@@ -330,25 +330,51 @@ function setupHeaderShadow() {
 
 // ---------- Giriş bölümünde imleci izleyen ışık ----------
 function setupHeroGlow() {
-  const hero = document.querySelector('.spot, .hero__window');
-  if (!hero || prefersReducedMotion() || !window.matchMedia('(hover: hover)').matches) return;
+  if (prefersReducedMotion() || !window.matchMedia('(hover: hover)').matches) return;
 
+  // Ana sayfa: ekranı kaplayan katman; fare giriş bölümünün alt kenarından yukarıdaysa
+  // (üst şerit ve menü dahil) ışık görünür, kutunun kenarında kesilmez
+  const glow = document.querySelector('.cursor-glow');
+  const hero = document.querySelector('.hero--full');
+  if (glow && hero) {
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    window.addEventListener('pointermove', (e) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        glow.style.setProperty('--mx', `${x}px`);
+        glow.style.setProperty('--my', `${y}px`);
+        glow.classList.toggle('is-on', y <= hero.getBoundingClientRect().bottom);
+      });
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => glow.classList.remove('is-on'));
+    window.addEventListener('blur', () => glow.classList.remove('is-on'));
+    return;
+  }
+
+  // 404 sayfası: ışık pencerenin içinde
+  const box = document.querySelector('.hero__window');
+  if (!box) return;
   let frame = 0;
   let x = 0;
   let y = 0;
-  hero.addEventListener('pointermove', (e) => {
-    const rect = hero.getBoundingClientRect();
+  box.addEventListener('pointermove', (e) => {
+    const rect = box.getBoundingClientRect();
     x = e.clientX - rect.left;
     y = e.clientY - rect.top;
     if (frame) return;
     frame = requestAnimationFrame(() => {
-      hero.style.setProperty('--mx', `${x}px`);
-      hero.style.setProperty('--my', `${y}px`);
+      box.style.setProperty('--mx', `${x}px`);
+      box.style.setProperty('--my', `${y}px`);
       frame = 0;
     });
   });
-  hero.addEventListener('pointerenter', () => hero.classList.add('is-pointer'));
-  hero.addEventListener('pointerleave', () => hero.classList.remove('is-pointer'));
+  box.addEventListener('pointerenter', () => box.classList.add('is-pointer'));
+  box.addEventListener('pointerleave', () => box.classList.remove('is-pointer'));
 }
 
 // ---------- Proje kartlarında imleci izleyen ışık ----------

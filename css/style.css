@@ -1487,8 +1487,7 @@ body::before {
     background-clip: text;
   }
 
-  /* Fare imlecini izleyen hafif ışık (giriş bölümü) */
-  .spot::after,
+  /* Fare imlecini izleyen hafif ışık (404 penceresi) */
   .hero__window::after {
     content: "";
     position: absolute;
@@ -1499,9 +1498,20 @@ body::before {
     opacity: 0;
     transition: opacity .5s;
   }
-  .spot.is-pointer::after,
   .hero__window.is-pointer::after { opacity: 1; }
-  .spot::after { background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .06), transparent 70%); }
+
+  /* Ana sayfa: fare ışığı tüm ekranı kaplayan katmanda; giriş bölümünden
+     yukarıdaki menüye çıkınca da kesilmeden yayılır */
+  .cursor-glow {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .06), transparent 70%);
+    opacity: 0;
+    transition: opacity .5s;
+  }
+  .cursor-glow.is-on { opacity: 1; }
 
   /* Kaydırınca beliren öğeler */
   .reveal-on [data-reveal] { opacity: 0; }
