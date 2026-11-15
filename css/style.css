@@ -5,13 +5,19 @@
    ========================================================= */
 
 :root {
-  /* Sayfa: giriş bölümüyle aynı nötr siyah (varsayılan) */
-  --paper: #09090b;
-  --surface: #111113;
+  /* Sayfa: koyu lacivert-mor zemin; sol üstte mor, sağ altta mavi ışık */
+  --paper: #0c0a1a;
+  --glow-indigo:
+    radial-gradient(40% 55% at 21% 19%, #291f58, transparent),
+    radial-gradient(40% 55% at 80% 70%, #1a295e, transparent);
+  --site-glow: var(--glow-indigo);
+  --chrome-bg: transparent;           /* üst şerit ve giriş bölümü: zemin görünsün */
+  --footer-bg: rgba(6, 5, 14, .45);
+  --surface: rgba(22, 19, 46, .55);
   --ink: #e4e4e7;
   --strong: #fafafa;
-  --muted: #a1a1aa;
-  --line: #232327;
+  --muted: #a7a6bd;
+  --line: rgba(255, 255, 255, .08);
   --accent: #e7e7e9;          /* ana düğme ve odak çizgisi */
   --accent-ink: #111113;
   --link: #fafafa;
@@ -34,11 +40,11 @@
   --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
 
   /* Giriş bölümü ve menü (her iki temada da koyu) */
-  --spot-bg: #09090b;
+  --spot-bg: #0c0a1a;
   --spot-ink: #f4f4f5;
   --spot-muted: rgba(244, 244, 245, .62);
 
-  --shot-bg: #121215;
+  --shot-bg: rgba(8, 7, 20, .55);
   --card-glow: rgba(255, 255, 255, .055);
   --card-ring: rgba(255, 255, 255, .5);
   --dot: rgba(255, 255, 255, .08);
@@ -64,6 +70,9 @@
   --link-line: rgba(9, 9, 11, .3);
   --error: #c62828;
   --shot-bg: #f4f4f5;
+  --site-glow: none;
+  --chrome-bg: #0c0a1a;
+  --footer-bg: #0c0a1a;
   --card-glow: rgba(9, 9, 11, .035);
   --card-ring: rgba(9, 9, 11, .35);
   --dot: rgba(9, 9, 11, .08);
@@ -81,6 +90,7 @@ html {
 
 body {
   margin: 0;
+  position: relative;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
@@ -123,13 +133,23 @@ a { color: inherit; }
 }
 .skip-link:focus { top: 12px; }
 
+/* Ekrana sabit arka plan ışıkları: sayfa kayarken yerinde kalır */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--site-glow);
+  pointer-events: none;
+}
+
 /* ---------- Üst şerit: logo ve tema düğmesi (koyu, sayfayla birlikte kayar) ---------- */
 .site-header {
   --hd-ink: var(--spot-ink);
   --hd-accent: #fafafa;
   position: relative;
   z-index: 40;
-  background: var(--spot-bg);
+  background: var(--chrome-bg);
   color: var(--hd-ink);
 }
 .site-header :focus-visible { outline-color: var(--hd-accent); }
@@ -188,7 +208,7 @@ a { color: inherit; }
   gap: 12px;
   padding: 4px;
   border-radius: 999px;
-  background: rgba(24, 24, 27, .68);
+  background: rgba(16, 13, 36, .66);
   border: 1px solid rgba(255, 255, 255, .1);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   backdrop-filter: blur(16px) saturate(140%);
@@ -503,11 +523,7 @@ a { color: inherit; }
   min-height: min(calc(100vh - var(--header-h) - 32px), 860px);
   padding: clamp(56px, 9vw, 120px) clamp(20px, 5vw, 64px) clamp(28px, 4vw, 44px);
   border-radius: calc(var(--radius) + 10px);
-  background:
-    radial-gradient(50% 65% at 6% 62%, rgba(36, 66, 138, .42), transparent 72%),
-    radial-gradient(45% 60% at 96% 58%, rgba(124, 94, 62, .34), transparent 72%),
-    radial-gradient(55% 40% at 50% 28%, rgba(255, 255, 255, .055), transparent 72%),
-    var(--spot-bg);
+  background: var(--chrome-bg);
   color: var(--spot-ink);
   text-align: center;
 }
@@ -517,6 +533,17 @@ a { color: inherit; }
 
 /* Giriş bölümü ekranın iki kenarına kadar uzanır */
 .hero--full { padding-top: 0; }
+/* Açık temada üst şerit, giriş ve alt bilgi koyu kalır; ışıklar ekrana sabit olduğu için aralarında çizgi oluşmaz */
+:root[data-theme="light"] .site-header,
+:root[data-theme="light"] .hero--full .spot,
+:root[data-theme="light"] .site-footer {
+  background: var(--glow-indigo), #0c0a1a;
+  background-attachment: fixed;
+}
+/* Telefonda alttaki menü, giriş bölümünün en altını örtmesin */
+@media (max-width: 767px) {
+  .hero--full .spot { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
+}
 .hero--full .spot {
   border-radius: 0;
   min-height: min(calc(100vh - var(--header-h)), 980px);
@@ -832,8 +859,8 @@ a { color: inherit; }
   overflow: hidden;
   border-radius: calc(var(--card-r) - 8px);
   background:
-    radial-gradient(70% 90% at 0% 100%, rgba(36, 66, 138, .32), transparent 70%),
-    radial-gradient(70% 90% at 100% 100%, rgba(124, 94, 62, .28), transparent 70%),
+    radial-gradient(70% 90% at 0% 0%, rgba(66, 46, 150, .32), transparent 70%),
+    radial-gradient(70% 90% at 100% 100%, rgba(34, 62, 160, .32), transparent 70%),
     var(--shot-bg);
 }
 .project__media::before {
@@ -1286,11 +1313,11 @@ a { color: inherit; }
 .site-footer {
   --ft-ink: #fafafa;
   --ft-muted: #a1a1aa;
-  --ft-line: #232327;
+  --ft-line: rgba(255, 255, 255, .08);
   --glass-ink: #fafafa;
   margin-top: clamp(80px, 11vw, 140px);
   padding-block: clamp(56px, 7vw, 88px) 40px;
-  background: #0b0b0d;
+  background: var(--footer-bg);
   border-top: 1px solid var(--ft-line);
   color: var(--ft-muted);
 }
