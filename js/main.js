@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHeaderShadow();
   setupHeroGlow();
   setupCardSpotlight();
+  setupToTop();
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
@@ -387,4 +388,19 @@ function setupCardSpotlight() {
       card.style.setProperty('--y', `${e.clientY - rect.top}px`);
     });
   });
+}
+
+// ---------- Başa dön düğmesi ----------
+// Giriş bölümü ekrandan tamamen çıkınca sağ alt köşede belirir, geri dönünce kaybolur.
+function setupToTop() {
+  const btn = document.querySelector('.to-top');
+  const hero = document.querySelector('.hero--full');
+  if (!btn) return;
+  if (!hero || !('IntersectionObserver' in window)) {
+    btn.classList.add('is-visible');
+    return;
+  }
+  new IntersectionObserver(([entry]) => {
+    btn.classList.toggle('is-visible', !entry.isIntersecting);
+  }).observe(hero);
 }
