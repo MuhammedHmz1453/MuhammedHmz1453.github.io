@@ -45,7 +45,7 @@
 
   --radius: 14px;
   --gutter: clamp(16px, 4vw, 40px);
-  --header-h: 64px;
+  --header-h: 94px;
 
   color-scheme: dark;
 }
@@ -75,7 +75,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-h) + 12px);
+  scroll-padding-top: 96px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -123,18 +123,18 @@ a { color: inherit; }
 }
 .skip-link:focus { top: 12px; }
 
-/* ---------- Üst menü ---------- */
+/* ---------- Üst şerit: logo ve tema düğmesi (koyu, sayfayla birlikte kayar) ---------- */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: color-mix(in srgb, var(--paper) 86%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  --hd-ink: var(--spot-ink);
+  --hd-accent: #fafafa;
+  position: relative;
+  z-index: 40;
+  background: var(--spot-bg);
+  color: var(--hd-ink);
 }
+.site-header :focus-visible { outline-color: var(--hd-accent); }
 
-.nav {
+.topbar {
   height: var(--header-h);
   display: flex;
   align-items: center;
@@ -146,69 +146,32 @@ a { color: inherit; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  color: var(--hd-ink);
   text-decoration: none;
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
-
 .nav__mark {
   width: 30px;
   height: 30px;
   border-radius: 8px;
 }
 
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.nav__links a {
-  display: block;
-  padding: 8px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9375rem;
-  color: var(--muted);
-  transition: color .15s, background-color .15s;
-}
-.nav__links a:hover { color: var(--ink); background: color-mix(in srgb, var(--line) 45%, transparent); }
-.nav__links a { position: relative; }
-.nav__links a::after {
-  content: "";
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 3px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
-}
-.nav__links a[aria-current="true"] { color: var(--ink); }
-.nav__links a[aria-current="true"]::after { transform: scaleX(1); }
-.site-header { transition: box-shadow .3s, border-color .3s; }
-.site-header.is-scrolled { box-shadow: 0 10px 30px -22px rgba(10, 20, 15, .45); }
-
-.nav__toggle { display: none; }
-
 .theme-toggle {
   display: grid;
   place-items: center;
   width: 40px;
   height: 40px;
-  margin-left: 6px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 999px;
   background: transparent;
-  color: var(--ink);
+  color: var(--hd-ink);
   cursor: pointer;
+  transition: border-color .2s;
 }
+.theme-toggle:hover { border-color: rgba(255, 255, 255, .4); }
 .theme-toggle svg {
   width: 18px;
   height: 18px;
@@ -222,63 +185,109 @@ a { color: inherit; }
 :root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 :root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
 
-@media (max-width: 720px) {
-  .nav__toggle {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 14px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: transparent;
-    color: var(--ink);
-    font: 500 0.9375rem var(--font-body);
-    cursor: pointer;
-  }
-  .nav__links {
-    position: absolute;
-    top: var(--header-h);
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 8px var(--gutter) 16px;
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-    display: none;
-  }
-  .nav__links.is-open { display: flex; }
-  .nav__links a { padding: 12px 4px; font-size: 1.0625rem; color: var(--ink); }
-  .nav__links a::after { left: 4px; right: auto; width: 24px; bottom: 6px; }
-  .theme-toggle { margin: 8px 0 0; }
+/* ---------- Menü: "tubelight" (yüzen hap ve floresan lamba) ----------
+   Bilgisayarda ekranın üstünde ortada, telefonda altta durur. */
+.tube {
+  position: fixed;
+  z-index: 60;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tube__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(24, 24, 27, .68);
+  border: 1px solid rgba(255, 255, 255, .1);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .3), 0 4px 6px -4px rgba(0, 0, 0, .3);
+}
+.tube__link {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 24px;
+  border-radius: 999px;
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  color: rgba(250, 250, 250, .8);
+  text-decoration: none;
+  transition: color .2s, background-color .2s;
+}
+.tube__link:hover { color: #fafafa; }
+.tube__link.is-active { color: #fafafa; background: rgba(255, 255, 255, .07); }
+.tube__link:focus-visible { outline: 2px solid #fafafa; outline-offset: 2px; border-radius: 999px; }
+.tube__icon {
+  display: none;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  max-width: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-/* Menü: giriş bölümüyle aynı koyu zemin (her iki temada) */
-.site-header {
-  --hd-ink: var(--spot-ink);
-  --hd-muted: rgba(244, 244, 245, .66);
-  --hd-line: rgba(255, 255, 255, .1);
-  --hd-accent: #ff6fae;
-  background: var(--spot-bg);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  border-bottom-color: transparent;
-  color: var(--hd-ink);
+/* Aktif bağlantının arkasındaki ışık ve üstündeki floresan çubuk; JS yayla kaydırır */
+.tube__lamp {
+  position: absolute;
+  z-index: 0;
+  top: 4px;
+  left: 0;
+  width: 0;
+  height: calc(100% - 8px);
+  border-radius: 999px;
+  background: rgba(250, 250, 250, .05);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, width;
 }
-.site-header :focus-visible { outline-color: var(--hd-accent); }
-.site-header .nav__brand { color: var(--hd-ink); }
-.site-header .nav__links a { color: var(--hd-muted); }
-.site-header .nav__links a:hover { color: var(--hd-ink); background: rgba(255, 255, 255, .07); }
-.site-header .nav__links a[aria-current="true"] { color: var(--hd-ink); }
-.site-header .nav__links a::after { background: var(--hd-accent); }
-.site-header .theme-toggle,
-.site-header .nav__toggle { color: var(--hd-ink); border-color: rgba(255, 255, 255, .18); }
-.site-header .theme-toggle:hover,
-.site-header .nav__toggle:hover { border-color: rgba(255, 255, 255, .4); }
-.site-header.is-scrolled { border-bottom-color: var(--hd-line); box-shadow: 0 12px 30px -20px rgba(0, 0, 0, .6); }
-@media (max-width: 720px) {
-  .site-header .nav__links:not(.nav__links--plain) { background: var(--spot-bg); border-bottom-color: var(--hd-line); }
-  .site-header .nav__links a { color: var(--hd-ink); }
+.tube__lamp.is-on { opacity: 1; }
+.tube__light {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 32px;
+  height: 4px;
+  transform: translateX(-50%);
+  border-radius: 999px 999px 0 0;
+  background: #fafafa;
+}
+.tube__light i {
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(250, 250, 250, .2);
+}
+.tube__light i:nth-child(1) { width: 48px; height: 24px; top: -8px; left: -8px; filter: blur(12px); }
+.tube__light i:nth-child(2) { width: 32px; height: 24px; top: -4px; left: 0; filter: blur(12px); }
+.tube__light i:nth-child(3) { width: 16px; height: 16px; top: 0; left: 8px; filter: blur(4px); }
+
+@media (max-width: 767px) {
+  .tube { top: auto; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); }
+  .tube__bar { gap: 8px; }
+  .tube__link { padding: 10px 18px; }
+  .tube__icon { display: block; }
+  .tube__text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  /* alttaki menü sayfanın sonunu kapatmasın */
+  body { padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)); }
 }
 
 /* ---------- Düğmeler ---------- */
@@ -1488,9 +1497,8 @@ a { color: inherit; }
 /* 404 sayfası: daha küçük başlık */
 .hero__name--small { font-size: clamp(1.75rem, 6.4vw, 4.75rem); line-height: 1; }
 
-@media (max-width: 720px) {
-  .nav__links--plain { position: static; display: flex; flex-direction: row; padding: 0; background: none; border: 0; }
-  .nav__links--plain .theme-toggle { margin: 0; }
+@media (max-width: 767px) {
+  html { scroll-padding-top: 16px; }
 }
 
 /* Başa dön linki */
