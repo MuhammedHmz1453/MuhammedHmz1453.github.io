@@ -8,9 +8,9 @@ liste:
       - Supabase
       - Web Audio
     demo: https://oyunhane.vercel.app
-    kod: ''
     gorsel: /assets/uploads/oyunhane.jpg
     cizim: duz
+    kod: ''
   - ad: Lazer Bahçesi
     aciklama: Ahşap Dekorasyon Kutular ve Saat ürünleri sattığımız bir şirket
     etiketler:
@@ -18,10 +18,10 @@ liste:
       - Canvas API
       - Animasyon
     demo: https://www.lazerbahcesi.com
-    kod: https://github.com/MuhammedHmz1453/lazer-bahcesi
     gorsel: /assets/uploads/lazer-bahcesi.jpg
     cizim: bahce
-  - ad: Bu portfolyo sitesi
+    kod: https://github.com/MuhammedHmz1453/lazer-bahcesi
+  - ad: Hamza Karaca
     aciklama: Şu an baktığın site. Kendimi tanıttım
     etiketler:
       - HTML
@@ -29,6 +29,6 @@ liste:
       - JavaScript
       - GitHub Pages
     demo: https://muhammedhmz1453.github.io/
-    kod: https://github.com/MuhammedHmz1453/MuhammedHmz1453.github.io
     gorsel: /assets/uploads/portfolyo.jpg
     cizim: site
+    kod: https://github.com/MuhammedHmz1453/MuhammedHmz1453.github.io
