@@ -947,6 +947,26 @@ a { color: inherit; }
   .project:last-child:nth-child(odd) .project__links { margin-top: 0; }
 }
 
+/* Geniş ekranda projeler yan yana üç sütun. Tam 4 proje varsa 2×2 dizilir. */
+@media (min-width: 1100px) {
+  .projects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .projects:has(> .project:nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project:last-child:nth-child(odd) {
+    grid-column: auto;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+  .project:last-child:nth-child(odd) .project__media { margin: 8px 8px 0; }
+  .project:last-child:nth-child(odd) .project__body { justify-content: flex-start; }
+  .project:last-child:nth-child(odd) .project__links { margin-top: auto; }
+  .projects:has(> .project:nth-child(4):last-child) .project h3 { font-size: clamp(1.5rem, 2.2vw, 1.875rem); }
+  .project h3 { font-size: 1.625rem; }
+  .project__links { gap: 8px; }
+  .mini-pill { font-size: .875rem; padding: 0 14px; }
+  .mini-pill--solid { padding: 4px 4px 4px 14px; }
+  .mini-pill__icon { width: 32px; height: 32px; }
+}
+
 /* Profil linkleri (İletişim) */
 .socials a span {
   display: inline-block;

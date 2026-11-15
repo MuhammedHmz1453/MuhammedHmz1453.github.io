@@ -188,7 +188,7 @@
 
       <div class="projects">
         {%- for p in pr.liste %}
-        <article class="project" data-reveal-project style="--i: {{ forloop.index0 | modulo: 2 }}">
+        <article class="project" data-reveal-project style="--i: {{ forloop.index0 | modulo: 3 }}">
           <div class="project__media">
           {%- if p.gorsel and p.gorsel != "" %}
           <img class="project__shot" src="{{ p.gorsel | remove_first: '/' }}" alt="{{ p.ad | escape }} görseli" loading="lazy" decoding="async">
