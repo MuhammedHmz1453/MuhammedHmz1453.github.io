@@ -1571,8 +1571,8 @@ body::before {
   }
   .hero__window.is-pointer::after { opacity: 1; }
 
-  /* Ana sayfa: fare ışığı tüm ekranı kaplayan katmanda; giriş bölümünden
-     yukarıdaki menüye çıkınca da kesilmeden yayılır */
+  /* Ana sayfa: fare ışığı tüm ekranı kaplayan katmanda; sitenin her yerinde
+     imlecin etrafında yayılır */
   .cursor-glow {
     position: fixed;
     inset: 0;

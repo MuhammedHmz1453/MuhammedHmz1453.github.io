@@ -330,15 +330,13 @@ function setupHeaderShadow() {
   update();
 }
 
-// ---------- Giriş bölümünde imleci izleyen ışık ----------
+// ---------- İmleci izleyen ışık ----------
 function setupHeroGlow() {
   if (prefersReducedMotion() || !window.matchMedia('(hover: hover)').matches) return;
 
-  // Ana sayfa: ekranı kaplayan katman; fare giriş bölümünün alt kenarından yukarıdaysa
-  // (üst şerit ve menü dahil) ışık görünür, kutunun kenarında kesilmez
+  // Ana sayfa: ekranı kaplayan katman; fare sitenin neresindeyse ışık orada yayılır
   const glow = document.querySelector('.cursor-glow');
-  const hero = document.querySelector('.hero--full');
-  if (glow && hero) {
+  if (glow) {
     let frame = 0;
     let x = 0;
     let y = 0;
@@ -350,7 +348,7 @@ function setupHeroGlow() {
         frame = 0;
         glow.style.setProperty('--mx', `${x}px`);
         glow.style.setProperty('--my', `${y}px`);
-        glow.classList.toggle('is-on', y <= hero.getBoundingClientRect().bottom);
+        glow.classList.add('is-on');
       });
     }, { passive: true });
     document.documentElement.addEventListener('pointerleave', () => glow.classList.remove('is-on'));
