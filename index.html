@@ -421,10 +421,92 @@
     </section>
   </main>
 
-  <footer class="footer container">
-    <p>© <span data-year>{{ site.time | date: "%Y" }}</span> {{ tam_ad | escape }}</p>
-    <p>HTML, CSS ve JavaScript ile elle yazıldı.{% if g.kaynak_kod and g.kaynak_kod != "" %} <a href="{{ g.kaynak_kod | escape }}" target="_blank" rel="noopener">Kaynak kodu gör</a>{% endif %}</p>
-    <p><a class="to-top" href="#">Başa dön <span aria-hidden="true">↑</span></a></p>
+  <!-- ============ ALT BİLGİ ============
+       Yazılar panelden gelir: tanıtım cümlesi "Giriş ve genel bilgiler"de,
+       profil linkleri "İletişim"de; projeler "Projeler"den. -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="footer__logo" href="#" aria-label="Sayfanın başına dön">
+            <img src="assets/logo.svg" alt="" width="36" height="36" loading="lazy">
+            <span>{{ g.site_adi | default: tam_ad | escape }}</span>
+          </a>
+          {%- if g.alt_yazi and g.alt_yazi != "" %}
+          <p class="footer__about">{{ g.alt_yazi | escape }}</p>
+          {%- endif %}
+          {%- if i.linkler.size > 0 %}
+          <ul class="footer__social" aria-label="Sosyal medya">
+            {%- for l in i.linkler %}
+            {%- assign anahtar = l.ad | downcase | strip -%}
+            {%- assign logo = site.data.sosyal_ikonlar[anahtar] %}
+            <li>
+              <a class="social social--{{ anahtar | replace: ' ', '-' }}" href="{{ l.adres | escape }}" target="_blank" rel="noopener" aria-label="{{ l.ad | escape }}">
+                {%- if logo %}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{ logo }}"/></svg>
+                {%- else %}
+                <span>{{ l.ad | slice: 0 | upcase }}</span>
+                {%- endif %}
+              </a>
+            </li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+        </div>
+
+        <nav class="footer__cols" aria-label="Alt bilgi">
+          <div class="footer__col">
+            <h2>Bölümler</h2>
+            <ul>
+              <li><a href="#hakkimda">Hakkımda</a></li>
+              <li><a href="#projeler">Projeler</a></li>
+              <li><a href="#yetenekler">Yetenekler</a></li>
+              <li><a href="#iletisim">İletişim</a></li>
+            </ul>
+          </div>
+          {%- if pr.liste.size > 0 %}
+          <div class="footer__col">
+            <h2>Projeler</h2>
+            <ul>
+              {%- for p in pr.liste %}
+              <li>{% if p.demo and p.demo != "" %}<a href="{{ p.demo | escape }}" target="_blank" rel="noopener">{{ p.ad | escape }}</a>{% else %}<a href="#projeler">{{ p.ad | escape }}</a>{% endif %}</li>
+              {%- endfor %}
+            </ul>
+          </div>
+          {%- endif %}
+          <div class="footer__col">
+            <h2>İletişim</h2>
+            <ul>
+              <li><a href="mailto:{{ i.eposta | escape }}">E-posta gönder</a></li>
+              <li><a href="#iletisim">İletişim formu</a></li>
+              {%- if g.kaynak_kod and g.kaynak_kod != "" %}
+              <li><a href="{{ g.kaynak_kod | escape }}" target="_blank" rel="noopener">Kaynak kodu</a></li>
+              {%- endif %}
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© <span data-year>{{ site.time | date: "%Y" }}</span> {{ tam_ad | escape }}. Tüm hakları saklıdır.</p>
+        <p class="footer__meta">
+          <a href="#">Başa dön <span aria-hidden="true">↑</span></a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Instagram logosunun kendi renk geçişi -->
+    <svg class="glass-filter" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id="ig-renk" cx="30%" cy="107%" r="150%">
+          <stop offset="0" stop-color="#fdf497"/>
+          <stop offset=".05" stop-color="#fdf497"/>
+          <stop offset=".45" stop-color="#fd5949"/>
+          <stop offset=".6" stop-color="#d6249f"/>
+          <stop offset=".9" stop-color="#285aeb"/>
+        </radialGradient>
+      </defs>
+    </svg>
   </footer>
 </body>
 </html>
