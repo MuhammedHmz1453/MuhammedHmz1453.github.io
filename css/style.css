@@ -75,7 +75,7 @@
     radial-gradient(40% 55% at 21% 19%, #d9cefd, transparent),
     radial-gradient(40% 55% at 80% 70%, #c9d9fd, transparent);
   --chrome-bg: #0c0a1a;
-  --footer-bg: #0c0a1a;
+  --footer-bg: #ffffff;
   --card-glow: rgba(9, 9, 11, .035);
   --card-ring: rgba(9, 9, 11, .35);
   --dot: rgba(9, 9, 11, .08);
@@ -539,10 +539,9 @@ body::before {
 
 /* Giriş bölümü ekranın iki kenarına kadar uzanır */
 .hero--full { padding-top: 0; }
-/* Açık temada üst şerit, giriş ve alt bilgi koyu kalır; ışıklar ekrana sabit olduğu için aralarında çizgi oluşmaz */
+/* Açık temada üst şerit ve giriş koyu kalır; ışıklar ekrana sabit olduğu için aralarında çizgi oluşmaz */
 :root[data-theme="light"] .site-header,
-:root[data-theme="light"] .hero--full .spot,
-:root[data-theme="light"] .site-footer {
+:root[data-theme="light"] .hero--full .spot {
   background: var(--glow-indigo), #0c0a1a;
   background-attachment: fixed;
 }
@@ -1393,6 +1392,19 @@ body::before {
 .social--discord { --brand: #5865f2; color: #5865f2; }
 .social--behance { --brand: #1769ff; color: #1769ff; }
 .social--dribbble { --brand: #ea4c89; color: #ea4c89; }
+
+/* Açık temada alt bilgi beyaz: yazılar koyu, beyaz logolar siyah olur */
+:root[data-theme="light"] .site-footer {
+  --ft-ink: #09090b;
+  --ft-muted: #52525b;
+  --ft-line: rgba(30, 27, 75, .1);
+}
+:root[data-theme="light"] .site-footer :focus-visible { outline-color: #09090b; }
+:root[data-theme="light"] .social { background: rgba(9, 9, 11, .03); }
+:root[data-theme="light"] .social--github,
+:root[data-theme="light"] .social--x,
+:root[data-theme="light"] .social--twitter { --brand: #09090b; color: #09090b; }
+:root[data-theme="light"] .social--tiktok { color: #09090b; }
 
 .footer__cols {
   display: grid;
