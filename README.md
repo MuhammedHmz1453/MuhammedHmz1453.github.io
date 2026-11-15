@@ -61,10 +61,8 @@ Sitenin adresi değişirse `_config.yml` dosyasındaki `url:` satırını da gü
 
 ## İletişim formu nasıl çalışıyor?
 
-GitHub Pages sadece statik dosya sunar, sunucu kodu çalıştırmaz. Bu yüzden form, *Mesajı gönder*'e basıldığında ziyaretçinin e-posta uygulamasını mesaj hazır yazılmış hâlde açar (`mailto:`). Ek hesap gerekmez.
+Form, mesajları ücretsiz [FormSubmit](https://formsubmit.co) servisiyle doğrudan **İletişim** bölümündeki e-posta adresine gönderir. Hesap gerekmez; ziyaretçi sayfadan ayrılmaz, gönderince formun altında sonuç yazısı çıkar.
 
-Mesajların doğrudan sana gelmesini istersen ücretsiz [Formspree](https://formspree.io) kullanabilirsin:
+**İlk kurulum (bir kere):** Siteden ilk mesaj gönderildiğinde FormSubmit, e-posta adresine "Activate Form" bağlantılı bir onay e-postası yollar. Bağlantıya bas; o andan sonra bütün mesajlar e-postana gelir. Onaylanmadan önce gönderilen mesajlar iletilmez.
 
-1. Formspree'de hesap aç, yeni form oluştur, sana verilen adresi kopyala (`https://formspree.io/f/xxxxxxx` gibi).
-2. `index.html` içindeki `<form ...>` satırına `action="https://formspree.io/f/xxxxxxx" method="POST"` ekle.
-3. `js/main.js` dosyasında `setupContactForm` fonksiyonunun sonundaki `window.location.href = ...` satırını `form.submit();` ile değiştir.
+E-posta adresini panelden değiştirirsen yeni adres için de bir kere onay gerekir. Spam'e karşı formda botların doldurduğu gizli bir tuzak alan var; dolu gelen mesajlar gönderilmez.

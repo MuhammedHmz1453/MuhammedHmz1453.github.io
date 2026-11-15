@@ -410,9 +410,15 @@
           {%- endif %}
         </div>
 
-        <!-- Bu form sunucu gerektirmez: Gönder'e basınca ziyaretçinin e-posta uygulaması,
-             mesaj hazır yazılmış hâlde açılır. Formspree'ye geçmek için README.md'ye bak. -->
-        <form class="form" data-contact-form novalidate data-reveal style="--i: 1">
+        <!-- Mesajlar FormSubmit (formsubmit.co) ile doğrudan İletişim'deki e-posta adresine gelir.
+             JS çalışmazsa form yine FormSubmit'e gönderilir ve siteye geri dönülür. Ayrıntı README.md'de. -->
+        <form class="form" action="https://formsubmit.co/{{ i.eposta | escape }}" method="POST" data-contact-form novalidate data-reveal style="--i: 1">
+          <input type="hidden" name="_subject" value="Portfolyo sitesinden yeni mesaj">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="{{ site.url }}/#iletisim">
+          <!-- Spam botları için tuzak alan: insanlar görmez, doldurulursa mesaj gönderilmez -->
+          <input class="form__honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="field">
             <label for="f-ad">Adın</label>
             <input id="f-ad" name="ad" type="text" autocomplete="name" required>
@@ -428,8 +434,9 @@
             <textarea id="f-mesaj" name="mesaj" rows="5" required></textarea>
             <p class="field__error" id="f-mesaj-hata"></p>
           </div>
-          <button class="lg-btn lg-btn--xl" type="submit">Mesajı gönder</button>
-          <p class="form__note">Gönder'e basınca e-posta uygulaman, mesajın hazır yazılmış olarak açılır.</p>
+          <button class="lg-btn lg-btn--xl" type="submit" data-submit>Mesajı gönder</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+          <p class="form__note">Mesajın doğrudan bana ulaşır, sayfadan ayrılman gerekmez.</p>
         </form>
       </div>
     </section>

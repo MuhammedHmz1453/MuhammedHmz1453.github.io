@@ -111,7 +111,7 @@ function setupCopyEmail() {
 }
 
 // ---------- İletişim formu ----------
-// Sunucu gerektirmez: ziyaretçinin e-posta uygulamasını hazır mesajla açar.
+// Mesaj FormSubmit (formsubmit.co) ile doğrudan e-posta adresine gönderilir; sayfa yenilenmez.
 function setupContactForm() {
   const form = document.querySelector('[data-contact-form]');
   const link = document.querySelector('[data-email]');
@@ -151,8 +151,26 @@ function setupContactForm() {
     if (e.target.getAttribute('aria-invalid') === 'true') check(e.target);
   });
 
-  form.addEventListener('submit', (e) => {
+  const btn = form.querySelector('[data-submit]');
+  const status = form.querySelector('.form__status');
+  const btnText = btn.textContent;
+  let sending = false;
+
+  // Sonuç yazısı; hata olursa e-posta adresine doğrudan yazma bağlantısı da eklenir
+  const showStatus = (type, text, withMail) => {
+    status.className = `form__status is-${type}`;
+    status.textContent = text;
+    if (withMail) {
+      const a = document.createElement('a');
+      a.href = `mailto:${to}`;
+      a.textContent = to;
+      status.append(' ', a, ' adresine doğrudan yazabilirsin.');
+    }
+  };
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (sending) return;
     const fields = [form.ad, form.eposta, form.mesaj];
     const results = fields.map(check);
     const firstBad = fields[results.indexOf(false)];
@@ -160,11 +178,54 @@ function setupContactForm() {
       firstBad.focus();
       return;
     }
+    // Tuzak alan doluysa gönderen bir bottur: sessizce geç
+    if (form._honey && form._honey.value) return;
 
     const name = form.ad.value.trim();
-    const subject = `Portfolyo sitesinden mesaj: ${name}`;
-    const body = `${form.mesaj.value.trim()}\n\n— ${name}\n${form.eposta.value.trim()}`;
-    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const email = form.eposta.value.trim();
+    const message = form.mesaj.value.trim();
+
+    sending = true;
+    btn.disabled = true;
+    btn.textContent = 'Gönderiliyor…';
+    status.className = 'form__status';
+    status.textContent = '';
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${to}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          Ad: name,
+          email,
+          Mesaj: message,
+          _replyto: email,
+          _subject: `Portfolyo sitesinden mesaj: ${name}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
+        signal: controller.signal,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && String(data.success) === 'true') {
+        form.reset();
+        showStatus('ok', `Teşekkürler ${name}, mesajın bana ulaştı. En kısa sürede ${email} adresine dönüyorum.`);
+      } else if (/activ/i.test(data.message || '')) {
+        // FormSubmit'te ilk mesajdan sonra site sahibinin onaylaması gerekir
+        showStatus('error', 'Mesaj formu henüz etkinleştirilmedi, mesajın iletilemedi. Şimdilik', true);
+      } else {
+        throw new Error(data.message || `HTTP ${res.status}`);
+      }
+    } catch (err) {
+      showStatus('error', 'Mesaj gönderilemedi. İnternet bağlantını kontrol edip tekrar dene ya da', true);
+    } finally {
+      clearTimeout(timer);
+      sending = false;
+      btn.disabled = false;
+      btn.textContent = btnText;
+    }
   });
 }
 
