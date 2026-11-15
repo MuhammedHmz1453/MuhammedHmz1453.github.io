@@ -75,7 +75,7 @@
     radial-gradient(40% 55% at 21% 19%, #d9cefd, transparent),
     radial-gradient(40% 55% at 80% 70%, #c9d9fd, transparent);
   --chrome-bg: #0c0a1a;
-  --footer-bg: #ffffff;
+  --footer-bg: rgba(255, 255, 255, .45);   /* alt bilgi açık, arkadaki renkli zemin görünür */
   --card-glow: rgba(9, 9, 11, .035);
   --card-ring: rgba(9, 9, 11, .35);
   --dot: rgba(9, 9, 11, .08);
@@ -1393,7 +1393,7 @@ body::before {
 .social--behance { --brand: #1769ff; color: #1769ff; }
 .social--dribbble { --brand: #ea4c89; color: #ea4c89; }
 
-/* Açık temada alt bilgi beyaz: yazılar koyu, beyaz logolar siyah olur */
+/* Açık temada alt bilgi açık renk (zemin görünür): yazılar koyu, beyaz logolar siyah olur */
 :root[data-theme="light"] .site-footer {
   --ft-ink: #09090b;
   --ft-muted: #52525b;
