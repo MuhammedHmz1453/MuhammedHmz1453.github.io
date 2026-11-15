@@ -247,18 +247,8 @@
             <div class="project__links">
               {%- if p.demo and p.demo != "" %}
               <a class="mini-pill mini-pill--solid" href="{{ p.demo | escape }}" target="_blank" rel="noopener">
-                Canlı demo
+                Canlı link
                 <span class="mini-pill__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg></span>
-              </a>
-              {%- endif %}
-              {%- if p.kod and p.kod != "" %}
-              <a class="mini-pill mini-pill--ghost" href="{{ p.kod | escape }}" target="_blank" rel="noopener">
-                {%- if p.kod contains "github.com" %}
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{ site.data.teknoloji_ikonlari['github'] }}"/></svg>
-                {%- else %}
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path class="mini-pill__code" d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
-                {%- endif %}
-                Kaynak kod
               </a>
               {%- endif %}
             </div>

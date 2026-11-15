@@ -71,19 +71,12 @@ collections:
               - { name: aciklama, label: Açıklama, widget: text, hint: "Proje ne yapıyor? 1–2 cümle yeter." }
               - { name: etiketler, label: Kullanılan teknolojiler, widget: list, required: false, hint: "Virgülle ayır. Örnek: HTML, CSS, JavaScript" }
               - name: demo
-                label: Canlı demo linki
+                label: Canlı link
                 widget: string
                 type: url
                 required: false
                 pattern: ['^(https?://\S+)?$', "Link https:// ile başlamalı. Örnek: https://muhammedhmz1453.github.io/todo/"]
-                hint: "Projenin tarayıcıda açıldığı adres. Kartta “Canlı demo” düğmesi bu adrese gider. Boş bırakırsan düğme görünmez."
-              - name: kod
-                label: Kaynak kod linki
-                widget: string
-                type: url
-                required: false
-                pattern: ['^(https?://\S+)?$', "Link https:// ile başlamalı. Örnek: https://github.com/MuhammedHmz1453/todo"]
-                hint: "Projenin GitHub sayfası. Kartta “Kaynak kod” düğmesi bu adrese gider. Boş bırakırsan düğme görünmez."
+                hint: "Projenin tarayıcıda açıldığı adres. Kartta “Canlı link” düğmesi bu adrese gider. Boş bırakırsan düğme görünmez."
               - { name: gorsel, label: Ekran görüntüsü, widget: image, required: false, hint: "Yüklersen kartın üstünde bu görsel görünür. Yatay (16:10) görseller en iyi sonucu verir." }
               - name: cizim
                 label: Görsel yoksa kartın üstünde
