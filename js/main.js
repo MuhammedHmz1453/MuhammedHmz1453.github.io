@@ -382,7 +382,7 @@ function setupHeroGlow() {
 // ---------- Proje kartlarında imleci izleyen ışık ----------
 function setupCardSpotlight() {
   if (!window.matchMedia('(hover: hover)').matches) return;
-  document.querySelectorAll('.project, .stage').forEach((card) => {
+  document.querySelectorAll('.project, .stage, .about__card').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--x', `${e.clientX - rect.left}px`);
