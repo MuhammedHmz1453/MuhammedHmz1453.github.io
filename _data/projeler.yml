@@ -19,7 +19,7 @@ liste:
       - Animasyon
     demo: https://www.lazerbahcesi.com
     kod: https://github.com/MuhammedHmz1453/lazer-bahcesi
-    gorsel: /assets/uploads/lazer-bahcesi-logo.jpg
+    gorsel: /assets/uploads/lazer-bahcesi.jpg
     cizim: bahce
   - ad: Bu portfolyo sitesi
     aciklama: Şu an baktığın site. Kendimi tanıttım
@@ -30,5 +30,5 @@ liste:
       - GitHub Pages
     demo: https://muhammedhmz1453.github.io/
     kod: https://github.com/MuhammedHmz1453/MuhammedHmz1453.github.io
-    gorsel: ''
+    gorsel: /assets/uploads/portfolyo.jpg
     cizim: site
