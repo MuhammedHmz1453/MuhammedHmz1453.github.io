@@ -319,8 +319,11 @@ body::before {
 .tube__theme:hover svg { transform: rotate(20deg); }
 
 @media (max-width: 767px) {
-  .tube { top: auto; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); display: flex; align-items: center; gap: 8px; }
-  .tube__bar { gap: clamp(2px, 1.4vw, 8px); }
+  /* Telefonda alttaki menü iki yandan eşit boşlukla durur: sol kenarı yazılarla,
+     sağdaki tema düğmesi "başa dön" düğmesiyle aynı hizada (en fazla 560px genişlik) */
+  :root { --nav-side: max(var(--gutter), calc((100vw - 560px) / 2)); }
+  .tube { top: auto; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); left: var(--nav-side); right: var(--nav-side); transform: none; display: flex; align-items: center; gap: 8px; }
+  .tube__bar { flex: 1; min-width: 0; justify-content: space-between; gap: clamp(2px, 1.4vw, 8px); }
   .tube__link { padding: 10px clamp(10px, 3.2vw, 18px); }
   .tube__theme { position: static; flex: none; width: 48px; height: 48px; }
   .tube__icon { display: block; }
@@ -1504,7 +1507,7 @@ body::before {
 }
 @media (max-width: 767px) {
   /* telefonda alttaki menünün üstünde */
-  .to-top { right: 16px; bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
+  .to-top { right: var(--nav-side); bottom: calc(86px + env(safe-area-inset-bottom, 0px)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .tube__theme:hover,
