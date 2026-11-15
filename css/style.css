@@ -1305,7 +1305,7 @@ body::before {
   text-decoration-color: var(--link-line);
   color: var(--strong);
   overflow-wrap: anywhere;
-  cursor: copy;
+  cursor: pointer;
   transition: text-decoration-color .2s, color .2s;
 }
 .email:hover { text-decoration-color: currentColor; }
