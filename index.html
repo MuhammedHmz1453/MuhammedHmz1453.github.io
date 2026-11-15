@@ -53,6 +53,18 @@
   <script src="js/main.js?v={{ site.time | date: '%s' }}" defer></script>
 </head>
 <body>
+  <!-- Sıvı cam düğmelerin arkasındaki bükülme efekti (LiquidButton'daki GlassFilter) -->
+  <svg class="glass-filter" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="container-glass" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.05 0.05" numOctaves="1" seed="1" result="turbulence"/>
+        <feGaussianBlur in="turbulence" stdDeviation="2" result="blurredNoise"/>
+        <feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="70" xChannelSelector="R" yChannelSelector="B" result="displaced"/>
+        <feGaussianBlur in="displaced" stdDeviation="4" result="finalBlur"/>
+        <feComposite in="finalBlur" in2="finalBlur" operator="over"/>
+      </filter>
+    </defs>
+  </svg>
   <a class="skip-link" href="#icerik">İçeriğe atla</a>
 
   <header class="site-header">
@@ -61,7 +73,7 @@
         <img class="nav__mark" src="assets/logo.svg" alt="" width="30" height="30">
         <span>{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}</span>
       </a>
-      <button class="theme-toggle" type="button" aria-label="Koyu temaya geç" data-theme-toggle>
+      <button class="lg-btn lg-btn--icon theme-toggle" type="button" aria-label="Koyu temaya geç" data-theme-toggle>
         <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-moon"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
         <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       </button>
@@ -117,9 +129,9 @@
           <p class="spot__lede">{{ g.giris | escape }}</p>
 
           <div class="spot__cta">
-            <a class="pill" href="#projeler">
-              Projelerimi gör
-              <span class="pill__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg></span>
+            <a class="lg-btn lg-btn--xxl" href="#projeler">
+              <span>Projelerimi gör</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg>
             </a>
 
             {%- if g.durum_goster and g.durum != "" %}
@@ -263,9 +275,9 @@
             <p>{{ p.aciklama | escape }}</p>
             <div class="project__links">
               {%- if p.demo and p.demo != "" %}
-              <a class="mini-pill mini-pill--solid" href="{{ p.demo | escape }}" target="_blank" rel="noopener">
-                Canlı link
-                <span class="mini-pill__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg></span>
+              <a class="lg-btn lg-btn--xl" href="{{ p.demo | escape }}" target="_blank" rel="noopener">
+                <span>Canlı link</span>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg>
               </a>
               {%- endif %}
             </div>
@@ -371,7 +383,7 @@
 
           <div class="email-row">
             <a class="email" href="mailto:{{ i.eposta | escape }}" data-email="{{ i.eposta | escape }}">{{ i.eposta | escape }}</a>
-            <button class="copy-btn" type="button" data-copy-email>Kopyala</button>
+            <button class="lg-btn lg-btn--sm copy-btn" type="button" data-copy-email>Kopyala</button>
           </div>
           <p class="copy-status" role="status" aria-live="polite"></p>
 
@@ -402,7 +414,7 @@
             <textarea id="f-mesaj" name="mesaj" rows="5" required></textarea>
             <p class="field__error" id="f-mesaj-hata"></p>
           </div>
-          <button class="btn btn--accent" type="submit">Mesajı gönder</button>
+          <button class="lg-btn lg-btn--xl" type="submit">Mesajı gönder</button>
           <p class="form__note">Gönder'e basınca e-posta uygulaman, mesajın hazır yazılmış olarak açılır.</p>
         </form>
       </div>
