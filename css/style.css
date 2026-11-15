@@ -74,7 +74,10 @@
   --site-glow:
     radial-gradient(40% 55% at 21% 19%, #d9cefd, transparent),
     radial-gradient(40% 55% at 80% 70%, #c9d9fd, transparent);
-  --chrome-bg: #0c0a1a;
+  --chrome-bg: transparent;           /* üst şerit ve giriş açık; arkadaki renkli zemin görünür */
+  --spot-bg: #eeedf8;
+  --spot-ink: #09090b;
+  --spot-muted: rgba(9, 9, 11, .62);
   --footer-bg: rgba(255, 255, 255, .45);   /* alt bilgi açık, arkadaki renkli zemin görünür */
   --card-glow: rgba(9, 9, 11, .035);
   --card-ring: rgba(9, 9, 11, .35);
@@ -159,6 +162,7 @@ body::before {
   color: var(--hd-ink);
 }
 .site-header :focus-visible { outline-color: var(--hd-accent); }
+:root[data-theme="light"] .site-header { --hd-accent: #09090b; }
 
 .topbar {
   height: var(--header-h);
@@ -335,17 +339,19 @@ body::before {
    arkasında içeriği büken SVG filtresi (#container-glass), üzerine gelince büyüme.
    Koyu zeminde açık, açık zeminde koyu parlama kullanılır. */
 :root {
+  --glass-shadow-dark: 0 0 8px rgba(0, 0, 0, .03), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 3px .5px -3.5px rgba(255, 255, 255, .09), inset -3px -3px .5px -3.5px rgba(255, 255, 255, .85), inset 1px 1px 1px -.5px rgba(255, 255, 255, .6), inset -1px -1px 1px -.5px rgba(255, 255, 255, .6), inset 0 0 6px 6px rgba(255, 255, 255, .12), inset 0 0 2px 2px rgba(255, 255, 255, .06), 0 0 12px rgba(0, 0, 0, .15);
+  --glass-shadow-light: 0 0 6px rgba(0, 0, 0, .03), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 3px .5px -3px rgba(0, 0, 0, .9), inset -3px -3px .5px -3px rgba(0, 0, 0, .85), inset 1px 1px 1px -.5px rgba(0, 0, 0, .6), inset -1px -1px 1px -.5px rgba(0, 0, 0, .6), inset 0 0 6px 6px rgba(0, 0, 0, .12), inset 0 0 2px 2px rgba(0, 0, 0, .06), 0 0 12px rgba(255, 255, 255, .15);
   --glass-ink: #fafafa;
-  --glass-shadow: 0 0 8px rgba(0, 0, 0, .03), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 3px .5px -3.5px rgba(255, 255, 255, .09), inset -3px -3px .5px -3.5px rgba(255, 255, 255, .85), inset 1px 1px 1px -.5px rgba(255, 255, 255, .6), inset -1px -1px 1px -.5px rgba(255, 255, 255, .6), inset 0 0 6px 6px rgba(255, 255, 255, .12), inset 0 0 2px 2px rgba(255, 255, 255, .06), 0 0 12px rgba(0, 0, 0, .15);
+  --glass-shadow: var(--glass-shadow-dark);
 }
 :root[data-theme="light"] {
   --glass-ink: #18181b;
-  --glass-shadow: 0 0 6px rgba(0, 0, 0, .03), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 3px .5px -3px rgba(0, 0, 0, .9), inset -3px -3px .5px -3px rgba(0, 0, 0, .85), inset 1px 1px 1px -.5px rgba(0, 0, 0, .6), inset -1px -1px 1px -.5px rgba(0, 0, 0, .6), inset 0 0 6px 6px rgba(0, 0, 0, .12), inset 0 0 2px 2px rgba(0, 0, 0, .06), 0 0 12px rgba(255, 255, 255, .15);
+  --glass-shadow: var(--glass-shadow-light);
 }
-/* Giriş bölümü, üst şerit ve 404 penceresi her temada koyu */
-.spot, .site-header, .hero__window, .to-top {
+/* 404 penceresi ve başa dön düğmesi her temada koyu */
+.hero__window, .to-top {
   --glass-ink: #fafafa;
-  --glass-shadow: 0 0 8px rgba(0, 0, 0, .03), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 3px .5px -3.5px rgba(255, 255, 255, .09), inset -3px -3px .5px -3.5px rgba(255, 255, 255, .85), inset 1px 1px 1px -.5px rgba(255, 255, 255, .6), inset -1px -1px 1px -.5px rgba(255, 255, 255, .6), inset 0 0 6px 6px rgba(255, 255, 255, .12), inset 0 0 2px 2px rgba(255, 255, 255, .06), 0 0 12px rgba(0, 0, 0, .15);
+  --glass-shadow: var(--glass-shadow-dark);
 }
 
 .lg-btn {
@@ -566,12 +572,6 @@ body::before {
 
 /* Giriş bölümü ekranın iki kenarına kadar uzanır */
 .hero--full { padding-top: 0; }
-/* Açık temada üst şerit ve giriş koyu kalır; ışıklar ekrana sabit olduğu için aralarında çizgi oluşmaz */
-:root[data-theme="light"] .site-header,
-:root[data-theme="light"] .hero--full .spot {
-  background: var(--glow-indigo), #0c0a1a;
-  background-attachment: fixed;
-}
 /* Telefonda alttaki menü, giriş bölümünün en altını örtmesin */
 @media (max-width: 767px) {
   .hero--full .spot { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
@@ -642,7 +642,7 @@ body::before {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  box-shadow: 0 0 0 2px var(--spot-bg), 0 0 0 3px rgba(255, 255, 255, .45);
+  box-shadow: 0 0 0 2px var(--spot-bg), 0 0 0 3px color-mix(in srgb, var(--spot-ink) 45%, transparent);
 }
 .trust__avatar img {
   width: 100%;
@@ -657,6 +657,7 @@ body::before {
   height: 100%;
   border-radius: 50%;
   background: #27272a;
+  color: #fafafa;
   font-weight: 700;
   font-size: .875rem;
 }
@@ -689,9 +690,9 @@ body::before {
   content: "";
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2));
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--spot-ink) 20%, transparent));
 }
-.spot__caption::after { background: linear-gradient(270deg, transparent, rgba(255, 255, 255, .2)); }
+.spot__caption::after { background: linear-gradient(270deg, transparent, color-mix(in srgb, var(--spot-ink) 20%, transparent)); }
 
 .marquee {
   margin-top: 26px;
@@ -711,7 +712,7 @@ body::before {
   white-space: nowrap;
   font-weight: 600;
   font-size: 1.0625rem;
-  color: rgba(244, 244, 245, .7);
+  color: color-mix(in srgb, var(--spot-ink) 70%, transparent);
 }
 .marquee__track svg { width: 24px; height: 24px; fill: currentColor; }
 .marquee__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .6; }
@@ -1580,6 +1581,9 @@ body::before {
     background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .06), transparent 70%);
     opacity: 0;
     transition: opacity .5s;
+  }
+  :root[data-theme="light"] .cursor-glow {
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(124, 92, 255, .12), transparent 70%);
   }
   .cursor-glow.is-on { opacity: 1; }
 
