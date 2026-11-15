@@ -4,6 +4,8 @@ backend:
   name: github
   repo: MuhammedHmz1453/MuhammedHmz1453.github.io
   branch: main
+  # Sadece erişim token'ı ile giriş (GitHub ile giriş bu kurulumda çalışmıyor, düğmesi gizli)
+  auth_methods: [token]
   commit_messages:
     create: "İçerik eklendi: {{slug}}"
     update: "İçerik güncellendi: {{slug}}"
@@ -11,7 +13,15 @@ backend:
     uploadMedia: "Görsel yüklendi: {{path}}"
     deleteMedia: "Görsel silindi: {{path}}"
 
-logo_url: https://hamzakaraca.vercel.app/assets/logo.svg
+# Panelin adı, logosu ve "siteyi gör" bağlantısı
+app_title: Hamza Karaca · Panel
+logo:
+  src: /assets/logo.svg
+display_url: https://hamzakaraca.vercel.app
+
+# Bu sitede sayfa önizlemesi yok; düzenleme ekranı tam genişlikte açılsın
+editor:
+  preview: false
 
 media_folder: assets/uploads
 public_folder: /assets/uploads
@@ -19,19 +29,22 @@ public_folder: /assets/uploads
 collections:
   - name: site
     label: Site içeriği
+    icon: web
     description: Sitedeki her bölümün yazıları. Kaydettikten 1–2 dakika sonra sitede görünür.
     files:
       # ---------- Genel ----------
       - name: genel
+        icon: home
+        description: "Adın, giriş yazısı, sekme başlığı ve en alttaki tanıtım."
         label: Giriş ve genel bilgiler
         file: _data/genel.yml
         fields:
-          - { name: site_adi, label: Site adı, widget: string, required: false, hint: "Menüdeki logonun yanında ve link paylaşımlarında görünür. Örnek: Hamza Karaca" }
-          - { name: ad, label: Ad, widget: string, hint: "Örnek: Muhammed Hamza. Her kelime ayrı satırda büyük harflerle yazılır." }
-          - { name: soyad, label: Soyad, widget: string, hint: "İçi boş harflerle, en altta yazılır." }
-          - { name: unvan, label: Unvan, widget: string, hint: "Tarayıcı sekmesinde adının yanında görünür." }
-          - { name: durum_goster, label: Durum satırını göster, widget: boolean, default: true }
-          - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Adının üstündeki küçük satır. Örnek: İş ve projelere açığım" }
+          - { name: site_adi, label: Site adı, widget: string, required: false, hint: "Tarayıcı sekmesinde, menüdeki logonun yanında ve sayfanın en altında görünür. Örnek: Hamza Karaca" }
+          - { name: ad, label: Ad, widget: string, hint: "Giriş bölümündeki büyük başlığın ilk satırı. Örnek: Muhammed Hamza" }
+          - { name: soyad, label: Soyad, widget: string, hint: "Başlığın ikinci satırı, eğik yazıyla." }
+          - { name: unvan, label: Unvan, widget: string, hint: "Link paylaşımlarında (WhatsApp, Instagram) adının yanında görünür." }
+          - { name: durum_goster, label: Fotoğraflı durum satırını göster, widget: boolean, default: true }
+          - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Giriş bölümünde fotoğrafının yanındaki iki satır, aralarına “ · ” koy. Örnek: Junior web geliştirici · İş ve projelere açığım" }
           - { name: giris, label: Giriş cümlesi, widget: text, hint: "Adının altındaki 1–2 cümle." }
           - { name: profil_kucuk, label: Küçük profil fotoğrafı, widget: image, required: false, hint: "Giriş bölümünde düğmenin yanındaki yuvarlak fotoğraf. Yüzünün yakından göründüğü kare bir fotoğraf seç. Boş bırakırsan Hakkımda fotoğrafı kullanılır." }
           - { name: alt_yazi, label: Alt bilgi tanıtım cümlesi, widget: text, required: false, hint: "Sayfanın en altında logonun altındaki kısa tanıtım." }
@@ -40,6 +53,8 @@ collections:
 
       # ---------- Hakkımda ----------
       - name: hakkimda
+        icon: person
+        description: "Hakkımda yazısı ve kısa bilgiler."
         label: Hakkımda
         file: _data/hakkimda.yml
         fields:
@@ -57,6 +72,8 @@ collections:
 
       # ---------- Projeler ----------
       - name: projeler
+        icon: work
+        description: "Proje kartları: ad, açıklama, ekran görüntüsü ve canlı link."
         label: Projeler
         file: _data/projeler.yml
         fields:
@@ -92,6 +109,8 @@ collections:
 
       # ---------- Yetenekler ----------
       - name: yetenekler
+        icon: code
+        description: "Kök saldı, büyüyor ve filizleniyor listeleri."
         label: Yetenekler
         file: _data/yetenekler.yml
         fields:
@@ -119,12 +138,14 @@ collections:
 
       # ---------- İletişim ----------
       - name: iletisim
+        icon: mail
+        description: "E-posta adresin ve profil linklerin."
         label: İletişim
         file: _data/iletisim.yml
         fields:
           - { name: baslik, label: Başlık, widget: string }
           - { name: yazi, label: Yazı, widget: text }
-          - { name: eposta, label: E-posta adresin, widget: string, hint: "Sitede görünür ve iletişim formu bu adrese yazar." }
+          - { name: eposta, label: E-posta adresin, widget: string, hint: "Sitede görünür; iletişim formundan gelen mesajlar bu adrese gelir. Değiştirirsen yeni adres için FormSubmit’in gönderdiği onay e-postasını bir kere onaylaman gerekir." }
           - name: linkler
             label: Profil linkleri
             label_singular: link

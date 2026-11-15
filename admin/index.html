@@ -4,11 +4,174 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Site Yönetimi</title>
-  <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+  <meta name="darkreader-lock">
+  <meta name="theme-color" content="#0c0a1a">
+  <title>Hamza Karaca · Panel</title>
+  <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+  <link rel="icon" href="/assets/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..800&display=swap">
+  <style>
+    /* =========================================================
+       Panel teması: sitenin renkleri (koyu lacivert-mor zemin, mor vurgu),
+       Figtree yazı tipi ve ışıklı giriş ekranı.
+       Sveltia CMS'in kendi renk değişkenleri ezilir; "html:root" seçicisi
+       panelin sonradan eklenen stillerinden daha güçlü olsun diye.
+       ========================================================= */
+    html:root {
+      --sui-base-hue: 250;
+      --sui-font-family-default: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --sui-control-medium-border-radius: 10px;
+      --sui-button-medium-border-radius: 10px;
+      --sui-textbox-border-radius: 10px;
+      --hk-glow:
+        radial-gradient(40% 55% at 21% 19%, #291f58, transparent),
+        radial-gradient(40% 55% at 80% 70%, #1a295e, transparent);
+    }
+
+    /* Koyu tema */
+    html:root[data-theme="dark"] {
+      --sui-foreground-color-1-hsl: 250 30% 97%;
+      --sui-foreground-color-2-hsl: 250 20% 84%;
+      --sui-foreground-color-3-hsl: 250 14% 72%;
+      --sui-foreground-color-4-hsl: 250 12% 62%;
+      --sui-foreground-color-5-hsl: 250 10% 42%;
+      --sui-background-color-1-hsl: 250 45% 6%;
+      --sui-background-color-2-hsl: 250 40% 8%;
+      --sui-background-color-3-hsl: 250 34% 11%;
+      --sui-background-color-4-hsl: 250 30% 15%;
+      --sui-background-color-5-hsl: 250 28% 24%;
+      --sui-border-color-1-hsl: 250 22% 42%;
+      --sui-border-color-2-hsl: 250 26% 22%;
+      --sui-border-color-3-hsl: 250 28% 16%;
+      --sui-primary-accent-color-text: hsl(258 100% 80%);
+      --sui-primary-accent-color-light: hsl(258 90% 70%);
+      --sui-primary-accent-color: hsl(258 85% 64%);
+      --sui-primary-accent-color-dark: hsl(258 80% 56%);
+      --sui-primary-accent-color-translucent: hsl(258 90% 66% / 55%);
+      --sui-primary-accent-color-translucent-light: hsl(258 90% 66% / 35%);
+      --sui-hover-background-color: hsl(258 60% 70% / 10%);
+      --sui-selected-background-color: hsl(258 80% 66% / 20%);
+      --sui-active-background-color: hsl(258 80% 66% / 28%);
+      --hk-page: #0c0a1a;
+      --hk-title: #fafafa;
+      --hk-sub: rgba(244, 244, 245, .62);
+    }
+
+    /* Açık tema: sitenin açık temasındaki lila tonlar */
+    html:root[data-theme="light"] {
+      --sui-foreground-color-1-hsl: 250 30% 8%;
+      --sui-foreground-color-2-hsl: 250 15% 24%;
+      --sui-foreground-color-3-hsl: 250 10% 36%;
+      --sui-foreground-color-4-hsl: 250 8% 46%;
+      --sui-foreground-color-5-hsl: 250 8% 66%;
+      --sui-background-color-1-hsl: 0 0% 100%;
+      --sui-background-color-2-hsl: 250 60% 98.5%;
+      --sui-background-color-3-hsl: 250 45% 96%;
+      --sui-background-color-4-hsl: 250 40% 93%;
+      --sui-background-color-5-hsl: 250 40% 87%;
+      --sui-border-color-1-hsl: 250 15% 62%;
+      --sui-border-color-2-hsl: 250 25% 80%;
+      --sui-border-color-3-hsl: 250 30% 89%;
+      --sui-primary-accent-color-text: hsl(258 70% 46%);
+      --sui-primary-accent-color-light: hsl(258 75% 60%);
+      --sui-primary-accent-color: hsl(258 72% 54%);
+      --sui-primary-accent-color-dark: hsl(258 72% 47%);
+      --sui-primary-accent-color-translucent: hsl(258 75% 55% / 50%);
+      --sui-primary-accent-color-translucent-light: hsl(258 75% 55% / 30%);
+      --sui-hover-background-color: hsl(258 70% 60% / 8%);
+      --sui-selected-background-color: hsl(258 75% 60% / 14%);
+      --sui-active-background-color: hsl(258 75% 60% / 22%);
+      --hk-page: #eeedf8;
+      --hk-title: #09090b;
+      --hk-sub: rgba(9, 9, 11, .6);
+      --hk-glow:
+        radial-gradient(40% 55% at 21% 19%, #d9cefd, transparent),
+        radial-gradient(40% 55% at 80% 70%, #c9d9fd, transparent);
+    }
+
+    /* Ana düğmeler (Kaydet, Giriş yap...): mordan laciverte geçişli */
+    html body .sui.button.primary:not(:disabled) {
+      background-image: linear-gradient(135deg, hsl(262 85% 63%), hsl(232 80% 58%));
+      border-color: transparent;
+      color: #fff;
+      box-shadow: 0 8px 20px -10px hsl(258 90% 55% / .8);
+      transition: filter .2s, box-shadow .2s, transform .2s;
+    }
+    html body .sui.button.primary:not(:disabled):hover {
+      filter: brightness(1.08);
+      box-shadow: 0 10px 26px -10px hsl(258 90% 55% / .95);
+    }
+
+    /* ---------- Giriş ekranı ---------- */
+    /* Sitenin arka planı: koyu zemin, sol üstte mor ve sağ altta mavi ışık */
+    body:has(.app-shell img.logo + h1) {
+      background: var(--hk-glow), var(--hk-page);
+      background-attachment: fixed;
+    }
+    body:has(.app-shell img.logo + h1) .app-shell,
+    body:has(.app-shell img.logo + h1) .app-shell > *,
+    body:has(.app-shell img.logo + h1) .app-shell .main {
+      background: transparent !important;
+    }
+    .app-shell img.logo:has(+ h1) {
+      width: 112px;
+      height: 112px;
+      border-radius: 26px;
+      filter: drop-shadow(0 18px 40px hsl(258 90% 50% / .45));
+    }
+    .app-shell img.logo + h1 {
+      margin-top: 22px;
+      text-align: center;
+      font-family: "Figtree", system-ui, sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      color: var(--hk-title);
+    }
+    /* Başlığın altına kısa bir açıklama */
+    .app-shell img.logo + h1::after {
+      content: "Sitenin yazılarını, projelerini ve fotoğraflarını buradan düzenle.";
+      display: block;
+      max-width: 34ch;
+      margin: 10px auto 0;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0;
+      color: var(--hk-sub);
+    }
+    .app-shell img.logo + h1 ~ .buttons .sui.button {
+      height: 44px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .app-shell img.logo + h1 ~ .buttons .sui.button:not(.primary) {
+      background: hsl(250 40% 50% / 8%);
+      border-color: hsl(250 40% 70% / 22%);
+      color: var(--hk-title);
+    }
+
+    /* Giriş ekranı yumuşakça belirsin */
+    @media (prefers-reduced-motion: no-preference) {
+      .app-shell img.logo:has(+ h1),
+      .app-shell img.logo + h1,
+      .app-shell img.logo + h1 ~ * {
+        animation: hk-rise .8s cubic-bezier(.2, .7, .2, 1) both;
+      }
+      .app-shell img.logo + h1 { animation-delay: .08s; }
+      .app-shell img.logo + h1 ~ * { animation-delay: .16s; }
+      @keyframes hk-rise {
+        from { opacity: 0; transform: translateY(14px); }
+        to { opacity: 1; transform: none; }
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Yönetim paneli: Sveltia CMS. Ayarlar aynı klasördeki config.yml dosyasında. -->
+  <!-- Yönetim paneli: Sveltia CMS. Ayarlar aynı klasördeki config.yml dosyasında, tema yukarıda. -->
   <script src="https://unpkg.com/@sveltia/cms@0.255.1/dist/sveltia-cms.js"></script>
 </body>
 </html>
