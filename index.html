@@ -70,7 +70,7 @@
 
   <header class="site-header">
     <div class="topbar container">
-      <a class="nav__brand" href="#" aria-label="Sayfanın başına dön">
+      <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Sayfayı yenile" data-reload>
         <img class="nav__mark" src="assets/logo.svg" alt="" width="30" height="30">
         <span>{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}</span>
       </a>

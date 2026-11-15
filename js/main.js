@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHeroGlow();
   setupCardSpotlight();
   setupToTop();
+  setupReload();
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
@@ -403,4 +404,17 @@ function setupToTop() {
   new IntersectionObserver(([entry]) => {
     btn.classList.toggle('is-visible', !entry.isIntersecting);
   }).observe(hero);
+}
+
+// ---------- Site adına basınca sayfayı yenile (F5 gibi) ----------
+// Adresteki #bölüm silinir ki yenilenince bir bölüme atlamasın, sayfa baştan açılsın.
+function setupReload() {
+  document.querySelectorAll('[data-reload]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+      location.reload();
+    });
+  });
 }
