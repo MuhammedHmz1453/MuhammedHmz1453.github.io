@@ -787,12 +787,11 @@ body::before {
 .about__text { max-width: 64ch; }
 .about__text p + p { margin-top: 1em; }
 
-/* Fotoğraf yoksa: yazı ve bilgiler tam genişlikte bir kartta; geniş ekranda yan yana */
+/* Fotoğraf yoksa: yazı ve bilgiler tam genişlikte ince bir çerçevede (zemin yok); geniş ekranda yan yana */
 .about__card {
   position: relative;
   max-width: none;
   padding: clamp(24px, 4vw, 48px);
-  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 22px;
 }
@@ -859,9 +858,7 @@ body::before {
 .project::before,
 .project::after,
 .stage::before,
-.stage::after,
-.about__card::before,
-.about__card::after {
+.stage::after {
   content: "";
   position: absolute;
   pointer-events: none;
@@ -870,15 +867,13 @@ body::before {
   transition: opacity .35s;
 }
 .project::before,
-.stage::before,
-.about__card::before {
+.stage::before {
   inset: 0;
   z-index: 1;
   background: radial-gradient(480px circle at var(--x, 50%) var(--y, 0%), var(--card-glow), transparent 45%);
 }
 .project::after,
-.stage::after,
-.about__card::after {
+.stage::after {
   inset: -1px;
   z-index: 2;
   padding: 1px;
@@ -891,9 +886,7 @@ body::before {
 .project:hover::before,
 .project:hover::after,
 .stage:hover::before,
-.stage:hover::after,
-.about__card:hover::before,
-.about__card:hover::after { opacity: 1; }
+.stage:hover::after { opacity: 1; }
 
 /* Görsel alanı: kartın içinde, ışıklı ve noktalı zemin */
 .project__media {
