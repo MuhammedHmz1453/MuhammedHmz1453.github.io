@@ -11,6 +11,8 @@ backend:
     uploadMedia: "Görsel yüklendi: {{path}}"
     deleteMedia: "Görsel silindi: {{path}}"
 
+logo_url: https://hamzakaraca.vercel.app/assets/logo.svg
+
 media_folder: assets/uploads
 public_folder: /assets/uploads
 

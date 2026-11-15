@@ -33,10 +33,7 @@ permalink: /404.html
   <header class="site-header">
     <nav class="nav container" aria-label="Ana menü">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön">
-        <svg class="nav__mark" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16 28V13M16 19l-6-6M16 15l5-5" />
-          <circle cx="10" cy="13" r="1.6" /><circle cx="21" cy="10" r="1.6" /><circle cx="16" cy="12" r="1.6" />
-        </svg>
+        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="30" height="30">
         <span>{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}</span>
       </a>
       <ul class="nav__links nav__links--plain">
