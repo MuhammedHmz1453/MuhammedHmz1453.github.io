@@ -787,13 +787,9 @@ body::before {
 .about__text { max-width: 64ch; }
 .about__text p + p { margin-top: 1em; }
 
-/* Fotoğraf yoksa: yazı ve bilgiler tam genişlikte ince bir çerçevede (zemin yok); geniş ekranda yan yana */
+/* Fotoğraf yoksa: yazı ve bilgiler tam genişlikte (zemin ve çerçeve yok); geniş ekranda yan yana */
 .about__card {
-  position: relative;
   max-width: none;
-  padding: clamp(24px, 4vw, 48px);
-  border: 1px solid var(--line);
-  border-radius: 22px;
 }
 @media (min-width: 960px) {
   .about__card {
