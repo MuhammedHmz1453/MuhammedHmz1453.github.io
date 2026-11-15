@@ -396,8 +396,8 @@
           <p>{{ i.yazi | escape }}</p>
 
           <div class="email-row">
-            <a class="email" href="mailto:{{ i.eposta | escape }}" data-email="{{ i.eposta | escape }}">{{ i.eposta | escape }}</a>
-            <button class="lg-btn lg-btn--sm copy-btn" type="button" data-copy-email>Kopyala</button>
+            <!-- Tıklayınca adres panoya kopyalanır (JS yoksa e-posta uygulaması açılır) -->
+            <a class="email" href="mailto:{{ i.eposta | escape }}" data-email="{{ i.eposta | escape }}" title="Kopyalamak için tıkla">{{ i.eposta | escape }}</a>
           </div>
           <p class="copy-status" role="status" aria-live="polite"></p>
 

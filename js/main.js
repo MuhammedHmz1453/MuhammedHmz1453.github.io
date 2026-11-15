@@ -73,20 +73,20 @@ function setupTheme() {
 }
 
 // ---------- E-postayı kopyala ----------
+// E-posta adresine tıklayınca adres panoya kopyalanır. Ctrl/Cmd ile ya da orta tuşla
+// tıklanırsa her zamanki gibi e-posta uygulaması açılır.
 function setupCopyEmail() {
-  const btn = document.querySelector('[data-copy-email]');
   const link = document.querySelector('[data-email]');
   const status = document.querySelector('.copy-status');
-  if (!btn || !link) return;
+  if (!link) return;
 
   const email = link.dataset.email;
   let timer;
 
-  btn.addEventListener('click', async () => {
-    let ok = false;
+  const copy = async () => {
     try {
       await navigator.clipboard.writeText(email);
-      ok = true;
+      return true;
     } catch (e) {
       // Eski tarayıcılar için yedek yöntem
       const temp = document.createElement('textarea');
@@ -96,16 +96,26 @@ function setupCopyEmail() {
       temp.style.opacity = '0';
       document.body.appendChild(temp);
       temp.select();
+      let ok = false;
       try { ok = document.execCommand('copy'); } catch (err) {}
       temp.remove();
+      return ok;
     }
+  };
 
-    btn.textContent = ok ? 'Kopyalandı' : 'Kopyala';
-    if (status) status.textContent = ok ? `${email} panoya kopyalandı.` : 'Kopyalanamadı. Adresi seçip elle kopyalayabilirsin.';
+  link.addEventListener('click', async (e) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    const ok = await copy();
+    link.classList.toggle('is-copied', ok);
+    if (status) {
+      status.classList.toggle('is-ok', ok);
+      status.textContent = ok ? `Kopyalandı: ${email}` : 'Kopyalanamadı. Adresi seçip elle kopyalayabilirsin.';
+    }
     clearTimeout(timer);
     timer = setTimeout(() => {
-      btn.textContent = 'Kopyala';
-      if (status) status.textContent = '';
+      link.classList.remove('is-copied');
+      if (status) { status.textContent = ''; status.classList.remove('is-ok'); }
     }, 2500);
   });
 }

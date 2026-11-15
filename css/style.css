@@ -1305,8 +1305,13 @@ body::before {
   text-decoration-color: var(--link-line);
   color: var(--strong);
   overflow-wrap: anywhere;
+  cursor: copy;
+  transition: text-decoration-color .2s, color .2s;
 }
+.email:hover { text-decoration-color: currentColor; }
+.email.is-copied { color: var(--success); text-decoration-color: currentColor; }
 .copy-status { min-height: 1.6em; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
+.copy-status.is-ok { color: var(--success); }
 
 .socials { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 20px; }
 
