@@ -58,19 +58,22 @@
 
 /* Açık tema: ziyaretçi menüdeki düğmeyle seçerse */
 :root[data-theme="light"] {
-  --paper: #f4f4f5;
-  --surface: #ffffff;
+  /* Koyu temadaki zeminin açık hâli: açık lila zemin; sol üstte mor, sağ altta mavi ışık */
+  --paper: #eeedf8;
+  --surface: rgba(255, 255, 255, .72);
   --ink: #27272a;
   --strong: #09090b;
   --muted: #52525b;
-  --line: #e4e4e7;
+  --line: rgba(30, 27, 75, .1);
   --accent: #111113;
   --accent-ink: #fafafa;
   --link: #09090b;
   --link-line: rgba(9, 9, 11, .3);
   --error: #c62828;
-  --shot-bg: #f4f4f5;
-  --site-glow: none;
+  --shot-bg: #eeedf8;
+  --site-glow:
+    radial-gradient(40% 55% at 21% 19%, #d9cefd, transparent),
+    radial-gradient(40% 55% at 80% 70%, #c9d9fd, transparent);
   --chrome-bg: #0c0a1a;
   --footer-bg: #0c0a1a;
   --card-glow: rgba(9, 9, 11, .035);
