@@ -502,9 +502,6 @@
             <ul>
               <li><a href="mailto:{{ i.eposta | escape }}">E-posta gönder</a></li>
               <li><a href="#iletisim">İletişim formu</a></li>
-              {%- if g.kaynak_kod and g.kaynak_kod != "" %}
-              <li><a href="{{ g.kaynak_kod | escape }}" target="_blank" rel="noopener">Kaynak kodu</a></li>
-              {%- endif %}
             </ul>
           </div>
         </nav>

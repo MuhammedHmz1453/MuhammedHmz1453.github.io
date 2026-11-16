@@ -49,7 +49,6 @@ collections:
           - { name: profil_kucuk, label: Küçük profil fotoğrafı, widget: image, required: false, hint: "Giriş bölümünde düğmenin yanındaki yuvarlak fotoğraf. Yüzünün yakından göründüğü kare bir fotoğraf seç. Boş bırakırsan Hakkımda fotoğrafı kullanılır." }
           - { name: alt_yazi, label: Alt bilgi tanıtım cümlesi, widget: text, required: false, hint: "Sayfanın en altında logonun altındaki kısa tanıtım." }
           - { name: seo_aciklama, label: Arama motoru açıklaması, widget: text, hint: "Google sonuçlarında sitenin altında görünen kısa açıklama." }
-          - { name: kaynak_kod, label: Sitenin kaynak kodu linki, widget: string, required: false }
 
       # ---------- Hakkımda ----------
       - name: hakkimda
