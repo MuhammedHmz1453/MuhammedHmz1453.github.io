@@ -78,17 +78,13 @@ function setupTheme() {
 function setupCopyEmail() {
   const link = document.querySelector('[data-email]');
   const status = document.querySelector('.copy-status');
-  if (!link) return;
 
-  const email = link.dataset.email;
-  let timer;
-
-  const copy = async () => {
+  // Adresi panoya kopyalar; eski tarayıcılar için yedek yöntem de var
+  const copy = async (email) => {
     try {
       await navigator.clipboard.writeText(email);
       return true;
     } catch (e) {
-      // Eski tarayıcılar için yedek yöntem
       const temp = document.createElement('textarea');
       temp.value = email;
       temp.setAttribute('readonly', '');
@@ -102,29 +98,36 @@ function setupCopyEmail() {
       return ok;
     }
   };
+  const plainClick = (e) => e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
 
-  link.addEventListener('click', async (e) => {
-    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    const ok = await copy();
-    link.classList.toggle('is-copied', ok);
-    if (status) {
-      status.classList.toggle('is-ok', ok);
-      status.textContent = ok ? `Kopyalandı: ${email}` : 'Kopyalanamadı. Adresi seçip elle kopyalayabilirsin.';
-    }
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      link.classList.remove('is-copied');
-      if (status) { status.textContent = ''; status.classList.remove('is-ok'); }
-    }, 2500);
-  });
-
-  // Alt bilgideki "E-postamı kopyala": adresi kopyalar, ekranın altında kısa bir bildirim gösterir
-  document.querySelectorAll('[data-copy-email]').forEach((a) => {
-    a.addEventListener('click', async (e) => {
-      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  // İletişim bölümündeki büyük e-posta adresi: kopyalar, altında "Kopyalandı" yazar
+  if (link) {
+    const email = link.dataset.email;
+    let timer;
+    link.addEventListener('click', async (e) => {
+      if (!plainClick(e)) return;
       e.preventDefault();
-      const ok = await copy();
+      const ok = await copy(email);
+      link.classList.toggle('is-copied', ok);
+      if (status) {
+        status.classList.toggle('is-ok', ok);
+        status.textContent = ok ? `Kopyalandı: ${email}` : 'Kopyalanamadı. Adresi seçip elle kopyalayabilirsin.';
+      }
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        link.classList.remove('is-copied');
+        if (status) { status.textContent = ''; status.classList.remove('is-ok'); }
+      }, 2500);
+    });
+  }
+
+  // Diğer e-posta bağlantıları (alt bilgi, yasal sayfalar): kopyalar ve kısa bildirim gösterir
+  document.querySelectorAll('[data-copy-email]').forEach((a) => {
+    const email = a.dataset.copyEmail || a.getAttribute('href').replace(/^mailto:/, '');
+    a.addEventListener('click', async (e) => {
+      if (!plainClick(e)) return;
+      e.preventDefault();
+      const ok = await copy(email);
       showToast(ok ? `E-posta adresim kopyalandı: ${email}` : `Kopyalanamadı. Adresim: ${email}`, ok);
     });
   });
@@ -172,12 +175,15 @@ function setupContactForm() {
       return '';
     },
     mesaj: (v) => v ? '' : 'Mesaj alanı boş. Ne hakkında konuşmak istediğini birkaç cümleyle yaz.',
+    // KVKK onay kutusu: işaretli değilse mesaj gönderilmez
+    onay: (v) => v ? '' : 'Mesajı gönderebilmek için onay kutusunu işaretlemelisin. İstemezsen bana doğrudan e-posta da yazabilirsin.',
   };
 
-  const errorIds = { ad: 'f-ad-hata', eposta: 'f-eposta-hata', mesaj: 'f-mesaj-hata' };
+  const errorIds = { ad: 'f-ad-hata', eposta: 'f-eposta-hata', mesaj: 'f-mesaj-hata', onay: 'f-onay-hata' };
 
   const check = (field) => {
-    const msg = rules[field.name](field.value.trim());
+    const value = field.type === 'checkbox' ? field.checked : field.value.trim();
+    const msg = rules[field.name](value);
     const errorEl = document.getElementById(errorIds[field.name]);
     errorEl.textContent = msg;
     if (msg) {
@@ -193,6 +199,9 @@ function setupContactForm() {
   // Hata gösterildikten sonra, kullanıcı düzelttikçe hatayı kaldır
   form.addEventListener('input', (e) => {
     if (e.target.getAttribute('aria-invalid') === 'true') check(e.target);
+  });
+  form.addEventListener('change', (e) => {
+    if (e.target.type === 'checkbox' && e.target.getAttribute('aria-invalid') === 'true') check(e.target);
   });
 
   const btn = form.querySelector('[data-submit]');
@@ -215,7 +224,7 @@ function setupContactForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (sending) return;
-    const fields = [form.ad, form.eposta, form.mesaj];
+    const fields = [form.ad, form.eposta, form.mesaj, form.onay].filter(Boolean);
     const results = fields.map(check);
     const firstBad = fields[results.indexOf(false)];
     if (firstBad) {
@@ -245,6 +254,7 @@ function setupContactForm() {
           Ad: name,
           email,
           Mesaj: message,
+          'KVKK onayı': `Aydınlatma metni okundu, yurt dışına aktarıma açık rıza verildi (${new Date().toLocaleString('tr-TR')})`,
           _replyto: email,
           _subject: `Portfolyo sitesinden mesaj: ${name}`,
           _template: 'table',
@@ -255,6 +265,7 @@ function setupContactForm() {
       const data = await res.json().catch(() => ({}));
       if (res.ok && String(data.success) === 'true') {
         form.reset();
+        if (form.onay) form.onay.removeAttribute('aria-invalid');
         showStatus('ok', `Teşekkürler ${name}, mesajın bana ulaştı. En kısa sürede ${email} adresine dönüyorum.`);
       } else if (/activ/i.test(data.message || '')) {
         // FormSubmit'te ilk mesajdan sonra site sahibinin onaylaması gerekir

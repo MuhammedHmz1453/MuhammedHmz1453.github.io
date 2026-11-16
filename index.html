@@ -39,9 +39,9 @@
   <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=2" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400..800;1,400&family=Martian+Mono:wdth,wght@75..112.5,300..600&family=Instrument+Serif:ital@1&display=swap">
+  <!-- Yazı tipleri sitenin kendi sunucusundan (Google Fonts yok) -->
+  <link rel="preload" href="{{ '/assets/fonts/figtree-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/css/fonts.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="stylesheet" href="css/style.css?v={{ site.time | date: '%s' }}">
 
   <!-- Tema: sayfa çizilmeden önce seçili temayı uygula (beyaz yanıp sönmeyi önler) -->
@@ -436,6 +436,13 @@
             <textarea id="f-mesaj" name="mesaj" rows="5" required></textarea>
             <p class="field__error" id="f-mesaj-hata"></p>
           </div>
+          <div class="field field--check">
+            <label class="check" for="f-onay">
+              <input id="f-onay" name="onay" type="checkbox" value="Evet" required>
+              <span><a href="{{ '/kvkk-aydinlatma-metni/' | relative_url }}" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>’ni okudum. Mesajımın yanıtlanabilmesi için verilerimin yurt dışındaki hizmet sağlayıcılara (FormSubmit, Google) aktarılmasına açık rıza veriyorum.</span>
+            </label>
+            <p class="field__error" id="f-onay-hata"></p>
+          </div>
           <button class="lg-btn lg-btn--xl" type="submit" data-submit>Mesajı gönder</button>
           <p class="form__status" role="status" aria-live="polite"></p>
           <p class="form__note">Mesajın doğrudan bana ulaşır, sayfadan ayrılman gerekmez.</p>
@@ -509,6 +516,11 @@
 
       <div class="footer__bottom">
         <p>© <span data-year>{{ site.time | date: "%Y" }}</span> {{ tam_ad | escape }}. Tüm hakları saklıdır.</p>
+        <nav class="footer__legal" aria-label="Yasal metinler">
+          <a href="{{ '/kvkk-aydinlatma-metni/' | relative_url }}">KVKK Aydınlatma Metni</a>
+          <a href="{{ '/cerez-politikasi/' | relative_url }}">Çerez Politikası</a>
+          <a href="{{ '/gizlilik-politikasi/' | relative_url }}">Gizlilik Politikası</a>
+        </nav>
       </div>
     </div>
 

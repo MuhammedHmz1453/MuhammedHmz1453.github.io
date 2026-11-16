@@ -1,0 +1,71 @@
+---
+---
+{%- assign g = site.data.genel -%}
+{%- assign tam_ad = g.ad | append: " " | append: g.soyad | strip -%}
+{%- assign site_adi = g.site_adi | default: tam_ad -%}
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="darkreader-lock">
+  <title>{{ page.title | escape }} · {{ site_adi | escape }}</title>
+  <meta name="description" content="{{ page.aciklama | default: page.title | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta name="theme-color" content="#0c0a1a">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=2" sizes="48x48">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=2" type="image/svg+xml">
+  <link rel="preload" href="{{ '/assets/fonts/figtree-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/css/fonts.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <script>
+    try {
+      var t = localStorage.getItem('tema');
+      if (t === 'acik' || t === 'koyu') document.documentElement.dataset.theme = t === 'koyu' ? 'dark' : 'light';
+    } catch (e) {}
+  </script>
+  <script src="{{ '/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+</head>
+<body class="legal-page">
+  <a class="skip-link" href="#icerik">İçeriğe atla</a>
+  <header class="site-header">
+    <div class="topbar container">
+      <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön">
+        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="30" height="30">
+        <span>{{ site_adi | downcase | replace: " ", "" | escape }}</span>
+      </a>
+      <button class="lg-btn lg-btn--icon theme-toggle" type="button" aria-label="Açık temaya geç" data-theme-toggle>
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-moon"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="legal container" id="icerik">
+    <a class="legal__back" href="{{ '/' | relative_url }}"><span aria-hidden="true">←</span> Ana sayfaya dön</a>
+
+    <header class="legal__head">
+      <p class="legal__eyebrow">Yasal bilgiler</p>
+      <h1>{{ page.title | escape }}</h1>
+      <p class="legal__meta">Son güncelleme: {{ page.guncelleme }}</p>
+      <nav class="legal__tabs" aria-label="Yasal metinler">
+        {%- assign belgeler = site.pages | where: "layout", "yasal" | sort: "sira" -%}
+        {%- for b in belgeler %}
+        <a href="{{ b.url | relative_url }}"{% if b.url == page.url %} aria-current="page"{% endif %}>{{ b.kisa_ad | default: b.title }}</a>
+        {%- endfor %}
+      </nav>
+    </header>
+
+    <article class="legal__body">
+      {{ content }}
+    </article>
+  </main>
+
+  <footer class="legal-footer">
+    <div class="container legal-footer__inner">
+      <p>© {{ site.time | date: "%Y" }} {{ tam_ad | escape }}</p>
+      <a href="{{ '/' | relative_url }}">Ana sayfa</a>
+    </div>
+  </footer>
+</body>
+</html>

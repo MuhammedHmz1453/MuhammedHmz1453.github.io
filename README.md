@@ -66,3 +66,15 @@ Form, mesajları ücretsiz [FormSubmit](https://formsubmit.co) servisiyle doğru
 **İlk kurulum (bir kere):** Siteden ilk mesaj gönderildiğinde FormSubmit, e-posta adresine "Activate Form" bağlantılı bir onay e-postası yollar. Bağlantıya bas; o andan sonra bütün mesajlar e-postana gelir. Onaylanmadan önce gönderilen mesajlar iletilmez.
 
 E-posta adresini panelden değiştirirsen yeni adres için de bir kere onay gerekir. Spam'e karşı formda botların doldurduğu gizli bir tuzak alan var; dolu gelen mesajlar gönderilmez.
+
+## Yasal metinler (KVKK, çerez, gizlilik)
+
+- `kvkk-aydinlatma-metni.md` → /kvkk-aydinlatma-metni/
+- `cerez-politikasi.md` → /cerez-politikasi/
+- `gizlilik-politikasi.md` → /gizlilik-politikasi/
+
+Üçü de `_layouts/yasal.html` sayfa düzenini kullanır ve sayfanın en altındaki bağlantılardan açılır. E-posta adresi ve adın panelden (İletişim / Giriş ve genel bilgiler) otomatik gelir. Metinleri değiştirirsen dosyanın başındaki `guncelleme:` tarihini de güncelle.
+
+İletişim formunda, mesaj gönderilmeden önce işaretlenmesi gereken bir KVKK onay kutusu vardır; onay bilgisi gelen e-postada "KVKK onayı" satırında görünür.
+
+Metinler sitenin bugünkü işleyişine göre yazıldı: çerez yok, sadece tema tercihi tarayıcıda saklanıyor, yazı tipleri sitenin kendi sunucusundan geliyor (`assets/fonts`, `css/fonts.css`), form FormSubmit ile Gmail'e gidiyor, site Vercel'de barındırılıyor. Siteye analiz (analytics), reklam, yeni bir form servisi gibi bir şey eklenirse bu üç metnin de güncellenmesi gerekir.
