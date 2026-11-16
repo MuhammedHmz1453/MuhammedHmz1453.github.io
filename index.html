@@ -437,10 +437,49 @@
             <p class="field__error" id="f-mesaj-hata"></p>
           </div>
           <div class="field field--check">
-            <label class="check" for="f-onay">
-              <input id="f-onay" name="onay" type="checkbox" value="Evet" required>
-              <span><a href="{{ '/kvkk-aydinlatma-metni/' | relative_url }}" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>’ni okudum. Mesajımın yanıtlanabilmesi için verilerimin yurt dışındaki hizmet sağlayıcılara (FormSubmit, Google) aktarılmasına açık rıza veriyorum.</span>
-            </label>
+            <div class="check">
+              <!-- Neon onay kutusu: işaretlenince tik çizilir, parlar; parçacık, halka ve kıvılcım efekti çıkar -->
+              <label class="neon-checkbox">
+                <input id="f-onay" name="onay" type="checkbox" value="Evet" required>
+                <span class="neon-checkbox__frame" aria-hidden="true">
+                  <span class="neon-checkbox__box">
+                    <span class="neon-checkbox__check-container">
+                      <svg class="neon-checkbox__check" viewBox="0 0 24 24"><path d="M3,12.5l7,7L21,5"/></svg>
+                    </span>
+                    <span class="neon-checkbox__glow"></span>
+                    <span class="neon-checkbox__borders"><span></span><span></span><span></span><span></span></span>
+                  </span>
+                  <span class="neon-checkbox__effects">
+                    <span class="neon-checkbox__particles">
+                      <span style="--x: 25px; --y: -25px"></span>
+                      <span style="--x: -25px; --y: -25px"></span>
+                      <span style="--x: 25px; --y: 25px"></span>
+                      <span style="--x: -25px; --y: 25px"></span>
+                      <span style="--x: 35px; --y: 0px"></span>
+                      <span style="--x: -35px; --y: 0px"></span>
+                      <span style="--x: 0px; --y: 35px"></span>
+                      <span style="--x: 0px; --y: -35px"></span>
+                      <span style="--x: 20px; --y: -30px"></span>
+                      <span style="--x: -20px; --y: 30px"></span>
+                      <span style="--x: 30px; --y: 20px"></span>
+                      <span style="--x: -30px; --y: -20px"></span>
+                    </span>
+                    <span class="neon-checkbox__rings">
+                      <span style="animation-delay: 0.0s"></span>
+                      <span style="animation-delay: 0.1s"></span>
+                      <span style="animation-delay: 0.2s"></span>
+                    </span>
+                    <span class="neon-checkbox__sparks">
+                      <span style="--r: 0deg"></span>
+                      <span style="--r: 90deg"></span>
+                      <span style="--r: 180deg"></span>
+                      <span style="--r: 270deg"></span>
+                    </span>
+                  </span>
+                </span>
+              </label>
+              <label class="check__text" for="f-onay"><a href="{{ '/kvkk-aydinlatma-metni/' | relative_url }}" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>’ni okudum. Mesajımın yanıtlanabilmesi için verilerimin yurt dışındaki hizmet sağlayıcılara (FormSubmit, Google) aktarılmasına açık rıza veriyorum.</label>
+            </div>
             <p class="field__error" id="f-onay-hata"></p>
           </div>
           <button class="lg-btn lg-btn--xl" type="submit" data-submit>Mesajı gönder</button>

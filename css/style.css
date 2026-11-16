@@ -1775,24 +1775,177 @@ body::before {
 .check {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
+}
+.check__text {
+  padding-top: 4px;
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.55;
   color: var(--muted);
   cursor: pointer;
 }
-.check input {
+.field.field--check .check__text { margin-bottom: 0; font-weight: 400; font-size: .875rem; }
+.check__text a { color: var(--strong); text-decoration: underline; text-underline-offset: 3px; }
+
+/* Neon onay kutusu (animated-check-box bileşeni). İşaretlenince: kenar neon yeşile döner,
+   tik çizilir ve büyür, arkası parlar, kenarlarda ışık akar; parçacıklar saçılır,
+   üç halka yayılır, dört kıvılcım çakar. Gerçek kutu görünmez ama klavyeyle seçilebilir. */
+.neon-checkbox {
+  --primary: #00ffaa;
+  --primary-dark: #00cc88;
+  --primary-light: #88ffdd;
+  --size: 30px;
+  position: relative;
+  display: inline-block;
   flex: none;
-  width: 20px;
-  height: 20px;
-  margin: 1px 0 0;
-  accent-color: #7c5cff;
+  width: var(--size);
+  height: var(--size);
   cursor: pointer;
 }
-.check a { color: var(--strong); text-decoration: underline; text-underline-offset: 3px; }
-.check input[aria-invalid="true"] { outline: 2px solid var(--error); outline-offset: 2px; }
-.field.field--check label { margin-bottom: 0; font-weight: 400; font-size: .875rem; }
+.neon-checkbox input {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.neon-checkbox span { display: block; }
+.neon-checkbox__frame { position: relative; width: 100%; height: 100%; }
+.neon-checkbox__box {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--primary-dark);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, .8);
+  transition: all .4s;
+}
+.neon-checkbox__check-container {
+  position: absolute;
+  inset: 2px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+.neon-checkbox__check {
+  width: 80%;
+  height: 80%;
+  max-width: none;
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  transform-origin: center;
+  transition: all .4s cubic-bezier(.16, 1, .3, 1);
+}
+.neon-checkbox__glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 6px;
+  background: var(--primary);
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity .4s;
+}
+.neon-checkbox__borders {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.neon-checkbox__borders span {
+  position: absolute;
+  width: 40px;
+  height: 1px;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity .4s;
+}
+.neon-checkbox__borders span:nth-child(1) { top: 0; left: -100%; animation: hk-border-flow-1 2s linear infinite; }
+.neon-checkbox__borders span:nth-child(2) { top: -100%; right: 0; width: 1px; height: 40px; animation: hk-border-flow-2 2s linear infinite; }
+.neon-checkbox__borders span:nth-child(3) { bottom: 0; right: -100%; animation: hk-border-flow-3 2s linear infinite; }
+.neon-checkbox__borders span:nth-child(4) { bottom: -100%; left: 0; width: 1px; height: 40px; animation: hk-border-flow-4 2s linear infinite; }
+
+.neon-checkbox__particles,
+.neon-checkbox__sparks { position: absolute; inset: 0; }
+.neon-checkbox__particles span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 6px var(--primary);
+  pointer-events: none;
+  opacity: 0;
+}
+.neon-checkbox__rings { position: absolute; inset: -20px; pointer-events: none; }
+.neon-checkbox__rings span {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, .5);
+  transform: scale(0);
+  opacity: 0;
+}
+.neon-checkbox__sparks span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 1px;
+  background: linear-gradient(to right, var(--primary), transparent);
+  opacity: 0;
+}
+
+/* İşaretli */
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__box {
+  border-color: var(--primary);
+  /* koyu zemin korunur, üstüne yeşil ton: neon görünüm açık temada da seçilir */
+  background: linear-gradient(rgba(0, 255, 170, .1), rgba(0, 255, 170, .1)), rgba(0, 0, 0, .8);
+}
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__check { stroke-dashoffset: 0; transform: scale(1.1); }
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__glow { opacity: .2; }
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__borders span { opacity: 1; }
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__particles span { opacity: 1; animation: hk-particle-explosion .6s ease-out forwards; }
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__rings span { opacity: 1; animation-name: hk-ring-pulse; animation-duration: .6s; animation-timing-function: ease-out; animation-fill-mode: forwards; }
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__sparks span { opacity: 1; animation: hk-spark-flash .6s ease-out forwards; }
+
+/* Klavyeyle gelindiğinde odak çerçevesi; boş bırakılıp gönderilince kırmızı kenar */
+.neon-checkbox input:focus-visible + .neon-checkbox__frame { outline: 2px solid var(--primary-light); outline-offset: 3px; border-radius: 6px; }
+.neon-checkbox input[aria-invalid="true"] + .neon-checkbox__frame .neon-checkbox__box { border-color: var(--error); }
+
+@keyframes hk-border-flow-1 { 0% { transform: translateX(0); } 100% { transform: translateX(200%); } }
+@keyframes hk-border-flow-2 { 0% { transform: translateY(0); } 100% { transform: translateY(200%); } }
+@keyframes hk-border-flow-3 { 0% { transform: translateX(0); } 100% { transform: translateX(-200%); } }
+@keyframes hk-border-flow-4 { 0% { transform: translateY(0); } 100% { transform: translateY(-200%); } }
+@keyframes hk-particle-explosion {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--x, 20px)), calc(-50% + var(--y, 20px))) scale(0); opacity: 0; }
+}
+@keyframes hk-ring-pulse { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+@keyframes hk-spark-flash {
+  0% { transform: rotate(var(--r, 0deg)) translateX(0) scale(1); opacity: 1; }
+  100% { transform: rotate(var(--r, 0deg)) translateX(30px) scale(0); opacity: 0; }
+}
+
+/* Hareket azaltma açıksa: yalnızca tik ve renk değişir, patlama ve akan ışık olmaz */
+@media (prefers-reduced-motion: reduce) {
+  .neon-checkbox__borders span,
+  .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__particles span,
+  .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__rings span,
+  .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__sparks span { animation: none; opacity: 0; }
+  .neon-checkbox__check { transition: none; }
+}
 
 /* ---------- Yasal sayfalar (KVKK, çerez, gizlilik) ---------- */
 .legal {
