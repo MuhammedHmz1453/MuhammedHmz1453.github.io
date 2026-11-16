@@ -1778,7 +1778,7 @@ body::before {
   gap: 14px;
 }
 .check__text {
-  padding-top: 4px;
+  padding-top: 1px;
   font-size: .875rem;
   font-weight: 400;
   line-height: 1.55;
@@ -1795,7 +1795,7 @@ body::before {
   --primary: #00ffaa;
   --primary-dark: #00cc88;
   --primary-light: #88ffdd;
-  --size: 30px;
+  --size: 24px;
   position: relative;
   display: inline-block;
   flex: none;
