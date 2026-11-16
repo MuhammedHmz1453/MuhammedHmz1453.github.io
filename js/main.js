@@ -118,6 +118,40 @@ function setupCopyEmail() {
       if (status) { status.textContent = ''; status.classList.remove('is-ok'); }
     }, 2500);
   });
+
+  // Alt bilgideki "E-postamı kopyala": adresi kopyalar, ekranın altında kısa bir bildirim gösterir
+  document.querySelectorAll('[data-copy-email]').forEach((a) => {
+    a.addEventListener('click', async (e) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      const ok = await copy();
+      showToast(ok ? `E-posta adresim kopyalandı: ${email}` : `Kopyalanamadı. Adresim: ${email}`, ok);
+    });
+  });
+}
+
+// ---------- Kısa bildirim (toast) ----------
+let toastTimer;
+function showToast(text, ok = true) {
+  let toast = document.querySelector('.toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = ok
+    ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>'
+    : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v5M12 16.5v.01"/><circle cx="12" cy="12" r="9"/></svg>';
+  const span = document.createElement('span');
+  span.textContent = text;
+  toast.append(span);
+  toast.classList.toggle('is-error', !ok);
+  // bir sonraki karede göster ki geçiş animasyonu çalışsın
+  requestAnimationFrame(() => toast.classList.add('is-on'));
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('is-on'), 2800);
 }
 
 // ---------- İletişim formu ----------

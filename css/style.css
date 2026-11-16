@@ -1316,6 +1316,55 @@ body::before {
 .copy-status { min-height: 1.6em; margin-top: 8px; font-size: 0.875rem; color: var(--muted); }
 .copy-status.is-ok { color: var(--success); }
 
+/* Kısa bildirim: ekranın altında ortada belirir (örn. "E-posta adresim kopyalandı") */
+.toast {
+  position: fixed;
+  z-index: 80;
+  left: 50%;
+  bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 12px 18px;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 999px;
+  background: rgba(16, 13, 36, .9);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, .45);
+  color: #fafafa;
+  font-size: .9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+  opacity: 0;
+  transform: translate(-50%, 14px);
+  pointer-events: none;
+  transition: opacity .3s ease, transform .35s cubic-bezier(.2, .7, .2, 1);
+}
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
+.toast svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  max-width: none;
+  fill: none;
+  stroke: #5ee6a0;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.toast.is-error svg { stroke: #ff8a80; }
+@media (max-width: 767px) {
+  /* telefonda alttaki menünün ve başa dön düğmesinin üstünde */
+  .toast { bottom: calc(146px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .toast, .toast.is-on { transform: translate(-50%, 0); }
+}
+
 .socials { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 20px; }
 
 .form {
