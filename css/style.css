@@ -2104,7 +2104,7 @@ body::before {
 .faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
 .faq__item[open] .faq__icon { background: linear-gradient(135deg, #7c5cff, #4f63e8); border-color: transparent; color: #fff; transform: rotate(180deg); }
 .faq__item[open] .faq__icon::after { transform: translate(-50%, -50%) rotate(0deg); }
-.faq__answer { padding: 0 clamp(18px, 3vw, 28px) 22px; }
+.faq__answer { padding: 8px clamp(18px, 3vw, 28px) 22px; }
 .faq__answer p { max-width: 70ch; color: var(--muted); line-height: 1.7; }
 @media (prefers-reduced-motion: no-preference) {
   .faq__item[open] .faq__answer { animation: hk-faq-open .35s cubic-bezier(.2, .7, .2, 1); }
