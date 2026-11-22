@@ -563,13 +563,6 @@
           </a>
           {%- endif %}
 
-          {%- if i.linkler.size > 0 %}
-          <ul class="socials">
-            {%- for l in i.linkler %}
-            <li><a href="{{ l.adres | escape }}" target="_blank" rel="noopener">{{ l.ad | escape }} <span aria-hidden="true">↗</span></a></li>
-            {%- endfor %}
-          </ul>
-          {%- endif %}
         </div>
 
         <!-- Mesajlar FormSubmit (formsubmit.co) ile doğrudan İletişim'deki e-posta adresine gelir.
