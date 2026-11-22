@@ -291,7 +291,7 @@ function setupIntro() {
   const root = document.documentElement;
   const ready = () => root.classList.add('is-ready');
   const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
-  Promise.race([fonts, new Promise((r) => setTimeout(r, 1200))]).then(ready);
+  Promise.race([fonts, new Promise((r) => setTimeout(r, 600))]).then(ready);
 }
 
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -308,7 +308,7 @@ function setupReveal() {
       entry.target.classList.add('is-visible');
       observer.unobserve(entry.target);
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px -2% 0px' });
 
   items.forEach((el) => observer.observe(el));
 }
