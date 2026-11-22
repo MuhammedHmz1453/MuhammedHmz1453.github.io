@@ -298,7 +298,7 @@ const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: r
 
 // ---------- Kaydırınca beliren bölümler ----------
 function setupReveal() {
-  const items = document.querySelectorAll('[data-reveal], [data-reveal-project], .stage');
+  const items = document.querySelectorAll('[data-reveal], [data-reveal-project]');
   if (!items.length || prefersReducedMotion() || !('IntersectionObserver' in window)) return;
 
   document.documentElement.classList.add('reveal-on');
@@ -497,7 +497,7 @@ function setupHeroGlow() {
 // ---------- Proje kartlarında imleci izleyen ışık ----------
 function setupCardSpotlight() {
   if (!window.matchMedia('(hover: hover)').matches) return;
-  document.querySelectorAll('.project, .stage, .service, .plan').forEach((card) => {
+  document.querySelectorAll('.project, .service, .plan').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--x', `${e.clientX - rect.left}px`);
