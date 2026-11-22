@@ -1,5 +1,5 @@
 # Bu dosya yönetim panelinden (/admin) düzenlenir.
-baslik: Sık sorulan sorular
+baslik: SSS
 aciklama: Aklındaki soru burada yoksa bana yazman yeterli.
 sorular:
   - soru: Bir site ne kadar sürede hazır olur?
