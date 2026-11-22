@@ -4,7 +4,7 @@ baslik: Başlangıç paketleri
 aciklama: Her proje farklı; fiyat, ihtiyacına göre belirlenir. Paketi seç, sana özel teklif hazırlayayım.
 paketler:
   - ad: Tanıtım sitesi
-    fiyat: ''
+    fiyat: 1.500 TL
     fiyat_notu: ''
     aciklama: Kişiler, küçük işletmeler ve projeler için tek sayfalık ya da birkaç sayfalık site.
     one_cikan: false
@@ -14,7 +14,7 @@ paketler:
       - İletişim formu
       - İçerik düzenleme paneli
   - ad: E-ticaret sitesi
-    fiyat: ''
+    fiyat: 3.500 TL
     fiyat_notu: ''
     aciklama: Ürünlerini sergileyip sipariş alabileceğin mağaza sitesi.
     one_cikan: true
@@ -24,7 +24,7 @@ paketler:
       - Telefona uyumlu tasarım
       - İçerik düzenleme paneli
   - ad: Bakım paketi
-    fiyat: ''
+    fiyat: 5.000 TL
     fiyat_notu: ''
     aciklama: Var olan sitenin güncel ve sorunsuz kalması için düzenli destek.
     one_cikan: false
