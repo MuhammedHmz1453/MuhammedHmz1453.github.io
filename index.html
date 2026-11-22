@@ -330,11 +330,6 @@
           {%- endif %}
           </div>
           <div class="project__body">
-            {%- if p.etiketler.size > 0 %}
-            <ul class="tags" aria-label="Kullanılan teknolojiler">
-              {%- for e in p.etiketler %}<li>{{ e | escape }}</li>{%- endfor %}
-            </ul>
-            {%- endif %}
             <h3>{{ p.ad | escape }}</h3>
             <p>{{ p.aciklama | escape }}</p>
             <div class="project__links">
