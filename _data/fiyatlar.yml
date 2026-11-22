@@ -1,34 +1,35 @@
 # Bu dosya yönetim panelinden (/admin) düzenlenir.
 # "fiyat" boş bırakılırsa kartta "Teklife göre" yazar.
-baslik: Başlangıç paketleri
-aciklama: Her proje farklı; fiyat, ihtiyacına göre belirlenir. Paketi seç, sana özel teklif hazırlayayım.
+baslik: Paketlerim
+aciklama: Sana uyan paketi seç, ihtiyacını yaz; sana özel ücretsiz teklif hazırlayayım.
 paketler:
-  - ad: Tanıtım sitesi
+  - ad: Başlangıç
     fiyat: 1.500 TL
     fiyat_notu: ''
-    aciklama: Kişiler, küçük işletmeler ve projeler için tek sayfalık ya da birkaç sayfalık site.
+    aciklama: Yeni başlayan işletmeler ve kişiler için tek sayfalık tanıtım sitesi.
     one_cikan: false
     maddeler:
-      - Tek ya da birkaç sayfa
-      - Telefona uyumlu tasarım
+      - Tek sayfalık modern tasarım
+      - Telefona uyumlu
       - İletişim formu
-      - İçerik düzenleme paneli
-  - ad: E-ticaret sitesi
+      - Hızlı açılan sayfa
+  - ad: Profesyonel
     fiyat: 3.500 TL
     fiyat_notu: ''
-    aciklama: Ürünlerini sergileyip sipariş alabileceğin mağaza sitesi.
+    aciklama: Kurumsal ya da işletme sitesi isteyenler için çok sayfalı, sana özel site.
     one_cikan: true
     maddeler:
-      - Ürün ve kategori sayfaları
-      - Sipariş ve iletişim akışı
-      - Telefona uyumlu tasarım
+      - Başlangıç paketindeki her şey
+      - Çok sayfalı, sana özel tasarım
       - İçerik düzenleme paneli
-  - ad: Bakım paketi
+      - Arama motorları için temel ayarlar
+  - ad: Premium
     fiyat: 5.000 TL
     fiyat_notu: ''
-    aciklama: Var olan sitenin güncel ve sorunsuz kalması için düzenli destek.
+    aciklama: E-ticaret ya da kapsamlı bir site ve yayından sonra düzenli destek.
     one_cikan: false
     maddeler:
-      - İçerik ve görsel güncellemeleri
-      - Hata düzeltme
-      - Hız ve güvenlik kontrolleri
+      - Profesyonel paketteki her şey
+      - Ürün, kategori ve sipariş sayfaları
+      - Yayından sonra bakım ve destek
+      - Öncelikli iletişim

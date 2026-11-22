@@ -600,6 +600,29 @@ body::before {
   margin-inline: auto;
 }
 
+/* Başlığın üstündeki kısa slogan: ziyaretçi ilk bakışta ne iş yaptığını görsün */
+.spot__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: clamp(18px, 2.6vw, 26px);
+  padding: 7px 16px 7px 12px;
+  border: 1px solid color-mix(in srgb, #7c5cff 40%, var(--line));
+  border-radius: 999px;
+  background: color-mix(in srgb, #7c5cff 12%, transparent);
+  color: var(--spot-ink, var(--strong));
+  font-size: clamp(.8125rem, 1.4vw, .9375rem);
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+.spot__kicker i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8b7bff;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #8b7bff 25%, transparent);
+}
+
 .spot__title {
   font-family: var(--font-body);
   font-weight: 600;
@@ -1253,6 +1276,7 @@ body::before {
   font-size: 0.9375rem;
 }
 .field input,
+.field select,
 .field textarea {
   width: 100%;
   padding: 12px 14px;
@@ -1264,7 +1288,22 @@ body::before {
   transition: border-color .15s;
 }
 .field textarea { resize: vertical; min-height: 130px; }
+.field textarea::placeholder { color: color-mix(in srgb, var(--muted) 75%, transparent); }
+.field select {
+  appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a96b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  cursor: pointer;
+}
+.field select option { background: var(--paper); color: var(--ink); }
+/* Hizmet ve paket seçimi: geniş ekranda yan yana */
+.field-row { display: grid; gap: 18px 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 560px) { .field-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .field input:focus,
+.field select:focus,
 .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent); }
 .field [aria-invalid="true"] { border-color: var(--error); }
 .field__error { margin-top: 6px; font-size: 0.875rem; color: var(--error); }
@@ -1469,6 +1508,7 @@ body::before {
   .js.is-ready .hero__actions { animation: rise .54s cubic-bezier(.2, .7, .2, 1) .42s both; }
   .js.is-ready .hero__soil { animation: fade .72s ease .54s both; }
 
+  .js .spot__kicker,
   .js .spot__line,
   .js .spot__lede,
   .js .spot__cta,
@@ -1477,6 +1517,7 @@ body::before {
     animation: blur-rise .66s cubic-bezier(.2, .7, .1, 1) both;
     animation-delay: calc(.06s + var(--i, 0) * .1s);
   }
+  .js.is-ready .spot__kicker { animation: rise .5s cubic-bezier(.2, .7, .2, 1) both; }
   .js.is-ready .spot__lede { animation: rise .54s cubic-bezier(.2, .7, .2, 1) .27s both; }
   .js.is-ready .spot__cta { animation: rise .54s cubic-bezier(.2, .7, .2, 1) .36s both; }
   .js.is-ready .spot__band { animation: fade .84s ease .51s both; }
@@ -1985,6 +2026,9 @@ body::before {
 /* ---------- Hizmetler ---------- */
 .services { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 760px) { .services { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
+/* 4 hizmet: tablette 2×2, geniş ekranda tek sıra (3+1 artık kalmasın) */
+@media (min-width: 760px) { .services--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1180px) { .services--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .service p { margin-top: 10px; color: var(--muted); line-height: 1.6; }
 .service__icon {
   display: grid;
@@ -2141,3 +2185,6 @@ body::before {
 @media (min-width: 768px) and (max-width: 1199px) {
   .site-header .nav__brand span { display: none; }
 }
+
+/* Proje kartında öne çıkan özellikler */
+.project__features { margin-top: 16px; }

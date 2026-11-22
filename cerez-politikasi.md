@@ -33,7 +33,7 @@ Bu kayıt yalnızca sizin tarayıcınızda durur, bana ya da başka birine gönd
 ## Üçüncü taraflar
 
 - **Yazı tipleri ve diğer dosyalar** sitenin kendi sunucusundan yüklenir. Sayfayı açtığınızda Google Fonts gibi üçüncü taraf hizmetlere istek gönderilmez.
-- **İletişim formu:** "Mesajı gönder"e bastığınızda mesajınız FormSubmit (formsubmit.co) hizmetine iletilir. Tarayıcınızda JavaScript kapalıysa form sizi FormSubmit'in sayfasına yönlendirir. Bu durumda FormSubmit kendi çerezlerini kullanabilir.
+- **İletişim formu:** "Ücretsiz teklif iste" düğmesine bastığınızda mesajınız FormSubmit (formsubmit.co) hizmetine iletilir. Tarayıcınızda JavaScript kapalıysa form sizi FormSubmit'in sayfasına yönlendirir. Bu durumda FormSubmit kendi çerezlerini kullanabilir.
 - **Dış bağlantılar:** GitHub, Instagram, Oyunhane ve Lazer Bahçesi gibi sitelere verilen bağlantılara tıkladığınızda, o sitelerin kendi çerez ve gizlilik politikaları geçerli olur.
 - **Yönetim paneli** (/admin) yalnızca site sahibinin kullanımı içindir. Ziyaretçiler için herhangi bir kayıt oluşturmaz.
 

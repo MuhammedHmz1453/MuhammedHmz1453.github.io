@@ -45,7 +45,8 @@ collections:
           - { name: unvan, label: Unvan, widget: string, hint: "Link paylaşımlarında (WhatsApp, Instagram) adının yanında görünür." }
           - { name: durum_goster, label: Fotoğraflı durum satırını göster, widget: boolean, default: true }
           - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Giriş bölümünde fotoğrafının yanındaki iki satır, aralarına “ · ” koy. Örnek: Junior web geliştirici · İş ve projelere açığım" }
-          - { name: giris, label: Giriş cümlesi, widget: text, hint: "Adının altındaki 1–2 cümle." }
+          - { name: slogan, label: Slogan, widget: string, required: false, hint: "Adının üstündeki küçük etiket; ziyaretçi ilk bakışta ne iş yaptığını anlasın. Örnek: İşletmeler için web siteleri" }
+          - { name: giris, label: Giriş cümlesi, widget: text, hint: "Adının altındaki 1–2 cümle. Hangi hizmetleri verdiğini açıkça yaz." }
           - { name: profil_kucuk, label: Küçük profil fotoğrafı, widget: image, required: false, hint: "Giriş bölümünde düğmenin yanındaki yuvarlak fotoğraf. Yüzünün yakından göründüğü kare bir fotoğraf seç. Boş bırakırsan Hakkımda fotoğrafı kullanılır." }
           - { name: alt_yazi, label: Alt bilgi tanıtım cümlesi, widget: text, required: false, hint: "Sayfanın en altında logonun altındaki kısa tanıtım." }
           - { name: seo_aciklama, label: Arama motoru açıklaması, widget: text, hint: "Google sonuçlarında sitenin altında görünen kısa açıklama." }
@@ -74,7 +75,7 @@ collections:
       # ---------- Hizmetler ----------
       - name: hizmetler
         icon: design_services
-        description: "Verdiğin hizmetler: web tasarım, e-ticaret, bakım."
+        description: "Verdiğin hizmetler: kurumsal site, e-ticaret, işletme sitesi, site yenileme."
         label: Hizmetler
         file: _data/hizmetler.yml
         fields:
@@ -93,6 +94,9 @@ collections:
                 widget: select
                 default: tasarim
                 options:
+                  - { label: "Bina (kurumsal site)", value: kurumsal }
+                  - { label: "Dükkân (işletme sitesi)", value: isletme }
+                  - { label: "Yenileme okları (site yenileme)", value: yenileme }
                   - { label: "Ekran (web tasarım)", value: tasarim }
                   - { label: "Sepet (e-ticaret)", value: eticaret }
                   - { label: "İngiliz anahtarı (bakım)", value: bakim }
@@ -120,6 +124,7 @@ collections:
             fields:
               - { name: ad, label: Proje adı, widget: string }
               - { name: aciklama, label: Açıklama, widget: text, hint: "Proje ne yapıyor? 1–2 cümle yeter." }
+              - { name: ozellikler, label: Öne çıkan özellikler, label_singular: Özellik, widget: list, required: false, hint: "Kartta tik işaretiyle görünür. Örnek: Google ile giriş ve puan sistemi" }
               - { name: etiketler, label: Kullanılan teknolojiler, label_singular: Teknoloji, widget: list, required: false, hint: "Her teknolojiyi ayrı ekle. Örnek: HTML, CSS, JavaScript" }
               - name: demo
                 label: Canlı link
@@ -179,8 +184,8 @@ collections:
       # ---------- Fiyatlandırma ----------
       - name: fiyatlar
         icon: sell
-        description: "Başlangıç paketleri ve fiyatları."
-        label: Fiyatlandırma
+        description: "Başlangıç, Profesyonel ve Premium paketleri ve fiyatları."
+        label: Paketlerim
         file: _data/fiyatlar.yml
         fields:
           - { name: baslik, label: Bölüm başlığı, widget: string }

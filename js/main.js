@@ -175,9 +175,9 @@ function setupContactForm() {
       if (!emailPattern.test(v)) return 'E-posta adresini kontrol et: ornek@alanadi.com gibi olmalı.';
       return '';
     },
-    mesaj: (v) => v ? '' : 'Mesaj alanı boş. Ne hakkında konuşmak istediğini birkaç cümleyle yaz.',
+    mesaj: (v) => v ? '' : 'İhtiyaçlarını birkaç cümleyle yaz: nasıl bir site istiyorsun, işin ne?',
     // KVKK onay kutusu: işaretli değilse mesaj gönderilmez
-    onay: (v) => v ? '' : 'Mesajı gönderebilmek için onay kutusunu işaretlemelisin. İstemezsen bana doğrudan e-posta da yazabilirsin.',
+    onay: (v) => v ? '' : 'Talebini gönderebilmek için onay kutusunu işaretlemelisin. İstemezsen bana doğrudan e-posta da yazabilirsin.',
   };
 
   const errorIds = { ad: 'f-ad-hata', eposta: 'f-eposta-hata', mesaj: 'f-mesaj-hata', onay: 'f-onay-hata' };
@@ -254,10 +254,12 @@ function setupContactForm() {
         body: JSON.stringify({
           Ad: name,
           email,
-          Mesaj: message,
+          Hizmet: (form.hizmet && form.hizmet.value) || 'Belirtilmedi',
+          Paket: (form.paket && form.paket.value) || 'Henüz karar vermedi',
+          'İhtiyaçlar': message,
           'KVKK onayı': `Aydınlatma metni okundu, yurt dışına aktarıma açık rıza verildi (${new Date().toLocaleString('tr-TR')})`,
           _replyto: email,
-          _subject: `Portfolyo sitesinden mesaj: ${name}`,
+          _subject: `Yeni teklif talebi: ${name}`,
           _template: 'table',
           _captcha: 'false',
         }),
@@ -267,7 +269,7 @@ function setupContactForm() {
       if (res.ok && String(data.success) === 'true') {
         form.reset();
         if (form.onay) form.onay.removeAttribute('aria-invalid');
-        showStatus('ok', `Teşekkürler ${name}, mesajın bana ulaştı. En kısa sürede ${email} adresine dönüyorum.`);
+        showStatus('ok', `Teşekkürler ${name}, teklif talebin bana ulaştı. Teklifimi en kısa sürede ${email} adresine gönderiyorum.`);
       } else if (/activ/i.test(data.message || '')) {
         // FormSubmit'te ilk mesajdan sonra site sahibinin onaylaması gerekir
         showStatus('error', 'Mesaj formu henüz etkinleştirilmedi, mesajın iletilemedi. Şimdilik', true);
@@ -572,18 +574,14 @@ function setupReload() {
 // ---------- Fiyat paketlerindeki "Teklif al" ----------
 // İletişim formuna kaydırır ve mesaj alanı boşsa paket adını içeren bir mesaj yazar.
 function setupPlanCta() {
+  const paket = document.getElementById('f-paket');
   const mesaj = document.getElementById('f-mesaj');
   document.querySelectorAll('[data-paket]').forEach((a) => {
     a.addEventListener('click', () => {
+      // seçilen paket formda hazır seçili gelir, imleç ihtiyaçlar alanına geçer
+      if (paket) paket.value = a.dataset.paket;
       if (!mesaj) return;
-      if (!mesaj.value.trim()) {
-        mesaj.value = `Merhaba, "${a.dataset.paket}" paketi hakkında teklif almak istiyorum. Kısaca ihtiyacım şu:\n`;
-      }
-      // kaydırma bitince mesajın sonuna odaklan
-      setTimeout(() => {
-        mesaj.focus({ preventScroll: true });
-        mesaj.setSelectionRange(mesaj.value.length, mesaj.value.length);
-      }, 700);
+      setTimeout(() => mesaj.focus({ preventScroll: true }), 700);
     });
   });
 }

@@ -1,25 +1,32 @@
 # Bu dosya yönetim panelinden (/admin) düzenlenir.
-baslik: Neler yapıyorum?
-aciklama: İhtiyacına göre sıfırdan bir site, satış yapan bir mağaza ya da var olan sitenin bakımı.
+baslik: Hizmetlerim
+aciklama: İşini internete taşıyan, hızlı ve telefona uyumlu siteler. Sıfırdan bir site ya da var olan sitenin yenilenmesi.
 liste:
-  - ad: Web tasarım
-    ikon: tasarim
-    aciklama: Kendini, işini ya da projeni tanıtan; hızlı açılan ve telefonda rahat kullanılan modern bir site.
+  - ad: Kurumsal site
+    ikon: kurumsal
+    aciklama: Firmanı, hizmetlerini ve ekibini güven veren, profesyonel bir dille anlatan çok sayfalı site.
     maddeler:
-      - Sana özel tasarım
-      - Telefon, tablet ve bilgisayara uyumlu
+      - Hakkımızda, hizmetler ve iletişim sayfaları
+      - Firmana özel tasarım
       - İçeriği kendin düzenleyebileceğin panel
   - ad: E-ticaret
     ikon: eticaret
     aciklama: Ürünlerini sergileyip sipariş alabileceğin, düzenli ve güven veren bir mağaza sitesi.
     maddeler:
       - Ürün ve kategori sayfaları
-      - Sipariş ve iletişim akışı
+      - Sepet ve sipariş akışı
       - Ürün fotoğraflarının düzenlenmesi
-  - ad: Bakım ve destek
-    ikon: bakim
-    aciklama: Sitenin yayına alındıktan sonra da güncel, hızlı ve sorunsuz kalması için düzenli bakım.
+  - ad: İşletme sitesi
+    ikon: isletme
+    aciklama: Kafe, kuaför, atölye ya da mağaza gibi yerel işletmeler için müşterinin seni hemen bulduğu site.
     maddeler:
-      - İçerik ve görsel güncellemeleri
-      - Hata düzeltme
-      - Hız ve güvenlik kontrolleri
+      - Adres, harita ve çalışma saatleri
+      - Tek dokunuşla arama ve yol tarifi
+      - Menü, fiyat listesi ya da galeri
+  - ad: Site yenileme
+    ikon: yenileme
+    aciklama: Eski, yavaş ya da telefonda bozuk görünen siteni modern ve hızlı bir hâle getiriyorum.
+    maddeler:
+      - Yeni ve modern tasarım
+      - Telefona uyum ve hız iyileştirmesi
+      - İçeriklerin yeni siteye taşınması

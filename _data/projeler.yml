@@ -1,7 +1,13 @@
 aciklama: Hepsi canlı ve çalışıyor. Tıkla, dene.
 liste:
   - ad: Lazer Bahçesi
-    aciklama: Ahşap Dekorasyon Kutular ve Saat ürünleri sattığımız bir şirket
+    aciklama: Ahşap dekoratif kutu, saat ve isme özel hediye ürünleri sattığımız şirketin online mağazası.
+    ozellikler:
+      - Kategoriler, en çok satanlar ve indirimdeki ürünler
+      - İsme özel hediye için isim, tarih ve not yazma alanı
+      - Sepete ekle ve hemen al ile sipariş
+      - Üyelik, favoriler ve ürün arama
+      - WhatsApp ile hızlı iletişim
     etiketler:
       - JavaScript
       - Canvas API
@@ -11,7 +17,13 @@ liste:
     cizim: bahce
     kod: https://github.com/MuhammedHmz1453/lazer-bahcesi
   - ad: Oyunhane
-    aciklama: "İndirmeden tarayıcıda oynanan 12 oyunluk bir oyun salonu: Okey, Satranç ve Mangala'dan Boğaz'da vapur sürmeye kadar. Google ile giriş yapıp puan topluyor, puanlarla yeni oyunların kilidini açıyorsun; her gün başka bir oyun öne çıkıyor."
+    aciklama: "İndirmeden tarayıcıda oynanan bir oyun salonu: Okey, Satranç ve Mangala'dan Boğaz'da vapur sürmeye kadar."
+    ozellikler:
+      - 12 oyun, indirme gerektirmeden tarayıcıda
+      - Google ile giriş ve puan sistemi
+      - Puanlarla açılan kilitli oyunlar
+      - Her gün öne çıkan yeni bir oyun
+      - Telefonda ve bilgisayarda oynanabilir
     etiketler:
       - JavaScript
       - Canvas API

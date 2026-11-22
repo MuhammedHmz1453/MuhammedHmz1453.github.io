@@ -112,7 +112,7 @@
           <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
         </a>
         <a class="tube__link" href="#fiyatlar">
-          <span class="tube__text">Fiyatlar</span>
+          <span class="tube__text">Paketler</span>
           <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1"/></svg>
         </a>
         <a class="tube__link" href="#sss">
@@ -120,7 +120,7 @@
           <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
         </a>
         <a class="tube__link" href="#iletisim">
-          <span class="tube__text">İletişim</span>
+          <span class="tube__text">Teklif al</span>
           <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
         </a>
     </div>
@@ -143,6 +143,9 @@
     <section class="hero hero--full" aria-labelledby="hero-baslik">
       <div class="spot">
         <div class="spot__inner">
+          {%- if g.slogan and g.slogan != "" %}
+          <p class="spot__kicker"><i aria-hidden="true"></i>{{ g.slogan | escape }}</p>
+          {%- endif %}
           <h1 class="spot__title" id="hero-baslik">
             <span class="spot__line" style="--i: 0">{{ g.ad | escape }}</span>
             <span class="spot__line spot__line--serif" style="--i: 1">{{ g.soyad | escape }}</span>
@@ -151,8 +154,8 @@
           <p class="spot__lede">{{ g.giris | escape }}</p>
 
           <div class="spot__cta">
-            <a class="lg-btn lg-btn--xxl" href="#projeler">
-              <span>Projelerimi gör</span>
+            <a class="lg-btn lg-btn--xxl" href="#iletisim">
+              <span>Ücretsiz teklif al</span>
               <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg>
             </a>
 
@@ -237,18 +240,21 @@
     <section class="section container" id="hizmetler" aria-labelledby="hizmetler-baslik">
       <header class="section__head" data-reveal>
         <a class="anchor" href="#hizmetler">#hizmetler</a>
-        <h2 id="hizmetler-baslik">{{ hz.baslik | default: "Hizmetler" | escape }}</h2>
+        <h2 id="hizmetler-baslik">{{ hz.baslik | default: "Hizmetlerim" | escape }}</h2>
         {%- if hz.aciklama and hz.aciklama != "" %}
         <p class="section__sub">{{ hz.aciklama | escape }}</p>
         {%- endif %}
       </header>
 
-      <div class="services">
+      <div class="services services--{{ hz.liste.size }}">
         {%- for sv in hz.liste %}
-        <article class="service" data-reveal style="--i: {{ forloop.index0 | modulo: 3 }}">
+        <article class="service" data-reveal style="--i: {{ forloop.index0 | modulo: 4 }}">
           <span class="service__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24">
             {%- case sv.ikon -%}
+            {%- when "kurumsal" -%}<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>
+            {%- when "isletme" -%}<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/>
+            {%- when "yenileme" -%}<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>
             {%- when "eticaret" -%}<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
             {%- when "bakim" -%}<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
             {%- when "mobil" -%}<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>
@@ -336,6 +342,13 @@
           <div class="project__body">
             <h3>{{ p.ad | escape }}</h3>
             <p>{{ p.aciklama | escape }}</p>
+            {%- if p.ozellikler.size > 0 %}
+            <ul class="checklist project__features" aria-label="Öne çıkan özellikler">
+              {%- for o in p.ozellikler %}
+              <li>{{ o | escape }}</li>
+              {%- endfor %}
+            </ul>
+            {%- endif %}
             <div class="project__links">
               {%- if p.demo and p.demo != "" %}
               <a class="lg-btn lg-btn--xl" href="{{ p.demo | escape }}" target="_blank" rel="noopener">
@@ -352,12 +365,12 @@
 
     <!-- ============ FİYATLANDIRMA ============
          Paketler panelden (Fiyatlandırma) gelir. Fiyat boşsa "Teklif al" yazar.
-         "Teklif al" düğmesi iletişim formuna gider ve mesaja paket adını yazar. -->
+         "Teklif al" düğmesi teklif formuna gider ve paketi formda seçili hâle getirir. -->
     {%- if fy.paketler.size > 0 %}
     <section class="section container" id="fiyatlar" aria-labelledby="fiyatlar-baslik">
       <header class="section__head" data-reveal>
         <a class="anchor" href="#fiyatlar">#fiyatlar</a>
-        <h2 id="fiyatlar-baslik">{{ fy.baslik | default: "Fiyatlandırma" | escape }}</h2>
+        <h2 id="fiyatlar-baslik">{{ fy.baslik | default: "Paketlerim" | escape }}</h2>
         {%- if fy.aciklama and fy.aciklama != "" %}
         <p class="section__sub">{{ fy.aciklama | escape }}</p>
         {%- endif %}
@@ -454,7 +467,7 @@
         <!-- Mesajlar FormSubmit (formsubmit.co) ile doğrudan İletişim'deki e-posta adresine gelir.
              JS çalışmazsa form yine FormSubmit'e gönderilir ve siteye geri dönülür. Ayrıntı README.md'de. -->
         <form class="form" action="https://formsubmit.co/{{ i.eposta | escape }}" method="POST" data-contact-form novalidate data-reveal style="--i: 1">
-          <input type="hidden" name="_subject" value="Portfolyo sitesinden yeni mesaj">
+          <input type="hidden" name="_subject" value="Siteden yeni teklif talebi">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_next" value="{{ site.url }}/#iletisim">
@@ -470,9 +483,30 @@
             <input id="f-eposta" name="eposta" type="email" autocomplete="email" required>
             <p class="field__error" id="f-eposta-hata"></p>
           </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-hizmet">Hangi hizmet?</label>
+              <select id="f-hizmet" name="hizmet">
+                <option value="">Seç (isteğe bağlı)</option>
+                {%- for sv in hz.liste %}
+                <option>{{ sv.ad | escape }}</option>
+                {%- endfor %}
+                <option>Diğer</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-paket">Paket</label>
+              <select id="f-paket" name="paket">
+                <option value="">Henüz karar vermedim</option>
+                {%- for pk in fy.paketler %}
+                <option value="{{ pk.ad | escape }}">{{ pk.ad | escape }}{% if pk.fiyat and pk.fiyat != "" %} · {{ pk.fiyat | escape }}{% endif %}</option>
+                {%- endfor %}
+              </select>
+            </div>
+          </div>
           <div class="field">
-            <label for="f-mesaj">Mesajın</label>
-            <textarea id="f-mesaj" name="mesaj" rows="5" required></textarea>
+            <label for="f-mesaj">İhtiyaçların</label>
+            <textarea id="f-mesaj" name="mesaj" rows="5" required placeholder="Nasıl bir site istiyorsun? İşin ne, kaç sayfa olmalı, beğendiğin örnek siteler, ne zamana lazım..."></textarea>
             <p class="field__error" id="f-mesaj-hata"></p>
           </div>
           <div class="field field--check">
@@ -521,7 +555,7 @@
             </div>
             <p class="field__error" id="f-onay-hata"></p>
           </div>
-          <button class="lg-btn lg-btn--xl" type="submit" data-submit>Mesajı gönder</button>
+          <button class="lg-btn lg-btn--xl" type="submit" data-submit>Ücretsiz teklif iste</button>
           <p class="form__status" role="status" aria-live="polite"></p>
           <p class="form__note">Mesajın doğrudan bana ulaşır, sayfadan ayrılman gerekmez.</p>
         </form>
@@ -569,7 +603,7 @@
               <li><a href="#hakkimda">Hakkımda</a></li>
               <li><a href="#hizmetler">Hizmetler</a></li>
               <li><a href="#projeler">Projeler</a></li>
-              <li><a href="#fiyatlar">Fiyatlandırma</a></li>
+              <li><a href="#fiyatlar">Paketlerim</a></li>
               <li><a href="#sss">SSS</a></li>
             </ul>
           </div>
@@ -587,7 +621,7 @@
             <h2>İletişim</h2>
             <ul>
               <li><a href="mailto:{{ i.eposta | escape }}" data-copy-email title="Kopyalamak için tıkla">E-postamı kopyala</a></li>
-              <li><a href="#iletisim">İletişim formu</a></li>
+              <li><a href="#iletisim">Ücretsiz teklif al</a></li>
               {%- if wa != "" %}
               <li><a href="https://wa.me/{{ wa }}" target="_blank" rel="noopener">WhatsApp</a></li>
               {%- endif %}
