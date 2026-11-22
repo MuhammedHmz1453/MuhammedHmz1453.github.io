@@ -105,8 +105,8 @@
     /* ---------- Site içeriği: bölüm kartları ----------
        Paneldeki dosya listesi (tablo) renkli, simgeli ve açıklamalı kartlara dönüşür.
        Açıklamalar ve renkler sırayla verilir; sıra config.yml'deki "files" sırasıyla aynı:
-       1 Giriş, 2 Hakkımda, 3 Hizmetler, 4 Projeler, 5 Yetenekler, 6 Çalışma süreci,
-       7 Fiyatlandırma, 8 SSS, 9 İletişim. */
+       1 Giriş, 2 Hakkımda, 3 Hizmetler, 4 Projeler, 5 Yetenekler, 6 Fiyatlandırma,
+       7 SSS, 8 İletişim. */
     html body .list-container .list-view {
       padding: 8px clamp(16px, 2.4vw, 28px) 32px;
     }
@@ -207,10 +207,9 @@
     html body .list-container .list-view .sui.grid-row:nth-child(3) { --c: 280; --aciklama: "Verdiğin hizmetler: web tasarım, e-ticaret, bakım."; }
     html body .list-container .list-view .sui.grid-row:nth-child(4) { --c: 330; --aciklama: "Proje kartları: ad, açıklama, ekran görüntüsü ve canlı link."; }
     html body .list-container .list-view .sui.grid-row:nth-child(5) { --c: 168; --aciklama: "Kök saldı, büyüyor ve filizleniyor listeleri."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(6) { --c: 190; --aciklama: "Müşteriyle nasıl çalıştığını anlatan adımlar."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(7) { --c: 140; --aciklama: "Başlangıç paketleri; fiyat boşsa “Teklife göre” yazar."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(8) { --c: 230; --aciklama: "Sık sorulan sorular ve cevapları."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(9) { --c: 38; --aciklama: "E-posta, WhatsApp numarası ve sosyal medya linklerin."; }
+    html body .list-container .list-view .sui.grid-row:nth-child(6) { --c: 140; --aciklama: "Başlangıç paketleri; fiyat boşsa “Teklife göre” yazar."; }
+    html body .list-container .list-view .sui.grid-row:nth-child(7) { --c: 230; --aciklama: "Sık sorulan sorular ve cevapları."; }
+    html body .list-container .list-view .sui.grid-row:nth-child(8) { --c: 38; --aciklama: "E-posta, WhatsApp numarası ve sosyal medya linklerin."; }
     @media (prefers-reduced-motion: reduce) {
       html body .list-container .list-view .sui.grid-row,
       html body .list-container .list-view .sui.grid-row::after { transition: none; }

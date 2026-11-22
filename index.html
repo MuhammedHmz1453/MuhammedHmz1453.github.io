@@ -8,7 +8,7 @@
 {%- assign y = site.data.yetenekler -%}
 {%- assign i = site.data.iletisim -%}
 {%- assign hz = site.data.hizmetler -%}
-{%- assign sr = site.data.surec -%}
+
 {%- assign fy = site.data.fiyatlar -%}
 {%- assign sss = site.data.sss -%}
 {%- comment %} WhatsApp numarası: boşluk, tire, parantez ve + atılır; 0 ile başlıyorsa 9, 5 ile başlıyorsa 90 eklenir {% endcomment -%}
@@ -435,30 +435,6 @@
       </div>
     </section>
 
-    <!-- ============ ÇALIŞMA SÜRECİ ============
-         Adımlar panelden (Çalışma süreci) gelir. -->
-    {%- if sr.adimlar.size > 0 %}
-    <section class="section container" id="surec" aria-labelledby="surec-baslik">
-      <header class="section__head" data-reveal>
-        <a class="anchor" href="#surec">#surec</a>
-        <h2 id="surec-baslik">{{ sr.baslik | default: "Çalışma süreci" | escape }}</h2>
-        {%- if sr.aciklama and sr.aciklama != "" %}
-        <p class="section__sub">{{ sr.aciklama | escape }}</p>
-        {%- endif %}
-      </header>
-
-      <ol class="steps" style="--adim: {{ sr.adimlar.size }}">
-        {%- for a in sr.adimlar %}
-        <li class="step" data-reveal style="--i: {{ forloop.index0 }}">
-          <span class="step__no" aria-hidden="true">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>
-          <h3>{{ a.baslik | escape }}</h3>
-          <p>{{ a.aciklama | escape }}</p>
-        </li>
-        {%- endfor %}
-      </ol>
-    </section>
-    {%- endif %}
-
     <!-- ============ FİYATLANDIRMA ============
          Paketler panelden (Fiyatlandırma) gelir. Fiyat boşsa "Teklif al" yazar.
          "Teklif al" düğmesi iletişim formuna gider ve mesaja paket adını yazar. -->
@@ -678,7 +654,6 @@
               <li><a href="#hakkimda">Hakkımda</a></li>
               <li><a href="#hizmetler">Hizmetler</a></li>
               <li><a href="#projeler">Projeler</a></li>
-              <li><a href="#surec">Çalışma süreci</a></li>
               <li><a href="#fiyatlar">Fiyatlandırma</a></li>
               <li><a href="#sss">SSS</a></li>
             </ul>

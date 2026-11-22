@@ -176,26 +176,6 @@ collections:
             summary: "{{ad}}"
             fields: *yetenek
 
-      # ---------- Çalışma süreci ----------
-      - name: surec
-        icon: route
-        description: "Müşteriyle nasıl çalıştığını anlatan adımlar."
-        label: Çalışma süreci
-        file: _data/surec.yml
-        fields:
-          - { name: baslik, label: Bölüm başlığı, widget: string }
-          - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false }
-          - name: adimlar
-            label: Adımlar
-            label_singular: Adım
-            widget: list
-            collapsed: true
-            summary: "{{baslik}}"
-            hint: "Sırayla numaralanır (01, 02...). Sırasını tutup sürükleyerek değiştirebilirsin."
-            fields:
-              - { name: baslik, label: Adım adı, widget: string }
-              - { name: aciklama, label: Açıklama, widget: text }
-
       # ---------- Fiyatlandırma ----------
       - name: fiyatlar
         icon: sell

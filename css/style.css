@@ -2107,7 +2107,7 @@ body::before {
 .legal-footer__inner a:hover { color: var(--strong); }
 
 /* =========================================================
-   Hizmetler, Çalışma süreci, Fiyatlandırma, SSS
+   Hizmetler, Fiyatlandırma, SSS
    ========================================================= */
 
 /* Ortak: tikli liste */
@@ -2179,63 +2179,6 @@ body::before {
 .service:nth-child(3n) .service__icon { color: #ff7ab8; background: color-mix(in srgb, #ff4f9a 16%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, #ff4f9a 30%, transparent); }
 :root[data-theme="light"] .service:nth-child(3n+2) .service__icon { color: #1f6fd6; }
 :root[data-theme="light"] .service:nth-child(3n) .service__icon { color: #d02d79; }
-
-/* ---------- Çalışma süreci: numaralı adımlar ---------- */
-.steps {
-  position: relative;
-  display: grid;
-  gap: 18px;
-  padding: 0;
-  list-style: none;
-}
-.step {
-  position: relative;
-  padding: 0 0 0 64px;
-}
-.step__no {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #7c5cff, #4f63e8);
-  box-shadow: 0 10px 24px -12px rgba(124, 92, 255, .8);
-  color: #fff;
-  font: 600 .875rem var(--font-mono);
-  font-variation-settings: "wdth" 87.5;
-}
-/* telefonda adımlar alt alta, numaralar dikey çizgiyle bağlı */
-.step:not(:last-child)::before {
-  content: "";
-  position: absolute;
-  top: 48px;
-  bottom: -14px;
-  left: 21px;
-  width: 2px;
-  border-radius: 2px;
-  background: linear-gradient(var(--line), color-mix(in srgb, #7c5cff 40%, transparent), var(--line));
-}
-.step h3 { padding-top: 9px; font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em; color: var(--strong); }
-.step p { margin-top: 6px; padding-bottom: 14px; color: var(--muted); line-height: 1.6; }
-/* geniş ekranda yan yana, numaralar yatay çizgiyle bağlı */
-@media (min-width: 960px) {
-  .steps { grid-template-columns: repeat(var(--adim, 5), minmax(0, 1fr)); gap: 24px; }
-  .step { padding: 64px 0 0; }
-  .step:not(:last-child)::before {
-    top: 21px;
-    bottom: auto;
-    left: 52px;
-    right: -16px;
-    width: auto;
-    height: 2px;
-    background: linear-gradient(90deg, color-mix(in srgb, #7c5cff 50%, transparent), var(--line));
-  }
-  .step h3 { padding-top: 0; }
-  .step p { padding-bottom: 0; }
-}
 
 /* ---------- Fiyatlandırma: paket kartları ---------- */
 .plans { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); align-items: stretch; }
