@@ -686,43 +686,29 @@ body::before {
 .trust {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   text-align: left;
 }
-.trust__avatar {
+/* Yeşil "müsait" ışığı: hafifçe nabız atar */
+.trust__dot {
   position: relative;
   flex: none;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px var(--spot-bg), 0 0 0 3px color-mix(in srgb, var(--spot-ink) 45%, transparent);
-}
-.trust__avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-.trust__initials {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #27272a;
-  color: #fafafa;
-  font-weight: 700;
-  font-size: .875rem;
-}
-.trust__dot {
-  position: absolute;
-  right: -2px;
-  bottom: -2px;
-  width: 13px;
-  height: 13px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: #3ddc84;
-  box-shadow: 0 0 0 3px var(--spot-bg);
+  box-shadow: 0 0 0 4px color-mix(in srgb, #3ddc84 22%, transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .trust__dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #3ddc84;
+    animation: trust-pulse 2s ease-out infinite;
+  }
+  @keyframes trust-pulse { from { opacity: .6; transform: scale(1); } to { opacity: 0; transform: scale(2.8); } }
 }
 .trust__text b { display: block; font-weight: 600; font-size: .9375rem; color: var(--spot-ink); }
 .trust__text small { display: block; margin-top: 2px; font-size: .875rem; color: var(--spot-muted); }

@@ -43,14 +43,13 @@ collections:
           - { name: ad, label: Ad, widget: string, hint: "Giriş bölümündeki büyük başlığın ilk satırı. Örnek: Muhammed Hamza" }
           - { name: soyad, label: Soyad, widget: string, hint: "Başlığın ikinci satırı, eğik yazıyla." }
           - { name: unvan, label: Unvan, widget: string, hint: "Link paylaşımlarında (WhatsApp, Instagram) adının yanında görünür." }
-          - { name: durum_goster, label: Fotoğraflı durum satırını göster, widget: boolean, default: true }
-          - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Giriş bölümünde fotoğrafının yanındaki iki satır, aralarına “ · ” koy. Örnek: Web geliştirici · Yeni projeler için müsaitim" }
+          - { name: durum_goster, label: Durum satırını göster, widget: boolean, default: true }
+          - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Giriş bölümünde butonun yanındaki, yeşil ışıklı iki satır, aralarına “ · ” koy. Örnek: Web geliştirici · Yeni projeler için müsaitim" }
           - { name: slogan, label: Slogan, widget: string, required: false, hint: "Büyük başlığın üstündeki küçük etiket. Örnek: Muhammed Hamza Karaca · Web geliştirici" }
           - { name: baslik, label: Büyük başlık (1. satır), widget: string, required: false, hint: "Girişteki büyük başlık. Boş bırakırsan adın yazar. Örnek: İşletmen için modern" }
           - { name: baslik_vurgu, label: Büyük başlık (2. satır, eğik), widget: string, required: false, hint: "Örnek: web siteleri geliştiriyorum." }
           - { name: etiketler, label: Giriş etiketleri, label_singular: Etiket, widget: list, required: false, hint: "Giriş yazısının altındaki küçük etiketler. Örnek: E-Ticaret" }
           - { name: giris, label: Giriş cümlesi, widget: text, hint: "Adının altındaki 1–2 cümle. Hangi hizmetleri verdiğini açıkça yaz." }
-          - { name: profil_kucuk, label: Küçük profil fotoğrafı, widget: image, required: false, hint: "Giriş bölümünde düğmenin yanındaki yuvarlak fotoğraf. Yüzünün yakından göründüğü kare bir fotoğraf seç. Boş bırakırsan Hakkımda fotoğrafı kullanılır." }
           - { name: alt_yazi, label: Alt bilgi tanıtım cümlesi, widget: text, required: false, hint: "Sayfanın en altında logonun altındaki kısa tanıtım." }
           - { name: seo_aciklama, label: Arama motoru açıklaması, widget: text, hint: "Google sonuçlarında sitenin altında görünen kısa açıklama." }
 
