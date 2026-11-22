@@ -1,0 +1,34 @@
+# Bu dosya yönetim panelinden (/admin) düzenlenir.
+# "fiyat" boş bırakılırsa kartta "Teklife göre" yazar.
+baslik: Başlangıç paketleri
+aciklama: Her proje farklı; fiyat, ihtiyacına göre belirlenir. Paketi seç, sana özel teklif hazırlayayım.
+paketler:
+  - ad: Tanıtım sitesi
+    fiyat: ''
+    fiyat_notu: ''
+    aciklama: Kişiler, küçük işletmeler ve projeler için tek sayfalık ya da birkaç sayfalık site.
+    one_cikan: false
+    maddeler:
+      - Tek ya da birkaç sayfa
+      - Telefona uyumlu tasarım
+      - İletişim formu
+      - İçerik düzenleme paneli
+  - ad: E-ticaret sitesi
+    fiyat: ''
+    fiyat_notu: ''
+    aciklama: Ürünlerini sergileyip sipariş alabileceğin mağaza sitesi.
+    one_cikan: true
+    maddeler:
+      - Ürün ve kategori sayfaları
+      - Sipariş ve iletişim akışı
+      - Telefona uyumlu tasarım
+      - İçerik düzenleme paneli
+  - ad: Bakım paketi
+    fiyat: ''
+    fiyat_notu: ''
+    aciklama: Var olan sitenin güncel ve sorunsuz kalması için düzenli destek.
+    one_cikan: false
+    maddeler:
+      - İçerik ve görsel güncellemeleri
+      - Hata düzeltme
+      - Hız ve güvenlik kontrolleri

@@ -1,0 +1,25 @@
+# Bu dosya yönetim panelinden (/admin) düzenlenir.
+baslik: Neler yapıyorum?
+aciklama: İhtiyacına göre sıfırdan bir site, satış yapan bir mağaza ya da var olan sitenin bakımı.
+liste:
+  - ad: Web tasarım
+    ikon: tasarim
+    aciklama: Kendini, işini ya da projeni tanıtan; hızlı açılan ve telefonda rahat kullanılan modern bir site.
+    maddeler:
+      - Sana özel tasarım
+      - Telefon, tablet ve bilgisayara uyumlu
+      - İçeriği kendin düzenleyebileceğin panel
+  - ad: E-ticaret
+    ikon: eticaret
+    aciklama: Ürünlerini sergileyip sipariş alabileceğin, düzenli ve güven veren bir mağaza sitesi.
+    maddeler:
+      - Ürün ve kategori sayfaları
+      - Sipariş ve iletişim akışı
+      - Ürün fotoğraflarının düzenlenmesi
+  - ad: Bakım ve destek
+    ikon: bakim
+    aciklama: Sitenin yayına alındıktan sonra da güncel, hızlı ve sorunsuz kalması için düzenli bakım.
+    maddeler:
+      - İçerik ve görsel güncellemeleri
+      - Hata düzeltme
+      - Hız ve güvenlik kontrolleri

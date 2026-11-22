@@ -1,0 +1,14 @@
+# Bu dosya yönetim panelinden (/admin) düzenlenir.
+baslik: Nasıl çalışıyorum?
+aciklama: İlk mesajdan yayına kadar her adımda ne olacağını baştan bilirsin.
+adimlar:
+  - baslik: Tanışma
+    aciklama: Ne istediğini, kimlere hitap ettiğini ve beğendiğin örnekleri konuşuruz.
+  - baslik: Plan ve tasarım
+    aciklama: Sayfaları ve görünümü planlarım, onayını aldıktan sonra devam ederim.
+  - baslik: Geliştirme
+    aciklama: Siteyi kodlarım; ara aşamalarda bağlantı gönderir, geri bildirimini alırım.
+  - baslik: Yayına alma
+    aciklama: Son kontrollerden sonra siteyi yayına alır, panelin nasıl kullanılacağını gösteririm.
+  - baslik: Destek
+    aciklama: Yayından sonra da soruların ve güncelleme isteklerin için ulaşabilirsin.

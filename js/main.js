@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCardSpotlight();
   setupToTop();
   setupReload();
+  setupPlanCta();
 
   const year = document.querySelector('[data-year]');
   if (year) year.textContent = new Date().getFullYear();
@@ -496,7 +497,7 @@ function setupHeroGlow() {
 // ---------- Proje kartlarında imleci izleyen ışık ----------
 function setupCardSpotlight() {
   if (!window.matchMedia('(hover: hover)').matches) return;
-  document.querySelectorAll('.project, .stage').forEach((card) => {
+  document.querySelectorAll('.project, .stage, .service, .plan').forEach((card) => {
     card.addEventListener('pointermove', (e) => {
       const rect = card.getBoundingClientRect();
       card.style.setProperty('--x', `${e.clientX - rect.left}px`);
@@ -529,6 +530,25 @@ function setupReload() {
       e.preventDefault();
       if (location.hash) history.replaceState(null, '', location.pathname + location.search);
       location.reload();
+    });
+  });
+}
+
+// ---------- Fiyat paketlerindeki "Teklif al" ----------
+// İletişim formuna kaydırır ve mesaj alanı boşsa paket adını içeren bir mesaj yazar.
+function setupPlanCta() {
+  const mesaj = document.getElementById('f-mesaj');
+  document.querySelectorAll('[data-paket]').forEach((a) => {
+    a.addEventListener('click', () => {
+      if (!mesaj) return;
+      if (!mesaj.value.trim()) {
+        mesaj.value = `Merhaba, "${a.dataset.paket}" paketi hakkında teklif almak istiyorum. Kısaca ihtiyacım şu:\n`;
+      }
+      // kaydırma bitince mesajın sonuna odaklan
+      setTimeout(() => {
+        mesaj.focus({ preventScroll: true });
+        mesaj.setSelectionRange(mesaj.value.length, mesaj.value.length);
+      }, 700);
     });
   });
 }

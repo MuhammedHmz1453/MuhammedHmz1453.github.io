@@ -1,0 +1,16 @@
+# Bu dosya yönetim panelinden (/admin) düzenlenir.
+baslik: Sık sorulan sorular
+aciklama: Aklındaki soru burada yoksa bana yazman yeterli.
+sorular:
+  - soru: Bir site ne kadar sürede hazır olur?
+    cevap: Sitenin büyüklüğüne ve içeriklerin hazır olmasına göre değişir. Tanışma görüşmesinden sonra sana tahmini bir süre söylerim.
+  - soru: Fiyat neye göre belirleniyor?
+    cevap: Sayfa sayısına, istediğin özelliklere ve tasarımın kapsamına göre. Ne istediğini anlattıktan sonra sana özel bir teklif hazırlarım.
+  - soru: Siteyi daha sonra kendim güncelleyebilir miyim?
+    cevap: Evet. Yazıları, fotoğrafları ve projeleri kod bilmeden değiştirebileceğin bir yönetim paneli kuruyorum.
+  - soru: Site telefonda düzgün görünür mü?
+    cevap: Evet. Her siteyi telefon, tablet ve bilgisayarda ayrı ayrı deniyorum.
+  - soru: Alan adı (.com) ve barındırma ne olacak?
+    cevap: Hangi seçeneklerin sana uygun olduğunu birlikte konuşuruz; alan adı ve barındırmanın kurulumunda yardımcı olurum.
+  - soru: Site yayına alındıktan sonra destek veriyor musun?
+    cevap: Evet. Küçük düzeltmeler için bana her zaman yazabilirsin; düzenli güncellemeler için bakım paketi var.

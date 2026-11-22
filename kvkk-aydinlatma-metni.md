@@ -62,7 +62,8 @@ Kişisel verileriniz satılmaz, kiralanmaz ve reklam amacıyla kimseyle paylaş�
 | FormSubmit (formsubmit.co) | İletişim formundaki mesajın e-posta adresime iletilmesi | Ad, e-posta adresi, mesaj, IP adresi |
 | Google LLC (Gmail) | E-posta kutusu; mesajların alınması, saklanması ve yanıtlanması | Ad, e-posta adresi, mesaj ve yazışma içeriği |
 | Vercel Inc. | Sitenin barındırılması | Sunucu kayıtları (IP adresi, tarayıcı bilgisi, ziyaret edilen sayfa, tarih ve saat) |
-| GitHub, Inc. | Sitenin dosyalarının saklanması ve sitenin GitHub Pages üzerindeki kopyasının yayınlanması | Sitenin GitHub Pages kopyasını ziyaret ettiğinizde sunucu kayıtları |
+| GitHub, Inc. | Sitenin dosyalarının saklanması ve sitenin GitHub Pages üzerindeki kopyasının yayınlanması | Sitenin GitHub Pages kopyasını ziyaret ettiğinizde sunucu kayıtları |{% if site.data.iletisim.whatsapp and site.data.iletisim.whatsapp != "" %}
+| WhatsApp (Meta Platforms) | WhatsApp üzerinden bana yazmayı seçtiğinizde mesajlaşma | Telefon numarası, adınız, mesajlarınız |{% endif %}
 | Yetkili kamu kurum ve kuruluşları | Kanunen zorunlu hâllerde | Talep edilen veriler |
 
 **Yurt dışına aktarım:** Yukarıdaki hizmet sağlayıcıların sunucuları Türkiye dışında, ağırlıklı olarak Amerika Birleşik Devletleri'nde bulunmaktadır. Bu nedenle verileriniz KVKK'nın 9. maddesinde öngörülen şartlar çerçevesinde yurt dışına aktarılır. İletişim formu üzerinden gönderdiğiniz veriler, formdaki onay kutusuyla verdiğiniz **açık rızaya** dayanılarak aktarılır. Açık rıza vermek istemezseniz formu kullanmak zorunda değilsiniz; bana doğrudan <a class="legal__mail" href="mailto:{{ eposta }}" data-copy-email title="Kopyalamak için tıkla">{{ eposta }}</a> adresinden de ulaşabilirsiniz. Bu adres de Gmail altyapısını kullanır.

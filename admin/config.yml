@@ -71,6 +71,37 @@ collections:
               - { name: baslik, label: Başlık, widget: string, hint: "Örnek: Konum" }
               - { name: deger, label: Değer, widget: string, hint: "Örnek: Türkiye · uzaktan çalışmaya açık" }
 
+      # ---------- Hizmetler ----------
+      - name: hizmetler
+        icon: design_services
+        description: "Verdiğin hizmetler: web tasarım, e-ticaret, bakım."
+        label: Hizmetler
+        file: _data/hizmetler.yml
+        fields:
+          - { name: baslik, label: Bölüm başlığı, widget: string }
+          - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false }
+          - name: liste
+            label: Hizmetler
+            label_singular: Hizmet
+            widget: list
+            collapsed: true
+            summary: "{{ad}}"
+            fields:
+              - { name: ad, label: Hizmet adı, widget: string }
+              - name: ikon
+                label: Simge
+                widget: select
+                default: tasarim
+                options:
+                  - { label: "Ekran (web tasarım)", value: tasarim }
+                  - { label: "Sepet (e-ticaret)", value: eticaret }
+                  - { label: "İngiliz anahtarı (bakım)", value: bakim }
+                  - { label: "Telefon (mobil uyum)", value: mobil }
+                  - { label: "Büyüteç (arama motoru)", value: seo }
+                  - { label: "Şimşek (hız)", value: hiz }
+              - { name: aciklama, label: Açıklama, widget: text, hint: "1–2 cümle." }
+              - { name: maddeler, label: Neler var, label_singular: Madde, widget: list, required: false, hint: "Kartta tik işaretiyle görünür." }
+
       # ---------- Projeler ----------
       - name: projeler
         icon: work
@@ -145,6 +176,68 @@ collections:
             summary: "{{ad}}"
             fields: *yetenek
 
+      # ---------- Çalışma süreci ----------
+      - name: surec
+        icon: route
+        description: "Müşteriyle nasıl çalıştığını anlatan adımlar."
+        label: Çalışma süreci
+        file: _data/surec.yml
+        fields:
+          - { name: baslik, label: Bölüm başlığı, widget: string }
+          - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false }
+          - name: adimlar
+            label: Adımlar
+            label_singular: Adım
+            widget: list
+            collapsed: true
+            summary: "{{baslik}}"
+            hint: "Sırayla numaralanır (01, 02...). Sırasını tutup sürükleyerek değiştirebilirsin."
+            fields:
+              - { name: baslik, label: Adım adı, widget: string }
+              - { name: aciklama, label: Açıklama, widget: text }
+
+      # ---------- Fiyatlandırma ----------
+      - name: fiyatlar
+        icon: sell
+        description: "Başlangıç paketleri ve fiyatları."
+        label: Fiyatlandırma
+        file: _data/fiyatlar.yml
+        fields:
+          - { name: baslik, label: Bölüm başlığı, widget: string }
+          - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false }
+          - name: paketler
+            label: Paketler
+            label_singular: Paket
+            widget: list
+            collapsed: true
+            summary: "{{ad}}"
+            fields:
+              - { name: ad, label: Paket adı, widget: string }
+              - { name: aciklama, label: Kısa açıklama, widget: text }
+              - { name: fiyat, label: Fiyat, widget: string, required: false, hint: "Örnek: 5.000 TL ya da 5.000 TL'den başlayan. Boş bırakırsan kartta “Teklife göre” yazar." }
+              - { name: fiyat_notu, label: Fiyatın altındaki not, widget: string, required: false, hint: "Örnek: tek seferlik, aylık, KDV dahil" }
+              - { name: one_cikan, label: Öne çıkar (“Önerilen” etiketi), widget: boolean, default: false, required: false }
+              - { name: maddeler, label: Pakette neler var, label_singular: Madde, widget: list, required: false }
+
+      # ---------- SSS ----------
+      - name: sss
+        icon: help
+        description: "Sık sorulan sorular ve cevapları."
+        label: SSS
+        file: _data/sss.yml
+        fields:
+          - { name: baslik, label: Bölüm başlığı, widget: string }
+          - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false }
+          - name: sorular
+            label: Sorular
+            label_singular: Soru
+            widget: list
+            collapsed: true
+            summary: "{{soru}}"
+            fields:
+              - { name: soru, label: Soru, widget: string }
+              - { name: cevap, label: Cevap, widget: text }
+
       # ---------- İletişim ----------
       - name: iletisim
         icon: mail
@@ -155,6 +248,7 @@ collections:
           - { name: baslik, label: Başlık, widget: string }
           - { name: yazi, label: Yazı, widget: text }
           - { name: eposta, label: E-posta adresin, widget: string, hint: "Sitede görünür; iletişim formundan gelen mesajlar bu adrese gelir. Değiştirirsen yeni adres için FormSubmit’in gönderdiği onay e-postasını bir kere onaylaman gerekir." }
+          - { name: whatsapp, label: WhatsApp numarası, widget: string, required: false, hint: "Örnek: 0555 123 45 67. Yazarsan İletişim bölümünde “WhatsApp'tan yaz” düğmesi çıkar; boş bırakırsan çıkmaz. Numara sitede herkese açık olur." }
           - name: linkler
             label: Profil linkleri
             label_singular: Link

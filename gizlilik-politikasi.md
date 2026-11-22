@@ -43,7 +43,8 @@ Site, aşağıdaki hizmetlerin altyapısını kullanır. Bu hizmetlerin sunucula
 | Vercel | Sitenin barındırılması | [vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy) |
 | GitHub | Site dosyalarının saklanması, GitHub Pages kopyası | [GitHub Gizlilik Bildirimi](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement) |
 | FormSubmit | İletişim formundaki mesajların e-postama iletilmesi | [formsubmit.co](https://formsubmit.co) |
-| Google (Gmail) | Mesajların alınması ve yanıtlanması | [policies.google.com/privacy](https://policies.google.com/privacy) |
+| Google (Gmail) | Mesajların alınması ve yanıtlanması | [policies.google.com/privacy](https://policies.google.com/privacy) |{% if site.data.iletisim.whatsapp and site.data.iletisim.whatsapp != "" %}
+| WhatsApp | WhatsApp üzerinden yazmayı seçtiğinizde mesajlaşma | [whatsapp.com/legal/privacy-policy](https://www.whatsapp.com/legal/privacy-policy) |{% endif %}
 
 İletişim formunu kullanmadan önce, verilerinizin bu hizmetler aracılığıyla yurt dışına aktarılmasına formdaki onay kutusuyla açık rıza vermeniz istenir. Ayrıntılar [KVKK Aydınlatma Metni]({{ '/kvkk-aydinlatma-metni/' | relative_url }}) sayfasındadır.
 
