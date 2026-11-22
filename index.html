@@ -146,12 +146,24 @@
           {%- if g.slogan and g.slogan != "" %}
           <p class="spot__kicker"><i aria-hidden="true"></i>{{ g.slogan | escape }}</p>
           {%- endif %}
-          <h1 class="spot__title" id="hero-baslik">
+          <h1 class="spot__title{% if g.baslik and g.baslik != "" %} spot__title--cumle{% endif %}" id="hero-baslik">
+            {%- if g.baslik and g.baslik != "" %}
+            <span class="spot__line" style="--i: 0">{{ g.baslik | escape }}</span>
+            {%- if g.baslik_vurgu and g.baslik_vurgu != "" %}<span class="spot__line spot__line--serif" style="--i: 1">{{ g.baslik_vurgu | escape }}</span>{% endif %}
+            {%- else %}
             <span class="spot__line" style="--i: 0">{{ g.ad | escape }}</span>
             <span class="spot__line spot__line--serif" style="--i: 1">{{ g.soyad | escape }}</span>
+            {%- endif %}
           </h1>
 
           <p class="spot__lede">{{ g.giris | escape }}</p>
+          {%- if g.etiketler.size > 0 %}
+          <ul class="spot__tags" aria-label="Öne çıkan hizmetler">
+            {%- for e in g.etiketler %}
+            <li>{{ e | escape }}</li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
 
           <div class="spot__cta">
             <a class="lg-btn lg-btn--xxl" href="#iletisim">

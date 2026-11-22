@@ -632,6 +632,29 @@ body::before {
   text-wrap: balance;
 }
 .spot__line { display: block; }
+/* Başlık ad yerine bir cümleyse biraz küçülür, iki satıra sığar */
+.spot__title--cumle { font-size: clamp(2.15rem, 6.2vw, 5.25rem); letter-spacing: -0.035em; }
+.spot__title--cumle .spot__line--serif { font-size: 1.08em; }
+
+/* Girişteki hizmet etiketleri */
+.spot__tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 10px;
+  margin-top: 18px;
+  padding: 0;
+  list-style: none;
+}
+.spot__tags li {
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--strong) 6%, transparent);
+  color: var(--spot-ink, var(--strong));
+  font-size: .875rem;
+  font-weight: 600;
+}
 .spot__line--serif {
   font-family: var(--font-serif);
   font-style: italic;
@@ -1511,6 +1534,7 @@ body::before {
   .js .spot__kicker,
   .js .spot__line,
   .js .spot__lede,
+  .js .spot__tags,
   .js .spot__cta,
   .js .spot__band { opacity: 0; }
   .js.is-ready .spot__line {
@@ -1519,6 +1543,7 @@ body::before {
   }
   .js.is-ready .spot__kicker { animation: rise .5s cubic-bezier(.2, .7, .2, 1) both; }
   .js.is-ready .spot__lede { animation: rise .54s cubic-bezier(.2, .7, .2, 1) .27s both; }
+  .js.is-ready .spot__tags { animation: rise .54s cubic-bezier(.2, .7, .2, 1) .32s both; }
   .js.is-ready .spot__cta { animation: rise .54s cubic-bezier(.2, .7, .2, 1) .36s both; }
   .js.is-ready .spot__band { animation: fade .84s ease .51s both; }
 
