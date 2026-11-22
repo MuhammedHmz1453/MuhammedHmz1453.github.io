@@ -499,7 +499,12 @@
             {%- endfor %}
           </ul>
           {%- endif %}
+          {%- if wa != "" -%}
+          {%- capture wa_metin %}Merhaba, "{{ pk.ad }}"{% unless pk.ad contains "paket" %} paketi{% endunless %} hakkında teklif almak istiyorum.{% endcapture %}
+          <a class="lg-btn lg-btn--xl plan__cta" href="https://wa.me/{{ wa }}?text={{ wa_metin | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" aria-label="{{ pk.ad | escape }} paketi için WhatsApp'tan teklif al">
+          {%- else %}
           <a class="lg-btn lg-btn--xl plan__cta" href="#iletisim" data-paket="{{ pk.ad | escape }}">
+          {%- endif %}
             <span>Teklif al</span>
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg>
           </a>
