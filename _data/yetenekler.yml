@@ -1,8 +1,24 @@
 aciklama: "Yüzdelik çubuklar yerine dürüst bir sınıflandırma: neyi sağlam bildiğim, neyi kullanarak büyüttüğüm, neye yeni başladığım."
 kok_saldi:
-  - ad: Python
-    nerede: ''
-buyuyor:
   - ad: HTML
     nerede: ''
+  - ad: CSS
+    nerede: ''
+  - ad: JavaScript
+    nerede: ''
+  - ad: Python
+    nerede: ''
+  - ad: Node.js
+    nerede: ''
+  - ad: Jekyll
+    nerede: ''
+  - ad: Supabase
+    nerede: ''
+  - ad: Git
+    nerede: ''
+  - ad: GitHub
+    nerede: ''
+  - ad: Vercel
+    nerede: ''
+buyuyor: []
 filizleniyor: []
