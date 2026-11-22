@@ -320,6 +320,7 @@ function setupScrollSpy() {
   const bar = document.querySelector('.tube__bar');
   if (!bar) return;
   const lamp = bar.querySelector('.tube__lamp');
+  const light = lamp.querySelector('.tube__light');
   const links = [...bar.querySelectorAll('.tube__link')];
   const targets = links.map((a) => {
     const id = a.getAttribute('href').slice(1);
@@ -327,29 +328,41 @@ function setupScrollSpy() {
   });
   const reduce = prefersReducedMotion();
 
-  const STIFFNESS = 300;
-  const DAMPING = 30;
-  const s = { x: 0, w: 0, vx: 0, vw: 0, tx: 0, tw: 0 };
+  // Lamba yalnızca transform ile hareket eder (genişlik scaleX ile): her karede sayfa
+  // yeniden yerleşmez, iş ekran kartında (GPU) biter. Ölçüler önbellekte tutulur.
+  const BASE = 100;
+  let boxes = [];
+  const measure = () => {
+    boxes = links.map((a) => ({ x: a.offsetLeft, w: a.offsetWidth, y: a.offsetTop, h: a.offsetHeight }));
+  };
+
+  const STIFFNESS = 320;
+  const DAMPING = 32;
+  const s = { x: 0, w: BASE, vx: 0, vw: 0, tx: 0, tw: BASE };
   let frame = 0;
   let last = 0;
-  let active = null;
+  let active = -1;
   let placed = false;
 
   const draw = () => {
-    lamp.style.transform = `translateX(${s.x}px)`;
-    lamp.style.width = `${s.w}px`;
+    const k = s.w / BASE;
+    lamp.style.transform = `translate3d(${s.x}px,0,0) scaleX(${k})`;
+    light.style.transform = `translateX(-50%) scaleX(${1 / k})`;
   };
 
   const tick = (now) => {
     const dt = Math.min(0.032, (now - last) / 1000 || 0.016);
     last = now;
-    for (const [p, v, t] of [['x', 'vx', 'tx'], ['w', 'vw', 'tw']]) {
-      const a = -STIFFNESS * (s[p] - s[t]) - DAMPING * s[v];
-      s[v] += a * dt;
-      s[p] += s[v] * dt;
+    // yarım adımlarla hesapla: düşük kare hızında bile yay sarsılmaz
+    for (let n = 0; n < 2; n++) {
+      const h = dt / 2;
+      s.vx += (-STIFFNESS * (s.x - s.tx) - DAMPING * s.vx) * h;
+      s.x += s.vx * h;
+      s.vw += (-STIFFNESS * (s.w - s.tw) - DAMPING * s.vw) * h;
+      s.w += s.vw * h;
     }
-    const settled = Math.abs(s.x - s.tx) < 0.3 && Math.abs(s.w - s.tw) < 0.3
-      && Math.abs(s.vx) < 2 && Math.abs(s.vw) < 2;
+    const settled = Math.abs(s.x - s.tx) < 0.25 && Math.abs(s.w - s.tw) < 0.25
+      && Math.abs(s.vx) < 1.5 && Math.abs(s.vw) < 1.5;
     if (settled) {
       s.x = s.tx; s.w = s.tw; s.vx = 0; s.vw = 0;
       draw();
@@ -360,11 +373,13 @@ function setupScrollSpy() {
     frame = requestAnimationFrame(tick);
   };
 
-  const place = (link, instant) => {
-    s.tx = link.offsetLeft;
-    s.tw = link.offsetWidth;
-    lamp.style.top = `${link.offsetTop}px`;
-    lamp.style.height = `${link.offsetHeight}px`;
+  const place = (i, instant) => {
+    const b = boxes[i];
+    if (!b) return;
+    s.tx = b.x;
+    s.tw = b.w;
+    lamp.style.top = `${b.y}px`;
+    lamp.style.height = `${b.h}px`;
     if (instant || reduce || !placed) {
       if (frame) cancelAnimationFrame(frame);
       frame = 0;
@@ -380,62 +395,82 @@ function setupScrollSpy() {
     }
   };
 
-  const setActive = (link, instant = false) => {
-    if (!link) return;
-    if (link === active) {
-      if (instant) place(link, true);
+  const setActive = (i, instant = false) => {
+    if (i < 0) return;
+    if (i === active) {
+      if (instant) place(i, true);
       return;
     }
-    active = link;
-    links.forEach((a) => {
-      const on = a === link;
-      a.classList.toggle('is-active', on);
-      if (on) a.setAttribute('aria-current', 'true');
-      else a.removeAttribute('aria-current');
-    });
-    place(link, instant);
+    const prev = links[active];
+    active = i;
+    if (prev) {
+      prev.classList.remove('is-active');
+      prev.removeAttribute('aria-current');
+    }
+    links[i].classList.add('is-active');
+    links[i].setAttribute('aria-current', 'true');
+    place(i, instant);
   };
 
-  // Kaydırınca: ekranın üstten %40'ını geçen son bölüm aktif olur
+  // Kaydırınca: ekranın üstten %40'ındaki çizgiyi geçen son bölüm aktif olur.
+  // Konumları kaydırma sırasında ölçmek yerine IntersectionObserver kullanılır.
+  const above = new Set();
   let locked = false;
   let unlockTimer = 0;
-  const fromScroll = () => {
+  let docH = document.documentElement.scrollHeight;
+
+  const pick = () => {
     if (locked) return;
-    const line = window.innerHeight * 0.4;
     let index = 0;
-    targets.forEach((el, i) => {
-      if (el && el.getBoundingClientRect().top <= line) index = i;
-    });
-    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-    if (atBottom) index = targets.length - 1;
-    setActive(links[index]);
+    targets.forEach((el, i) => { if (el && above.has(el)) index = i; });
+    if (window.innerHeight + window.scrollY >= docH - 2) index = targets.length - 1;
+    setActive(index);
   };
+
+  const io = new IntersectionObserver((entries) => {
+    // gözlem alanı sayfanın çok yukarısından %40 çizgisine kadar uzanır:
+    // bölüm bu alana değiyorsa üst kenarı çizgiyi geçmiş demektir (hızlı atlamalarda da doğru kalır)
+    entries.forEach((e) => {
+      if (e.isIntersecting) above.add(e.target);
+      else above.delete(e.target);
+    });
+    pick();
+  }, { rootMargin: '100000px 0px -60% 0px' });
+  targets.forEach((el) => el && io.observe(el));
+
+  // sayfanın en altı: son bağlantı (bölümü kısa olsa bile) yansın
   let pending = false;
   window.addEventListener('scroll', () => {
     if (pending) return;
     pending = true;
-    requestAnimationFrame(() => { pending = false; fromScroll(); });
+    requestAnimationFrame(() => { pending = false; pick(); });
   }, { passive: true });
 
   // Tıklayınca: lamba hemen o bağlantıya geçer; kaydırma bitene kadar arada kalan bölümler onu çekmez
   const unlock = () => {
     clearTimeout(unlockTimer);
     locked = false;
-    fromScroll();
+    pick();
   };
-  links.forEach((a) => a.addEventListener('click', () => {
-    setActive(a);
+  links.forEach((a, i) => a.addEventListener('click', () => {
+    setActive(i);
     locked = true;
     clearTimeout(unlockTimer);
     unlockTimer = setTimeout(unlock, 1600);
   }));
   window.addEventListener('scrollend', () => { if (locked) unlock(); });
 
-  window.addEventListener('resize', () => active && place(active, true));
-  if (document.fonts) document.fonts.ready.then(() => active && place(active, true));
+  const refresh = () => {
+    measure();
+    docH = document.documentElement.scrollHeight;
+    if (active >= 0) place(active, true);
+  };
+  window.addEventListener('resize', refresh);
+  if ('ResizeObserver' in window) new ResizeObserver(() => { docH = document.documentElement.scrollHeight; }).observe(document.body);
+  if (document.fonts) document.fonts.ready.then(refresh);
 
-  setActive(links[0], true);
-  fromScroll();
+  measure();
+  setActive(0, true);
 }
 
 // ---------- Kaydırınca üst menüye gölge ----------
