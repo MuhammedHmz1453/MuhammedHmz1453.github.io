@@ -4,7 +4,7 @@ title: KVKK Aydınlatma Metni
 kisa_ad: KVKK Aydınlatma Metni
 sira: 1
 permalink: /kvkk-aydinlatma-metni/
-guncelleme: 16 Kasım 2026
+guncelleme: 22 Kasım 2026
 aciklama: 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında, bu sitede kişisel verilerin nasıl işlendiğine dair aydınlatma metni.
 ---
 {%- assign g = site.data.genel -%}
@@ -38,7 +38,7 @@ Site; üyelik, ödeme, reklam, ziyaretçi analizi (analytics) ya da takip amaçl
 ## 3. Kişisel verilerin işlenme amaçları
 
 - İletişim formu veya e-posta yoluyla ilettiğiniz mesajları almak, okumak ve yanıtlamak,
-- İş, staj, serbest proje ve iş birliği tekliflerini değerlendirmek ve bu konudaki görüşmeleri yürütmek,
+- Web sitesi teklif taleplerinizi değerlendirmek, size teklif hazırlamak ve proje görüşmelerini yürütmek,
 - Sitenin güvenli ve kesintisiz çalışmasını sağlamak; hata, kötüye kullanım ve istenmeyen mesajları (spam) tespit etmek ve önlemek,
 - Hukuki yükümlülükleri yerine getirmek ve yetkili kurumların kanuna dayalı taleplerini karşılamak.
 
@@ -48,7 +48,7 @@ Kişisel verileriniz; iletişim formu ve e-posta aracılığıyla **elektronik o
 
 Verileriniz, KVKK'nın 5. maddesinde sayılan aşağıdaki hukuki sebeplere dayanılarak işlenir:
 
-- **Sözleşmenin kurulması veya ifası (m. 5/2-c):** İş, proje ya da iş birliği teklifinize ilişkin görüşmeleri yürütmek için gerekli olan verileriniz,
+- **Sözleşmenin kurulması veya ifası (m. 5/2-c):** Teklif talebinize ve projenize ilişkin görüşmeleri yürütmek için gerekli olan verileriniz,
 - **Meşru menfaat (m. 5/2-f):** Temel hak ve özgürlüklerinize zarar vermemek kaydıyla, mesajlarınızı yanıtlayabilmek ve sitenin güvenliğini sağlayabilmek için gerekli olan verileriniz,
 - **Hukuki yükümlülük (m. 5/2-ç):** Kanunlardan doğan yükümlülükler gerektirdiğinde,
 - **Açık rıza (m. 9):** İletişim formu üzerinden gönderdiğiniz verilerin yurt dışına aktarılması için formdaki onay kutusuyla verdiğiniz açık rıza.
@@ -70,7 +70,7 @@ Kişisel verileriniz satılmaz, kiralanmaz ve reklam amacıyla kimseyle paylaş�
 
 ## 6. Saklama süresi
 
-- **İletişim mesajları ve yazışmalar:** Talebiniz sonuçlandıktan sonra en fazla **2 yıl** saklanır, ardından silinir. Bir iş ya da proje ilişkisi kurulursa, bu ilişki boyunca ve kanuni zamanaşımı süreleri kadar saklanabilir.
+- **İletişim mesajları ve yazışmalar:** Talebiniz sonuçlandıktan sonra en fazla **2 yıl** saklanır, ardından silinir. Birlikte bir proje yapılırsa, bu ilişki boyunca ve kanuni zamanaşımı süreleri kadar saklanabilir.
 - **Sunucu kayıtları:** Barındırma hizmet sağlayıcısının kendi politikasında belirlenen kısa süreler boyunca tutulur ve otomatik olarak silinir.
 
 Saklama süresi dolan veya işlenme sebebi ortadan kalkan veriler silinir ya da anonim hâle getirilir.

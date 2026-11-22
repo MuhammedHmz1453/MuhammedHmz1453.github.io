@@ -11,4 +11,8 @@ sorular:
   - soru: Alan adı (.com) ve barındırma ne olacak?
     cevap: Hangi seçeneklerin sana uygun olduğunu birlikte konuşuruz; alan adı ve barındırmanın kurulumunda yardımcı olurum.
   - soru: Site yayına alındıktan sonra destek veriyor musun?
-    cevap: Evet. Küçük düzeltmeler için bana her zaman yazabilirsin; düzenli güncellemeler için bakım paketi var.
+    cevap: Evet, aylık bakım hizmeti veriyorum. İçerik güncelleme, hata düzeltme, hız ve güvenlik kontrolleri bu hizmete dahildir. Bakım paket fiyatına dahil değildir; aylık ücretini ihtiyacına göre birlikte belirleriz.
+  - soru: Paket fiyatları aylık mı, tek seferlik mi?
+    cevap: Tek seferlik. Paket ücretini bir kez ödersin; yalnızca yayından sonra bakım istersen aylık ücret alınır.
+  - soru: E-ticaret sitesinde kartla online ödeme olacak mı?
+    cevap: Hayır. Paketlerde kartla online ödeme altyapısı yoktur. Müşterilerin ürünleri sitende inceleyip siparişlerini WhatsApp üzerinden iletir, ödemeyi havale/EFT ile yapar.

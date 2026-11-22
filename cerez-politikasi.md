@@ -4,7 +4,7 @@ title: Çerez Politikası
 kisa_ad: Çerez Politikası
 sira: 2
 permalink: /cerez-politikasi/
-guncelleme: 16 Kasım 2026
+guncelleme: 22 Kasım 2026
 aciklama: Bu sitede çerez ve benzeri tarayıcı depolama teknolojilerinin nasıl kullanıldığına dair bilgiler.
 ---
 {%- assign eposta = site.data.iletisim.eposta -%}

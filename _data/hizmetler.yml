@@ -14,7 +14,7 @@ liste:
     aciklama: Ürünlerini sergileyip sipariş alabileceğin, düzenli ve güven veren bir mağaza sitesi.
     maddeler:
       - Ürün ve kategori sayfaları
-      - Sepet ve sipariş akışı
+      - Siparişler WhatsApp ya da havale/EFT ile
       - Ürün fotoğraflarının düzenlenmesi
   - ad: İşletme sitesi
     ikon: isletme

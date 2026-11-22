@@ -2,10 +2,11 @@
 # "fiyat" boş bırakılırsa kartta "Teklife göre" yazar.
 baslik: Paketlerim
 aciklama: Sana uyan paketi seç, ihtiyacını yaz; sana özel ücretsiz teklif hazırlayayım.
+not: "Paket fiyatları tek seferliktir. Yayından sonraki bakım (içerik güncelleme, hata düzeltme, hız ve güvenlik kontrolleri) paketlere dahil değildir; isteyenlere aylık ücretle ayrıca verilir. E-ticaret sitelerinde kartla online ödeme altyapısı yoktur; siparişler WhatsApp ya da havale/EFT ile alınır."
 paketler:
   - ad: Başlangıç
     fiyat: 1.500 TL
-    fiyat_notu: ''
+    fiyat_notu: Tek seferlik
     aciklama: Yeni başlayan işletmeler ve kişiler için tek sayfalık tanıtım sitesi.
     one_cikan: false
     maddeler:
@@ -15,7 +16,7 @@ paketler:
       - Hızlı açılan sayfa
   - ad: Profesyonel
     fiyat: 3.500 TL
-    fiyat_notu: ''
+    fiyat_notu: Tek seferlik
     aciklama: Kurumsal ya da işletme sitesi isteyenler için çok sayfalı, sana özel site.
     one_cikan: true
     maddeler:
@@ -25,11 +26,11 @@ paketler:
       - Arama motorları için temel ayarlar
   - ad: Premium
     fiyat: 5.000 TL
-    fiyat_notu: ''
-    aciklama: E-ticaret ya da kapsamlı bir site ve yayından sonra düzenli destek.
+    fiyat_notu: Tek seferlik
+    aciklama: E-ticaret sitesi ya da kapsamlı bir site isteyenler için.
     one_cikan: false
     maddeler:
       - Profesyonel paketteki her şey
-      - Ürün, kategori ve sipariş sayfaları
-      - Yayından sonra bakım ve destek
+      - Ürün ve kategori sayfaları
+      - Siparişler WhatsApp ya da havale/EFT ile (kartla online ödeme yok)
       - Öncelikli iletişim

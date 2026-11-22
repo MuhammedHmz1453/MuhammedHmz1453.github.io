@@ -2102,6 +2102,32 @@ body::before {
   color: var(--strong);
 }
 .plan__price small { color: var(--muted); font-size: .875rem; }
+/* Paketlerin altındaki açıklama: ödeme ve bakım bilgisi */
+.plans__note {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  max-width: 860px;
+  margin-top: 24px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+.plans__note svg {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  fill: none;
+  stroke: #8b7bff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .plan .checklist { margin-bottom: 26px; }
 .plan__cta { margin-top: auto; align-self: flex-start; }
 .plan--featured {

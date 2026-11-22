@@ -4,7 +4,7 @@ title: Gizlilik Politikası
 kisa_ad: Gizlilik Politikası
 sira: 3
 permalink: /gizlilik-politikasi/
-guncelleme: 16 Kasım 2026
+guncelleme: 22 Kasım 2026
 aciklama: Bu sitede hangi bilgilerin toplandığı, nasıl kullanıldığı ve korunduğuna dair gizlilik politikası.
 ---
 {%- assign g = site.data.genel -%}
@@ -29,7 +29,7 @@ Bu gizlilik politikası, **{{ tam_ad }}** tarafından yayımlanan **{{ site.url 
 ## 2. Bilgiler nasıl kullanılır?
 
 - Mesajlarınızı okumak ve yanıtlamak,
-- İş, proje ve iş birliği tekliflerini değerlendirmek,
+- Teklif taleplerinizi değerlendirmek ve size teklif hazırlamak,
 - Sitenin güvenli ve sorunsuz çalışmasını sağlamak, spam ve kötüye kullanımı önlemek.
 
 Bilgileriniz **satılmaz, kiralanmaz, reklam için kullanılmaz** ve izniniz olmadan bülten ya da tanıtım e-postası göndermek için kullanılmaz.

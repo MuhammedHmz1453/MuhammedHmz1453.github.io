@@ -44,7 +44,7 @@ collections:
           - { name: soyad, label: Soyad, widget: string, hint: "Başlığın ikinci satırı, eğik yazıyla." }
           - { name: unvan, label: Unvan, widget: string, hint: "Link paylaşımlarında (WhatsApp, Instagram) adının yanında görünür." }
           - { name: durum_goster, label: Fotoğraflı durum satırını göster, widget: boolean, default: true }
-          - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Giriş bölümünde fotoğrafının yanındaki iki satır, aralarına “ · ” koy. Örnek: Junior web geliştirici · İş ve projelere açığım" }
+          - { name: durum, label: Durum satırı, widget: string, required: false, hint: "Giriş bölümünde fotoğrafının yanındaki iki satır, aralarına “ · ” koy. Örnek: Web geliştirici · Yeni projeler için müsaitim" }
           - { name: slogan, label: Slogan, widget: string, required: false, hint: "Büyük başlığın üstündeki küçük etiket. Örnek: Muhammed Hamza Karaca · Web geliştirici" }
           - { name: baslik, label: Büyük başlık (1. satır), widget: string, required: false, hint: "Girişteki büyük başlık. Boş bırakırsan adın yazar. Örnek: İşletmen için modern" }
           - { name: baslik_vurgu, label: Büyük başlık (2. satır, eğik), widget: string, required: false, hint: "Örnek: web siteleri geliştiriyorum." }
@@ -193,6 +193,7 @@ collections:
         fields:
           - { name: baslik, label: Bölüm başlığı, widget: string }
           - { name: aciklama, label: Bölüm açıklaması, widget: text, required: false }
+          - { name: not, label: Paketlerin altındaki not, widget: text, required: false, hint: "Ödeme şekli, bakım ücreti gibi açıklamalar. Örnek: Paket fiyatları tek seferliktir; bakım aylık ücretle ayrıca verilir." }
           - name: paketler
             label: Paketler
             label_singular: Paket

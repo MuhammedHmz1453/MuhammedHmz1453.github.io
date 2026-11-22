@@ -422,6 +422,9 @@
         </article>
         {%- endfor %}
       </div>
+      {%- if fy.not and fy.not != "" %}
+      <p class="plans__note" data-reveal><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>{{ fy.not | escape }}</span></p>
+      {%- endif %}
     </section>
     {%- endif %}
 
@@ -563,13 +566,13 @@
                   </span>
                 </span>
               </label>
-              <label class="check__text" for="f-onay"><a href="{{ '/kvkk-aydinlatma-metni/' | relative_url }}" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>’ni okudum. Mesajımın yanıtlanabilmesi için verilerimin yurt dışındaki hizmet sağlayıcılara (FormSubmit, Google) aktarılmasına açık rıza veriyorum.</label>
+              <label class="check__text" for="f-onay"><a href="{{ '/kvkk-aydinlatma-metni/' | relative_url }}" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>’ni okudum. Talebimin yanıtlanabilmesi için verilerimin yurt dışındaki hizmet sağlayıcılara (FormSubmit, Google) aktarılmasına açık rıza veriyorum.</label>
             </div>
             <p class="field__error" id="f-onay-hata"></p>
           </div>
           <button class="lg-btn lg-btn--xl" type="submit" data-submit>Ücretsiz teklif iste</button>
           <p class="form__status" role="status" aria-live="polite"></p>
-          <p class="form__note">Mesajın doğrudan bana ulaşır, sayfadan ayrılman gerekmez.</p>
+          <p class="form__note">Talebin doğrudan bana ulaşır, sayfadan ayrılman gerekmez. Teklif ücretsizdir ve seni hiçbir şeye bağlamaz.</p>
         </form>
       </div>
     </section>
