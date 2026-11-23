@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupToTop();
   setupReload();
   setupAutoUpdate();
+  setupSelects();
   setupPlanCta();
 
   const year = document.querySelector('[data-year]');
@@ -566,13 +567,155 @@ function setupReload() {
 
 // ---------- Fiyat paketlerindeki "Teklif al" ----------
 // İletişim formuna kaydırır ve mesaj alanı boşsa paket adını içeren bir mesaj yazar.
+// ---------- Teklif formundaki seçim kutuları ----------
+// Tarayıcının sade açılır listesi yerine sitenin tasarımında, animasyonlu bir liste.
+// Asıl <select> gizli olarak formda kalır (değer oradan gönderilir); klavyeyle
+// (ok tuşları, Enter, Esc, Home/End, harfle arama) ve ekran okuyucuyla kullanılabilir.
+const SELECT_IKONLARI = {
+  kurumsal: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
+  eticaret: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
+  isletme: '<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/>',
+  yenileme: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
+  diger: '<circle cx="12" cy="12" r="10"/><path d="M8 12h.01M12 12h.01M16 12h.01"/>',
+  paket: '<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.29 7 12 12l8.71-5"/>',
+  bos: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/>',
+};
+const svgIkon = (ad) => `<svg viewBox="0 0 24 24" aria-hidden="true">${SELECT_IKONLARI[ad] || SELECT_IKONLARI.paket}</svg>`;
+
+function setupSelects() {
+  document.querySelectorAll('.field select').forEach((select, n) => {
+    const label = document.querySelector(`label[for="${select.id}"]`);
+    const wrap = document.createElement('div');
+    wrap.className = 'dd';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dd__btn';
+    btn.id = `${select.id}-dd`;
+    btn.setAttribute('aria-haspopup', 'listbox');
+    btn.setAttribute('aria-expanded', 'false');
+    const list = document.createElement('ul');
+    list.className = 'dd__list';
+    list.id = `${select.id}-liste`;
+    list.setAttribute('role', 'listbox');
+    list.tabIndex = -1;
+    btn.setAttribute('aria-controls', list.id);
+    if (label) {
+      label.id = label.id || `${select.id}-etiket`;
+      btn.setAttribute('aria-labelledby', `${label.id} ${btn.id}`);
+      list.setAttribute('aria-labelledby', label.id);
+      label.htmlFor = btn.id; // etikete tıklayınca liste düğmesi odaklansın
+    }
+
+    const opts = [...select.options].map((o, i) => {
+      const li = document.createElement('li');
+      li.id = `${select.id}-sec-${i}`;
+      li.className = 'dd__opt' + (o.value === '' ? ' dd__opt--bos' : '');
+      li.setAttribute('role', 'option');
+      li.dataset.value = o.value;
+      const isPaket = select.name === 'paket';
+      const ikon = o.value === '' ? 'bos' : (o.dataset.ikon || (o.text === 'Diğer' ? 'diger' : (isPaket ? 'paket' : 'paket')));
+      const ad = isPaket && o.value ? o.value : o.text;
+      li.innerHTML = `<span class="dd__icon">${svgIkon(ikon)}</span><span class="dd__text">${ad}</span>`
+        + (o.dataset.fiyat ? `<span class="dd__price">${o.dataset.fiyat}</span>` : '')
+        + '<svg class="dd__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+      list.append(li);
+      return li;
+    });
+
+    select.classList.add('dd__native');
+    select.tabIndex = -1;
+    select.setAttribute('aria-hidden', 'true');
+    select.before(wrap);
+    wrap.append(btn, list, select);
+
+    let active = -1;
+    const render = () => {
+      const i = select.selectedIndex < 0 ? 0 : select.selectedIndex;
+      const o = opts[i];
+      btn.innerHTML = `<span class="dd__icon">${o.querySelector('.dd__icon').innerHTML}</span>`
+        + `<span class="dd__val${select.value === '' ? ' is-empty' : ''}">${o.querySelector('.dd__text').textContent}</span>`
+        + '<svg class="dd__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+      opts.forEach((li, k) => li.setAttribute('aria-selected', String(k === i)));
+    };
+    const setActive = (i) => {
+      active = Math.max(0, Math.min(opts.length - 1, i));
+      opts.forEach((li, k) => li.classList.toggle('is-active', k === active));
+      list.setAttribute('aria-activedescendant', opts[active].id);
+      opts[active].scrollIntoView({ block: 'nearest' });
+    };
+    const open = () => {
+      if (wrap.classList.contains('is-open')) return;
+      document.querySelectorAll('.dd.is-open').forEach((d) => d !== wrap && d.dispatchEvent(new Event('dd-kapat')));
+      // altta yer yoksa (telefonda alttaki menü dahil) liste yukarı doğru açılır
+      const r = btn.getBoundingClientRect();
+      const altMenu = window.innerWidth < 768 ? 100 : 16;
+      const listH = Math.min(300, list.scrollHeight + 2);
+      const asagi = window.innerHeight - r.bottom - altMenu;
+      wrap.classList.toggle('dd--up', asagi < listH + 8 && r.top > asagi);
+      wrap.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      setActive(select.selectedIndex < 0 ? 0 : select.selectedIndex);
+      list.focus({ preventScroll: true });
+    };
+    const close = (focusBtn = true) => {
+      if (!wrap.classList.contains('is-open')) return;
+      wrap.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      if (focusBtn) btn.focus({ preventScroll: true });
+    };
+    const choose = (i) => {
+      select.selectedIndex = i;
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      close();
+      wrap.classList.remove('is-picked');
+      void wrap.offsetWidth; // seçim animasyonu her seferinde baştan oynasın
+      wrap.classList.add('is-picked');
+    };
+
+    wrap.addEventListener('dd-kapat', () => close(false));
+    btn.addEventListener('click', () => (wrap.classList.contains('is-open') ? close() : open()));
+    btn.addEventListener('keydown', (e) => {
+      if (['ArrowDown', 'ArrowUp', 'Enter', ' '].includes(e.key)) { e.preventDefault(); open(); }
+    });
+    opts.forEach((li, i) => {
+      li.addEventListener('click', () => choose(i));
+      li.addEventListener('pointermove', () => { if (active !== i) setActive(i); });
+    });
+    let aranan = '';
+    let aramaZamani = 0;
+    list.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
+      else if (e.key === 'Home') { e.preventDefault(); setActive(0); }
+      else if (e.key === 'End') { e.preventDefault(); setActive(opts.length - 1); }
+      else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active); }
+      else if (e.key === 'Escape') { e.preventDefault(); close(); }
+      else if (e.key === 'Tab') { close(false); }
+      else if (e.key.length === 1) {
+        const now = Date.now();
+        aranan = (now - aramaZamani > 700 ? '' : aranan) + e.key.toLocaleLowerCase('tr');
+        aramaZamani = now;
+        const k = opts.findIndex((li) => li.textContent.trim().toLocaleLowerCase('tr').startsWith(aranan));
+        if (k >= 0) setActive(k);
+      }
+    });
+    document.addEventListener('pointerdown', (e) => { if (!wrap.contains(e.target)) close(false); });
+    select.addEventListener('change', render);
+    select.form && select.form.addEventListener('reset', () => setTimeout(render));
+    render();
+  });
+}
+
 function setupPlanCta() {
   const paket = document.getElementById('f-paket');
   const mesaj = document.getElementById('f-mesaj');
   document.querySelectorAll('[data-paket]').forEach((a) => {
     a.addEventListener('click', () => {
       // seçilen paket formda hazır seçili gelir, imleç ihtiyaçlar alanına geçer
-      if (paket) paket.value = a.dataset.paket;
+      if (paket) {
+        paket.value = a.dataset.paket;
+        paket.dispatchEvent(new Event('change', { bubbles: true }));
+      }
       if (!mesaj) return;
       setTimeout(() => mesaj.focus({ preventScroll: true }), 700);
     });

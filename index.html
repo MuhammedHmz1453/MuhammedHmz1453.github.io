@@ -486,7 +486,7 @@
               <select id="f-hizmet" name="hizmet">
                 <option value="">Seç (isteğe bağlı)</option>
                 {%- for sv in hz.liste %}
-                <option>{{ sv.ad | escape }}</option>
+                <option data-ikon="{{ sv.ikon | escape }}">{{ sv.ad | escape }}</option>
                 {%- endfor %}
                 <option>Diğer</option>
               </select>
@@ -496,7 +496,7 @@
               <select id="f-paket" name="paket">
                 <option value="">Henüz karar vermedim</option>
                 {%- for pk in fy.paketler %}
-                <option value="{{ pk.ad | escape }}">{{ pk.ad | escape }}{% if pk.fiyat and pk.fiyat != "" %} · {{ pk.fiyat | escape }}{% endif %}</option>
+                <option value="{{ pk.ad | escape }}" data-fiyat="{{ pk.fiyat | escape }}">{{ pk.ad | escape }}{% if pk.fiyat and pk.fiyat != "" %} · {{ pk.fiyat | escape }}{% endif %}</option>
                 {%- endfor %}
               </select>
             </div>
