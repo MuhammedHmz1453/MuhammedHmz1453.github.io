@@ -488,28 +488,6 @@ function setupHeaderShadow() {
 function setupHeroGlow() {
   if (prefersReducedMotion() || !window.matchMedia('(hover: hover)').matches) return;
 
-  // Ana sayfa: ekranı kaplayan katman; fare sitenin neresindeyse ışık orada yayılır
-  const glow = document.querySelector('.cursor-glow');
-  if (glow) {
-    let frame = 0;
-    let x = 0;
-    let y = 0;
-    window.addEventListener('pointermove', (e) => {
-      x = e.clientX;
-      y = e.clientY;
-      if (frame) return;
-      frame = requestAnimationFrame(() => {
-        frame = 0;
-        glow.style.setProperty('--mx', `${x}px`);
-        glow.style.setProperty('--my', `${y}px`);
-        glow.classList.add('is-on');
-      });
-    }, { passive: true });
-    document.documentElement.addEventListener('pointerleave', () => glow.classList.remove('is-on'));
-    window.addEventListener('blur', () => glow.classList.remove('is-on'));
-    return;
-  }
-
   // 404 sayfası: ışık pencerenin içinde
   const box = document.querySelector('.hero__window');
   if (!box) return;
@@ -535,11 +513,25 @@ function setupHeroGlow() {
 function setupCardSpotlight() {
   if (!window.matchMedia('(hover: hover)').matches) return;
   document.querySelectorAll('.project, .service, .plan').forEach((card) => {
+    // konum kart üzerine gelince bir kez ölçülür; güncelleme karede en çok bir kez yapılır
+    let rect = null;
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    card.addEventListener('pointerenter', () => { rect = card.getBoundingClientRect(); });
     card.addEventListener('pointermove', (e) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--x', `${e.clientX - rect.left}px`);
-      card.style.setProperty('--y', `${e.clientY - rect.top}px`);
-    });
+      if (!rect) rect = card.getBoundingClientRect();
+      x = e.clientX - rect.left;
+      y = e.clientY - rect.top;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+      });
+    }, { passive: true });
+    card.addEventListener('pointerleave', () => { rect = null; });
+    window.addEventListener('scroll', () => { rect = null; }, { passive: true });
   });
 }
 

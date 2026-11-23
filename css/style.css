@@ -344,7 +344,7 @@ body::before {
 
 /* ---------- Sıvı cam düğmeler (liquid glass) ----------
    Sitedeki bütün düğmeler. Şeffaf zemin, kenarlarda cam parlaması (iç gölgeler),
-   arkasında içeriği büken SVG filtresi (#container-glass), üzerine gelince büyüme.
+   arkasında hafif yarı saydam zemin, üzerine gelince büyüme.
    Koyu zeminde açık, açık zeminde koyu parlama kullanılır. */
 :root {
   --glass-shadow-dark: 0 0 8px rgba(0, 0, 0, .03), 0 2px 6px rgba(0, 0, 0, .08), inset 3px 3px .5px -3.5px rgba(255, 255, 255, .09), inset -3px -3px .5px -3.5px rgba(255, 255, 255, .85), inset 1px 1px 1px -.5px rgba(255, 255, 255, .6), inset -1px -1px 1px -.5px rgba(255, 255, 255, .6), inset 0 0 6px 6px rgba(255, 255, 255, .12), inset 0 0 2px 2px rgba(255, 255, 255, .06), 0 0 12px rgba(0, 0, 0, .15);
@@ -391,18 +391,17 @@ body::before {
   border-radius: inherit;
   box-shadow: var(--glass-shadow);
   pointer-events: none;
-  transition: all .3s;
+  transition: box-shadow .3s;
 }
-/* Arkadaki içeriği büken cam (Chrome ve Edge'de görünür) */
+/* Camın zemini: hafif yarı saydam katman. (Eskiden arkadaki içeriği SVG filtresiyle
+   büküyordu; her karede yeniden hesaplandığı için bilgisayarı yoruyordu.) */
 .lg-btn::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -2;
-  overflow: hidden;
   border-radius: inherit;
-  -webkit-backdrop-filter: url("#container-glass");
-  backdrop-filter: url("#container-glass");
+  background: color-mix(in srgb, var(--glass-ink) 6%, transparent);
   pointer-events: none;
 }
 .lg-btn:hover { transform: scale(1.05); }
@@ -1562,21 +1561,6 @@ body::before {
   }
   .hero__window.is-pointer::after { opacity: 1; }
 
-  /* Ana sayfa: fare ışığı tüm ekranı kaplayan katmanda; sitenin her yerinde
-     imlecin etrafında yayılır */
-  .cursor-glow {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .06), transparent 70%);
-    opacity: 0;
-    transition: opacity .3s;
-  }
-  :root[data-theme="light"] .cursor-glow {
-    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(124, 92, 255, .12), transparent 70%);
-  }
-  .cursor-glow.is-on { opacity: 1; }
 
   /* Kaydırınca beliren öğeler */
   .reveal-on [data-reveal] { opacity: 0; }
@@ -1605,8 +1589,8 @@ body::before {
   to { opacity: 1; transform: none; }
 }
 @keyframes blur-rise {
-  from { opacity: 0; transform: translateY(.25em); filter: blur(14px); }
-  to { opacity: 1; transform: none; filter: blur(0); }
+  from { opacity: 0; transform: translateY(.25em); }
+  to { opacity: 1; transform: none; }
 }
 @keyframes fade {
   from { opacity: 0; }
@@ -1764,6 +1748,7 @@ body::before {
   background: var(--primary);
   opacity: 0;
   transition: opacity .4s;
+  animation-play-state: paused;
 }
 .neon-checkbox__borders span:nth-child(1) { top: 0; left: -100%; animation: hk-border-flow-1 2s linear infinite; }
 .neon-checkbox__borders span:nth-child(2) { top: -100%; right: 0; width: 1px; height: 40px; animation: hk-border-flow-2 2s linear infinite; }
@@ -1812,7 +1797,7 @@ body::before {
 }
 .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__check { stroke-dashoffset: 0; transform: scale(1.1); }
 .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__glow { opacity: .2; }
-.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__borders span { opacity: 1; }
+.neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__borders span { opacity: 1; animation-play-state: running; }
 .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__particles span { opacity: 1; animation: hk-particle-explosion .6s ease-out forwards; }
 .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__rings span { opacity: 1; animation-name: hk-ring-pulse; animation-duration: .6s; animation-timing-function: ease-out; animation-fill-mode: forwards; }
 .neon-checkbox input:checked + .neon-checkbox__frame .neon-checkbox__sparks span { opacity: 1; animation: hk-spark-flash .6s ease-out forwards; }
