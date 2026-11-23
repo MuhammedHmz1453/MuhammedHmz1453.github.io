@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupToTop();
   setupReload();
   setupAutoUpdate();
+  setupLangSwitch();
   setupSelects();
   setupPlanCta();
 
@@ -811,5 +812,54 @@ function setupAutoUpdate() {
   window.addEventListener('focus', check);
   window.addEventListener('pageshow', (e) => { if (e.persisted) check(); });
   setInterval(check, 60000);
+}
+
+// ---------- Dil değiştirme animasyonu ----------
+// TR/EN düğmesine basınca düğmeden başlayan mor-mavi bir daire ekranı kaplar ve
+// gidilecek dilin adı belirir; yeni sayfa açılınca daire aynı noktaya doğru çekilir.
+// Bulunduğun bölüm korunur (Projeler'deysen öteki dilde de Projeler açılır).
+const BOLUMLER = { tr: ['hakkimda', 'hizmetler', 'projeler', 'fiyatlar', 'sss', 'iletisim'], en: ['about', 'services', 'projects', 'packages', 'faq', 'contact'] };
+function setupLangSwitch() {
+  const links = document.querySelectorAll('[data-lang-link]');
+  if (!links.length) return;
+  const reduce = prefersReducedMotion();
+  let gidiyor = false;
+
+  links.forEach((link) => link.addEventListener('click', (e) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0 || gidiyor) return;
+    e.preventDefault();
+    gidiyor = true;
+    const hedefDil = (link.getAttribute('hreflang') || link.lang || '').slice(0, 2) === 'en' ? 'en' : 'tr';
+    let url = link.href.split('#')[0];
+    // ana sayfadaysak açık olan bölümü öteki dilde de aç
+    const aktif = document.querySelector('.tube__link.is-active');
+    if (aktif) {
+      const k = BOLUMLER[DIL].indexOf(aktif.getAttribute('href').slice(1));
+      if (k >= 0) url += `#${BOLUMLER[hedefDil][k]}`;
+    }
+    const r = link.getBoundingClientRect();
+    const x = ((r.left + r.width / 2) / window.innerWidth) * 100;
+    const y = ((r.top + r.height / 2) / window.innerHeight) * 100;
+    const yazi = hedefDil === 'en' ? 'English' : 'Türkçe';
+    if (reduce) { location.href = url; return; }
+    try { sessionStorage.setItem('dil-gecis', JSON.stringify({ x, y, yazi })); } catch (err) { /* gizli sekme */ }
+
+    const perde = document.createElement('div');
+    perde.className = 'dil-perde';
+    perde.style.setProperty('--dg-x', `${x}%`);
+    perde.style.setProperty('--dg-y', `${y}%`);
+    perde.innerHTML = `<span>${yazi}</span>`;
+    document.body.append(perde);
+    perde.getBoundingClientRect();
+    perde.classList.add('is-on');
+    setTimeout(() => { location.href = url; }, 520);
+  }));
+
+  // Geri tuşuyla bu sayfaya dönülürse (tarayıcı hafızasından) perde kalmasın
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    gidiyor = false;
+    document.querySelectorAll('.dil-perde').forEach((p) => p.remove());
+  });
 }
 

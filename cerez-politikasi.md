@@ -32,7 +32,7 @@ Bu politika, **{{ site.url | remove: "https://" }}** adresindeki sitede ("Site")
 
 Bu kayıt yalnızca sizin tarayıcınızda durur, bana ya da başka birine gönderilmez ve kimliğinizi belirleyen bir bilgi içermez. Tema düğmesine hiç basmazsanız oluşturulmaz. Tamamen sizin isteğinizle oluşan bu işlevsel kayıt için ayrıca onay istenmez.
 
-Site ayrıca sayfanın en güncel sürümünü kendiliğinden yükleyebilmek için tarayıcınızın oturum depolamasına (sessionStorage) kısa süreliğine bir sürüm numarası yazar. Bu kayıt kişisel veri içermez ve sekmeyi kapattığınızda silinir.
+Site ayrıca sayfanın en güncel sürümünü kendiliğinden yükleyebilmek için tarayıcınızın oturum depolamasına (sessionStorage) kısa süreliğine bir sürüm numarası yazar; dil değiştirdiğinizde de geçiş animasyonu için bir saniyeden kısa süreliğine bir kayıt tutulur. Bu kayıtlar kişisel veri içermez ve sekmeyi kapattığınızda silinir.
 
 ## Üçüncü taraflar
 

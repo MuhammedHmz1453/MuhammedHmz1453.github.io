@@ -32,7 +32,7 @@ Cookies are small text files that the websites you visit store in your browser. 
 
 This entry stays only in your browser, is not sent to me or anyone else, and does not contain any information that identifies you. It is not created if you never press the theme button. As this functional entry is created entirely at your request, no separate consent is asked for it.
 
-The Site also briefly stores a version number in your browser's session storage (sessionStorage) to load the latest version of the page automatically. It contains no personal data and is deleted when you close the tab.
+The Site also briefly stores a version number in your browser's session storage (sessionStorage) to load the latest version of the page automatically; when you switch languages, an entry for the transition animation is kept for less than a second. These entries contain no personal data and are deleted when you close the tab.
 
 ## Third parties
 

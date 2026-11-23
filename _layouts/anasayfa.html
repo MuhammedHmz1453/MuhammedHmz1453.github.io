@@ -70,6 +70,21 @@
     // Animasyonlar için: JS çalışıyor. Bir sorun olursa 2 sn sonra her şey yine görünür.
     document.documentElement.classList.add('js');
     setTimeout(function () { document.documentElement.classList.add('is-ready'); }, 2000);
+    // Dil değiştirildiyse sayfa renkli perdenin arkasında açılır, perde sonra çekilir
+    try {
+      var dg = sessionStorage.getItem('dil-gecis');
+      if (dg) {
+        sessionStorage.removeItem('dil-gecis');
+        dg = JSON.parse(dg);
+        var kok = document.documentElement;
+        kok.classList.add('dil-gelis');
+        kok.style.scrollBehavior = 'auto'; // bölüme yumuşak kaydırma yerine anında atla, perde kaymasın
+        kok.style.setProperty('--dg-x', dg.x + '%');
+        kok.style.setProperty('--dg-y', dg.y + '%');
+        kok.style.setProperty('--dg-yazi', JSON.stringify(String(dg.yazi)));
+        setTimeout(function () { kok.classList.remove('dil-gelis'); kok.style.scrollBehavior = ''; }, 1100);
+      }
+    } catch (e) {}
     try {
       var t = localStorage.getItem('tema');
       if (t === 'acik' || t === 'koyu') document.documentElement.dataset.theme = t === 'koyu' ? 'dark' : 'light';

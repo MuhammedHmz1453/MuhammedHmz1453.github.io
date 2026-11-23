@@ -2478,3 +2478,35 @@ body::before {
     white-space: nowrap;
   }
 }
+
+/* ---------- Dil değiştirme animasyonu ----------
+   Çıkış: düğmeden büyüyen daire (.dil-perde). Giriş: yeni sayfa perdenin arkasında açılır,
+   perde aynı noktaya doğru küçülerek çekilir (html.dil-gelis::after). */
+.dil-perde,
+html.dil-gelis body::after {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(60% 60% at 30% 25%, rgba(255, 255, 255, .18), transparent 70%),
+    linear-gradient(135deg, #7c5cff, #4f63e8);
+  color: #fff;
+  font: 700 clamp(2.4rem, 8vw, 5rem)/1 var(--font-display, sans-serif);
+  letter-spacing: -.04em;
+  pointer-events: none;
+}
+.dil-perde {
+  clip-path: circle(0% at var(--dg-x, 50%) var(--dg-y, 0%));
+  transition: clip-path .52s cubic-bezier(.7, 0, .25, 1);
+}
+.dil-perde.is-on { clip-path: circle(150% at var(--dg-x, 50%) var(--dg-y, 0%)); }
+.dil-perde span { opacity: 0; transform: translateY(16px) scale(.96); transition: opacity .3s ease .2s, transform .45s cubic-bezier(.2, .8, .2, 1) .2s; }
+.dil-perde.is-on span { opacity: 1; transform: none; }
+html.dil-gelis body::after {
+  content: var(--dg-yazi, "");
+  clip-path: circle(150% at var(--dg-x, 50%) var(--dg-y, 0%));
+  animation: dil-perde-cek .65s cubic-bezier(.7, 0, .25, 1) .3s forwards;
+}
+@keyframes dil-perde-cek { to { clip-path: circle(0% at var(--dg-x, 50%) var(--dg-y, 0%)); } }
