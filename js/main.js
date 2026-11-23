@@ -511,7 +511,7 @@ function setupHeroGlow() {
 
 // ---------- Proje kartlarında imleci izleyen ışık ----------
 function setupCardSpotlight() {
-  if (!window.matchMedia('(hover: hover)').matches) return;
+  if (!window.matchMedia('(any-hover: hover)').matches) return;
   document.querySelectorAll('.project, .service, .plan').forEach((card) => {
     // konum kart üzerine gelince bir kez ölçülür; güncelleme karede en çok bir kez yapılır
     let rect = null;

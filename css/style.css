@@ -2225,16 +2225,23 @@ body::before {
 :root[data-theme="light"] :is(.project, .service, .plan, .plans__note, .faq, .form) {
   --lift-shadow: 0 30px 50px -30px rgba(60, 40, 140, .35), 0 14px 24px -18px rgba(60, 40, 140, .22);
 }
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  .project:hover, .service:hover, .plan:hover {
-    transform: translateY(-8px);
-    border-color: color-mix(in srgb, #7c5cff 45%, var(--line));
-    box-shadow: var(--lift-shadow);
-  }
-  .plans__note:hover, .faq:hover, .form:hover, .form:focus-within {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, #7c5cff 35%, var(--line));
-    box-shadow: var(--lift-shadow);
-  }
-  .plan--featured:hover { box-shadow: 0 40px 64px -28px rgba(124, 92, 255, .85), 0 14px 24px -18px rgba(0, 0, 0, .45); }
+/* Tüm cihazlarda çalışır (dokunmatik ekranlı dizüstüler dahil); bilgisayarda "animasyonları
+   azalt" açıksa kalkma yine olur ama geçiş anlık olur. */
+.project:hover, .service:hover, .plan:hover {
+  transform: translateY(-10px);
+  border-color: color-mix(in srgb, #7c5cff 50%, var(--line));
+  box-shadow: var(--lift-shadow);
+}
+.plans__note:hover, .faq:hover, .form:hover, .form:focus-within {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, #7c5cff 40%, var(--line));
+  box-shadow: var(--lift-shadow);
+}
+.plan--featured:hover { box-shadow: 0 40px 64px -28px rgba(124, 92, 255, .85), 0 14px 24px -18px rgba(0, 0, 0, .45); }
+@media (hover: none) {
+  /* telefonda dokununca kart havada takılı kalmasın */
+  .project:hover, .service:hover, .plan:hover, .plans__note:hover, .faq:hover, .form:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project, .service, .plan, .plans__note, .faq, .form { transition-duration: .01s; }
 }
