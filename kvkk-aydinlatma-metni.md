@@ -85,7 +85,7 @@ Veri sorumlusuna başvurarak:
 4. Yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme,
 5. Eksik veya yanlış işlenmişse düzeltilmesini isteme,
 6. KVKK'nın 7. maddesinde öngörülen şartlar çerçevesinde silinmesini veya yok edilmesini isteme,
-7. 5. ve 6. maddeler uyarınca yapılan işlemlerin, verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,
+7. 5 ve 6. maddeler uyarınca yapılan işlemlerin, verilerin aktarıldığı üçüncü kişilere bildirilmesini isteme,
 8. İşlenen verilerin münhasıran otomatik sistemler vasıtasıyla analiz edilmesi suretiyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme,
 9. Kanuna aykırı işleme sebebiyle zarara uğramanız hâlinde zararın giderilmesini talep etme
 
