@@ -33,8 +33,14 @@ liste:
     gorsel: /assets/uploads/oyunhane.jpg
     cizim: duz
     kod: ''
-  - ad: Hamza Karaca
-    aciklama: Şu an baktığın site. Kendimi tanıttım
+  - ad: MHK
+    aciklama: Şu an baktığın site. Web sitesi hizmetlerimi, paketlerimi ve projelerimi tanıttığım kişisel sitem.
+    ozellikler:
+      - Hizmetler, paketler ve ücretsiz teklif formu
+      - Teklif talepleri doğrudan e-postama geliyor
+      - Kod bilmeden içerik düzenleme paneli
+      - Koyu ve açık tema, telefona uyumlu tasarım
+      - KVKK, çerez ve gizlilik metinleri
     etiketler:
       - HTML
       - CSS Grid
