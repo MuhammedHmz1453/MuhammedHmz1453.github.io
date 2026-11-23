@@ -40,6 +40,7 @@ collections:
         file: _data/genel.yml
         fields:
           - { name: site_adi, label: Site adı, widget: string, required: false, hint: "Tarayıcı sekmesinde, menüdeki logonun yanında ve sayfanın en altında görünür. Örnek: Hamza Karaca" }
+          - { name: logo_yazi, label: Logodaki yazı, widget: string, required: false, hint: "Sol üstte logonun yanındaki kısa yazı. Örnek: MHK" }
           - { name: ad, label: Ad, widget: string, hint: "Giriş bölümündeki büyük başlığın ilk satırı. Örnek: Muhammed Hamza" }
           - { name: soyad, label: Soyad, widget: string, hint: "Başlığın ikinci satırı, eğik yazıyla." }
           - { name: unvan, label: Unvan, widget: string, hint: "Link paylaşımlarında (WhatsApp, Instagram) adının yanında görünür." }

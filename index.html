@@ -84,7 +84,7 @@
     <div class="topbar container">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Sayfayı yenile" data-reload>
         <img class="nav__mark" src="assets/logo.svg" alt="" width="30" height="30">
-        <span>{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}</span>
+        <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
     </div>
   </header>

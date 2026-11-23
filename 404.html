@@ -49,7 +49,7 @@ permalink: /404.html
     <div class="topbar container">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön">
         <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="30" height="30">
-        <span>{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}</span>
+        <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
       <button class="lg-btn lg-btn--icon theme-toggle" type="button" aria-label="Koyu temaya geç" data-theme-toggle>
         <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-moon"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
