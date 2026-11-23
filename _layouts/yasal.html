@@ -13,8 +13,8 @@
   <meta name="description" content="{{ page.aciklama | default: page.title | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   <meta name="theme-color" content="#0c0a1a">
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=2" sizes="48x48">
-  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=2" type="image/svg+xml">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=3" sizes="48x48">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=3" type="image/svg+xml">
   <link rel="preload" href="{{ '/assets/fonts/figtree-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/css/fonts.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
@@ -31,7 +31,7 @@
   <header class="site-header">
     <div class="topbar container">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön">
-        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}" alt="" width="30" height="30">
+        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=3" alt="" width="30" height="30">
         <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ site_adi | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
       <button class="lg-btn lg-btn--icon theme-toggle" type="button" aria-label="Açık temaya geç" data-theme-toggle>
