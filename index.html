@@ -83,7 +83,7 @@
   <header class="site-header">
     <div class="topbar container">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Sayfayı yenile" data-reload>
-        <img class="nav__mark" src="assets/logo.svg?v=3" alt="" width="30" height="30">
+        <img class="nav__mark" src="assets/logo.svg?v=3" alt="" width="40" height="40">
         <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
     </div>
@@ -578,7 +578,7 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a class="footer__logo" href="#" aria-label="Sayfanın başına dön">
-            <img src="assets/logo.svg?v=3" alt="" width="36" height="36" loading="lazy">
+            <img src="assets/logo.svg?v=3" alt="" width="44" height="44" loading="lazy">
             <span>{{ g.site_adi | default: tam_ad | escape }}</span>
           </a>
           {%- if g.alt_yazi and g.alt_yazi != "" %}

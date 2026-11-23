@@ -31,7 +31,7 @@
   <header class="site-header">
     <div class="topbar container">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön">
-        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=3" alt="" width="30" height="30">
+        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=3" alt="" width="40" height="40">
         <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ site_adi | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
       <button class="lg-btn lg-btn--icon theme-toggle" type="button" aria-label="Açık temaya geç" data-theme-toggle>
