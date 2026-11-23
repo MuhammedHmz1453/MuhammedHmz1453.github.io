@@ -92,7 +92,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  scroll-padding-top: 0; /* bölüm ekranın en üstünden başlar; menüye yer bölümün kendi iç boşluğundan */
   -webkit-text-size-adjust: 100%;
   /* Sağdaki kaydırma çubuğu gizli; sayfa tekerlek, dokunma ve klavyeyle kaymaya devam eder */
   scrollbar-width: none;
@@ -1622,7 +1622,7 @@ body::before {
 .hero__name--small { font-size: clamp(1.75rem, 6.4vw, 4.75rem); line-height: 1; }
 
 @media (max-width: 767px) {
-  html { scroll-padding-top: 16px; }
+  html { scroll-padding-top: 0; }
 }
 
 /* Başa dön linki */
