@@ -39,6 +39,7 @@
   --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-display: "Sora", "Figtree", system-ui, sans-serif;
 
   /* Giriş bölümü ve menü (her iki temada da koyu) */
   --spot-bg: #0c0a1a;
@@ -633,8 +634,28 @@ body::before {
 }
 .spot__line { display: block; }
 /* Başlık ad yerine bir cümleyse biraz küçülür, iki satıra sığar */
-.spot__title--cumle { font-size: clamp(2.15rem, 6.2vw, 5.25rem); letter-spacing: -0.035em; }
-.spot__title--cumle .spot__line--serif { font-size: 1.08em; }
+.spot__title--cumle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5.6vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+/* ikinci satır: aynı yazı tipi, mor-mavi renk geçişi */
+.spot__title--cumle .spot__line--serif {
+  padding-bottom: .08em; /* ş, ğ, y gibi harflerin kuyruğu kesilmesin */
+  font-family: inherit;
+  font-style: normal;
+  font-weight: inherit;
+  font-size: 1em;
+  line-height: inherit;
+  letter-spacing: inherit;
+  background: linear-gradient(90deg, #a08bff, #5b74ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root[data-theme="light"] .spot__title--cumle .spot__line--serif { background-image: linear-gradient(90deg, #6a4cff, #3346d6); }
 
 /* Girişteki hizmet etiketleri */
 .spot__tags {
