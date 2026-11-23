@@ -256,8 +256,8 @@ function setupContactForm() {
         body: JSON.stringify({
           Ad: name,
           email,
-          Hizmet: (form.hizmet && form.hizmet.value) || 'Belirtilmedi',
-          Paket: (form.paket && form.paket.value) || 'Henüz karar vermedi',
+          Hizmet: (form.hizmet && form.hizmet.value) || 'Seçilmedi',
+          Paket: (form.paket && form.paket.value) || 'Seçilmedi',
           'İhtiyaçlar': message,
           'KVKK onayı': `Aydınlatma metni okundu, yurt dışına aktarıma açık rıza verildi (${new Date().toLocaleString('tr-TR')})`,
           _replyto: email,
@@ -576,7 +576,6 @@ const SELECT_IKONLARI = {
   eticaret: '<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>',
   isletme: '<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/>',
   yenileme: '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>',
-  diger: '<circle cx="12" cy="12" r="10"/><path d="M8 12h.01M12 12h.01M16 12h.01"/>',
   paket: '<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12M3.29 7 12 12l8.71-5"/>',
   bos: '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/>',
 };
@@ -610,10 +609,11 @@ function setupSelects() {
       const li = document.createElement('li');
       li.id = `${select.id}-sec-${i}`;
       li.className = 'dd__opt' + (o.value === '' ? ' dd__opt--bos' : '');
+      if (o.value === '') li.hidden = true; // "Seç" yalnızca kutuda yazar, listede seçenek olarak çıkmaz
       li.setAttribute('role', 'option');
       li.dataset.value = o.value;
       const isPaket = select.name === 'paket';
-      const ikon = o.value === '' ? 'bos' : (o.dataset.ikon || (o.text === 'Diğer' ? 'diger' : (isPaket ? 'paket' : 'paket')));
+      const ikon = o.value === '' ? 'bos' : (o.dataset.ikon || 'paket');
       const ad = isPaket && o.value ? o.value : o.text;
       li.innerHTML = `<span class="dd__icon">${svgIkon(ikon)}</span><span class="dd__text">${ad}</span>`
         + (o.dataset.fiyat ? `<span class="dd__price">${o.dataset.fiyat}</span>` : '')
@@ -637,8 +637,9 @@ function setupSelects() {
         + '<svg class="dd__chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
       opts.forEach((li, k) => li.setAttribute('aria-selected', String(k === i)));
     };
+    const ilk = opts.findIndex((li) => !li.hidden);
     const setActive = (i) => {
-      active = Math.max(0, Math.min(opts.length - 1, i));
+      active = Math.max(ilk, Math.min(opts.length - 1, i));
       opts.forEach((li, k) => li.classList.toggle('is-active', k === active));
       list.setAttribute('aria-activedescendant', opts[active].id);
       opts[active].scrollIntoView({ block: 'nearest' });
@@ -686,7 +687,7 @@ function setupSelects() {
     list.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1); }
       else if (e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1); }
-      else if (e.key === 'Home') { e.preventDefault(); setActive(0); }
+      else if (e.key === 'Home') { e.preventDefault(); setActive(ilk); }
       else if (e.key === 'End') { e.preventDefault(); setActive(opts.length - 1); }
       else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(active); }
       else if (e.key === 'Escape') { e.preventDefault(); close(); }
@@ -695,7 +696,7 @@ function setupSelects() {
         const now = Date.now();
         aranan = (now - aramaZamani > 700 ? '' : aranan) + e.key.toLocaleLowerCase('tr');
         aramaZamani = now;
-        const k = opts.findIndex((li) => li.textContent.trim().toLocaleLowerCase('tr').startsWith(aranan));
+        const k = opts.findIndex((li) => !li.hidden && li.textContent.trim().toLocaleLowerCase('tr').startsWith(aranan));
         if (k >= 0) setActive(k);
       }
     });
