@@ -17,7 +17,7 @@ backend:
 app_title: Hamza Karaca · Panel
 logo:
   src: /assets/logo.svg
-display_url: https://hamzakaraca.vercel.app
+display_url: https://mhkaraca.vercel.app
 
 # Bu sitede sayfa önizlemesi yok; düzenleme ekranı tam genişlikte açılsın
 editor:
