@@ -2,5 +2,19 @@
   "framework": "jekyll",
   "installCommand": "bundle install",
   "buildCommand": "bundle exec jekyll build",
-  "outputDirectory": "_site"
+  "outputDirectory": "_site",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "hamzakaraca.vercel.app" }],
+      "destination": "https://mhkaraca.vercel.app/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "muhammedhamzakaraca.vercel.app" }],
+      "destination": "https://mhkaraca.vercel.app/:path*",
+      "permanent": true
+    }
+  ]
 }
