@@ -888,7 +888,6 @@ body::before {
   border-radius: var(--card-r);
   transition: transform .35s cubic-bezier(.2, .7, .2, 1), border-color .25s;
 }
-.project:hover { transform: translateY(-4px); }
 
 /* İmleci izleyen ışık: yüzeyde hafif parıltı, kenarda parlak bir çizgi */
 .project::before,
@@ -1564,8 +1563,10 @@ body::before {
 
   /* Kaydırınca beliren öğeler */
   .reveal-on [data-reveal] { opacity: 0; }
+  /* "backwards": animasyon bitince transform serbest kalır, kartların üzerine gelince kalkma efekti çalışır */
   .reveal-on [data-reveal].is-visible {
-    animation: rise .54s cubic-bezier(.2, .7, .2, 1) both;
+    opacity: 1;
+    animation: rise .54s cubic-bezier(.2, .7, .2, 1) backwards;
     animation-delay: calc(var(--i, 0) * 72ms);
   }
 
@@ -2012,7 +2013,6 @@ body::before {
   background: var(--surface);
   transition: transform .35s cubic-bezier(.2, .7, .2, 1), border-color .25s, box-shadow .25s;
 }
-.service:hover, .plan:hover { transform: translateY(-4px); }
 .service h3, .plan h3 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -2201,7 +2201,7 @@ body::before {
   .tube__link { padding: 8px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .service:hover, .plan:hover, .whatsapp-btn:hover { transform: none; }
+  .whatsapp-btn:hover { transform: none; }
 }
 
 /* Tablet ve küçük bilgisayarda menü sol üstteki site adının üstüne binmesin: sadece logo kalır */
@@ -2211,3 +2211,30 @@ body::before {
 
 /* Proje kartında öne çıkan özellikler */
 .project__features { margin-top: 16px; }
+
+/* ---------- Kartlar: üzerine gelince yumuşakça kalkar ----------
+   Gölge derinleşir, kenar mor parlar. Yalnızca fareli cihazlarda (dokunmatikte
+   dokununca takılı kalmasın) ve hareket azaltma kapalıyken. */
+.project, .service, .plan, .plans__note, .faq, .form {
+  --lift-shadow: 0 30px 50px -30px rgba(0, 0, 0, .7), 0 14px 24px -18px rgba(0, 0, 0, .5);
+  transition:
+    transform .45s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .45s cubic-bezier(.2, .8, .2, 1),
+    border-color .3s ease;
+}
+:root[data-theme="light"] :is(.project, .service, .plan, .plans__note, .faq, .form) {
+  --lift-shadow: 0 30px 50px -30px rgba(60, 40, 140, .35), 0 14px 24px -18px rgba(60, 40, 140, .22);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .project:hover, .service:hover, .plan:hover {
+    transform: translateY(-8px);
+    border-color: color-mix(in srgb, #7c5cff 45%, var(--line));
+    box-shadow: var(--lift-shadow);
+  }
+  .plans__note:hover, .faq:hover, .form:hover, .form:focus-within {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, #7c5cff 35%, var(--line));
+    box-shadow: var(--lift-shadow);
+  }
+  .plan--featured:hover { box-shadow: 0 40px 64px -28px rgba(124, 92, 255, .85), 0 14px 24px -18px rgba(0, 0, 0, .45); }
+}
