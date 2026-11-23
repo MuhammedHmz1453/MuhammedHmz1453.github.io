@@ -2384,6 +2384,7 @@ body::before {
   transition: background-color .15s, color .15s;
 }
 .dd__opt--bos { color: var(--muted); }
+.dd__opt[hidden] { display: none; } /* "Seç" listede görünmesin (display: flex hidden'ı ezmesin) */
 .dd__opt.is-active { background: color-mix(in srgb, #7c5cff 16%, transparent); color: var(--strong); }
 .dd__opt .dd__text { flex: 1; min-width: 0; white-space: nowrap; }
 /* sağdaki kutunun listesi sağa hizalı açılır, formdan taşmaz */
