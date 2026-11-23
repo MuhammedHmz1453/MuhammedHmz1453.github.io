@@ -1,0 +1,15 @@
+# İngilizce sürüm (/en/). Yönetim panelinde "English" bölümünden düzenlenir.
+# Ad, soyad, logo yazısı ve site adı Türkçe dosyadan (genel.yml) alınır.
+unvan: Web Developer
+seo_aciklama: "Corporate websites, e-commerce, small business websites and website redesigns. Get a free quote for a fast, mobile-friendly website."
+durum_goster: true
+durum: "Web developer · Available for new projects"
+slogan: "Muhammed Hamza Karaca · Web developer"
+baslik: "I build modern websites"
+baslik_vurgu: "for your business."
+giris: "I create fast, mobile-friendly and professional websites that help your business stand out online."
+alt_yazi: I build fast, modern and mobile-friendly websites for businesses. Just write to me for a free quote.
+etiketler:
+  - Corporate Websites
+  - E-Commerce
+  - Custom Design

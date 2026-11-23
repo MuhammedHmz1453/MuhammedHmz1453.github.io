@@ -1,0 +1,28 @@
+# Simgeler Türkçe dosyadaki (hizmetler.yml) aynı sıradaki hizmetten alınır.
+baslik: My services
+aciklama: Fast, mobile-friendly websites that bring your business online. A brand-new site or a refresh of the one you already have.
+liste:
+  - ad: Corporate website
+    aciklama: A multi-page website that presents your company, services and team in a trustworthy, professional way.
+    maddeler:
+      - About, services and contact pages
+      - Design tailored to your company
+      - A panel to edit the content yourself
+  - ad: E-commerce
+    aciklama: A well-organized, trustworthy store where you can showcase your products and take orders.
+    maddeler:
+      - Product and category pages
+      - Orders via WhatsApp or bank transfer
+      - Product photos edited and arranged
+  - ad: Business website
+    aciklama: A website for local businesses such as cafés, hair salons, workshops or shops, so customers can find you right away.
+    maddeler:
+      - Address, map and opening hours
+      - One-tap call and directions
+      - Menu, price list or gallery
+  - ad: Website redesign
+    aciklama: I turn your old, slow or broken-on-mobile website into a modern, fast one.
+    maddeler:
+      - A new, modern design
+      - Mobile-friendly and faster
+      - Your content moved to the new site

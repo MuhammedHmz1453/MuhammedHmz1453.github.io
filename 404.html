@@ -15,6 +15,10 @@ permalink: /404.html
   <meta name="surum" content="{{ site.time | date: '%s' }}">
   <meta name="robots" content="noindex">
   <title>Sayfa bulunamadı · {{ g.site_adi | default: tam_ad | escape }}</title>
+  <script>
+    // /en/ altındaki bulunamayan adreslerde sayfa İngilizce gösterilir
+    if (location.pathname.indexOf("/en/") === 0) { document.documentElement.lang = "en"; document.title = "Page not found · {{ g.site_adi | default: tam_ad | escape }}"; }
+  </script>
   <meta name="theme-color" content="#0c0a1a">
 
   <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=4" sizes="48x48">
@@ -37,7 +41,7 @@ permalink: /404.html
 <body>
   <header class="site-header">
     <div class="topbar container">
-      <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön">
+      <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön" data-en-label="Back to home" data-en-href="{{ '/en/' | relative_url }}">
         <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=4" alt="" width="40" height="40">
         <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
@@ -54,28 +58,35 @@ permalink: /404.html
         <canvas class="hero__garden" data-garden aria-hidden="true"></canvas>
 
         <div class="hero__content">
-          <p class="status"><span class="status__dot" aria-hidden="true"></span>404 · Sayfa bulunamadı</p>
+          <p class="status"><span class="status__dot" aria-hidden="true"></span><span data-en="404 · Page not found">404 · Sayfa bulunamadı</span></p>
           <h1 class="hero__name hero__name--small" id="hero-baslik">
-            <span style="--i: 0">Bu sayfa</span>
-            <span class="hero__surname" style="--i: 1">filizlenmedi</span>
+            <span style="--i: 0" data-en="This page">Bu sayfa</span>
+            <span class="hero__surname" style="--i: 1" data-en="never sprouted">filizlenmedi</span>
           </h1>
-          <p class="hero__lede">Aradığın adres taşınmış ya da hiç var olmamış olabilir. Ana sayfadan devam edebilirsin.</p>
+          <p class="hero__lede" data-en="The address you are looking for may have moved or may never have existed. You can continue from the home page.">Aradığın adres taşınmış ya da hiç var olmamış olabilir. Ana sayfadan devam edebilirsin.</p>
           <div class="hero__actions">
-            <a class="lg-btn lg-btn--xl" href="{{ '/' | relative_url }}">Ana sayfaya dön</a>
-            <a class="lg-btn lg-btn--xl" href="{{ '/#projeler' | relative_url }}"><span>Projelere git</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg></a>
+            <a class="lg-btn lg-btn--xl" href="{{ '/' | relative_url }}" data-en="Back to home" data-en-href="{{ '/en/' | relative_url }}">Ana sayfaya dön</a>
+            <a class="lg-btn lg-btn--xl" href="{{ '/#projeler' | relative_url }}" data-en-href="{{ '/en/#projects' | relative_url }}"><span data-en="See projects">Projelere git</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg></a>
           </div>
         </div>
 
         <div class="hero__soil" data-soil>
           <button class="lg-btn lg-btn--sm plant-btn" type="button" data-plant>
             <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 15V7M8 10 4.5 6.5M8 8.5l3-3"/></svg>
-            Bir ışık dalı ek
+            <span data-en="Plant a light branch">Bir ışık dalı ek</span>
           </button>
-          <span class="hero__hint-note hint--pointer">ya da yukarıda boş bir yere tıkla</span>
-          <span class="hero__hint-note hint--touch">ya da yukarıda boş bir yere dokun</span>
+          <span class="hero__hint-note hint--pointer" data-en="or click an empty spot above">ya da yukarıda boş bir yere tıkla</span>
+          <span class="hero__hint-note hint--touch" data-en="or tap an empty spot above">ya da yukarıda boş bir yere dokun</span>
         </div>
       </div>
     </section>
   </main>
+  <script>
+    if (document.documentElement.lang === "en") {
+      document.querySelectorAll("[data-en]").forEach(function (el) { el.textContent = el.getAttribute("data-en"); });
+      document.querySelectorAll("[data-en-href]").forEach(function (el) { el.setAttribute("href", el.getAttribute("data-en-href")); });
+      document.querySelectorAll("[data-en-label]").forEach(function (el) { el.setAttribute("aria-label", el.getAttribute("data-en-label")); });
+    }
+  </script>
 </body>
 </html>

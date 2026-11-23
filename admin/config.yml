@@ -247,3 +247,247 @@ collections:
             fields:
               - { name: ad, label: Ad, widget: string, hint: "Instagram, Facebook, X, LinkedIn, GitHub, YouTube, TikTok, WhatsApp, Telegram, Discord, Behance ya da Dribbble yazarsan sayfanın en altında kendi renkli logosuyla görünür." }
               - { name: adres, label: Link, widget: string, hint: "Örnek: https://www.linkedin.com/in/kullaniciadin" }
+
+  # ---------- İngilizce site (/en/) ----------
+  - name: site_en
+    label: English (İngilizce site)
+    icon: translate
+    description: 'Sitenin İngilizce sürümü: mhkaraca.vercel.app/en/. Görseller, linkler, fiyatı boş bırakılan paketler ve hizmet simgeleri Türkçe içerikten alınır.'
+    files:
+    - name: genel_en
+      icon: home
+      label: Giriş ve genel bilgiler (English)
+      description: İngilizce sürüm (/en/). Adın, giriş yazısı, sekme başlığı ve en alttaki tanıtım.
+      file: _data/en/genel.yml
+      fields:
+      - name: unvan
+        label: Unvan
+        widget: string
+        hint: Link paylaşımlarında (WhatsApp, Instagram) adının yanında görünür.
+      - name: durum_goster
+        label: Durum satırını göster
+        widget: boolean
+        default: true
+      - name: durum
+        label: Durum satırı
+        widget: string
+        required: false
+        hint: 'Giriş bölümünde butonun yanındaki, yeşil ışıklı iki satır, aralarına “ · ” koy. Örnek: Web geliştirici · Yeni projeler için müsaitim'
+      - name: slogan
+        label: Slogan
+        widget: string
+        required: false
+        hint: 'Büyük başlığın üstündeki küçük etiket. Örnek: Muhammed Hamza Karaca · Web geliştirici'
+      - name: baslik
+        label: Büyük başlık (1. satır)
+        widget: string
+        required: false
+        hint: 'Girişteki büyük başlık. Boş bırakırsan adın yazar. Örnek: İşletmen için modern'
+      - name: baslik_vurgu
+        label: Büyük başlık (2. satır
+        eğik): null
+        widget: string
+        required: false
+        hint: 'Örnek: web siteleri geliştiriyorum.'
+      - name: etiketler
+        label: Giriş etiketleri
+        label_singular: Etiket
+        widget: list
+        required: false
+        hint: 'Giriş yazısının altındaki küçük etiketler. Örnek: E-Ticaret'
+      - name: giris
+        label: Giriş cümlesi
+        widget: text
+        hint: Adının altındaki 1–2 cümle. Hangi hizmetleri verdiğini açıkça yaz.
+      - name: alt_yazi
+        label: Alt bilgi tanıtım cümlesi
+        widget: text
+        required: false
+        hint: Sayfanın en altında logonun altındaki kısa tanıtım.
+      - name: seo_aciklama
+        label: Arama motoru açıklaması
+        widget: text
+        hint: Google sonuçlarında sitenin altında görünen kısa açıklama.
+    - name: hakkimda_en
+      icon: person
+      label: Hakkımda (English)
+      description: İngilizce sürüm (/en/). Hakkımda yazısı ve kısa bilgiler.
+      file: _data/en/hakkimda.yml
+      fields:
+      - name: giris
+        label: Giriş cümlesi
+        widget: text
+        hint: Büyük yazılan ilk paragraf.
+      - name: yazi
+        label: Yazı
+        widget: markdown
+        buttons:
+        - bold
+        - italic
+        - link
+        editor_components: []
+        hint: Paragrafları boş bir satırla ayır.
+      - name: bilgiler
+        label: Kısa bilgiler
+        label_singular: Bilgi
+        widget: list
+        required: false
+        collapsed: true
+        summary: '{{baslik}}: {{deger}}'
+        fields:
+        - name: baslik
+          label: Başlık
+          widget: string
+          hint: 'Örnek: Konum'
+        - name: deger
+          label: Değer
+          widget: string
+          hint: 'Örnek: Türkiye · uzaktan çalışmaya açık'
+    - name: hizmetler_en
+      icon: design_services
+      label: Hizmetler (English)
+      description: 'İngilizce sürüm (/en/). Verdiğin hizmetler: kurumsal site, e-ticaret, işletme sitesi, site yenileme.'
+      file: _data/en/hizmetler.yml
+      fields:
+      - name: baslik
+        label: Bölüm başlığı
+        widget: string
+      - name: aciklama
+        label: Bölüm açıklaması
+        widget: text
+        required: false
+      - name: liste
+        label: Hizmetler
+        label_singular: Hizmet
+        widget: list
+        collapsed: true
+        summary: '{{ad}}'
+        fields:
+        - name: ad
+          label: Hizmet adı
+          widget: string
+        - name: aciklama
+          label: Açıklama
+          widget: text
+          hint: 1–2 cümle.
+        - name: maddeler
+          label: Neler var
+          label_singular: Madde
+          widget: list
+          required: false
+          hint: Kartta tik işaretiyle görünür.
+    - name: projeler_en
+      icon: work
+      label: Projeler (English)
+      description: 'İngilizce sürüm (/en/). Proje kartları: ad, açıklama, ekran görüntüsü ve canlı link.'
+      file: _data/en/projeler.yml
+      fields:
+      - name: aciklama
+        label: Bölüm açıklaması
+        widget: string
+        required: false
+      - name: liste
+        label: Projeler
+        label_singular: Proje
+        widget: list
+        summary: '{{ad}}'
+        collapsed: true
+        hint: Bir projeye tıklayınca açılır. Sırasını değiştirmek için tutup sürükle.
+        fields:
+        - name: ad
+          label: Proje adı
+          widget: string
+        - name: aciklama
+          label: Açıklama
+          widget: text
+          hint: Proje ne yapıyor? 1–2 cümle yeter.
+        - name: ozellikler
+          label: Öne çıkan özellikler
+          label_singular: Özellik
+          widget: list
+          required: false
+          hint: 'Kartta tik işaretiyle görünür. Örnek: Google ile giriş ve puan sistemi'
+    - name: fiyatlar_en
+      icon: sell
+      label: Paketlerim (English)
+      description: İngilizce sürüm (/en/). Başlangıç, Profesyonel ve Premium paketleri ve fiyatları.
+      file: _data/en/fiyatlar.yml
+      fields:
+      - name: baslik
+        label: Bölüm başlığı
+        widget: string
+      - name: aciklama
+        label: Bölüm açıklaması
+        widget: text
+        required: false
+      - name: not
+        label: Paketlerin altındaki not
+        widget: text
+        required: false
+        hint: 'Ödeme şekli, bakım ücreti gibi açıklamalar. Örnek: Paket fiyatları tek seferliktir; bakım aylık ücretle ayrıca verilir.'
+      - name: paketler
+        label: Paketler
+        label_singular: Paket
+        widget: list
+        collapsed: true
+        summary: '{{ad}}'
+        fields:
+        - name: ad
+          label: Paket adı
+          widget: string
+        - name: aciklama
+          label: Kısa açıklama
+          widget: text
+        - name: fiyat
+          label: Fiyat
+          widget: string
+          required: false
+          hint: 'Örnek: 5.000 TL ya da 5.000 TL''den başlayan. Boş bırakırsan kartta “Teklife göre” yazar.'
+        - name: fiyat_notu
+          label: Fiyatın altındaki not
+          widget: string
+          required: false
+          hint: 'Örnek: tek seferlik, aylık, KDV dahil'
+        - name: maddeler
+          label: Pakette neler var
+          label_singular: Madde
+          widget: list
+          required: false
+    - name: sss_en
+      icon: help
+      label: SSS (English)
+      description: İngilizce sürüm (/en/). Sık sorulan sorular ve cevapları.
+      file: _data/en/sss.yml
+      fields:
+      - name: baslik
+        label: Bölüm başlığı
+        widget: string
+      - name: aciklama
+        label: Bölüm açıklaması
+        widget: text
+        required: false
+      - name: sorular
+        label: Sorular
+        label_singular: Soru
+        widget: list
+        collapsed: true
+        summary: '{{soru}}'
+        fields:
+        - name: soru
+          label: Soru
+          widget: string
+        - name: cevap
+          label: Cevap
+          widget: text
+    - name: iletisim_en
+      icon: mail
+      label: İletişim (English)
+      description: İngilizce sürüm (/en/). E-posta adresin ve profil linklerin.
+      file: _data/en/iletisim.yml
+      fields:
+      - name: baslik
+        label: Başlık
+        widget: string
+      - name: yazi
+        label: Yazı
+        widget: text

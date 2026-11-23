@@ -1,0 +1,27 @@
+# Görsel ve canlı link Türkçe dosyadaki (projeler.yml) aynı sıradaki projeden alınır.
+aciklama: All of them are live and working. Click and try.
+liste:
+  - ad: Lazer Bahçesi
+    aciklama: The online store of our company selling decorative wooden boxes, clocks and personalized gifts.
+    ozellikler:
+      - Categories, best sellers and products on sale
+      - Name, date and note fields for personalized gifts
+      - Ordering with Add to cart and Buy now
+      - Membership, favorites and product search
+      - Quick contact via WhatsApp
+  - ad: Oyunhane
+    aciklama: "A browser game arcade with no downloads: from Okey, Chess and Mangala to steering a ferry across the Bosphorus."
+    ozellikler:
+      - 12 games, right in the browser with no download
+      - Google sign-in and a points system
+      - Locked games unlocked with points
+      - A new featured game every day
+      - Playable on phones and computers
+  - ad: MHK
+    aciklama: The site you're looking at. My personal website where I present my web design services, packages and projects.
+    ozellikler:
+      - Services, packages and a free quote form
+      - Quote requests land straight in my inbox
+      - A content editing panel, no coding needed
+      - Dark and light themes, mobile-friendly design
+      - Privacy notice, cookie and privacy policies

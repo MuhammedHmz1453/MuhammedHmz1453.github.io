@@ -1,0 +1,681 @@
+---
+# Ana sayfa şablonu: Türkçe (/) ve İngilizce (/en/) sayfalar bu şablonu kullanır.
+# Metinler _data/ (Türkçe) ve _data/en/ (İngilizce) klasörlerinden, arayüz yazıları _data/arayuz.yml dosyasından gelir.
+---
+{%- comment %} Dil: page.lang "en" ise İngilizce içerik (_data/en) ve arayüz yazıları kullanılır.
+     Ad, logo, e-posta, görseller, linkler gibi dile bağlı olmayanlar Türkçe dosyalardan gelir. {% endcomment -%}
+{%- assign lang = page.lang | default: "tr" -%}
+{%- assign t = site.data.arayuz[lang] -%}
+{%- assign TR = site.data -%}
+{%- if lang == "en" %}{% assign D = site.data.en %}{% else %}{% assign D = site.data %}{% endif -%}
+{%- assign g0 = TR.genel -%}
+{%- assign g = D.genel -%}
+{%- assign h = D.hakkimda -%}
+{%- assign pr = D.projeler -%}
+{%- assign y = TR.yetenekler -%}
+{%- assign i0 = TR.iletisim -%}
+{%- assign i = D.iletisim -%}
+{%- assign hz = D.hizmetler -%}
+{%- assign fy = D.fiyatlar -%}
+{%- assign sss = D.sss -%}
+{%- comment %} WhatsApp numarası: boşluk, tire, parantez ve + atılır; 0 ile başlıyorsa 9, 5 ile başlıyorsa 90 eklenir {% endcomment -%}
+{%- assign wa = i0.whatsapp | default: "" | remove: " " | remove: "-" | remove: "(" | remove: ")" | remove: "+" -%}
+{%- assign wa_ilk = wa | slice: 0 -%}
+{%- if wa_ilk == "0" %}{% assign wa = wa | prepend: "9" %}{% elsif wa_ilk == "5" %}{% assign wa = wa | prepend: "90" %}{% endif -%}
+{%- assign tam_ad = g0.ad | append: " " | append: g0.soyad | strip -%}
+{%- assign ad_kelimeleri = g0.ad | split: " " -%}
+{%- assign tum_kelimeler = tam_ad | split: " " -%}
+{%- capture bas_harfler -%}{%- for k in tum_kelimeler -%}{{ k | slice: 0 }}{%- endfor -%}{%- endcapture -%}
+<!doctype html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Dark Reader gibi eklentiler sitenin renklerini değiştirmesin -->
+  <meta name="darkreader-lock">
+  <!-- Sürüm: site her yayınlandığında değişir; açık sekmeler yeni sürümü kendiliğinden yükler -->
+  <meta name="surum" content="{{ site.time | date: '%s' }}">
+
+  <title>{{ g0.site_adi | default: tam_ad | escape }}</title>
+  <meta name="description" content="{{ g.seo_aciklama | escape }}">
+  <meta property="og:title" content="{{ tam_ad | escape }} · {{ g.unvan | escape }}">
+  <meta property="og:description" content="{{ g.giris | escape }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ g0.site_adi | default: tam_ad | escape }}">
+  <meta property="og:url" content="{{ t.ana_url | absolute_url }}">
+  <meta property="og:image" content="{{ '/assets/og.png' | absolute_url }}?v=4">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="{{ t.locale }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="{{ t.ana_url | absolute_url }}">
+  <link rel="alternate" hreflang="tr" href="{{ '/' | absolute_url }}">
+  <link rel="alternate" hreflang="en" href="{{ '/en/' | absolute_url }}">
+  <link rel="alternate" hreflang="x-default" href="{{ '/' | absolute_url }}">
+  <meta name="theme-color" content="#0c0a1a">
+
+  <!-- Sekme logosu: her tarayıcı için ICO, destekleyenlere keskin SVG -->
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=4" sizes="48x48">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=4" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}?v=4">
+
+  <!-- Yazı tipleri sitenin kendi sunucusundan (Google Fonts yok) -->
+  <link rel="preload" href="{{ '/assets/fonts/figtree-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/sora-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/css/fonts.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+
+  <!-- Tema: sayfa çizilmeden önce seçili temayı uygula (beyaz yanıp sönmeyi önler) -->
+  <script>
+    // Animasyonlar için: JS çalışıyor. Bir sorun olursa 2 sn sonra her şey yine görünür.
+    document.documentElement.classList.add('js');
+    setTimeout(function () { document.documentElement.classList.add('is-ready'); }, 2000);
+    try {
+      var t = localStorage.getItem('tema');
+      if (t === 'acik' || t === 'koyu') document.documentElement.dataset.theme = t === 'koyu' ? 'dark' : 'light';
+    } catch (e) {}
+  </script>
+  <script src="{{ '/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#icerik">{{ t.icerige_atla }}</a>
+
+  <header class="site-header">
+    <div class="topbar container">
+      <a class="nav__brand" href="{{ t.ana_url | relative_url }}" aria-label="{{ t.sayfayi_yenile }}" data-reload>
+        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=4" alt="" width="40" height="40">
+        <span>{% if g0.logo_yazi and g0.logo_yazi != "" %}{{ g0.logo_yazi | escape }}{% else %}{{ g0.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
+      </a>
+      {%- include dil-secici.html t=t sinif="lang--ust" %}
+    </div>
+  </header>
+
+  <!-- Menü: ortada yüzen hap; aktif bölümün üstünde "floresan lamba" yanar.
+       Bilgisayarda üstte, telefonda altta durur ve yazıların yerine simgeler çıkar.
+       Sağındaki yuvarlak düğme açık/koyu temayı değiştirir. -->
+  <nav class="tube" aria-label="{{ t.ana_menu }}">
+    <div class="tube__bar">
+      <span class="tube__lamp" aria-hidden="true"><span class="tube__light"><i></i><i></i><i></i></span></span>
+        <a class="tube__link is-active" href="#" aria-current="true">
+          <span class="tube__text">{{ t.menu.ana }}</span>
+          <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        </a>
+        <a class="tube__link" href="#{{ t.id.hakkimda }}">
+          <span class="tube__text">{{ t.menu.hakkimda }}</span>
+          <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </a>
+        <a class="tube__link" href="#{{ t.id.hizmetler }}">
+          <span class="tube__text">{{ t.menu.hizmetler }}</span>
+          <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg>
+        </a>
+        <a class="tube__link" href="#{{ t.id.projeler }}">
+          <span class="tube__text">{{ t.menu.projeler }}</span>
+          <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+        </a>
+        <a class="tube__link" href="#{{ t.id.fiyatlar }}">
+          <span class="tube__text">{{ t.menu.fiyatlar }}</span>
+          <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1"/></svg>
+        </a>
+        <a class="tube__link" href="#{{ t.id.sss }}">
+          <span class="tube__text">{{ t.menu.sss }}</span>
+          <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        </a>
+        <a class="tube__link" href="#{{ t.id.iletisim }}">
+          <span class="tube__text">{{ t.menu.iletisim }}</span>
+          <svg class="tube__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        </a>
+    </div>
+    <a class="tube__lang" href="{{ t.diger_url | relative_url }}" hreflang="{{ t.diger_dil | downcase }}" lang="{{ t.diger_dil | downcase }}" data-lang-link title="{{ t.diger_dil_ad }}" aria-label="{{ t.diger_dil_ad }}">{{ t.diger_dil }}</a>
+    <button class="tube__theme theme-toggle" type="button" aria-label="{{ t.acik_tema }}" data-theme-toggle>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-moon"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </nav>
+
+  <main id="icerik">
+
+    <!-- ============ GİRİŞ (HERO) ============
+         Yazılar panelden (Giriş ve genel bilgiler) gelir.
+         Kayan şeritteki teknolojiler Yetenekler listesinden gelir;
+         logoları _data/teknoloji_ikonlari.yml dosyasında. -->
+    {%- assign durum_parca = g.durum | split: " · " -%}
+    {%- assign durum_ust = durum_parca[0] -%}
+    {%- assign durum_alt = g.durum | remove_first: durum_ust | remove_first: " · " -%}
+    {%- assign teknolojiler = y.kok_saldi | concat: y.buyuyor | concat: y.filizleniyor -%}
+    <section class="hero hero--full" aria-labelledby="hero-baslik">
+      <div class="spot">
+        <div class="spot__inner">
+          {%- if g.slogan and g.slogan != "" %}
+          <p class="spot__kicker"><i aria-hidden="true"></i>{{ g.slogan | escape }}</p>
+          {%- endif %}
+          <h1 class="spot__title{% if g.baslik and g.baslik != "" %} spot__title--cumle{% endif %}" id="hero-baslik">
+            {%- if g.baslik and g.baslik != "" %}
+            <span class="spot__line" style="--i: 0">{{ g.baslik | escape }}</span>
+            {%- if g.baslik_vurgu and g.baslik_vurgu != "" %}<span class="spot__line spot__line--serif" style="--i: 1">{{ g.baslik_vurgu | escape }}</span>{% endif %}
+            {%- else %}
+            <span class="spot__line" style="--i: 0">{{ g.ad | escape }}</span>
+            <span class="spot__line spot__line--serif" style="--i: 1">{{ g.soyad | escape }}</span>
+            {%- endif %}
+          </h1>
+
+          <p class="spot__lede">{{ g.giris | escape }}</p>
+          {%- if g.etiketler.size > 0 %}
+          <ul class="spot__tags" aria-label="{{ t.one_cikan_hizmetler }}">
+            {%- for e in g.etiketler %}
+            <li>{{ e | escape }}</li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+
+          <div class="spot__cta">
+            <a class="lg-btn lg-btn--xxl" href="#{{ t.id.iletisim }}">
+              <span>{{ t.ucretsiz_teklif_al }}</span>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg>
+            </a>
+
+            {%- if g.durum_goster and g.durum != "" %}
+            <div class="trust">
+              <i class="trust__dot" aria-hidden="true"></i>
+              <span class="trust__text">
+                <b>{{ durum_ust | escape }}</b>
+                {%- if durum_alt != "" %}<small>{{ durum_alt | escape }}</small>{% endif %}
+              </span>
+            </div>
+            {%- endif %}
+          </div>
+        </div>
+
+        {%- if teknolojiler.size > 0 %}
+        <div class="spot__band">
+          <p class="spot__caption"><span>{{ t.teknolojiler }}</span></p>
+          {%- if teknolojiler.size < 4 %}{% assign kopyalar = 1 %}{% else %}{% assign kopyalar = 4 %}{% endif %}
+          <div class="marquee{% if kopyalar == 1 %} marquee--static{% endif %}">
+            <ul class="marquee__track">
+              {%- for kopya in (1..kopyalar) %}
+              {%- for t in teknolojiler %}
+              {%- assign anahtar = t.ad | downcase | strip -%}
+              {%- assign ikon = site.data.teknoloji_ikonlari[anahtar] %}
+              <li{% if kopya > 1 %} aria-hidden="true"{% endif %}>
+                {%- if ikon %}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{ ikon }}"/></svg>{% else %}<i class="marquee__dot" aria-hidden="true"></i>{% endif -%}
+                <span>{{ t.ad | escape }}</span>
+              </li>
+              {%- endfor %}
+              {%- endfor %}
+            </ul>
+          </div>
+        </div>
+        {%- endif %}
+      </div>
+    </section>
+
+    <!-- ============ HAKKIMDA ============ -->
+    <section class="section container about" id="{{ t.id.hakkimda }}" aria-labelledby="hakkimda-baslik">
+      <header class="section__head" data-reveal>
+        <a class="anchor" href="#{{ t.id.hakkimda }}">#{{ t.id.hakkimda }}</a>
+        <h2 id="hakkimda-baslik">{{ t.hakkimda_baslik }}</h2>
+      </header>
+
+      {%- comment %} Panelde fotoğraf boş bırakılırsa bu bölümde fotoğraf olmaz, yazı tek sütun durur {% endcomment %}
+      {%- assign foto_var = false -%}
+      {%- assign foto = TR.hakkimda.foto -%}
+      {%- if foto and foto != "" %}{% assign foto_var = true %}{% endif %}
+      <div class="about__grid{% unless foto_var %} about__grid--yazi{% endunless %}">
+        {%- if foto_var %}
+        <img class="about__photo" src="{{ foto | relative_url }}" alt="{{ tam_ad | escape }} {{ t.portresi }}" width="320" height="320" decoding="async" data-reveal>
+        {%- endif %}
+
+        <div class="about__text{% unless foto_var %} about__card{% endunless %}" data-reveal style="--i: 1">
+          <div class="about__prose">
+            <p class="about__intro">{{ h.giris | escape }}</p>
+            {{ h.yazi | markdownify }}
+          </div>
+
+          {%- if h.bilgiler.size > 0 %}
+          <dl class="facts">
+            {%- for b in h.bilgiler %}
+            <div><dt>{{ b.baslik | escape }}</dt><dd>{{ b.deger | escape }}</dd></div>
+            {%- endfor %}
+          </dl>
+          {%- endif %}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HİZMETLER ============
+         Yazılar panelden (Hizmetler) gelir. -->
+    {%- if hz.liste.size > 0 %}
+    <section class="section container" id="{{ t.id.hizmetler }}" aria-labelledby="hizmetler-baslik">
+      <header class="section__head" data-reveal>
+        <a class="anchor" href="#{{ t.id.hizmetler }}">#{{ t.id.hizmetler }}</a>
+        <h2 id="hizmetler-baslik">{{ hz.baslik | default: t.hizmetler_baslik | escape }}</h2>
+        {%- if hz.aciklama and hz.aciklama != "" %}
+        <p class="section__sub">{{ hz.aciklama | escape }}</p>
+        {%- endif %}
+      </header>
+
+      <div class="services services--{{ hz.liste.size }}">
+        {%- for sv in hz.liste %}
+        {%- assign sv_ikon = sv.ikon | default: TR.hizmetler.liste[forloop.index0].ikon %}
+        <article class="service" data-reveal style="--i: {{ forloop.index0 | modulo: 4 }}">
+          <span class="service__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+            {%- case sv_ikon -%}
+            {%- when "kurumsal" -%}<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>
+            {%- when "isletme" -%}<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"/><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"/><path d="M2 7h20"/><path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7"/>
+            {%- when "yenileme" -%}<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>
+            {%- when "eticaret" -%}<circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/>
+            {%- when "bakim" -%}<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            {%- when "mobil" -%}<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/>
+            {%- when "seo" -%}<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            {%- when "hiz" -%}<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+            {%- else -%}<rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8M12 17v4"/>
+            {%- endcase -%}
+            </svg>
+          </span>
+          <h3>{{ sv.ad | escape }}</h3>
+          <p>{{ sv.aciklama | escape }}</p>
+          {%- if sv.maddeler.size > 0 %}
+          <ul class="checklist">
+            {%- for m in sv.maddeler %}
+            <li>{{ m | escape }}</li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+        </article>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+
+    <!-- ============ PROJELER ============ -->
+    <section class="section container" id="{{ t.id.projeler }}" aria-labelledby="projeler-baslik">
+      <header class="section__head" data-reveal>
+        <a class="anchor" href="#{{ t.id.projeler }}">#{{ t.id.projeler }}</a>
+        <h2 id="projeler-baslik">{{ t.projeler_baslik }}</h2>
+        {%- if pr.aciklama != "" %}
+        <p class="section__sub">{{ pr.aciklama | escape }}</p>
+        {%- endif %}
+      </header>
+
+      <div class="projects">
+        {%- for p in pr.liste %}
+        {%- assign p0 = TR.projeler.liste[forloop.index0] -%}
+        {%- assign p_gorsel = p.gorsel | default: p0.gorsel -%}
+        {%- assign p_demo = p.demo | default: p0.demo -%}
+        {%- assign p_cizim = p.cizim | default: p0.cizim %}
+        <article class="project" data-reveal-project style="--i: {{ forloop.index0 | modulo: 3 }}">
+          <div class="project__media">
+          {%- if p_gorsel and p_gorsel != "" %}
+          <img class="project__shot" src="{{ p_gorsel | relative_url }}" alt="{{ p.ad | escape }} {{ t.gorseli }}" loading="lazy" decoding="async">
+          {%- elsif p_cizim == "todo" %}
+          <div class="project__preview preview-todo" aria-hidden="true">
+            <div class="pt-card">
+              <div class="pt-input"><span>Yeni görev ekle…</span><b>+</b></div>
+              <ul>
+                <li class="is-done"><i></i>Portfolyo sitesini bitir</li>
+                <li><i></i>GitHub Pages'te yayınla</li>
+                <li><i></i>Lazer Bahçesi'ne ses ekle</li>
+              </ul>
+              <div class="pt-foot"><span>2 görev kaldı</span><span>Tümü · Aktif · Biten</span></div>
+            </div>
+          </div>
+          {%- elsif p_cizim == "bahce" %}
+          <div class="project__preview preview-garden" aria-hidden="true">
+            <svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice">
+              <g class="pg-glow">
+                <path stroke="#ff4f9a" d="M70 200 72 150 66 110 70 72M70 120 48 96 40 78M68 96l20-22 6-20"/>
+                <path stroke="#3bf0d8" d="M160 200 158 140 164 92 160 44M161 112l26-24 10-24M160 78l-22-20-6-18"/>
+                <path stroke="#ffc24a" d="M248 200 250 160 246 126 252 98M248 136l18-18M249 112l-20-14-6-14"/>
+              </g>
+              <g class="pg-core">
+                <path d="M70 200 72 150 66 110 70 72M70 120 48 96 40 78M68 96l20-22 6-20"/>
+                <path d="M160 200 158 140 164 92 160 44M161 112l26-24 10-24M160 78l-22-20-6-18"/>
+                <path d="M248 200 250 160 246 126 252 98M248 136l18-18M249 112l-20-14-6-14"/>
+              </g>
+              <g class="pg-buds">
+                <circle cx="70" cy="72" r="3" fill="#ffd1e4"/><circle cx="40" cy="78" r="2.5" fill="#ffd1e4"/><circle cx="94" cy="54" r="2.5" fill="#ffd1e4"/>
+                <circle cx="160" cy="44" r="3" fill="#c9fff7"/><circle cx="197" cy="64" r="2.5" fill="#c9fff7"/><circle cx="132" cy="40" r="2.5" fill="#c9fff7"/>
+                <circle cx="252" cy="98" r="3" fill="#ffe9b8"/><circle cx="266" cy="118" r="2.5" fill="#ffe9b8"/><circle cx="223" cy="84" r="2.5" fill="#ffe9b8"/>
+              </g>
+            </svg>
+          </div>
+          {%- elsif p_cizim == "site" %}
+          <div class="project__preview preview-site" aria-hidden="true">
+            <div class="ps-page">
+              <div class="ps-nav"><i></i><span></span><span></span><span></span></div>
+              <div class="ps-hero"><b></b><b></b><em></em></div>
+              <div class="ps-row"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+          {%- else %}
+          <div class="project__preview preview-plain" aria-hidden="true"><span>{{ p.ad | escape }}</span></div>
+          {%- endif %}
+          </div>
+          <div class="project__body">
+            <h3>{{ p.ad | escape }}</h3>
+            <p>{{ p.aciklama | escape }}</p>
+            {%- if p.ozellikler.size > 0 %}
+            <ul class="checklist project__features" aria-label="{{ t.ozellikler }}">
+              {%- for o in p.ozellikler %}
+              <li>{{ o | escape }}</li>
+              {%- endfor %}
+            </ul>
+            {%- endif %}
+            <div class="project__links">
+              {%- if p_demo and p_demo != "" %}
+              <a class="lg-btn lg-btn--xl" href="{{ p_demo | escape }}" target="_blank" rel="noopener">
+                <span>{{ t.canli_link }}</span>
+                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg>
+              </a>
+              {%- endif %}
+            </div>
+          </div>
+        </article>
+        {%- endfor %}
+      </div>
+    </section>
+
+    <!-- ============ FİYATLANDIRMA ============
+         Paketler panelden (Fiyatlandırma) gelir. Fiyat boşsa "Teklif al" yazar.
+         "Teklif al" düğmesi teklif formuna gider ve paketi formda seçili hâle getirir. -->
+    {%- if fy.paketler.size > 0 %}
+    <section class="section container" id="{{ t.id.fiyatlar }}" aria-labelledby="fiyatlar-baslik">
+      <header class="section__head" data-reveal>
+        <a class="anchor" href="#{{ t.id.fiyatlar }}">#{{ t.id.fiyatlar }}</a>
+        <h2 id="fiyatlar-baslik">{{ fy.baslik | default: t.fiyatlar_baslik | escape }}</h2>
+        {%- if fy.aciklama and fy.aciklama != "" %}
+        <p class="section__sub">{{ fy.aciklama | escape }}</p>
+        {%- endif %}
+      </header>
+
+      <div class="plans">
+        {%- for pk in fy.paketler %}
+        {%- assign pk0 = TR.fiyatlar.paketler[forloop.index0] -%}
+        {%- assign pk_fiyat = pk.fiyat | default: pk0.fiyat -%}
+        {%- if pk.one_cikan == nil %}{% assign pk_one = pk0.one_cikan %}{% else %}{% assign pk_one = pk.one_cikan %}{% endif %}
+        <article class="plan{% if pk_one %} plan--featured{% endif %}" data-reveal style="--i: {{ forloop.index0 | modulo: 3 }}">
+          {%- if pk_one %}
+          <span class="plan__badge">{{ t.onerilen }}</span>
+          {%- endif %}
+          <h3>{{ pk.ad | escape }}</h3>
+          <p class="plan__desc">{{ pk.aciklama | escape }}</p>
+          <p class="plan__price">
+            {%- if pk_fiyat and pk_fiyat != "" -%}
+            <b>{{ pk_fiyat | escape }}</b>{% if pk.fiyat_notu and pk.fiyat_notu != "" %}<small>{{ pk.fiyat_notu | escape }}</small>{% endif %}
+            {%- else -%}
+            <b>{{ t.teklife_gore }}</b><small>{{ t.teklife_gore_not }}</small>
+            {%- endif -%}
+          </p>
+          {%- if pk.maddeler.size > 0 %}
+          <ul class="checklist">
+            {%- for m in pk.maddeler %}
+            <li>{{ m | escape }}</li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+          {%- if wa != "" -%}
+          {%- if lang == "en" -%}{%- capture wa_metin %}Hi, I'd like a quote for the "{{ pk.ad }}" package.{% endcapture %}{%- else -%}{%- capture wa_metin %}Merhaba, "{{ pk.ad }}"{% unless pk.ad contains "paket" %} paketi{% endunless %} hakkında teklif almak istiyorum.{% endcapture %}{%- endif %}
+          <a class="lg-btn lg-btn--xl plan__cta" href="https://wa.me/{{ wa }}?text={{ wa_metin | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener" aria-label="{{ pk.ad | escape }} · {{ t.teklif_al }} (WhatsApp)">
+          {%- else %}
+          <a class="lg-btn lg-btn--xl plan__cta" href="#{{ t.id.iletisim }}" data-paket="{{ pk.ad | escape }}">
+          {%- endif %}
+            <span>{{ t.teklif_al }}</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5l7-7M5.5 4.5h6v6"/></svg>
+          </a>
+        </article>
+        {%- endfor %}
+      </div>
+      {%- if fy.not and fy.not != "" %}
+      <p class="plans__note" data-reveal><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>{{ fy.not | escape }}</span></p>
+      {%- endif %}
+    </section>
+    {%- endif %}
+
+    <!-- ============ SSS ============
+         Sorular panelden (SSS) gelir. Tıklayınca cevap açılır. -->
+    {%- if sss.sorular.size > 0 %}
+    <section class="section container" id="{{ t.id.sss }}" aria-labelledby="sss-baslik">
+      <header class="section__head" data-reveal>
+        <a class="anchor" href="#{{ t.id.sss }}">#{{ t.id.sss }}</a>
+        <h2 id="sss-baslik">{{ sss.baslik | default: t.sss_baslik | escape }}</h2>
+        {%- if sss.aciklama and sss.aciklama != "" %}
+        <p class="section__sub">{{ sss.aciklama | escape }}</p>
+        {%- endif %}
+      </header>
+
+      <div class="faq" data-reveal>
+        {%- for q in sss.sorular %}
+        <details class="faq__item">
+          <summary>
+            <span>{{ q.soru | escape }}</span>
+            <span class="faq__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="faq__answer"><p>{{ q.cevap | escape }}</p></div>
+        </details>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+
+    <!-- ============ İLETİŞİM ============ -->
+    <section class="section container contact" id="{{ t.id.iletisim }}" aria-labelledby="iletisim-baslik">
+      <header class="section__head" data-reveal>
+        <a class="anchor" href="#{{ t.id.iletisim }}">#{{ t.id.iletisim }}</a>
+        <h2 id="iletisim-baslik">{{ i.baslik | escape }}</h2>
+      </header>
+
+      <div class="contact__grid">
+        <div class="contact__direct" data-reveal>
+          <p>{{ i.yazi | escape }}</p>
+
+          <div class="email-row">
+            <!-- Tıklayınca adres panoya kopyalanır (JS yoksa e-posta uygulaması açılır) -->
+            <a class="email" href="mailto:{{ i0.eposta | escape }}" data-email="{{ i0.eposta | escape }}" title="{{ t.kopyalamak_icin }}">{{ i0.eposta | escape }}</a>
+          </div>
+          <p class="copy-status" role="status" aria-live="polite"></p>
+          {%- if wa != "" %}
+          <a class="whatsapp-btn" href="https://wa.me/{{ wa }}?text={{ t.whatsapp_mesaj | url_encode | replace: '+', '%20' }}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            <span>{{ t.whatsapp_yaz }}</span>
+          </a>
+          {%- endif %}
+
+        </div>
+
+        <!-- Mesajlar FormSubmit (formsubmit.co) ile doğrudan İletişim'deki e-posta adresine gelir.
+             JS çalışmazsa form yine FormSubmit'e gönderilir ve siteye geri dönülür. Ayrıntı README.md'de. -->
+        <form class="form" action="https://formsubmit.co/{{ i0.eposta | escape }}" method="POST" data-contact-form novalidate data-reveal style="--i: 1">
+          <input type="hidden" name="_subject" value="{{ t.form_konu }}">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="{{ site.url }}{{ t.ana_url }}#{{ t.id.iletisim }}">
+          <!-- Spam botları için tuzak alan: insanlar görmez, doldurulursa mesaj gönderilmez -->
+          <input class="form__honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="field">
+            <label for="f-ad">{{ t.ad }}</label>
+            <input id="f-ad" name="ad" type="text" autocomplete="name" required>
+            <p class="field__error" id="f-ad-hata"></p>
+          </div>
+          <div class="field">
+            <label for="f-eposta">{{ t.eposta }}</label>
+            <input id="f-eposta" name="eposta" type="email" autocomplete="email" required>
+            <p class="field__error" id="f-eposta-hata"></p>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-hizmet">{{ t.hizmet }}</label>
+              <select id="f-hizmet" name="hizmet">
+                <option value="">{{ t.sec }}</option>
+                {%- for sv in hz.liste %}
+                <option data-ikon="{{ sv.ikon | default: TR.hizmetler.liste[forloop.index0].ikon | escape }}">{{ sv.ad | escape }}</option>
+                {%- endfor %}
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-paket">{{ t.paket }}</label>
+              <select id="f-paket" name="paket">
+                <option value="">{{ t.sec }}</option>
+                {%- for pk in fy.paketler %}
+                {%- assign pk_fiyat = pk.fiyat | default: TR.fiyatlar.paketler[forloop.index0].fiyat %}
+                <option value="{{ pk.ad | escape }}" data-fiyat="{{ pk_fiyat | escape }}">{{ pk.ad | escape }}{% if pk_fiyat and pk_fiyat != "" %} · {{ pk_fiyat | escape }}{% endif %}</option>
+                {%- endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-mesaj">{{ t.ihtiyaclar }}</label>
+            <textarea id="f-mesaj" name="mesaj" rows="5" required placeholder="{{ t.ihtiyaclar_ipucu | escape }}"></textarea>
+            <p class="field__error" id="f-mesaj-hata"></p>
+          </div>
+          <div class="field field--check">
+            <div class="check">
+              <!-- Neon onay kutusu: işaretlenince tik çizilir, parlar; parçacık, halka ve kıvılcım efekti çıkar -->
+              <label class="neon-checkbox">
+                <input id="f-onay" name="onay" type="checkbox" value="Evet" required>
+                <span class="neon-checkbox__frame" aria-hidden="true">
+                  <span class="neon-checkbox__box">
+                    <span class="neon-checkbox__check-container">
+                      <svg class="neon-checkbox__check" viewBox="0 0 24 24"><path d="M3,12.5l7,7L21,5"/></svg>
+                    </span>
+                    <span class="neon-checkbox__glow"></span>
+                    <span class="neon-checkbox__borders"><span></span><span></span><span></span><span></span></span>
+                  </span>
+                  <span class="neon-checkbox__effects">
+                    <span class="neon-checkbox__particles">
+                      <span style="--x: 25px; --y: -25px"></span>
+                      <span style="--x: -25px; --y: -25px"></span>
+                      <span style="--x: 25px; --y: 25px"></span>
+                      <span style="--x: -25px; --y: 25px"></span>
+                      <span style="--x: 35px; --y: 0px"></span>
+                      <span style="--x: -35px; --y: 0px"></span>
+                      <span style="--x: 0px; --y: 35px"></span>
+                      <span style="--x: 0px; --y: -35px"></span>
+                      <span style="--x: 20px; --y: -30px"></span>
+                      <span style="--x: -20px; --y: 30px"></span>
+                      <span style="--x: 30px; --y: 20px"></span>
+                      <span style="--x: -30px; --y: -20px"></span>
+                    </span>
+                    <span class="neon-checkbox__rings">
+                      <span style="animation-delay: 0.0s"></span>
+                      <span style="animation-delay: 0.1s"></span>
+                      <span style="animation-delay: 0.2s"></span>
+                    </span>
+                    <span class="neon-checkbox__sparks">
+                      <span style="--r: 0deg"></span>
+                      <span style="--r: 90deg"></span>
+                      <span style="--r: 180deg"></span>
+                      <span style="--r: 270deg"></span>
+                    </span>
+                  </span>
+                </span>
+              </label>
+              <label class="check__text" for="f-onay">{{ t.onay_on }}<a href="{{ t.kvkk_url | relative_url }}" target="_blank" rel="noopener">{{ t.onay_baglanti }}</a>{{ t.onay_metni }}</label>
+            </div>
+            <p class="field__error" id="f-onay-hata"></p>
+          </div>
+          <button class="lg-btn lg-btn--xl" type="submit" data-submit>{{ t.gonder }}</button>
+          <p class="form__status" role="status" aria-live="polite"></p>
+          <p class="form__note">{{ t.form_not }}</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ ALT BİLGİ ============
+       Yazılar panelden gelir: tanıtım cümlesi "Giriş ve genel bilgiler"de,
+       profil linkleri "İletişim"de; projeler "Projeler"den. -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="footer__logo" href="#" aria-label="{{ t.sayfa_basina }}">
+            <img src="{{ '/assets/logo.svg' | relative_url }}?v=4" alt="" width="44" height="44" loading="lazy">
+            <span>{{ g0.site_adi | default: tam_ad | escape }}</span>
+          </a>
+          {%- if g.alt_yazi and g.alt_yazi != "" %}
+          <p class="footer__about">{{ g.alt_yazi | escape }}</p>
+          {%- endif %}
+          {%- if i0.linkler.size > 0 %}
+          <ul class="footer__social" aria-label="{{ t.sosyal }}">
+            {%- for l in i0.linkler %}
+            {%- assign anahtar = l.ad | downcase | strip -%}
+            {%- assign logo = site.data.sosyal_ikonlar[anahtar] %}
+            <li>
+              <a class="social social--{{ anahtar | replace: ' ', '-' }}" href="{{ l.adres | escape }}" target="_blank" rel="noopener" aria-label="{{ l.ad | escape }}">
+                {%- if logo %}
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{ logo }}"/></svg>
+                {%- else %}
+                <span>{{ l.ad | slice: 0 | upcase }}</span>
+                {%- endif %}
+              </a>
+            </li>
+            {%- endfor %}
+          </ul>
+          {%- endif %}
+        </div>
+
+        <nav class="footer__cols" aria-label="{{ t.alt_bilgi }}">
+          <div class="footer__col">
+            <h2>{{ t.bolumler }}</h2>
+            <ul>
+              <li><a href="#{{ t.id.hakkimda }}">{{ t.menu.hakkimda }}</a></li>
+              <li><a href="#{{ t.id.hizmetler }}">{{ t.menu.hizmetler }}</a></li>
+              <li><a href="#{{ t.id.projeler }}">{{ t.menu.projeler }}</a></li>
+              <li><a href="#{{ t.id.fiyatlar }}">{{ t.fiyatlar_baslik }}</a></li>
+              <li><a href="#{{ t.id.sss }}">{{ t.menu.sss }}</a></li>
+            </ul>
+          </div>
+          {%- if pr.liste.size > 0 %}
+          <div class="footer__col">
+            <h2>{{ t.menu.projeler }}</h2>
+            <ul>
+              {%- for p in pr.liste %}
+              {%- assign p_demo = p.demo | default: TR.projeler.liste[forloop.index0].demo %}
+              <li>{% if p_demo and p_demo != "" %}<a href="{{ p_demo | escape }}" target="_blank" rel="noopener">{{ p.ad | escape }}</a>{% else %}<a href="#{{ t.id.projeler }}">{{ p.ad | escape }}</a>{% endif %}</li>
+              {%- endfor %}
+            </ul>
+          </div>
+          {%- endif %}
+          <div class="footer__col">
+            <h2>{{ t.iletisim_baslik }}</h2>
+            <ul>
+              <li><a href="mailto:{{ i0.eposta | escape }}" data-copy-email title="{{ t.kopyalamak_icin }}">{{ t.eposta_kopyala }}</a></li>
+              <li><a href="#{{ t.id.iletisim }}">{{ t.ucretsiz_teklif_al }}</a></li>
+              {%- if wa != "" %}
+              <li><a href="https://wa.me/{{ wa }}" target="_blank" rel="noopener">WhatsApp</a></li>
+              {%- endif %}
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© <span data-year>{{ site.time | date: "%Y" }}</span> {{ tam_ad | escape }}. {{ t.haklar }}</p>
+        <nav class="footer__legal" aria-label="{{ t.yasal }}">
+          <a href="{{ t.kvkk_url | relative_url }}">{{ t.kvkk }}</a>
+          <a href="{{ t.cerez_url | relative_url }}">{{ t.cerez }}</a>
+          <a href="{{ t.gizlilik_url | relative_url }}">{{ t.gizlilik }}</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Instagram logosunun kendi renk geçişi -->
+    <svg class="glass-filter" aria-hidden="true" focusable="false">
+      <defs>
+        <radialGradient id="ig-renk" cx="30%" cy="107%" r="150%">
+          <stop offset="0" stop-color="#fdf497"/>
+          <stop offset=".05" stop-color="#fdf497"/>
+          <stop offset=".45" stop-color="#fd5949"/>
+          <stop offset=".6" stop-color="#d6249f"/>
+          <stop offset=".9" stop-color="#285aeb"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </footer>
+
+  <!-- Başa dön: giriş bölümü ekrandan çıkınca sağ alt köşede belirir -->
+  <a class="lg-btn lg-btn--icon to-top" href="#" aria-label="{{ t.basa_don }}" title="{{ t.basa_don }}">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
+</body>
+</html>

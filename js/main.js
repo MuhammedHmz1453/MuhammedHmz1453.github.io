@@ -3,6 +3,54 @@
 // Menü, tema, e-posta kopyalama, iletişim formu, yıl
 // =========================================================
 
+// ---------- Dil ----------
+// Sayfanın dili <html lang> özelliğinden okunur; JS'in gösterdiği yazılar buradan gelir.
+const DIL = document.documentElement.lang === 'en' ? 'en' : 'tr';
+const YAZI = {
+  tr: {
+    kapat: 'Kapat',
+    menu: 'Menü',
+    acikTema: 'Açık temaya geç',
+    koyuTema: 'Koyu temaya geç',
+    kopyalandi: (e) => `Kopyalandı: ${e}`,
+    kopyalanamadi: 'Kopyalanamadı. Adresi seçip elle kopyalayabilirsin.',
+    epostaKopyalandi: (e) => `E-posta adresim kopyalandı: ${e}`,
+    epostaKopyalanamadi: (e) => `Kopyalanamadı. Adresim: ${e}`,
+    adHata: 'Adını yaz, sana nasıl hitap edeceğimi bileyim.',
+    epostaBos: 'E-posta adresini yaz, sana dönebileyim.',
+    epostaHatali: 'E-posta adresini kontrol et: ornek@alanadi.com gibi olmalı.',
+    mesajHata: 'İhtiyaçlarını birkaç cümleyle yaz: nasıl bir site istiyorsun, işin ne?',
+    onayHata: 'Talebini gönderebilmek için onay kutusunu işaretlemelisin. İstemezsen bana doğrudan e-posta da yazabilirsin.',
+    dogrudanYaz: ' adresine doğrudan yazabilirsin.',
+    gonderiliyor: 'Gönderiliyor…',
+    tesekkurler: (ad, e) => `Teşekkürler ${ad}, teklif talebin bana ulaştı. Teklifimi en kısa sürede ${e} adresine gönderiyorum.`,
+    etkinDegil: 'Mesaj formu henüz etkinleştirilmedi, mesajın iletilemedi. Şimdilik',
+    gonderilemedi: 'Mesaj gönderilemedi. İnternet bağlantını kontrol edip tekrar dene ya da',
+    yeniSurum: 'Sitenin yeni sürümü hazır. Mesajını gönderdikten sonra sayfayı yenileyebilirsin.',
+  },
+  en: {
+    kapat: 'Close',
+    menu: 'Menu',
+    acikTema: 'Switch to light theme',
+    koyuTema: 'Switch to dark theme',
+    kopyalandi: (e) => `Copied: ${e}`,
+    kopyalanamadi: "Couldn't copy. You can select the address and copy it manually.",
+    epostaKopyalandi: (e) => `My email address was copied: ${e}`,
+    epostaKopyalanamadi: (e) => `Couldn't copy. My address: ${e}`,
+    adHata: 'Please write your name so I know how to address you.',
+    epostaBos: 'Please write your email address so I can get back to you.',
+    epostaHatali: 'Please check your email address: it should look like name@example.com.',
+    mesajHata: 'Describe your needs in a few sentences: what kind of website do you want, and what is your business?',
+    onayHata: 'Please tick the consent box to send your request. If you prefer not to, you can also email me directly.',
+    dogrudanYaz: ' directly.',
+    gonderiliyor: 'Sending…',
+    tesekkurler: (ad, e) => `Thank you ${ad}, your quote request has reached me. I'll send my quote to ${e} as soon as possible.`,
+    etkinDegil: "The contact form hasn't been activated yet, so your message couldn't be delivered. For now, you can write to",
+    gonderilemedi: "Your message couldn't be sent. Check your internet connection and try again, or write to",
+    yeniSurum: 'A new version of the site is ready. You can refresh the page after sending your message.',
+  },
+}[DIL];
+
 document.addEventListener('DOMContentLoaded', () => {
   setupMenu();
   setupTheme();
@@ -33,7 +81,7 @@ function setupMenu() {
   const setOpen = (open) => {
     menu.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.textContent = open ? 'Kapat' : 'Menü';
+    toggle.textContent = open ? YAZI.kapat : YAZI.menu;
   };
 
   toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
@@ -62,7 +110,7 @@ function setupTheme() {
   const isDark = () => root.dataset.theme !== 'light';
 
   const updateLabel = () => {
-    btn.setAttribute('aria-label', isDark() ? 'Açık temaya geç' : 'Koyu temaya geç');
+    btn.setAttribute('aria-label', isDark() ? YAZI.acikTema : YAZI.koyuTema);
   };
 
   btn.addEventListener('click', () => {
@@ -114,7 +162,7 @@ function setupCopyEmail() {
       link.classList.toggle('is-copied', ok);
       if (status) {
         status.classList.toggle('is-ok', ok);
-        status.textContent = ok ? `Kopyalandı: ${email}` : 'Kopyalanamadı. Adresi seçip elle kopyalayabilirsin.';
+        status.textContent = ok ? YAZI.kopyalandi(email) : YAZI.kopyalanamadi;
       }
       clearTimeout(timer);
       timer = setTimeout(() => {
@@ -131,7 +179,7 @@ function setupCopyEmail() {
       if (!plainClick(e)) return;
       e.preventDefault();
       const ok = await copy(email);
-      showToast(ok ? `E-posta adresim kopyalandı: ${email}` : `Kopyalanamadı. Adresim: ${email}`, ok);
+      showToast(ok ? YAZI.epostaKopyalandi(email) : YAZI.epostaKopyalanamadi(email), ok);
     });
   });
 }
@@ -171,15 +219,15 @@ function setupContactForm() {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const rules = {
-    ad: (v) => v ? '' : 'Adını yaz, sana nasıl hitap edeceğimi bileyim.',
+    ad: (v) => v ? '' : YAZI.adHata,
     eposta: (v) => {
-      if (!v) return 'E-posta adresini yaz, sana dönebileyim.';
-      if (!emailPattern.test(v)) return 'E-posta adresini kontrol et: ornek@alanadi.com gibi olmalı.';
+      if (!v) return YAZI.epostaBos;
+      if (!emailPattern.test(v)) return YAZI.epostaHatali;
       return '';
     },
-    mesaj: (v) => v ? '' : 'İhtiyaçlarını birkaç cümleyle yaz: nasıl bir site istiyorsun, işin ne?',
+    mesaj: (v) => v ? '' : YAZI.mesajHata,
     // KVKK onay kutusu: işaretli değilse mesaj gönderilmez
-    onay: (v) => v ? '' : 'Talebini gönderebilmek için onay kutusunu işaretlemelisin. İstemezsen bana doğrudan e-posta da yazabilirsin.',
+    onay: (v) => v ? '' : YAZI.onayHata,
   };
 
   const errorIds = { ad: 'f-ad-hata', eposta: 'f-eposta-hata', mesaj: 'f-mesaj-hata', onay: 'f-onay-hata' };
@@ -220,7 +268,7 @@ function setupContactForm() {
       const a = document.createElement('a');
       a.href = `mailto:${to}`;
       a.textContent = to;
-      status.append(' ', a, ' adresine doğrudan yazabilirsin.');
+      status.append(' ', a, YAZI.dogrudanYaz);
     }
   };
 
@@ -243,7 +291,7 @@ function setupContactForm() {
 
     sending = true;
     btn.disabled = true;
-    btn.textContent = 'Gönderiliyor…';
+    btn.textContent = YAZI.gonderiliyor;
     status.className = 'form__status';
     status.textContent = '';
     const controller = new AbortController();
@@ -259,9 +307,10 @@ function setupContactForm() {
           Hizmet: (form.hizmet && form.hizmet.value) || 'Seçilmedi',
           Paket: (form.paket && form.paket.value) || 'Seçilmedi',
           'İhtiyaçlar': message,
+          Dil: DIL === 'en' ? 'İngilizce (English)' : 'Türkçe',
           'KVKK onayı': `Aydınlatma metni okundu, yurt dışına aktarıma açık rıza verildi (${new Date().toLocaleString('tr-TR')})`,
           _replyto: email,
-          _subject: `Yeni teklif talebi: ${name}`,
+          _subject: `Yeni teklif talebi${DIL === 'en' ? ' (EN)' : ''}: ${name}`,
           _template: 'table',
           _captcha: 'false',
         }),
@@ -271,15 +320,15 @@ function setupContactForm() {
       if (res.ok && String(data.success) === 'true') {
         form.reset();
         if (form.onay) form.onay.removeAttribute('aria-invalid');
-        showStatus('ok', `Teşekkürler ${name}, teklif talebin bana ulaştı. Teklifimi en kısa sürede ${email} adresine gönderiyorum.`);
+        showStatus('ok', YAZI.tesekkurler(name, email));
       } else if (/activ/i.test(data.message || '')) {
         // FormSubmit'te ilk mesajdan sonra site sahibinin onaylaması gerekir
-        showStatus('error', 'Mesaj formu henüz etkinleştirilmedi, mesajın iletilemedi. Şimdilik', true);
+        showStatus('error', YAZI.etkinDegil, true);
       } else {
         throw new Error(data.message || `HTTP ${res.status}`);
       }
     } catch (err) {
-      showStatus('error', 'Mesaj gönderilemedi. İnternet bağlantını kontrol edip tekrar dene ya da', true);
+      showStatus('error', YAZI.gonderilemedi, true);
     } finally {
       clearTimeout(timer);
       sending = false;
@@ -753,7 +802,7 @@ function setupAutoUpdate() {
         location.reload();
       } else if (!notified && typeof showToast === 'function') {
         notified = true;
-        showToast('Sitenin yeni sürümü hazır. Mesajını gönderdikten sonra sayfayı yenileyebilirsin.', true);
+        showToast(YAZI.yeniSurum, true);
       }
     } catch (e) { /* çevrimdışı ya da geçici hata: sonra tekrar dene */ }
   };

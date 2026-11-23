@@ -1,0 +1,161 @@
+# Sitenin sabit arayüz yazıları (menü, düğmeler, form etiketleri...). Türkçe ve İngilizce.
+# İçerik (giriş yazısı, hizmetler, projeler, paketler, SSS) panelden düzenlenir;
+# İngilizce içerik _data/en/ klasöründedir.
+tr:
+  dil: tr
+  locale: tr_TR
+  ana_url: /
+  diger_url: /en/
+  diger_dil: EN
+  diger_dil_ad: English
+  dil_secimi: Dil seçimi
+  icerige_atla: İçeriğe atla
+  sayfayi_yenile: Sayfayı yenile
+  ana_menu: Ana menü
+  acik_tema: Açık temaya geç
+  koyu_tema: Koyu temaya geç
+  id:
+    hakkimda: hakkimda
+    hizmetler: hizmetler
+    projeler: projeler
+    fiyatlar: fiyatlar
+    sss: sss
+    iletisim: iletisim
+  menu:
+    ana: Ana sayfa
+    hakkimda: Hakkımda
+    hizmetler: Hizmetler
+    projeler: Projeler
+    fiyatlar: Paketler
+    sss: SSS
+    iletisim: Teklif al
+  one_cikan_hizmetler: Öne çıkan hizmetler
+  ucretsiz_teklif_al: Ücretsiz teklif al
+  teknolojiler: Kullandığım teknolojiler
+  hakkimda_baslik: Hakkımda
+  portresi: portresi
+  hizmetler_baslik: Hizmetlerim
+  projeler_baslik: Projelerim
+  gorseli: görseli
+  ozellikler: Öne çıkan özellikler
+  canli_link: Canlı link
+  fiyatlar_baslik: Paketlerim
+  onerilen: Önerilen
+  teklife_gore: Teklife göre
+  teklife_gore_not: İhtiyacına göre fiyatlandırılır
+  teklif_al: Teklif al
+  sss_baslik: SSS
+  kopyalamak_icin: Kopyalamak için tıkla
+  whatsapp_yaz: WhatsApp'tan yaz
+  whatsapp_mesaj: Merhaba, sitenden ulaşıyorum.
+  form_konu: Siteden yeni teklif talebi
+  ad: Adın
+  eposta: E-posta adresin
+  hizmet: Hangi hizmet?
+  paket: Paket
+  sec: Seç
+  ihtiyaclar: İhtiyaçların
+  ihtiyaclar_ipucu: Nasıl bir site istiyorsun? İşin ne, kaç sayfa olmalı, beğendiğin örnek siteler, ne zamana lazım...
+  onay_on: ""
+  onay_baglanti: KVKK Aydınlatma Metni
+  onay_metni: "’ni okudum. Talebimin yanıtlanabilmesi için verilerimin yurt dışındaki hizmet sağlayıcılara (FormSubmit, Google) aktarılmasına açık rıza veriyorum."
+  gonder: Ücretsiz teklif iste
+  form_not: Talebin doğrudan bana ulaşır, sayfadan ayrılman gerekmez. Teklif ücretsizdir ve seni hiçbir şeye bağlamaz.
+  basa_don: Başa dön
+  sayfa_basina: Sayfanın başına dön
+  sosyal: Sosyal medya
+  alt_bilgi: Alt bilgi
+  bolumler: Bölümler
+  iletisim_baslik: İletişim
+  eposta_kopyala: E-postamı kopyala
+  haklar: Tüm hakları saklıdır.
+  yasal: Yasal metinler
+  kvkk: KVKK Aydınlatma Metni
+  kvkk_url: /kvkk-aydinlatma-metni/
+  cerez: Çerez Politikası
+  cerez_url: /cerez-politikasi/
+  gizlilik: Gizlilik Politikası
+  gizlilik_url: /gizlilik-politikasi/
+  yasal_bilgiler: Yasal bilgiler
+  son_guncelleme: Son güncelleme
+  ana_sayfaya_don: Ana sayfaya dön
+  ana_sayfa: Ana sayfa
+en:
+  dil: en
+  locale: en_US
+  ana_url: /en/
+  diger_url: /
+  diger_dil: TR
+  diger_dil_ad: Türkçe
+  dil_secimi: Language
+  icerige_atla: Skip to content
+  sayfayi_yenile: Reload the page
+  ana_menu: Main menu
+  acik_tema: Switch to light theme
+  koyu_tema: Switch to dark theme
+  id:
+    hakkimda: about
+    hizmetler: services
+    projeler: projects
+    fiyatlar: packages
+    sss: faq
+    iletisim: contact
+  menu:
+    ana: Home
+    hakkimda: About
+    hizmetler: Services
+    projeler: Projects
+    fiyatlar: Packages
+    sss: FAQ
+    iletisim: Get a quote
+  one_cikan_hizmetler: Featured services
+  ucretsiz_teklif_al: Get a free quote
+  teknolojiler: Technologies I use
+  hakkimda_baslik: About
+  portresi: portrait
+  hizmetler_baslik: My services
+  projeler_baslik: My projects
+  gorseli: preview
+  ozellikler: Key features
+  canli_link: Live link
+  fiyatlar_baslik: My packages
+  onerilen: Recommended
+  teklife_gore: On request
+  teklife_gore_not: Priced to your needs
+  teklif_al: Get a quote
+  sss_baslik: FAQ
+  kopyalamak_icin: Click to copy
+  whatsapp_yaz: Message me on WhatsApp
+  whatsapp_mesaj: Hi, I'm reaching out from your website.
+  form_konu: New quote request from the website (EN)
+  ad: Your name
+  eposta: Your email address
+  hizmet: Which service?
+  paket: Package
+  sec: Select
+  ihtiyaclar: Your needs
+  ihtiyaclar_ipucu: What kind of website do you want? What's your business, how many pages, sites you like, when do you need it...
+  onay_on: "I have read the "
+  onay_baglanti: Privacy Notice
+  onay_metni: ". I give my explicit consent for my data to be transferred to service providers abroad (FormSubmit, Google) so that my request can be answered."
+  gonder: Request a free quote
+  form_not: Your request comes straight to me, no need to leave the page. The quote is free and doesn't commit you to anything.
+  basa_don: Back to top
+  sayfa_basina: Back to the top of the page
+  sosyal: Social media
+  alt_bilgi: Footer
+  bolumler: Sections
+  iletisim_baslik: Contact
+  eposta_kopyala: Copy my email
+  haklar: All rights reserved.
+  yasal: Legal
+  kvkk: Privacy Notice (KVKK)
+  kvkk_url: /en/privacy-notice/
+  cerez: Cookie Policy
+  cerez_url: /en/cookie-policy/
+  gizlilik: Privacy Policy
+  gizlilik_url: /en/privacy-policy/
+  yasal_bilgiler: Legal information
+  son_guncelleme: Last updated
+  ana_sayfaya_don: Back to home
+  ana_sayfa: Home

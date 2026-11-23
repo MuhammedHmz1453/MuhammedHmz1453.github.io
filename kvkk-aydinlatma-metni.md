@@ -1,5 +1,7 @@
 ---
 layout: yasal
+lang: tr
+ceviri: /en/privacy-notice/
 title: KVKK Aydınlatma Metni
 kisa_ad: KVKK Aydınlatma Metni
 sira: 1

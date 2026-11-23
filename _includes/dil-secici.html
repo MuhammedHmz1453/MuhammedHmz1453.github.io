@@ -1,0 +1,12 @@
+{%- comment %} Dil seçici: sağ üstte TR | EN. include.t = arayüz yazıları; include.diger = karşı dildeki aynı sayfa (yoksa ana sayfa) {% endcomment -%}
+{%- assign t = include.t -%}
+{%- assign diger = include.diger | default: t.diger_url %}
+<nav class="lang {{ include.sinif }}" aria-label="{{ t.dil_secimi }}">
+  {%- if t.dil == "tr" %}
+  <a class="lang__opt is-current" href="{{ page.url | relative_url }}" aria-current="true" lang="tr">TR</a>
+  <a class="lang__opt" href="{{ diger | relative_url }}" hreflang="en" lang="en" data-lang-link title="English">EN</a>
+  {%- else %}
+  <a class="lang__opt" href="{{ diger | relative_url }}" hreflang="tr" lang="tr" data-lang-link title="Türkçe">TR</a>
+  <a class="lang__opt is-current" href="{{ page.url | relative_url }}" aria-current="true" lang="en">EN</a>
+  {%- endif %}
+</nav>

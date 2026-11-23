@@ -2408,3 +2408,73 @@ body::before {
 }
 @keyframes dd-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 @keyframes dd-pick { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, #7c5cff 45%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+
+/* ---------- Dil seçici ----------
+   Bilgisayarda menünün sağında, tema düğmesinin yanında yuvarlak "EN/TR" düğmesi;
+   telefonda (alttaki menüde yer yok) ve yasal sayfalarda sağ üstte TR | EN. */
+.lang {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.lang__opt {
+  min-width: 38px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: var(--muted);
+  font: 700 .8125rem/1 var(--font-body);
+  letter-spacing: .06em;
+  text-align: center;
+  text-decoration: none;
+  transition: color .2s, background-color .2s;
+}
+.lang__opt:hover { color: var(--strong); }
+.lang__opt.is-current { color: #fff; background: linear-gradient(135deg, #7c5cff, #4f63e8); }
+.lang__opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lang--ust { display: none; }
+@media (max-width: 767px) { .lang--ust { display: inline-flex; } }
+
+.tube__lang {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 66px);
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(16, 13, 36, .66);
+  border: 1px solid rgba(255, 255, 255, .1);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, .3), 0 4px 6px -4px rgba(0, 0, 0, .3);
+  color: #d6d3e8;
+  font: 800 .75rem/1 var(--font-body);
+  letter-spacing: .08em;
+  text-decoration: none;
+  transition: color .2s, transform .3s cubic-bezier(.2, .7, .2, 1), border-color .2s;
+}
+.tube__lang:hover { color: #fafafa; transform: scale(1.06); border-color: color-mix(in srgb, #7c5cff 60%, transparent); }
+.tube__lang:focus-visible { outline: 2px solid #fafafa; outline-offset: 2px; }
+@media (max-width: 767px) { .tube__lang { display: none; } }
+
+/* Dar tablet (768–939px): menü üstte kalır ama yazılar yerine simgeler çıkar,
+   böylece sağdaki tema ve dil düğmeleri ekrandan taşmaz. */
+@media (min-width: 768px) and (max-width: 939px) {
+  .tube__link { padding: 10px 14px; }
+  .tube__icon { display: block; }
+  .tube__text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}

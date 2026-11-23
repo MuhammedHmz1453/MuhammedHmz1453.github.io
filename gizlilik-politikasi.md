@@ -1,5 +1,7 @@
 ---
 layout: yasal
+lang: tr
+ceviri: /en/privacy-policy/
 title: Gizlilik Politikası
 kisa_ad: Gizlilik Politikası
 sira: 3

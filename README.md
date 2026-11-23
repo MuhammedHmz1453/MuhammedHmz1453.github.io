@@ -30,6 +30,16 @@ Token o tarayıcıda saklanır, her seferinde tekrar girmen gerekmez. **Token'ı
 
 > Depo adını değiştirirsen `admin/config.yml` dosyasındaki `repo:` satırını da yeni adla güncelle.
 
+## İngilizce sürüm
+
+Sitenin İngilizce sürümü **https://mhkaraca.vercel.app/en/** adresindedir; sağ üstteki **TR / EN** düğmesiyle diller arasında geçilir.
+
+- **İngilizce içerik** `_data/en/` klasöründedir. Panelde **English (İngilizce site)** bölümünden düzenlenir.
+- **Ortak bilgiler** (ad, logo, e-posta, sosyal medya linkleri, proje görselleri ve canlı linkleri, hizmet simgeleri) Türkçe içerikten alınır; bir kez değiştirmen yeter.
+- **Menü, düğme ve form yazıları** `_data/arayuz.yml` dosyasındadır (Türkçe ve İngilizce).
+- **Yasal metinlerin İngilizcesi** `en/` klasöründedir: Privacy Notice (KVKK), Cookie Policy, Privacy Policy. Bağlayıcı olan Türkçe metinlerdir.
+- Ana sayfanın tasarımı iki dil için ortaktır: `_layouts/anasayfa.html`.
+
 ## Dosyalar
 
 ```

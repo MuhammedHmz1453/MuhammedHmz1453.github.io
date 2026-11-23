@@ -1,0 +1,32 @@
+# "fiyat" boş bırakılırsa Türkçe dosyadaki (fiyatlar.yml) aynı sıradaki paketin fiyatı kullanılır.
+baslik: My packages
+aciklama: Pick the package that fits you and tell me what you need; I'll prepare a free quote tailored to you.
+not: "Package prices are one-time payments. Maintenance after launch (content updates, bug fixes, speed and security checks) is not included in the packages; it is offered separately for a monthly fee. E-commerce sites have no online card payment; orders are taken via WhatsApp or bank transfer."
+paketler:
+  - ad: Starter
+    fiyat: 1,500 TL
+    fiyat_notu: One-time
+    aciklama: A one-page website for new businesses and individuals.
+    maddeler:
+      - Modern one-page design
+      - Mobile-friendly
+      - Contact form
+      - Fast-loading page
+  - ad: Professional
+    fiyat: 3,500 TL
+    fiyat_notu: One-time
+    aciklama: A multi-page website tailored to you, for companies and businesses.
+    maddeler:
+      - Everything in Starter
+      - Multi-page custom design
+      - Content editing panel
+      - Basic search engine (SEO) setup
+  - ad: Premium
+    fiyat: 5,000 TL
+    fiyat_notu: One-time
+    aciklama: For an e-commerce site or a more comprehensive website.
+    maddeler:
+      - Everything in Professional
+      - Product and category pages
+      - Orders via WhatsApp or bank transfer (no online card payment)
+      - Priority communication

@@ -1,10 +1,12 @@
 ---
 layout: yasal
+lang: tr
+ceviri: /en/cookie-policy/
 title: Çerez Politikası
 kisa_ad: Çerez Politikası
 sira: 2
 permalink: /cerez-politikasi/
-guncelleme: 22 Kasım 2026
+guncelleme: 23 Kasım 2026
 aciklama: Bu sitede çerez ve benzeri tarayıcı depolama teknolojilerinin nasıl kullanıldığına dair bilgiler.
 ---
 {%- assign eposta = site.data.iletisim.eposta -%}
@@ -29,6 +31,8 @@ Bu politika, **{{ site.url | remove: "https://" }}** adresindeki sitede ("Site")
 | `tema` | Yerel depolama (localStorage) | Seçtiğiniz temayı (açık/koyu) hatırlar; değeri yalnızca `acik` ya da `koyu` olur | Siz tarayıcınızdan silene kadar |
 
 Bu kayıt yalnızca sizin tarayıcınızda durur, bana ya da başka birine gönderilmez ve kimliğinizi belirleyen bir bilgi içermez. Tema düğmesine hiç basmazsanız oluşturulmaz. Tamamen sizin isteğinizle oluşan bu işlevsel kayıt için ayrıca onay istenmez.
+
+Site ayrıca sayfanın en güncel sürümünü kendiliğinden yükleyebilmek için tarayıcınızın oturum depolamasına (sessionStorage) kısa süreliğine bir sürüm numarası yazar. Bu kayıt kişisel veri içermez ve sekmeyi kapattığınızda silinir.
 
 ## Üçüncü taraflar
 

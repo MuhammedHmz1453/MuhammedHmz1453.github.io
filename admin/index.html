@@ -202,14 +202,14 @@
       transform: translateX(3px);
       color: hsl(var(--c) 85% var(--ic));
     }
-    html body .list-container .list-view .sui.grid-row:nth-child(1) { --c: 258; --aciklama: "Adın, giriş yazısı, sekme başlığı ve en alttaki tanıtım cümlesi."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(2) { --c: 205; --aciklama: "Hakkımda yazısı ve konum, diller gibi kısa bilgiler."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(3) { --c: 280; --aciklama: "Kurumsal site, e-ticaret, işletme sitesi, site yenileme."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(4) { --c: 330; --aciklama: "Proje kartları: ad, açıklama, özellikler, ekran görüntüsü ve canlı link."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(5) { --c: 168; --aciklama: "Kök saldı, büyüyor ve filizleniyor listeleri."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(6) { --c: 140; --aciklama: "Başlangıç, Profesyonel ve Premium paketleri ve fiyatları."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(7) { --c: 230; --aciklama: "Sık sorulan sorular ve cevapları."; }
-    html body .list-container .list-view .sui.grid-row:nth-child(8) { --c: 38; --aciklama: "Teklif formu başlığı, e-posta, WhatsApp ve sosyal medya linklerin."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(1) { --c: 258; --aciklama: "Adın, giriş yazısı, sekme başlığı ve en alttaki tanıtım cümlesi."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(2) { --c: 205; --aciklama: "Hakkımda yazısı ve konum, diller gibi kısa bilgiler."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(3) { --c: 280; --aciklama: "Kurumsal site, e-ticaret, işletme sitesi, site yenileme."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(4) { --c: 330; --aciklama: "Proje kartları: ad, açıklama, özellikler, ekran görüntüsü ve canlı link."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(5) { --c: 168; --aciklama: "Kök saldı, büyüyor ve filizleniyor listeleri."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(6) { --c: 140; --aciklama: "Başlangıç, Profesyonel ve Premium paketleri ve fiyatları."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(7) { --c: 230; --aciklama: "Sık sorulan sorular ve cevapları."; }
+    html:not([data-koleksiyon="site_en"]) body .list-container .list-view .sui.grid-row:nth-child(8) { --c: 38; --aciklama: "Teklif formu başlığı, e-posta, WhatsApp ve sosyal medya linklerin."; }
     @media (prefers-reduced-motion: reduce) {
       html body .list-container .list-view .sui.grid-row,
       html body .list-container .list-view .sui.grid-row::after { transition: none; }
@@ -293,10 +293,29 @@
         to { opacity: 1; transform: none; }
       }
     }
+    /* İngilizce site (English) bölümündeki kartlar: sıra config.yml'deki site_en "files" sırasıyla aynı */
+    html[data-koleksiyon="site_en"] body .list-container .list-view .sui.grid-row:nth-child(1) { --c: 258; --aciklama: "İngilizce giriş yazısı, başlık, durum satırı ve alt bilgi."; }
+    html[data-koleksiyon="site_en"] body .list-container .list-view .sui.grid-row:nth-child(2) { --c: 205; --aciklama: "İngilizce Hakkımda yazısı ve kısa bilgiler."; }
+    html[data-koleksiyon="site_en"] body .list-container .list-view .sui.grid-row:nth-child(3) { --c: 280; --aciklama: "Hizmetlerin İngilizce adları, açıklamaları ve maddeleri."; }
+    html[data-koleksiyon="site_en"] body .list-container .list-view .sui.grid-row:nth-child(4) { --c: 330; --aciklama: "Projelerin İngilizce açıklamaları ve özellikleri."; }
+    html[data-koleksiyon="site_en"] body .list-container .list-view .sui.grid-row:nth-child(5) { --c: 140; --aciklama: "Paketlerin İngilizce adları, fiyatları ve maddeleri."; }
+    html[data-koleksiyon="site_en"] body .list-container .list-view .sui.grid-row:nth-child(6) { --c: 230; --aciklama: "İngilizce sık sorulan sorular."; }
+    html[data-koleksiyon="site_en"] body .list-container .list-view .sui.grid-row:nth-child(7) { --c: 38; --aciklama: "İngilizce teklif formu başlığı ve yazısı."; }
   </style>
 </head>
 <body>
   <!-- Yönetim paneli: Sveltia CMS. Ayarlar aynı klasördeki config.yml dosyasında, tema yukarıda. -->
+  <script>
+    // Hangi bölüm (Türkçe ya da İngilizce) açık? Kart açıklamaları buna göre seçilir.
+    (function () {
+      var guncelle = function () {
+        var m = location.hash.match(/collections\/([^/?]+)/);
+        document.documentElement.dataset.koleksiyon = m ? m[1] : '';
+      };
+      window.addEventListener('hashchange', guncelle);
+      guncelle();
+    })();
+  </script>
   <script src="https://unpkg.com/@sveltia/cms@0.255.1/dist/sveltia-cms.js"></script>
 </body>
 </html>
