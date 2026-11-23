@@ -43,9 +43,9 @@
   <meta name="theme-color" content="#0c0a1a">
 
   <!-- Sekme logosu: her tarayıcı için ICO, destekleyenlere keskin SVG -->
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=3" sizes="48x48">
-  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=3" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=3">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=4" sizes="48x48">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=4" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=4">
 
   <!-- Yazı tipleri sitenin kendi sunucusundan (Google Fonts yok) -->
   <link rel="preload" href="{{ '/assets/fonts/figtree-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
@@ -70,7 +70,7 @@
   <header class="site-header">
     <div class="topbar container">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Sayfayı yenile" data-reload>
-        <img class="nav__mark" src="assets/logo.svg?v=3" alt="" width="40" height="40">
+        <img class="nav__mark" src="assets/logo.svg?v=4" alt="" width="40" height="40">
         <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
     </div>
@@ -565,7 +565,7 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a class="footer__logo" href="#" aria-label="Sayfanın başına dön">
-            <img src="assets/logo.svg?v=3" alt="" width="44" height="44" loading="lazy">
+            <img src="assets/logo.svg?v=4" alt="" width="44" height="44" loading="lazy">
             <span>{{ g.site_adi | default: tam_ad | escape }}</span>
           </a>
           {%- if g.alt_yazi and g.alt_yazi != "" %}
