@@ -26,6 +26,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Dark Reader gibi eklentiler sitenin renklerini değiştirmesin -->
   <meta name="darkreader-lock">
+  <!-- Sürüm: site her yayınlandığında değişir; açık sekmeler yeni sürümü kendiliğinden yükler -->
+  <meta name="surum" content="{{ site.time | date: '%s' }}">
 
   <title>{{ g.site_adi | default: tam_ad | escape }}</title>
   <meta name="description" content="{{ g.seo_aciklama | escape }}">

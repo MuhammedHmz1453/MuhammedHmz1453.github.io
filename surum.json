@@ -1,0 +1,5 @@
+---
+layout: null
+permalink: /surum.json
+---
+{"surum": "{{ site.time | date: '%s' }}"}

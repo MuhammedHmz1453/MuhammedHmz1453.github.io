@@ -6,15 +6,45 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "hamzakaraca.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "hamzakaraca.vercel.app"
+        }
+      ],
       "destination": "https://mhkaraca.vercel.app/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "muhammedhamzakaraca.vercel.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "muhammedhamzakaraca.vercel.app"
+        }
+      ],
       "destination": "https://mhkaraca.vercel.app/:path*",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/surum.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    },
+    {
+      "source": "/((?!.*\\.).*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ]
     }
   ]
 }

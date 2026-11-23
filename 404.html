@@ -11,6 +11,8 @@ permalink: /404.html
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Dark Reader gibi eklentiler sitenin renklerini değiştirmesin -->
   <meta name="darkreader-lock">
+  <!-- Sürüm: site her yayınlandığında değişir; açık sekmeler yeni sürümü kendiliğinden yükler -->
+  <meta name="surum" content="{{ site.time | date: '%s' }}">
   <meta name="robots" content="noindex">
   <title>Sayfa bulunamadı · {{ g.site_adi | default: tam_ad | escape }}</title>
   <meta name="theme-color" content="#0c0a1a">

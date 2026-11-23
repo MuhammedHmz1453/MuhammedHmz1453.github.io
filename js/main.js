@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCardSpotlight();
   setupToTop();
   setupReload();
+  setupAutoUpdate();
   setupPlanCta();
 
   const year = document.querySelector('[data-year]');
@@ -577,3 +578,45 @@ function setupPlanCta() {
     });
   });
 }
+
+// ---------- Otomatik güncelleme ----------
+// Site yeniden yayınlandığında, açık kalan sekmeler eski hâli göstermesin: sekmeye
+// dönüldüğünde ve sekme açıkken dakikada bir /surum.json kontrol edilir; sürüm
+// değiştiyse sayfa kendiliğinden yenilenir. Formda yazılmış bir şey varsa yazı
+// kaybolmasın diye yenilemek yerine küçük bir bildirim gösterilir.
+function setupAutoUpdate() {
+  const meta = document.querySelector('meta[name="surum"]');
+  if (!meta || !window.fetch || location.protocol === 'file:') return;
+  const current = meta.content;
+  let notified = false;
+
+  const formHasText = () => [...document.querySelectorAll('form input:not([type=hidden]):not([type=checkbox]), form textarea')]
+    .some((el) => el.value && el.value.trim());
+
+  const check = async () => {
+    if (document.visibilityState !== 'visible') return;
+    try {
+      const res = await fetch(`/surum.json?t=${Date.now()}`, { cache: 'no-store' });
+      if (!res.ok) return;
+      const { surum } = await res.json();
+      if (!surum || surum === current) return;
+      // aynı sürüm için yalnızca bir kez yenile (önbellek eski sayfayı verirse döngüye girmesin)
+      let tried = null;
+      try { tried = sessionStorage.getItem('surum-denendi'); } catch (e) { /* gizli sekme */ }
+      if (tried === surum) return;
+      if (!formHasText()) {
+        try { sessionStorage.setItem('surum-denendi', surum); } catch (e) { /* gizli sekme */ }
+        location.reload();
+      } else if (!notified && typeof showToast === 'function') {
+        notified = true;
+        showToast('Sitenin yeni sürümü hazır. Mesajını gönderdikten sonra sayfayı yenileyebilirsin.', true);
+      }
+    } catch (e) { /* çevrimdışı ya da geçici hata: sonra tekrar dene */ }
+  };
+
+  document.addEventListener('visibilitychange', check);
+  window.addEventListener('focus', check);
+  window.addEventListener('pageshow', (e) => { if (e.persisted) check(); });
+  setInterval(check, 60000);
+}
+
