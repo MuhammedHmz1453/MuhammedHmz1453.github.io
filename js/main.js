@@ -852,7 +852,7 @@ function setupLangSwitch() {
     document.body.append(perde);
     perde.getBoundingClientRect();
     perde.classList.add('is-on');
-    setTimeout(() => { location.href = url; }, 520);
+    setTimeout(() => { location.href = url; }, 360);
   }));
 
   // Geri tuşuyla bu sayfaya dönülürse (tarayıcı hafızasından) perde kalmasın

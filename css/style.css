@@ -2499,14 +2499,14 @@ html.dil-gelis body::after {
 }
 .dil-perde {
   clip-path: circle(0% at var(--dg-x, 50%) var(--dg-y, 0%));
-  transition: clip-path .52s cubic-bezier(.7, 0, .25, 1);
+  transition: clip-path .36s cubic-bezier(.7, 0, .25, 1);
 }
 .dil-perde.is-on { clip-path: circle(150% at var(--dg-x, 50%) var(--dg-y, 0%)); }
-.dil-perde span { opacity: 0; transform: translateY(16px) scale(.96); transition: opacity .3s ease .2s, transform .45s cubic-bezier(.2, .8, .2, 1) .2s; }
+.dil-perde span { opacity: 0; transform: translateY(12px) scale(.96); transition: opacity .2s ease .12s, transform .3s cubic-bezier(.2, .8, .2, 1) .12s; }
 .dil-perde.is-on span { opacity: 1; transform: none; }
 html.dil-gelis body::after {
   content: var(--dg-yazi, "");
   clip-path: circle(150% at var(--dg-x, 50%) var(--dg-y, 0%));
-  animation: dil-perde-cek .65s cubic-bezier(.7, 0, .25, 1) .3s forwards;
+  animation: dil-perde-cek .45s cubic-bezier(.7, 0, .25, 1) .12s forwards;
 }
 @keyframes dil-perde-cek { to { clip-path: circle(0% at var(--dg-x, 50%) var(--dg-y, 0%)); } }
