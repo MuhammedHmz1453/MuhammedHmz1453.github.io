@@ -2126,6 +2126,7 @@ body::before {
 /* ---------- SSS: açılır sorular ---------- */
 .faq {
   max-width: 860px;
+  margin-inline: auto; /* kutu ortada, yazılar sola dayalı */
   border: 1px solid var(--line);
   border-radius: 22px;
   background: var(--surface);
