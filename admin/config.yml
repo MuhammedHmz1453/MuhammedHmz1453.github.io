@@ -41,6 +41,7 @@ collections:
         fields:
           - { name: site_adi, label: Site adı, widget: string, required: false, hint: "Tarayıcı sekmesinde ve sayfanın en altındaki logonun yanında görünür. Örnek: MHK" }
           - { name: logo_yazi, label: Logodaki yazı, widget: string, required: false, hint: "Sol üstte logonun yanındaki kısa yazı. Örnek: MHK" }
+          - { name: google_dogrulama, label: Google doğrulama kodu, widget: string, required: false, hint: "Google Search Console > HTML etiketi yöntemi: content=\"...\" içindeki kodu buraya yapıştır. Boş bırakılabilir." }
           - { name: ad, label: Ad, widget: string, hint: "Giriş bölümündeki büyük başlığın ilk satırı. Örnek: Muhammed Hamza" }
           - { name: soyad, label: Soyad, widget: string, hint: "Başlığın ikinci satırı, eğik yazıyla." }
           - { name: unvan, label: Unvan, widget: string, hint: "Link paylaşımlarında (WhatsApp, Instagram) adının yanında görünür." }

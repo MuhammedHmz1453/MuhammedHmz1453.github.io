@@ -1,0 +1,67 @@
+{%- comment %}
+  Arama motorları için yapılandırılmış veri (JSON-LD): bu sitenin bir web tasarım hizmeti olduğunu,
+  kimin sunduğunu, hangi dillerde ve hangi paketlerle sunulduğunu anlatır. Ziyaretçiye görünmez.
+  Bilgiler paneldeki içerikten gelir; elle değiştirmeye gerek yok.
+{% endcomment -%}
+{%- assign kok = '/' | absolute_url -%}
+{%- assign sayfa = t.ana_url | absolute_url -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "{{ kok }}#website",
+      "url": {{ kok | jsonify }},
+      "name": {{ g0.site_adi | default: tam_ad | jsonify }},
+      "inLanguage": ["tr", "en"],
+      "publisher": { "@id": "{{ kok }}#hizmet" }
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ kok }}#kisi",
+      "name": {{ tam_ad | jsonify }},
+      "jobTitle": {{ g.unvan | jsonify }},
+      "url": {{ sayfa | jsonify }}
+      {%- if i0.linkler.size > 0 -%},
+      "sameAs": [{% for l in i0.linkler %}{{ l.adres | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+      {%- endif %}
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "{{ kok }}#hizmet",
+      "name": {{ g0.site_adi | default: tam_ad | jsonify }},
+      "description": {{ g.seo_aciklama | jsonify }},
+      "url": {{ sayfa | jsonify }},
+      "logo": {{ '/assets/apple-touch-icon.png' | absolute_url | jsonify }},
+      "image": {{ '/assets/og.png' | absolute_url | jsonify }},
+      "email": {{ i0.eposta | jsonify }},
+      "founder": { "@id": "{{ kok }}#kisi" },
+      "areaServed": { "@type": "Country", "name": "Türkiye" },
+      "availableLanguage": ["Turkish", "English"],
+      "knowsAbout": [{% for sv in hz.liste %}{{ sv.ad | jsonify }}{% unless forloop.last %}, {% endunless %}{% endfor %}]
+      {%- if fy.paketler.size > 0 -%},
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": {{ fy.baslik | default: t.fiyatlar_baslik | jsonify }},
+        "itemListElement": [
+          {%- for pk in fy.paketler %}
+          {%- assign pk0 = TR.fiyatlar.paketler[forloop.index0] -%}
+          {%- assign fiyat = pk0.fiyat | default: "" | remove: "." | remove: "," | remove: "TL" | remove: "₺" | strip %}
+          {
+            "@type": "Offer",
+            "name": {{ pk.ad | jsonify }},
+            "description": {{ pk.aciklama | jsonify }}
+            {%- if fiyat != "" -%},
+            "price": {{ fiyat | jsonify }},
+            "priceCurrency": "TRY"
+            {%- endif %}
+          }{% unless forloop.last %},{% endunless %}
+          {%- endfor %}
+        ]
+      }
+      {%- endif %}
+    }
+  ]
+}
+</script>

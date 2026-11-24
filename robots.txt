@@ -1,0 +1,10 @@
+---
+layout: null
+permalink: /robots.txt
+---
+# Arama motorları için: yönetim paneli hariç her sayfa taranabilir.
+User-agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

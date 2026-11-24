@@ -48,6 +48,11 @@
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="{{ t.locale }}">
   <meta name="twitter:card" content="summary_large_image">
+  {%- if g0.google_dogrulama and g0.google_dogrulama != "" %}
+  <!-- Google Search Console doğrulaması (panelde Giriş ve genel bilgiler > Google doğrulama kodu) -->
+  <meta name="google-site-verification" content="{{ g0.google_dogrulama | strip | escape }}">
+  {%- endif %}
+  {%- include yapisal-veri.html %}
   <link rel="canonical" href="{{ t.ana_url | absolute_url }}">
   <link rel="alternate" hreflang="tr" href="{{ '/' | absolute_url }}">
   <link rel="alternate" hreflang="en" href="{{ '/en/' | absolute_url }}">

@@ -1,0 +1,26 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
+{%- comment %} Arama motorları için site haritası. Her sayfanın Türkçe ve İngilizce eşi birbirine bağlanır. {% endcomment -%}
+{%- assign tarih = site.time | date_to_xmlschema -%}
+{%- capture ciftler -%}
+/|/en/|1.0;/kvkk-aydinlatma-metni/|/en/privacy-notice/|0.3;/cerez-politikasi/|/en/cookie-policy/|0.3;/gizlilik-politikasi/|/en/privacy-policy/|0.3
+{%- endcapture -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- assign liste = ciftler | strip | split: ";" -%}
+{%- for c in liste -%}
+{%- assign p = c | split: "|" -%}
+{%- for adres in (0..1) %}
+  <url>
+    <loc>{{ p[adres] | absolute_url }}</loc>
+    <lastmod>{{ tarih }}</lastmod>
+    <priority>{{ p[2] }}</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="{{ p[0] | absolute_url }}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="{{ p[1] | absolute_url }}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="{{ p[0] | absolute_url }}"/>
+  </url>
+{%- endfor -%}
+{%- endfor %}
+</urlset>
