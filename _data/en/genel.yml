@@ -1,7 +1,7 @@
 # İngilizce sürüm (/en/). Yönetim panelinde "English" bölümünden düzenlenir.
 # Ad, soyad, logo yazısı ve site adı Türkçe dosyadan (genel.yml) alınır.
 unvan: Web Developer
-seo_baslik: "MHK · Web Design & E-Commerce Websites"
+seo_baslik: "Karaca Design · Web Design & E-Commerce Websites"
 seo_aciklama: "Corporate websites, e-commerce, small business websites and website redesigns. Get a free quote for a fast, mobile-friendly website."
 durum_goster: true
 durum: "Web developer · Available for new projects"

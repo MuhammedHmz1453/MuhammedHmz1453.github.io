@@ -33,7 +33,7 @@ liste:
     gorsel: /assets/uploads/oyunhane.jpg
     cizim: duz
     kod: ''
-  - ad: MHK
+  - ad: Karaca Design
     aciklama: Şu an baktığın site. Web sitesi hizmetlerimi, paketlerimi ve projelerimi tanıttığım kişisel sitem.
     ozellikler:
       - Hizmetler, paketler ve ücretsiz teklif formu
@@ -47,6 +47,6 @@ liste:
       - JavaScript
       - GitHub Pages
     demo: https://karacadesign.vercel.app/
-    gorsel: /assets/uploads/mhk-site.jpg
+    gorsel: /assets/uploads/karaca-design.jpg
     cizim: site
     kod: https://github.com/MuhammedHmz1453/MuhammedHmz1453.github.io

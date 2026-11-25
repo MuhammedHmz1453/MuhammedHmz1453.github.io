@@ -14,9 +14,9 @@ backend:
     deleteMedia: "Görsel silindi: {{path}}"
 
 # Panelin adı, logosu ve "siteyi gör" bağlantısı
-app_title: Hamza Karaca · Panel
+app_title: Karaca Design · Panel
 logo:
-  src: /assets/logo.svg?v=4
+  src: /assets/logo.svg?v=5
 display_url: https://karacadesign.vercel.app
 
 # Bu sitede sayfa önizlemesi yok; düzenleme ekranı tam genişlikte açılsın
@@ -39,8 +39,8 @@ collections:
         label: Giriş ve genel bilgiler
         file: _data/genel.yml
         fields:
-          - { name: site_adi, label: Site adı, widget: string, required: false, hint: "Tarayıcı sekmesinde ve sayfanın en altındaki logonun yanında görünür. Örnek: MHK" }
-          - { name: logo_yazi, label: Logodaki yazı, widget: string, required: false, hint: "Sol üstte logonun yanındaki kısa yazı. Örnek: MHK" }
+          - { name: site_adi, label: Site adı, widget: string, required: false, hint: "Tarayıcı sekmesinde ve sayfanın en altındaki logonun yanında görünür. Örnek: Karaca Design" }
+          - { name: logo_yazi, label: Logodaki yazı, widget: string, required: false, hint: "Sol üstte logonun yanındaki kısa yazı. Örnek: Karaca Design" }
           - { name: google_dogrulama, label: Google doğrulama kodu, widget: string, required: false, hint: "Google Search Console > HTML etiketi yöntemi: content=\"...\" içindeki kodu buraya yapıştır. Boş bırakılabilir." }
           - { name: ad, label: Ad, widget: string, hint: "Giriş bölümündeki büyük başlığın ilk satırı. Örnek: Muhammed Hamza" }
           - { name: soyad, label: Soyad, widget: string, hint: "Başlığın ikinci satırı, eğik yazıyla." }
@@ -53,7 +53,7 @@ collections:
           - { name: etiketler, label: Giriş etiketleri, label_singular: Etiket, widget: list, required: false, hint: "Giriş yazısının altındaki küçük etiketler. Örnek: E-Ticaret" }
           - { name: giris, label: Giriş cümlesi, widget: text, hint: "Adının altındaki 1–2 cümle. Hangi hizmetleri verdiğini açıkça yaz." }
           - { name: alt_yazi, label: Alt bilgi tanıtım cümlesi, widget: text, required: false, hint: "Sayfanın en altında logonun altındaki kısa tanıtım." }
-          - { name: seo_baslik, label: Sekme ve Google başlığı, widget: string, required: false, hint: "Tarayıcı sekmesinde ve Google sonuçlarında büyük mavi yazı olarak görünür. 60 karakteri geçmesin. Örnek: MHK · Web Tasarım ve E-Ticaret Siteleri" }
+          - { name: seo_baslik, label: Sekme ve Google başlığı, widget: string, required: false, hint: "Tarayıcı sekmesinde ve Google sonuçlarında büyük mavi yazı olarak görünür. 60 karakteri geçmesin. Örnek: Karaca Design · Web Tasarım ve E-Ticaret Siteleri" }
           - { name: seo_aciklama, label: Arama motoru açıklaması, widget: text, hint: "Google sonuçlarında sitenin altında görünen kısa açıklama." }
 
       # ---------- Hakkımda ----------
@@ -310,7 +310,7 @@ collections:
         label: Sekme ve Google başlığı (English)
         widget: string
         required: false
-        hint: 'İngilizce sayfanın sekmesinde ve Google sonuçlarında görünür. Örnek: MHK · Web Design & E-Commerce Websites'
+        hint: 'İngilizce sayfanın sekmesinde ve Google sonuçlarında görünür. Örnek: Karaca Design · Web Design & E-Commerce Websites'
       - name: seo_aciklama
         label: Arama motoru açıklaması
         widget: text

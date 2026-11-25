@@ -21,8 +21,8 @@ permalink: /404.html
   </script>
   <meta name="theme-color" content="#0c0a1a">
 
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=4" sizes="48x48">
-  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=4" type="image/svg+xml">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=5" sizes="48x48">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=5" type="image/svg+xml">
   <!-- Yazı tipleri sitenin kendi sunucusundan (Google Fonts yok) -->
   <link rel="preload" href="{{ '/assets/fonts/figtree-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="{{ '/css/fonts.css' | relative_url }}?v={{ site.time | date: '%s' }}">
@@ -42,7 +42,7 @@ permalink: /404.html
   <header class="site-header">
     <div class="topbar container">
       <a class="nav__brand" href="{{ '/' | relative_url }}" aria-label="Ana sayfaya dön" data-en-label="Back to home" data-en-href="{{ '/en/' | relative_url }}">
-        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=4" alt="" width="40" height="40">
+        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=5" alt="" width="40" height="40">
         <span>{% if g.logo_yazi and g.logo_yazi != "" %}{{ g.logo_yazi | escape }}{% else %}{{ g.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
       <button class="lg-btn lg-btn--icon theme-toggle" type="button" aria-label="Koyu temaya geç" data-theme-toggle>

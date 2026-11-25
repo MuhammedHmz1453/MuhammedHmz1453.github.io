@@ -60,9 +60,9 @@
   <meta name="theme-color" content="#0c0a1a">
 
   <!-- Sekme logosu: her tarayıcı için ICO, destekleyenlere keskin SVG -->
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=4" sizes="48x48">
-  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=4" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}?v=4">
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}?v=5" sizes="48x48">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}?v=5" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{ '/assets/apple-touch-icon.png' | relative_url }}?v=5">
 
   <!-- Yazı tipleri sitenin kendi sunucusundan (Google Fonts yok) -->
   <link rel="preload" href="{{ '/assets/fonts/figtree-latin-wght-normal.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
@@ -103,7 +103,7 @@
   <header class="site-header">
     <div class="topbar container">
       <a class="nav__brand" href="{{ t.ana_url | relative_url }}" aria-label="{{ t.sayfayi_yenile }}" data-reload>
-        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=4" alt="" width="40" height="40">
+        <img class="nav__mark" src="{{ '/assets/logo.svg' | relative_url }}?v=5" alt="" width="40" height="40">
         <span>{% if g0.logo_yazi and g0.logo_yazi != "" %}{{ g0.logo_yazi | escape }}{% else %}{{ g0.site_adi | default: tam_ad | downcase | replace: " ", "" | escape }}{% endif %}</span>
       </a>
       {%- include dil-secici.html t=t sinif="lang--ust" %}
@@ -609,7 +609,7 @@
       <div class="footer__top">
         <div class="footer__brand">
           <a class="footer__logo" href="#" aria-label="{{ t.sayfa_basina }}">
-            <img src="{{ '/assets/logo.svg' | relative_url }}?v=4" alt="" width="44" height="44" loading="lazy">
+            <img src="{{ '/assets/logo.svg' | relative_url }}?v=5" alt="" width="44" height="44" loading="lazy">
             <span>{{ g0.site_adi | default: tam_ad | escape }}</span>
           </a>
           {%- if g.alt_yazi and g.alt_yazi != "" %}
