@@ -8,7 +8,7 @@ Giriş bölümünün altındaki kayan "Kullandığım teknolojiler" şeridi, pan
 
 Sitenin adresinin sonuna `/admin/` ekleyince panel açılır:
 
-**https://mhkaraca.vercel.app/admin/**
+**https://karacadesign.vercel.app/admin/**
 
 Panelden adını, giriş yazısını, Hakkımda yazısını ve fotoğrafını, projeleri (ekran görüntüsüyle birlikte), yetenekleri, e-posta adresini ve profil linklerini değiştirebilirsin. **Kaydet**'e bastığında değişiklik GitHub'a kaydedilir. Site 1–2 dakika içinde yeniden oluşturulur, sonra sayfayı yenileyince değişikliği görürsün.
 
@@ -32,7 +32,7 @@ Token o tarayıcıda saklanır, her seferinde tekrar girmen gerekmez. **Token'ı
 
 ## İngilizce sürüm
 
-Sitenin İngilizce sürümü **https://mhkaraca.vercel.app/en/** adresindedir; sağ üstteki **TR / EN** düğmesiyle diller arasında geçilir.
+Sitenin İngilizce sürümü **https://karacadesign.vercel.app/en/** adresindedir; sağ üstteki **TR / EN** düğmesiyle diller arasında geçilir.
 
 - **İngilizce içerik** `_data/en/` klasöründedir. Panelde **English (İngilizce site)** bölümünden düzenlenir.
 - **Ortak bilgiler** (ad, logo, e-posta, sosyal medya linkleri, proje görselleri ve canlı linkleri, hizmet simgeleri) Türkçe içerikten alınır; bir kez değiştirmen yeter.
@@ -63,9 +63,9 @@ GitHub Pages siteyi **Jekyll** ile oluşturur: `_data/` klasöründeki içerik, 
 
 ## Yayın
 
-Site **Vercel**'de yayında: **https://mhkaraca.vercel.app**
+Site **Vercel**'de yayında: **https://karacadesign.vercel.app**
 
-Vercel projesi (`muhammedhamzakaraca`) bu GitHub deposuna bağlı. Eski adresler https://hamzakaraca.vercel.app ve https://muhammedhamzakaraca.vercel.app yeni adrese yönlendirilir. Depoya her kayıt (panelden yapılan değişiklikler dahil) 1–2 dakika içinde siteye yansır. Vercel siteyi `Gemfile` ve `vercel.json` dosyalarındaki ayarlarla Jekyll kullanarak derler.
+Vercel projesi (`muhammedhamzakaraca`) bu GitHub deposuna bağlı. Eski adresler https://mhkaraca.vercel.app, https://hamzakaraca.vercel.app ve https://muhammedhamzakaraca.vercel.app yeni adrese yönlendirilir. Depoya her kayıt (panelden yapılan değişiklikler dahil) 1–2 dakika içinde siteye yansır. Vercel siteyi `Gemfile` ve `vercel.json` dosyalarındaki ayarlarla Jekyll kullanarak derler.
 
 Sitenin adresi değişirse `_config.yml` dosyasındaki `url:` satırını da güncelle; paylaşım önizlemesi bu adresi kullanır.
 

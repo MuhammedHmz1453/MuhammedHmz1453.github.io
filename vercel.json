@@ -12,7 +12,7 @@
           "value": "hamzakaraca.vercel.app"
         }
       ],
-      "destination": "https://mhkaraca.vercel.app/:path*",
+      "destination": "https://karacadesign.vercel.app/:path*",
       "permanent": true
     },
     {
@@ -23,7 +23,18 @@
           "value": "muhammedhamzakaraca.vercel.app"
         }
       ],
-      "destination": "https://mhkaraca.vercel.app/:path*",
+      "destination": "https://karacadesign.vercel.app/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "mhkaraca.vercel.app"
+        }
+      ],
+      "destination": "https://karacadesign.vercel.app/:path*",
       "permanent": true
     }
   ],

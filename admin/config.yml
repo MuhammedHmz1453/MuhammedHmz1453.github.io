@@ -17,7 +17,7 @@ backend:
 app_title: Hamza Karaca · Panel
 logo:
   src: /assets/logo.svg?v=4
-display_url: https://mhkaraca.vercel.app
+display_url: https://karacadesign.vercel.app
 
 # Bu sitede sayfa önizlemesi yok; düzenleme ekranı tam genişlikte açılsın
 editor:
@@ -254,7 +254,7 @@ collections:
   - name: site_en
     label: English (İngilizce site)
     icon: translate
-    description: 'Sitenin İngilizce sürümü: mhkaraca.vercel.app/en/. Görseller, linkler, fiyatı boş bırakılan paketler ve hizmet simgeleri Türkçe içerikten alınır.'
+    description: 'Sitenin İngilizce sürümü: karacadesign.vercel.app/en/. Görseller, linkler, fiyatı boş bırakılan paketler ve hizmet simgeleri Türkçe içerikten alınır.'
     files:
     - name: genel_en
       icon: home
