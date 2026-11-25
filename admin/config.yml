@@ -53,6 +53,7 @@ collections:
           - { name: etiketler, label: Giriş etiketleri, label_singular: Etiket, widget: list, required: false, hint: "Giriş yazısının altındaki küçük etiketler. Örnek: E-Ticaret" }
           - { name: giris, label: Giriş cümlesi, widget: text, hint: "Adının altındaki 1–2 cümle. Hangi hizmetleri verdiğini açıkça yaz." }
           - { name: alt_yazi, label: Alt bilgi tanıtım cümlesi, widget: text, required: false, hint: "Sayfanın en altında logonun altındaki kısa tanıtım." }
+          - { name: seo_baslik, label: Sekme ve Google başlığı, widget: string, required: false, hint: "Tarayıcı sekmesinde ve Google sonuçlarında büyük mavi yazı olarak görünür. 60 karakteri geçmesin. Örnek: MHK · Web Tasarım ve E-Ticaret Siteleri" }
           - { name: seo_aciklama, label: Arama motoru açıklaması, widget: text, hint: "Google sonuçlarında sitenin altında görünen kısa açıklama." }
 
       # ---------- Hakkımda ----------
@@ -305,6 +306,11 @@ collections:
         widget: text
         required: false
         hint: Sayfanın en altında logonun altındaki kısa tanıtım.
+      - name: seo_baslik
+        label: Sekme ve Google başlığı (English)
+        widget: string
+        required: false
+        hint: 'İngilizce sayfanın sekmesinde ve Google sonuçlarında görünür. Örnek: MHK · Web Design & E-Commerce Websites'
       - name: seo_aciklama
         label: Arama motoru açıklaması
         widget: text

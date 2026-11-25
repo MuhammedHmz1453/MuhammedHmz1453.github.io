@@ -36,7 +36,7 @@
   <!-- Sürüm: site her yayınlandığında değişir; açık sekmeler yeni sürümü kendiliğinden yükler -->
   <meta name="surum" content="{{ site.time | date: '%s' }}">
 
-  <title>{{ g0.site_adi | default: tam_ad | escape }}</title>
+  <title>{{ g.seo_baslik | default: g0.site_adi | default: tam_ad | escape }}</title>
   <meta name="description" content="{{ g.seo_aciklama | escape }}">
   <meta property="og:title" content="{{ tam_ad | escape }} · {{ g.unvan | escape }}">
   <meta property="og:description" content="{{ g.giris | escape }}">
