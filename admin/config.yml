@@ -16,7 +16,7 @@ backend:
 # Panelin adı, logosu ve "siteyi gör" bağlantısı
 app_title: Karaca Design · Panel
 logo:
-  src: /assets/logo.svg?v=5
+  src: /assets/logo.png?v=6
 display_url: https://karacadesign.vercel.app
 
 # Bu sitede sayfa önizlemesi yok; düzenleme ekranı tam genişlikte açılsın

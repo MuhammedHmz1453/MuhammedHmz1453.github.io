@@ -188,9 +188,9 @@ body::before {
 }
 .nav__brand span { font-family: var(--font-display); font-size: .875rem; font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
 .nav__mark {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
 }
 
 .theme-toggle svg {
@@ -1383,7 +1383,7 @@ body::before {
   letter-spacing: -0.02em;
   text-decoration: none;
 }
-.footer__logo img { width: 44px; height: 44px; border-radius: 12px; }
+.footer__logo img { width: 52px; height: 52px; border-radius: 50%; }
 .footer__about {
   max-width: 34ch;
   margin-top: 16px;
