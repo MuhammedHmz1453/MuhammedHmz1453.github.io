@@ -6,7 +6,7 @@ title: Privacy Notice (KVKK)
 kisa_ad: Privacy Notice (KVKK)
 sira: 1
 permalink: /en/privacy-notice/
-guncelleme: 22 November 2026
+guncelleme: 28 November 2026
 aciklama: Privacy notice on how personal data is processed on this website under the Turkish Personal Data Protection Law No. 6698 (KVKK).
 ---
 {%- assign g = site.data.genel -%}
@@ -31,7 +31,8 @@ Contact: <a class="legal__mail" href="mailto:{{ eposta }}" data-copy-email title
 | Data category | Which data | When |
 |---|---|---|
 | Identity | First name, last name | When you fill in the contact form or send an email |
-| Contact | Email address | When you fill in the contact form or send an email |
+| Contact | Email address | When you fill in the contact form or send an email |{% if site.data.iletisim.whatsapp and site.data.iletisim.whatsapp != "" %}
+| Contact | Phone number, WhatsApp profile name and your messages | When you write to me on WhatsApp |{% endif %}
 | Request and correspondence | The content of your message and any other information you send me | When you fill in the contact form or send an email |
 | Transaction security | IP address, browser and device information, page visited, date and time | Automatically, in the hosting provider's server logs, when you visit the Site |
 
@@ -48,7 +49,7 @@ The Site does not use membership, payments, advertising, visitor analytics or tr
 
 ## 4. Legal grounds and method of collection
 
-Your personal data is collected **electronically** through the contact form and email, and **automatically** through the hosting provider's server logs when you visit the Site.
+Your personal data is collected **electronically** through the contact form, email{% if site.data.iletisim.whatsapp and site.data.iletisim.whatsapp != "" %} and WhatsApp{% endif %}, and **automatically** through the hosting provider's server logs when you visit the Site.
 
 Your data is processed on the following legal grounds listed in Article 5 of the KVKK:
 

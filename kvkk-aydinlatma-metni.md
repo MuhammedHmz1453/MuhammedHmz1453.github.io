@@ -6,7 +6,7 @@ title: KVKK Aydınlatma Metni
 kisa_ad: KVKK Aydınlatma Metni
 sira: 1
 permalink: /kvkk-aydinlatma-metni/
-guncelleme: 22 Kasım 2026
+guncelleme: 28 Kasım 2026
 aciklama: 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında, bu sitede kişisel verilerin nasıl işlendiğine dair aydınlatma metni.
 ---
 {%- assign g = site.data.genel -%}
@@ -29,7 +29,8 @@ Kişisel verileriniz, veri sorumlusu sıfatıyla **{{ tam_ad }}** tarafından i�
 | Veri kategorisi | Hangi veriler | Ne zaman |
 |---|---|---|
 | Kimlik | Ad, soyad | İletişim formunu doldurduğunuzda ya da e-posta gönderdiğinizde |
-| İletişim | E-posta adresi | İletişim formunu doldurduğunuzda ya da e-posta gönderdiğinizde |
+| İletişim | E-posta adresi | İletişim formunu doldurduğunuzda ya da e-posta gönderdiğinizde |{% if site.data.iletisim.whatsapp and site.data.iletisim.whatsapp != "" %}
+| İletişim | Telefon numarası, WhatsApp profil adı ve mesajlarınız | WhatsApp üzerinden bana yazdığınızda |{% endif %}
 | Talep ve yazışma | Mesajınızın içeriği ve bana ilettiğiniz diğer bilgiler | İletişim formunu doldurduğunuzda ya da e-posta gönderdiğinizde |
 | İşlem güvenliği | IP adresi, tarayıcı ve cihaz bilgisi, ziyaret edilen sayfa, tarih ve saat | Siteyi ziyaret ettiğinizde barındırma hizmetinin sunucu kayıtlarında otomatik olarak |
 
@@ -46,7 +47,7 @@ Site; üyelik, ödeme, reklam, ziyaretçi analizi (analytics) ya da takip amaçl
 
 ## 4. Hukuki sebepler ve toplama yöntemi
 
-Kişisel verileriniz; iletişim formu ve e-posta aracılığıyla **elektronik ortamda**, siteyi ziyaret ettiğinizde ise barındırma hizmetinin sunucu kayıtları yoluyla **otomatik yollarla** toplanır.
+Kişisel verileriniz; iletişim formu, e-posta{% if site.data.iletisim.whatsapp and site.data.iletisim.whatsapp != "" %} ve WhatsApp{% endif %} aracılığıyla **elektronik ortamda**, siteyi ziyaret ettiğinizde ise barındırma hizmetinin sunucu kayıtları yoluyla **otomatik yollarla** toplanır.
 
 Verileriniz, KVKK'nın 5. maddesinde sayılan aşağıdaki hukuki sebeplere dayanılarak işlenir:
 

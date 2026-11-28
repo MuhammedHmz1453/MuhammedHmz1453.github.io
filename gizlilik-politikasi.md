@@ -6,7 +6,7 @@ title: Gizlilik Politikası
 kisa_ad: Gizlilik Politikası
 sira: 3
 permalink: /gizlilik-politikasi/
-guncelleme: 22 Kasım 2026
+guncelleme: 28 Kasım 2026
 aciklama: Bu sitede hangi bilgilerin toplandığı, nasıl kullanıldığı ve korunduğuna dair gizlilik politikası.
 ---
 {%- assign g = site.data.genel -%}

@@ -6,7 +6,7 @@ title: Privacy Policy
 kisa_ad: Privacy Policy
 sira: 3
 permalink: /en/privacy-policy/
-guncelleme: 22 November 2026
+guncelleme: 28 November 2026
 aciklama: Privacy policy on what information is collected on this website and how it is used and protected.
 ---
 {%- assign g = site.data.genel -%}
