@@ -110,6 +110,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-x: clip; /* "clip" kaydırma kutusu oluşturmaz; üstteki şerit yapışkan kalabilsin */
 }
 
 img, svg, canvas { display: block; max-width: 100%; }
@@ -156,13 +157,23 @@ body::before {
 }
 
 /* ---------- Üst şerit: logo ve tema düğmesi (koyu, sayfayla birlikte kayar) ---------- */
+/* Üst şerit (logo ve yazı) sayfa kayarken üstte kalır; kaydırınca arkasına
+   hafif bir zemin gelir ki altından geçen yazılarla karışmasın. */
 .site-header {
   --hd-ink: var(--spot-ink);
   --hd-accent: #fafafa;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 40;
   background: var(--chrome-bg);
   color: var(--hd-ink);
+  transition: background-color .25s ease, box-shadow .25s ease;
+}
+.site-header.is-scrolled {
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--line), 0 12px 30px -22px rgba(0, 0, 0, .7);
 }
 .site-header :focus-visible { outline-color: var(--hd-accent); }
 :root[data-theme="light"] .site-header { --hd-accent: #09090b; }
@@ -2510,3 +2521,8 @@ html.dil-gelis body::after {
   animation: dil-perde-cek .32s cubic-bezier(.7, 0, .25, 1) .05s forwards;
 }
 @keyframes dil-perde-cek { to { clip-path: circle(0% at var(--dg-x, 50%) var(--dg-y, 0%)); } }
+
+/* Telefonda üst şerit daha ince: sayfa kayarken yapışık kaldığında bölüm başlıklarının üstüne binmesin */
+@media (max-width: 767px) {
+  :root { --header-h: 70px; }
+}
